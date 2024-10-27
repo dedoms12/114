@@ -2,14 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
   margin: 0;
   padding: 0;
 }
 
-.bg-img {
-  background-image: url('/public/images/signin.png');
+.bg-img-signin {
+  background-image: url('/images/Signin/signin.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.bg-img-signup {
+  background-image: url('/images/SignUp/signin.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
 }

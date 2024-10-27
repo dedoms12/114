@@ -1,15 +1,15 @@
+import { Routes, Route } from 'react-router-dom'
 import './App.css'
+import SignIn from './page/signin.jsx'
+import SignUp from './page/signup.jsx'
 
 function App() {
   return (
     <div className="app-container">
-      <div className="auth-container">
-        <button className="auth-button">Sign Up</button>
-        <div className="logo-container">
-          <img src="/path/to/pill-image.png" alt="Pill Logo" className="pill-logo" />
-        </div>
-        <button className="auth-button">Sign In</button>
-      </div>
+      <Routes>
+        <Route path="/" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+      </Routes>
     </div>
   )
 }
