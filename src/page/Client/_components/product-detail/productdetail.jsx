@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import NavBar from '../navbar';
 import YouMightLike from '../might-like';
 import { products } from '../../product-page/general-health/gen-products';
+import ReviewsModal from './ReviewsModal';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -10,6 +11,7 @@ const ProductDetail = () => {
   const [selectedColor, setSelectedColor] = useState('blue');
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedShipping, setSelectedShipping] = useState('standard');
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
 
   // Find the product from our products data
   const product = products.find(p => p.id === parseInt(id)) || {
@@ -249,7 +251,12 @@ const ProductDetail = () => {
         <div className="bg-white rounded-lg p-6">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-medium">Reviews</h2>
-            <button className="text-sm text-blue-500">See All</button>
+            <button 
+              onClick={() => setIsReviewModalOpen(true)} 
+              className="text-sm text-blue-500"
+            >
+              See All
+            </button>
           </div>
           <div className="space-y-6">
             {product.reviews?.map((review) => (
@@ -258,6 +265,11 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
+      <ReviewsModal 
+        isOpen={isReviewModalOpen}
+        onClose={() => setIsReviewModalOpen(false)}
+        product={product}
+      />
     </div>
   );
 };
