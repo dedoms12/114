@@ -10,7 +10,6 @@ const SignUpRole = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would handle the role selection and pharmacy name if applicable
     navigate('/');
   };
 

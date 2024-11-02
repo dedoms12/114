@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import NavBar from './../_components/navbar';
 import ProductSection from './product-section';
 import StoreSection from './store-section';
 import TopProductsSection from './top-prod-section';
 
 const Home = () => {
+  const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   
   const bannerSlides = [
@@ -42,80 +44,15 @@ const Home = () => {
     setCurrentSlide((prev) => (prev - 1 + bannerSlides.length) % bannerSlides.length);
   };
 
-  const navItems = [
-    { name: 'Home', path: '/home', icon: '/images/Client/product-page/home-logo.svg' },
-    { name: 'Products', path: '/products', icon: '/images/Client/product-page/client-package.svg' },
-    { name: 'Stores', path: '/stores', icon: '/images/Client/product-page/client-shopping-cart.svg' },
-    { name: 'Contact Us', path: '/contact', icon: '/images/Client/product-page/client-vector.svg' },
-  ];
+  const handleCategoryClick = (category) => {
+    if (category === 'general-health') {
+      navigate('/general-health');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation Bar */}
-      <nav className="bg-[#FCFFFE] shadow-sm py-4">
-        <div className="container mx-auto px-6">
-          <div className="flex items-center justify-between">
-            {/* Logo and Nav Items */}
-            <div className="flex items-center space-x-12">
-              <Link to="/" className="flex items-center space-x-2">
-                <img src="/images/Client/product-page/PillLogo.svg" alt="PillPoint" className="h-12 w-12" />
-                <span className="text-2xl font-semibold text-gray-800">PillPoint</span>
-              </Link>
-              <div className="flex items-center space-x-8">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.path}
-                    className="flex items-center space-x-1 text-gray-600 hover:text-pill-blue"
-                  >
-                    <img src={item.icon} alt={item.name} className="w-5 h-5" />
-                    <span className="text-sm">{item.name}</span>
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {/* Right Side - Search, Cart, User */}
-            <div className="flex items-center space-x-6">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="w-64 pl-4 pr-10 py-2 rounded-full border border-gray-200 focus:outline-none focus:border-pill-blue"
-                />
-                <button className="absolute right-3 top-1/2 -translate-y-1/2">
-                  <svg 
-                    className="w-5 h-5 text-gray-400"
-                    xmlns="http://www.w3.org/2000/svg" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                  >
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                  </svg>
-                </button>
-              </div>
-              <div className="flex items-center space-x-4">
-                <button className="relative">
-                  <img src="/images/Client/product-page/client-shopping-cart.svg" alt="Cart" className="w-6 h-6" />
-                  <span className="absolute -top-2 -right-2 bg-[#F1511B] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                    2
-                  </span>
-                </button>
-                <div className="flex items-center space-x-2">
-                  <img src="/images/Client/product-page/client-account.svg" alt="User" className="w-6 h-6" />
-                  <span className="text-sm text-gray-600">User 1</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
-
+      <NavBar />
       {/* Banner Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-3 gap-6">
@@ -175,7 +112,7 @@ const Home = () => {
         </div>
       </div>
 
-      <ProductSection />
+      <ProductSection handleCategoryClick={handleCategoryClick} />
       <StoreSection />
       <TopProductsSection />
     </div>

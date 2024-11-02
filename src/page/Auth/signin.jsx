@@ -1,7 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add your authentication logic here
+    navigate('/');  // Navigate to home page after successful login
+  };
+
   return (
     <div className="flex flex-col md:flex-row h-screen">
       {/* Left side - Background image */}
@@ -16,7 +24,7 @@ const SignIn = () => {
       <div className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-8">
         <div className="w-full max-w-md">
           <h1 className="text-2xl font-bold mb-6 text-center text-gray-700">Sign in</h1>
-          <form className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
               <input type="email" id="email" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"/>

@@ -18,8 +18,6 @@ export default function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would typically validate the form and handle the signup logic
-    // For now, we'll just navigate to the role selection page
     navigate('/sign-up-role');
   };
 
