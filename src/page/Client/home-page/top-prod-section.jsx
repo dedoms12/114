@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const TopProductsSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  
-  const topProducts = [
+  const [sortBy, setSortBy] = useState('');
+  const [topProducts, setTopProducts] = useState([
     {
       id: 1,
       name: "Indoplas Disposable Face Mask 3-Ply With Earloop | Box (50 Pcs)",
@@ -99,49 +100,109 @@ const TopProductsSection = () => {
       rating: 5,
       location: "Quezon City, Metro Manila"
     }
-  ];
+  ]);
+  const [originalTopProducts] = useState([...topProducts]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % Math.ceil(topProducts.length / 5));
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => 
-      prev === 0 ? Math.ceil(topProducts.length / 5) - 1 : prev - 1
-    );
+    setCurrentSlide((prev) => (prev - 1 + Math.ceil(topProducts.length / 5)) % Math.ceil(topProducts.length / 5));
+  };
+
+  const handleSort = (type) => {
+    if (sortBy === type) {
+      setSortBy('');
+      return;
+    }
+
+    setSortBy(type);
+    let sorted = [...topProducts];
+    
+    switch(type) {
+      case 'latest':
+        sorted = sorted.sort((a, b) => b.id - a.id);
+        break;
+      case 'top-sales':
+        sorted = sorted.sort((a, b) => {
+          const aCount = parseInt(a.soldCount.replace(/,/g, ''));
+          const bCount = parseInt(b.soldCount.replace(/,/g, ''));
+          return bCount - aCount;
+        });
+        break;
+      case 'popular':
+        sorted = sorted.sort((a, b) => {
+          const aCount = parseInt(a.soldCount.replace(/,/g, ''));
+          const bCount = parseInt(b.soldCount.replace(/,/g, ''));
+          return (b.rating * bCount) - (a.rating * aCount);
+        });
+        break;
+      default:
+        break;
+    }
+    setTopProducts(sorted);
   };
 
   const ProductCard = ({ product }) => (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-4">
-      <div className="aspect-square mb-4">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-full object-contain"
-        />
-      </div>
-      <h3 className="text-sm font-medium mb-2 line-clamp-2">{product.name}</h3>
-      <div className="flex items-center mb-2">
-        <span className="text-lg font-semibold text-[#F1511B]">₱ {product.price}</span>
-      </div>
-      <div className="flex items-center space-x-2 mb-2">
-        <div className="flex text-yellow-400">
-          {[...Array(5)].map((_, i) => (
-            <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
-              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-            </svg>
-          ))}
+    <Link to={`/product/${product.id}`}>
+      <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-4 hover:shadow-md transition-shadow">
+        <div className="aspect-square mb-4">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-contain"
+          />
         </div>
-        <span className="text-sm text-gray-500">{product.soldCount} Sold</span>
+        <h3 className="text-sm font-medium mb-2 line-clamp-2">{product.name}</h3>
+        <div className="flex items-center mb-2">
+          <span className="text-lg font-semibold text-[#F1511B]">₱ {product.price}</span>
+        </div>
+        <div className="flex items-center space-x-2 mb-2">
+          <div className="flex text-yellow-400">
+            {[...Array(product.rating)].map((_, i) => (
+              <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+              </svg>
+            ))}
+          </div>
+          <span className="text-sm text-gray-500">{product.soldCount} Sold</span>
+        </div>
+        <p className="text-xs text-gray-500">{product.location}</p>
       </div>
-      <p className="text-xs text-gray-500">{product.location}</p>
-    </div>
+    </Link>
   );
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-semibold">Top Products</h2>
+        <div className="flex gap-2">
+          <button
+            className={`px-4 py-1.5 rounded-md text-sm ${
+              sortBy === 'popular' ? 'bg-[#4C9BF5] text-white' : 'bg-white'
+            }`}
+            onClick={() => handleSort('popular')}
+          >
+            Popular
+          </button>
+          <button
+            className={`px-4 py-1.5 rounded-md text-sm ${
+              sortBy === 'latest' ? 'bg-[#4C9BF5] text-white' : 'bg-white'
+            }`}
+            onClick={() => handleSort('latest')}
+          >
+            Latest
+          </button>
+          <button
+            className={`px-4 py-1.5 rounded-md text-sm ${
+              sortBy === 'top-sales' ? 'bg-[#4C9BF5] text-white' : 'bg-white'
+            }`}
+            onClick={() => handleSort('top-sales')}
+          >
+            Top Sales
+          </button>
+        </div>
       </div>
       
       <div className="relative">

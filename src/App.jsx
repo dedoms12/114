@@ -5,6 +5,7 @@ import SignUp from './page/Auth/signup.jsx';
 import SignUpRole from './page/Auth/sign-up-role.jsx';
 import Home from './page/Client/home-page/home.jsx';
 import GeneralHealth from './page/Client/product-page/general-health/gen-health';
+import ProductDetail from './page/Client/_components/product-detail/productdetail';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/general-health" element={<GeneralHealth />} />
+        <Route path="/product-detail/:id" element={<ProductDetail />} />
       </Routes>
     </Router>
   );

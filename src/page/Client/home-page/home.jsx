@@ -4,6 +4,7 @@ import NavBar from './../_components/navbar';
 import ProductSection from './product-section';
 import StoreSection from './store-section';
 import TopProductsSection from './top-prod-section';
+import CareChoiceSection from './care-choice-section';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -113,6 +114,7 @@ const Home = () => {
       </div>
 
       <ProductSection handleCategoryClick={handleCategoryClick} />
+      <CareChoiceSection />
       <StoreSection />
       <TopProductsSection />
     </div>
