@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import NavBar from '../../_components/navbar';
-import ProductCard from './productcard';
+import ProductCard from '../../_components/productcard';
 import { products } from './gen-products';
 import Categories from '../../_components/categories';
 import YouMightLike from '../../_components/might-like';

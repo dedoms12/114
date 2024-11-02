@@ -35,7 +35,7 @@ const ProductCard = ({ product }) => {
             </div>
             <span className="text-xs text-gray-500">{product.soldCount} Sold</span>
           </div>
-          <p className="text-xs text-gray-500">Quezon City, Metro Manila</p>
+          <p className="text-xs text-gray-500">Butuan City, Agusan Del Norte</p>
         </div>
       </div>
     </Link>
