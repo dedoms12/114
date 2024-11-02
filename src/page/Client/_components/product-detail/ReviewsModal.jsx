@@ -9,7 +9,20 @@ const ReviewsModal = ({ isOpen, onClose, product, onReviewSubmit }) => {
   const [images, setImages] = useState([]);
   const [previewImages, setPreviewImages] = useState([]);
 
+  // Add click outside handler
+  const handleClickOutside = (e) => {
+    if (e.target.classList.contains('modal-overlay')) {
+      onClose();
+    }
+  };
+
   if (!isOpen) return null;
+
+  // Get first letter of name for anonymous display
+  const getAnonymousName = (fullName) => {
+    const names = fullName.trim().split(' ');
+    return `${names[0].charAt(0)}${names[names.length - 1].charAt(0)}`;
+  };
 
   const handleImageUpload = (e) => {
     const files = Array.from(e.target.files);
@@ -61,7 +74,10 @@ const ReviewsModal = ({ isOpen, onClose, product, onReviewSubmit }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+    <div 
+      className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center modal-overlay"
+      onClick={handleClickOutside}
+    >
       <div className="bg-white rounded-lg w-full max-w-5xl max-h-[90vh] overflow-y-auto p-8">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-2xl font-medium">Product Reviews</h2>
@@ -205,7 +221,10 @@ const ReviewsModal = ({ isOpen, onClose, product, onReviewSubmit }) => {
               {product.reviews?.map((review) => (
                 <div key={review.id} className="border-b pb-6">
                   <div className="flex items-center gap-4 mb-3">
-                    <span className="font-medium">{review.user}</span>
+                    <div className="w-8 h-8 rounded-full bg-[#4C9BF5] text-white flex items-center justify-center">
+                      {getAnonymousName(review.user)}
+                    </div>
+                    <span className="font-medium">{review.user.split(' ')[0]}***</span>
                     <div className="flex">
                       {[...Array(5)].map((_, i) => (
                         <svg

@@ -1,10 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { products } from '../product-page/general-health/gen-products';
+import { medicalProducts } from '../product-page/medical-supplies/medsup-products';
+import { personalCareProducts } from '../product-page/personal-care/pc-products';
+import { supplementProducts } from '../product-page/supplements/supple-products';
 
 const YouMightLike = ({ vertical = false }) => {
+  const allProducts = [
+    ...products,
+    ...medicalProducts,
+    ...personalCareProducts,
+    ...supplementProducts
+  ];
+
   const getRandomProducts = (count) => {
-    const shuffled = [...products].sort(() => 0.5 - Math.random());
+    const shuffled = [...allProducts].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, vertical ? 4 : 8);
   };
 
@@ -49,6 +59,7 @@ const YouMightLike = ({ vertical = false }) => {
                     </div>
                     <span className="text-xs text-gray-500">{product.soldCount} Sold</span>
                   </div>
+                  <p className="text-xs text-gray-500">{product.location}</p>
                 </div>
               </div>
             </div>
@@ -59,7 +70,7 @@ const YouMightLike = ({ vertical = false }) => {
   }
 
   return (
-    <div className="mt-12">
+    <div className="bg-gray-50 py-12">
       <div className="container mx-auto px-6">
         <div className="flex gap-8">
           <div className="w-64"></div>
@@ -102,7 +113,7 @@ const YouMightLike = ({ vertical = false }) => {
                       </div>
                       <span className="text-xs text-gray-500">{product.soldCount} Sold</span>
                     </div>
-                    <p className="text-xs text-gray-500">Quezon City, Metro Manila</p>
+                    <p className="text-xs text-gray-500">{product.location}</p>
                   </div>
                 </Link>
               ))}

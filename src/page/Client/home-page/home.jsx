@@ -46,8 +46,21 @@ const Home = () => {
   };
 
   const handleCategoryClick = (category) => {
-    if (category === 'general-health') {
-      navigate('/general-health');
+    switch(category) {
+      case 'general-health':
+        navigate('/general-health');
+        break;
+      case 'medical-supplies':
+        navigate('/medical-supplies');
+        break;
+      case 'supplements':
+        navigate('/supplements');
+        break;
+      case 'personal-care':
+        navigate('/personal-care');
+        break;
+      default:
+        break;
     }
   };
 
