@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import NavBar from '../../_components/navbar';
 import ProductCard from '../../_components/productcard';
 import Categories from '../../_components/categories';
 import YouMightLike from '../../_components/might-like';
+import ProductDetail from '../../_components/product-detail/productdetail';
 import { medicalProducts } from './medsup-products';
 
 const MedicalSupplies = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [sortBy, setSortBy] = useState('');
   const [selectedRating, setSelectedRating] = useState(null);
   const [filteredProducts, setFilteredProducts] = useState(medicalProducts);
@@ -46,7 +50,7 @@ const MedicalSupplies = () => {
         sorted = sorted.sort((a, b) => a.price - b.price);
         break;
       case 'popular':
-        sorted = sorted.sort((a, b) => (b.rating * b.soldCount) - (a.rating * a.soldCount));
+        sorted = sorted.sort((a, b) => b.rating - a.rating);
         break;
       default:
         sorted = medicalProducts;
@@ -92,6 +96,23 @@ const MedicalSupplies = () => {
         ))}
       </div>
     );
+  };
+
+  useEffect(() => {
+    // Restore scroll position when returning from product detail
+    if (location.state?.scrollPosition) {
+      window.scrollTo(0, location.state.scrollPosition);
+    }
+  }, [location.state]);
+
+  const handleProductClick = (productId) => {
+    const categoryPath = location.pathname;
+    navigate(`${categoryPath}/product/${productId}`, {
+      state: { 
+        from: categoryPath,
+        scrollPosition: window.pageYOffset 
+      }
+    });
   };
 
   return (
@@ -173,7 +194,13 @@ const MedicalSupplies = () => {
 
             <div className="grid grid-cols-4 gap-4">
               {currentProducts.map(product => (
-                <ProductCard key={product.id} product={product} />
+                <div 
+                  key={product.id} 
+                  onClick={() => handleProductClick(product.id)}
+                  className="cursor-pointer"
+                >
+                  <ProductCard product={product} />
+                </div>
               ))}
             </div>
             
@@ -186,4 +213,4 @@ const MedicalSupplies = () => {
   );
 };
 
-export default MedicalSupplies; 
+export default MedicalSupplies;

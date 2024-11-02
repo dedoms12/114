@@ -145,7 +145,10 @@ const TopProductsSection = () => {
   };
 
   const ProductCard = ({ product }) => (
-    <Link to={`/product/${product.id}`}>
+    <Link 
+      to={`/general-health/product/${product.id}`}
+      state={{ from: '/' }}
+    >
       <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-4 hover:shadow-md transition-shadow">
         <div className="aspect-square mb-4">
           <img

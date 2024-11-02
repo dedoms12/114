@@ -19,11 +19,14 @@ function App() {
         <Route path="/sign-up-role" element={<SignUpRole />} />
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/general-health" element={<GeneralHealth />} />
+        <Route path="/general-health/product/:id" element={<ProductDetail />} />
         <Route path="/medical-supplies" element={<MedicalSupplies />} />
+        <Route path="/medical-supplies/product/:id" element={<ProductDetail />} />
         <Route path="/personal-care" element={<PersonalCare />} />
+        <Route path="/personal-care/product/:id" element={<ProductDetail />} />
         <Route path="/supplements" element={<Supplements />} />
+        <Route path="/supplements/product/:id" element={<ProductDetail />} />
       </Routes>
     </Router>
   );

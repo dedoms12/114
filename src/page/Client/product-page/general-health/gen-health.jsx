@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import NavBar from '../../_components/navbar';
 import ProductCard from '../../_components/productcard';
 import { products } from './gen-products';
@@ -6,6 +7,8 @@ import Categories from '../../_components/categories';
 import YouMightLike from '../../_components/might-like';
 
 const GeneralHealth = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [sortBy, setSortBy] = useState('');
   const [selectedRating, setSelectedRating] = useState(null);
   const [filteredProducts, setFilteredProducts] = useState(products);
@@ -75,6 +78,16 @@ const GeneralHealth = () => {
     setFilteredProducts(products);
   };
 
+  const handleProductClick = (productId) => {
+    const categoryPath = location.pathname;
+    navigate(`${categoryPath}/product/${productId}`, {
+      state: { 
+        from: categoryPath,
+        scrollPosition: window.pageYOffset 
+      }
+    });
+  };
+
   const Pagination = () => {
     return (
       <div className="flex justify-center mt-8 gap-2">
@@ -94,6 +107,13 @@ const GeneralHealth = () => {
       </div>
     );
   };
+
+  useEffect(() => {
+    // Restore scroll position when returning from product detail
+    if (location.state?.scrollPosition) {
+      window.scrollTo(0, location.state.scrollPosition);
+    }
+  }, [location.state]);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -174,7 +194,13 @@ const GeneralHealth = () => {
 
             <div className="grid grid-cols-4 gap-4">
               {currentProducts.map(product => (
-                <ProductCard key={product.id} product={product} />
+                <div 
+                  key={product.id} 
+                  onClick={() => handleProductClick(product.id)}
+                  className="cursor-pointer"
+                >
+                  <ProductCard product={product} />
+                </div>
               ))}
             </div>
             

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from '../../_components/navbar';
 import ProductCard from '../../_components/productcard';
 import Categories from '../../_components/categories';
 import YouMightLike from '../../_components/might-like';
 import { personalCareProducts } from './pc-products';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const PersonalCare = () => {
   const [sortBy, setSortBy] = useState('');
@@ -12,6 +13,15 @@ const PersonalCare = () => {
   const [isPriceDropdownOpen, setIsPriceDropdownOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 12;
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    // Restore scroll position when returning from product detail
+    if (location.state?.scrollPosition) {
+      window.scrollTo(0, location.state.scrollPosition);
+    }
+  }, [location.state]);
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -46,7 +56,7 @@ const PersonalCare = () => {
         sorted = sorted.sort((a, b) => a.price - b.price);
         break;
       case 'popular':
-        sorted = sorted.sort((a, b) => (b.rating * b.soldCount) - (a.rating * a.soldCount));
+        sorted.sort((a, b) => b.rating - a.rating);;
         break;
       default:
         sorted = personalCareProducts;
@@ -92,6 +102,16 @@ const PersonalCare = () => {
         ))}
       </div>
     );
+  };
+
+  const handleProductClick = (productId) => {
+    const categoryPath = location.pathname;
+    navigate(`${categoryPath}/product/${productId}`, {
+      state: { 
+        from: categoryPath,
+        scrollPosition: window.pageYOffset 
+      }
+    });
   };
 
   return (
@@ -173,7 +193,13 @@ const PersonalCare = () => {
 
             <div className="grid grid-cols-4 gap-4">
               {currentProducts.map(product => (
-                <ProductCard key={product.id} product={product} />
+                <div 
+                  key={product.id} 
+                  onClick={() => handleProductClick(product.id)}
+                  className="cursor-pointer"
+                >
+                  <ProductCard product={product} />
+                </div>
               ))}
             </div>
             
