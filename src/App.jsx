@@ -15,7 +15,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Checkout from './page/Client/checkout-page/checkout.jsx';
 import OrderConfirmation from './page/Client/order-check/check';
-
+import ContactPage from './page/Client/contact-us/contact-page';
 function App() {
   return (
     <CartProvider>
@@ -25,6 +25,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/sign-up-role" element={<SignUpRole />} />
           <Route path="/" element={<Home />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route path="/home" element={<Home />} />
           <Route path="/general-health" element={<GeneralHealth />} />
           <Route path="/general-health/product/:id" element={<ProductDetail />} />
