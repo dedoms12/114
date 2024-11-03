@@ -14,6 +14,7 @@ import Cart from './page/Client/cart-page/cart';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Checkout from './page/Client/checkout-page/checkout.jsx';
+import OrderConfirmation from './page/Client/order-check/check';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/supplements/product/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/order-confirmation" element={<OrderConfirmation />} />
         </Routes>
       </Router>
       <ToastContainer position="top-right" autoClose={2000} />

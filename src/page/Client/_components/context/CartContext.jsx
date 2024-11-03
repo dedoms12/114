@@ -63,6 +63,18 @@ const cartReducer = (state, action) => {
       );
       break;
 
+    case 'ADD_REVIEW':
+      const { productId, category, review } = action.payload;
+      // Update the product's reviews in the appropriate product list
+      const productList = getProductList(category);
+      const updatedProduct = productList.find(p => p.id === productId);
+      
+      if (updatedProduct) {
+        updatedProduct.reviews = [review, ...(updatedProduct.reviews || [])];
+      }
+      
+      return state;
+
     default:
       return state;
   }

@@ -54,8 +54,6 @@ const Checkout = () => {
   };
 
   const handlePlaceOrder = () => {
-    // Here you would typically make an API call to create the order
-    
     toast.success('Order placed successfully!', {
       position: "top-right",
       autoClose: 2000,
@@ -65,20 +63,21 @@ const Checkout = () => {
       draggable: true,
     });
 
-    // Navigate to order confirmation page after short delay
-    setTimeout(() => {
-      navigate('/order-confirmation', { 
-        state: { 
-          orderDetails: {
-            items: selectedItems,
-            shipping: selectedShipping,
-            payment: paymentMethod,
-            total: calculateSubtotal() + selectedShipping.price,
-            deliveryInfo
-          }
+    // Navigate to order confirmation page immediately with order details
+    navigate('/order-confirmation', { 
+      state: { 
+        orderDetails: {
+          items: selectedItems,
+          shipping: selectedShipping,
+          payment: paymentMethod,
+          total: calculateSubtotal() + selectedShipping.price,
+          deliveryInfo: deliveryInfo,
+          orderCode: 'MS-' + Date.now().toString().slice(-6), // Generate unique order code
+          vendor: 'Branch 1, Ampayon',
+          contact: '09109051475'
         }
-      });
-    }, 2000);
+      }
+    });
   };
 
   return (
