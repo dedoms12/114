@@ -9,26 +9,34 @@ import ProductDetail from './page/Client/_components/product-detail/productdetai
 import MedicalSupplies from './page/Client/product-page/medical-supplies/medsup.jsx';
 import PersonalCare from './page/Client/product-page/personal-care/pc.jsx';
 import Supplements from './page/Client/product-page/supplements/supple.jsx';
+import { CartProvider } from './page/Client/_components/context/CartContext.jsx';
+import Cart from './page/Client/cart-page/cart';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/sign-up-role" element={<SignUpRole />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/general-health" element={<GeneralHealth />} />
-        <Route path="/general-health/product/:id" element={<ProductDetail />} />
-        <Route path="/medical-supplies" element={<MedicalSupplies />} />
-        <Route path="/medical-supplies/product/:id" element={<ProductDetail />} />
-        <Route path="/personal-care" element={<PersonalCare />} />
-        <Route path="/personal-care/product/:id" element={<ProductDetail />} />
-        <Route path="/supplements" element={<Supplements />} />
-        <Route path="/supplements/product/:id" element={<ProductDetail />} />
-      </Routes>
-    </Router>
+    <CartProvider>
+      <Router>
+        <Routes>
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/sign-up-role" element={<SignUpRole />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/general-health" element={<GeneralHealth />} />
+          <Route path="/general-health/product/:id" element={<ProductDetail />} />
+          <Route path="/medical-supplies" element={<MedicalSupplies />} />
+          <Route path="/medical-supplies/product/:id" element={<ProductDetail />} />
+          <Route path="/personal-care" element={<PersonalCare />} />
+          <Route path="/personal-care/product/:id" element={<ProductDetail />} />
+          <Route path="/supplements" element={<Supplements />} />
+          <Route path="/supplements/product/:id" element={<ProductDetail />} />
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
+      </Router>
+      <ToastContainer position="top-right" autoClose={2000} />
+    </CartProvider>
   );
 }
 

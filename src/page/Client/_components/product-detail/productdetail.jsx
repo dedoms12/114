@@ -7,6 +7,8 @@ import { medicalProducts } from '../../product-page/medical-supplies/medsup-prod
 import { supplementProducts } from '../../product-page/supplements/supple-products';
 import { personalCareProducts } from '../../product-page/personal-care/pc-products';
 import ReviewsModal from './ReviewsModal';
+import { useCart } from '../context/CartContext';
+import { toast } from 'react-toastify';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -18,6 +20,7 @@ const ProductDetail = () => {
   const [selectedShipping, setSelectedShipping] = useState('standard');
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const [product, setProduct] = useState(null);
+  const { dispatch } = useCart();
 
   const handleGoBack = () => {
     const { state } = location;
@@ -101,6 +104,30 @@ const ProductDetail = () => {
       )}
     </div>
   );
+
+  const handleAddToCart = () => {
+    dispatch({
+      type: 'ADD_TO_CART',
+      payload: {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        quantity: quantity,
+        category: product.category,
+        variation: selectedColor || 'Default'
+      }
+    });
+    
+    toast.success('Product added to cart!', {
+      position: 'top-right',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -243,7 +270,10 @@ const ProductDetail = () => {
 
               {/* Action Buttons */}
               <div className="flex gap-4">
-                <button className="flex-1 px-6 py-3 bg-[#E6F0FF] text-[#4C9BF5] rounded-md hover:bg-blue-50">
+                <button 
+                  onClick={handleAddToCart}
+                  className="flex-1 px-6 py-3 bg-[#E6F0FF] text-[#4C9BF5] rounded-md hover:bg-blue-50"
+                >
                   Add To Cart
                 </button>
                 <button className="flex-1 px-6 py-3 bg-[#4C9BF5] text-white rounded-md hover:bg-blue-600">
