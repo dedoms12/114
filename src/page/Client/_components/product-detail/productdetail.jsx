@@ -129,6 +129,28 @@ const ProductDetail = () => {
     });
   };
 
+  const handleBuyNow = () => {
+    const item = {
+      id: product.id,
+      category: location.pathname.split('/')[1],
+      name: product.name,
+      price: product.price,
+      image: product.images[0],
+      quantity: quantity,
+      variation: selectedColor,
+      selected: true,
+      isBuyNow: true
+    };
+
+    dispatch({ type: 'ADD_TO_CART', payload: item });
+    navigate('/checkout', { 
+      state: { 
+        buyNow: true,
+        productId: product.id 
+      }
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <NavBar />
@@ -269,14 +291,17 @@ const ProductDetail = () => {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex gap-4">
-                <button 
+              <div className="flex space-x-4">
+                <button
                   onClick={handleAddToCart}
-                  className="flex-1 px-6 py-3 bg-[#E6F0FF] text-[#4C9BF5] rounded-md hover:bg-blue-50"
+                  className="flex-1 bg-[#4C9BF5] text-white py-3 rounded-md hover:bg-blue-600"
                 >
-                  Add To Cart
+                  Add to Cart
                 </button>
-                <button className="flex-1 px-6 py-3 bg-[#4C9BF5] text-white rounded-md hover:bg-blue-600">
+                <button
+                  onClick={handleBuyNow}
+                  className="flex-1 bg-[#F1511B] text-white py-3 rounded-md hover:bg-orange-600"
+                >
                   Buy Now
                 </button>
               </div>

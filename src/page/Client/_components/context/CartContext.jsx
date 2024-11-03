@@ -26,21 +26,11 @@ const cartReducer = (state, action) => {
   
   switch (action.type) {
     case 'ADD_TO_CART':
-      const existingItem = state.find(item => 
-        item.id === action.payload.id && 
-        item.category === action.payload.category
-      );
+      const filteredState = action.payload.isBuyNow 
+        ? state.filter(item => !item.isBuyNow)
+        : state;
       
-      if (existingItem) {
-        newState = state.map(item =>
-          item.id === action.payload.id && item.category === action.payload.category
-            ? { ...item, quantity: item.quantity + action.payload.quantity }
-            : item
-        );
-      } else {
-        newState = [...state, { ...action.payload, selected: false }];
-      }
-      break;
+      return [...filteredState, action.payload];
 
     case 'REMOVE_FROM_CART':
       newState = state.filter(item => 

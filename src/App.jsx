@@ -13,6 +13,7 @@ import { CartProvider } from './page/Client/_components/context/CartContext.jsx'
 import Cart from './page/Client/cart-page/cart';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Checkout from './page/Client/checkout-page/checkout.jsx';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/supplements" element={<Supplements />} />
           <Route path="/supplements/product/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
       </Router>
       <ToastContainer position="top-right" autoClose={2000} />
