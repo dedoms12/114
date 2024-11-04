@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FaUser } from 'react-icons/fa';
 import { MdLocalPharmacy } from 'react-icons/md';
 
@@ -10,7 +10,12 @@ const SignUpRole = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/');
+    // Navigate based on the selected role
+    if (selectedRole === 'buyer') {
+      navigate('/'); // Navigate to buyer page
+    } else if (selectedRole === 'seller') {
+      navigate('/dashboard'); // Navigate to seller page
+    }
   };
 
   return (

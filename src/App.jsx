@@ -16,15 +16,20 @@ import 'react-toastify/dist/ReactToastify.css';
 import Checkout from './page/Client/checkout-page/checkout.jsx';
 import OrderConfirmation from './page/Client/order-check/check';
 import ContactPage from './page/Client/contact-us/contact-page';
+import Dashboard from './page/Seller/home-page/dashboard.jsx';
+import HeroPage from './page/heropage.jsx';
+
 function App() {
   return (
     <CartProvider>
       <Router>
         <Routes>
+          <Route path="/" element={<HeroPage />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/sign-up-role" element={<SignUpRole />} />
-          <Route path="/" element={<Home />} />
+
+          {/* Buyer's route */}
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/home" element={<Home />} />
           <Route path="/general-health" element={<GeneralHealth />} />
@@ -38,6 +43,9 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
+
+          {/* Seller's route */}
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </Router>
       <ToastContainer position="top-right" autoClose={2000} />
