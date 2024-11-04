@@ -12,7 +12,7 @@ const SignUpRole = () => {
     e.preventDefault();
     // Navigate based on the selected role
     if (selectedRole === 'buyer') {
-      navigate('/'); // Navigate to buyer page
+      navigate('/home'); // Navigate to buyer page
     } else if (selectedRole === 'seller') {
       navigate('/dashboard'); // Navigate to seller page
     }
