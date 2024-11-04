@@ -18,6 +18,8 @@ import OrderConfirmation from './page/Client/order-check/check';
 import ContactPage from './page/Client/contact-us/contact-page';
 import Dashboard from './page/Seller/home-page/dashboard.jsx';
 import HeroPage from './page/heropage.jsx';
+import Sales from './page/Seller/sales/sales.jsx';
+import ProductManagement from './page/Seller/product-management/product-management.jsx';
 
 function App() {
   return (
@@ -46,6 +48,9 @@ function App() {
 
           {/* Seller's route */}
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/product-management" element={<ProductManagement />} />
+          <Route path="/sales" element={<Sales />} />
+          
         </Routes>
       </Router>
       <ToastContainer position="top-right" autoClose={2000} />
