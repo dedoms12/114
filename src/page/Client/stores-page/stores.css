@@ -1,0 +1,70 @@
+.geocoder-container {
+  width: 100%;
+}
+
+.geocoder-container .mapboxgl-ctrl-geocoder {
+  width: 100% !important;
+  max-width: none !important;
+  box-shadow: none;
+  border: none;
+  margin: 0;
+}
+
+/* Style the geocoder input to match design */
+.geocoder-container .mapboxgl-ctrl-geocoder--input {
+  height: 2rem;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 14px;
+  color: #666;
+  width: 100% !important;
+  min-width: 100% !important;
+}
+
+/* Hide the default search icon */
+.geocoder-container .mapboxgl-ctrl-geocoder--icon-search {
+  display: none;
+}
+
+/* Style the suggestions dropdown */
+.geocoder-container .suggestions {
+  background-color: white;
+  border-radius: 8px;
+  margin-top: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  width: 100% !important;
+}
+
+.geocoder-container .suggestions > li > a {
+  padding: 0.75rem 1rem;
+  color: #666;
+  font-size: 14px;
+}
+
+.geocoder-container .suggestions > li:hover {
+  background-color: #F8F9FA;
+}
+
+/* Style the clear button */
+.geocoder-container .mapboxgl-ctrl-geocoder--button {
+  background: none;
+  padding: 0;
+  margin-right: 8px;
+}
+
+.mapboxgl-popup {
+  max-width: 300px;
+}
+
+.mapboxgl-popup-content {
+  padding: 1rem;
+}
+
+/* Remove default Mapbox styling */
+.geocoder-container .mapboxgl-ctrl-geocoder {
+  background: none;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-shadow: none;
+}
