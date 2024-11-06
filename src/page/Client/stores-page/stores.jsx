@@ -208,7 +208,30 @@ const Stores = () => {
                   alt="Search"
                   className="w-5 h-5"
                 />
-                <div ref={geocoderContainerRef} className="geocoder-container flex-grow" />
+                <div ref={geocoderContainerRef} className="geocoder-container flex-grow">
+                  {/* Add custom styles to match the product search input */}
+                  <style>
+                    {`
+                      .mapboxgl-ctrl-geocoder {
+                        width: 100%;
+                        max-width: 100%;
+                        box-shadow: none;
+                        font-size: 0.875rem;
+                      }
+                      .mapboxgl-ctrl-geocoder--input {
+                        padding: 0;
+                        height: auto;
+                        border: none;
+                      }
+                      .mapboxgl-ctrl-geocoder--icon {
+                        display: none;
+                      }
+                      .mapboxgl-ctrl-geocoder--button {
+                        display: none;
+                      }
+                    `}
+                  </style>
+                </div>
                 <button className="bg-blue-500 p-2 rounded-lg">
                   <img
                     src="/images/Client/stores-page/magnifying.svg"

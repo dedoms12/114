@@ -21,41 +21,49 @@ import HeroPage from './page/heropage.jsx';
 import Sales from './page/Seller/sales/sales.jsx';
 import ProductManagement from './page/Seller/product-management/product-management.jsx';
 import Stores from './page/Client/stores-page/stores.jsx';
+import { OrderProvider } from './page/Client/_components/context/OrderContext';
+import UserProfile from './page/Client/user-profile/user-profile.jsx';
+import ChatbotPage from './page/Client/chatbot-page/chatbot-page.jsx';
 
 function App() {
   return (
-    <CartProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<HeroPage />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/sign-up-role" element={<SignUpRole />} />
+    <OrderProvider>
+      <CartProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<HeroPage />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/sign-up-role" element={<SignUpRole />} />
 
-          {/* Buyer's route */}
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/general-health" element={<GeneralHealth />} />
-          <Route path="/general-health/product/:id" element={<ProductDetail />} />
-          <Route path="/medical-supplies" element={<MedicalSupplies />} />
-          <Route path="/medical-supplies/product/:id" element={<ProductDetail />} />
-          <Route path="/personal-care" element={<PersonalCare />} />
-          <Route path="/personal-care/product/:id" element={<ProductDetail />} />
-          <Route path="/supplements" element={<Supplements />} />
-          <Route path="/supplements/product/:id" element={<ProductDetail />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/order-confirmation" element={<OrderConfirmation />} />
-          <Route path="/stores" element={<Stores />} />
-          {/* Seller's route */}
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/product-management" element={<ProductManagement />} />
-          <Route path="/sales" element={<Sales />} />
-          
-        </Routes>
-      </Router>
-      <ToastContainer position="top-right" autoClose={2000} />
-    </CartProvider>
+            {/* Buyer's route */}
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/general-health" element={<GeneralHealth />} />
+            <Route path="/general-health/product/:id" element={<ProductDetail />} />
+            <Route path="/medical-supplies" element={<MedicalSupplies />} />
+            <Route path="/medical-supplies/product/:id" element={<ProductDetail />} />
+            <Route path="/personal-care" element={<PersonalCare />} />
+            <Route path="/personal-care/product/:id" element={<ProductDetail />} />
+            <Route path="/supplements" element={<Supplements />} />
+            <Route path="/supplements/product/:id" element={<ProductDetail />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/order-confirmation" element={<OrderConfirmation />} />
+            <Route path="/stores" element={<Stores />} />
+            <Route path="/user-profile" element={<UserProfile />} />
+            <Route path="/chatbot" element={<ChatbotPage />} />
+            
+            {/* Seller's route */}
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/product-management" element={<ProductManagement />} />
+            <Route path="/sales" element={<Sales />} />
+            
+          </Routes>
+        </Router>
+        <ToastContainer position="top-right" autoClose={2000} />
+      </CartProvider>
+    </OrderProvider>
   );
 }
 
