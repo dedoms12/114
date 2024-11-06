@@ -20,6 +20,7 @@ import Dashboard from './page/Seller/home-page/dashboard.jsx';
 import HeroPage from './page/heropage.jsx';
 import Sales from './page/Seller/sales/sales.jsx';
 import ProductManagement from './page/Seller/product-management/product-management.jsx';
+import Stores from './page/Client/stores-page/stores.jsx';
 
 function App() {
   return (
@@ -45,7 +46,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
-
+          <Route path="/stores" element={<Stores />} />
           {/* Seller's route */}
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/product-management" element={<ProductManagement />} />
