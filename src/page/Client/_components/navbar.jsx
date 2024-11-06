@@ -5,12 +5,15 @@ import { FiSearch } from 'react-icons/fi';
 import { useOrders } from './context/OrderContext';
 import ChatbotButton from './ChatbotButton';
 import ChatbotModal from '../chatbot-page/chatbot-modal';
+import { useSearch } from './context/SearchContext';
 
 const NavBar = () => {
   const { cartItems } = useCart();
   const navigate = useNavigate();
   const { currentUser } = useOrders();
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
+  const { performSearch } = useSearch();
+  const [searchInput, setSearchInput] = useState('');
   
   const navItems = [
     { name: 'Home', path: '/home', icon: '/images/Client/product-page/home-logo.svg' },
@@ -20,6 +23,12 @@ const NavBar = () => {
   ];
 
   const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    performSearch(searchInput);
+    navigate('/search-results');
+  };
 
   return (
     <>
@@ -50,14 +59,21 @@ const NavBar = () => {
             <div className="flex items-center space-x-6">
               {/* Search Bar */}
               <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="w-64 pl-4 pr-10 py-2 rounded-full border border-gray-200 focus:outline-none focus:border-pill-blue"
-                />
-                <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                  <FiSearch className="w-5 h-5" />
-                </button>
+                <form onSubmit={handleSearch}>
+                  <input
+                    type="text"
+                    value={searchInput}
+                    onChange={(e) => setSearchInput(e.target.value)}
+                    placeholder="Search"
+                    className="w-64 pl-4 pr-10 py-2 rounded-full border border-gray-200 focus:outline-none focus:border-pill-blue"
+                  />
+                  <button 
+                    type="submit"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  >
+                    <FiSearch className="w-5 h-5" />
+                  </button>
+                </form>
               </div>
 
               {/* Cart with Counter */}
