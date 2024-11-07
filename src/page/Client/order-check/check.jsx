@@ -4,6 +4,7 @@ import NavBar from '../_components/navbar';
 import { toast } from 'react-toastify';
 import ReviewModal from '../_components/product-detail/ReviewsModal';
 import { FaBox, FaTruck, FaReceipt, FaUser, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import { useOrders } from '../_components/context/OrderContext';
 
 const OrderConfirmation = () => {
   const location = useLocation();
@@ -12,23 +13,31 @@ const OrderConfirmation = () => {
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const { orderDetails } = location.state || {};
+  const { updateOrderStatus } = useOrders();
 
   const handleReceived = () => {
+    updateOrderStatus(orderDetails.id, 'Completed');
     setIsSuccessModalOpen(true);
     toast.success('Order received successfully!', {
       position: "top-right",
       autoClose: 2000,
     });
+    setTimeout(() => {
+      navigate('/user-profile');
+    }, 2000);
   };
 
   const handleCancel = () => {
     const confirmed = window.confirm('Are you sure you want to cancel this order?');
     if (confirmed) {
+      updateOrderStatus(orderDetails.id, 'Cancelled');
       toast.info('Order cancelled successfully', {
         position: "top-right",
         autoClose: 2000,
       });
-      navigate('/cart');
+      setTimeout(() => {
+        navigate('/user-profile');
+      }, 2000);
     }
   };
 

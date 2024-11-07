@@ -6,11 +6,13 @@ import AddressModal from './AddressModal';
 import ShippingModal from './ShippingModal';
 import PaymentModal from './PaymentModal';
 import { toast } from 'react-toastify';
+import { useOrders } from '../_components/context/OrderContext';
 
 const Checkout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { cartItems } = useCart();
+  const { addOrder } = useOrders();
   
   const selectedItems = location.state?.buyNow 
     ? cartItems.filter(item => item.isBuyNow)
@@ -54,6 +56,19 @@ const Checkout = () => {
   };
 
   const handlePlaceOrder = () => {
+    const orderDetails = {
+      items: selectedItems,
+      shipping: selectedShipping,
+      payment: paymentMethod,
+      total: calculateSubtotal() + selectedShipping.price,
+      deliveryInfo: deliveryInfo,
+      orderCode: 'MS-' + Date.now().toString().slice(-6),
+      vendor: 'Branch 1, Ampayon',
+      contact: '09109051475'
+    };
+
+    addOrder(orderDetails);
+    
     toast.success('Order placed successfully!', {
       position: "top-right",
       autoClose: 2000,
@@ -63,21 +78,7 @@ const Checkout = () => {
       draggable: true,
     });
 
-    // Navigate to order confirmation page immediately with order details
-    navigate('/order-confirmation', { 
-      state: { 
-        orderDetails: {
-          items: selectedItems,
-          shipping: selectedShipping,
-          payment: paymentMethod,
-          total: calculateSubtotal() + selectedShipping.price,
-          deliveryInfo: deliveryInfo,
-          orderCode: 'MS-' + Date.now().toString().slice(-6), // Generate unique order code
-          vendor: 'Branch 1, Ampayon',
-          contact: '09109051475'
-        }
-      }
-    });
+    navigate('/order-confirmation', { state: { orderDetails } });
   };
 
   return (
