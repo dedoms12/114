@@ -7,7 +7,7 @@ const SignIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Add your authentication logic here
-    navigate('/');  // Navigate to home page after successful login
+    navigate('/home');  // Navigate to home page after successful login
   };
 
   return (
