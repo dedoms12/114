@@ -2,6 +2,7 @@ import NavbarSeller from "../components/navbarSeller";
 import Details from "./details";
 import Orders from "./orders";
 import Shipment from "./shipment";
+import Warehouse from "./warehouse";
 
 const Sales = () => {
 
@@ -25,8 +26,7 @@ const Sales = () => {
                 <Orders />
               </div>
               <div className="bg-white p-4 rounded shadow w-1/2">
-                <h2 className="font-bold">Warehouse Activities</h2>
-                {/* Placeholder for chart */}
+                <Warehouse />
               </div>
             </div>
           </div>
