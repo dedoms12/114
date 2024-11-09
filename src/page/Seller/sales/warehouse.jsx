@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import { Gauge } from "@mui/x-charts";
+import { Gauge, gaugeClasses } from "@mui/x-charts";
 
 const Warehouse = () => {
 
@@ -8,9 +8,22 @@ const Warehouse = () => {
       <h2 className="font-bold text-xl">Warehouse Activities</h2>
       <div className="flex flex-col">
         <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 1, md: 3 }}>
-          <Gauge width={300} height={200} value={75} startAngle={-90} endAngle={90} />
+          <Gauge
+            width={300}
+            height={185}
+            value={75}
+            startAngle={-90}
+            endAngle={90}
+            sx={{
+              [`& .${gaugeClasses.valueText}`]: {
+                fontSize: 45,
+                transform: 'translate(0px, 0px)',
+              },
+            }}
+          />
         </Stack>
-        <div className="flex justify-between m-3">
+        <span className="font-medium flex justify-center m-1">Space used</span>
+        <div className="flex justify-between m-1">
           <span>Incoming: 15</span>
           <span>Outgoing: 28</span>
         </div>
