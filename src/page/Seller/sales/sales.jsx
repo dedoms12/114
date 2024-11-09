@@ -1,5 +1,6 @@
 import NavbarSeller from "../components/navbarSeller";
 import Details from "./details";
+import Orders from "./orders";
 import Shipment from "./shipment";
 
 const Sales = () => {
@@ -21,8 +22,7 @@ const Sales = () => {
             </div>
             <div className="mt-5 flex">
               <div className="bg-white p-4 rounded shadow w-1/2 mr-5">
-                <h2 className="font-bold">Orders</h2>
-                {/* Placeholder for chart */}
+                <Orders />
               </div>
               <div className="bg-white p-4 rounded shadow w-1/2">
                 <h2 className="font-bold">Warehouse Activities</h2>
