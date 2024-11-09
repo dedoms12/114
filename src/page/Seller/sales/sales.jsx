@@ -1,6 +1,8 @@
 import NavbarSeller from "../components/navbarSeller";
 import Details from "./details";
+import Distance from "./distance";
 import Orders from "./orders";
+import Profit from "./profit";
 import Shipment from "./shipment";
 import Warehouse from "./warehouse";
 
@@ -29,6 +31,15 @@ const Sales = () => {
                 <Warehouse />
               </div>
             </div>
+          </div>
+        </div>
+
+        <div className="flex my-5">
+          <div className="border bg-white rounded shadow p-5 w-1/2 mr-2.5">
+            <Profit />
+          </div>
+          <div className="border bg-white rounded shadow p-5 w-1/2 ml-2.5">
+            <Distance />
           </div>
         </div>
       </div>
