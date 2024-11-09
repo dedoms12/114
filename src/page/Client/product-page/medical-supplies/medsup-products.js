@@ -95,7 +95,7 @@ export const medicalProducts = [
       "/images/Client/product-page/medsup/image1stbatch-10.svg",
       "/images/Client/product-page/medsup/image1stbatch-10.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Butuan City, Agusan Del Norte"
   },
   {
     id: 3,
