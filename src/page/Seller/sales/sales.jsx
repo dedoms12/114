@@ -18,7 +18,7 @@ const Sales = () => {
             <Shipment />
           </div>
           <div className="w-2/3">
-            <div className="bg-white border rounded shadow p-4 mb-5">
+            <div className="bg-white border rounded shadow py-4 pl-3 pr-6 mb-5">
               <Details />
             </div>
             <div className="mt-5 flex">

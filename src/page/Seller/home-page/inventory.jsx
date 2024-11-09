@@ -8,8 +8,8 @@ const Inventory = () => {
   ];
 
   return (
-    <div className="flex my-12">
-      <div className="mr-4 border rounded p-6 bg-white w-2/3 shadow-lg">
+    <div className="flex flex-col md:flex-row my-12">
+      <div className="mr-0 md:mr-4 border rounded p-6 bg-white w-full md:w-2/3 shadow-lg">
         {/* Title of the Product Inventory section */}
         <h1 className="text-xl font-bold text-gray-800 mb-4">Product Inventory</h1>
         {/* Header for the current month's items and a link to view details */}
@@ -59,7 +59,7 @@ const Inventory = () => {
       </div>
 
       {/* Container for the inventory detail section */}
-      <div className="ml-4 border rounded p-6 bg-white w-1/3 shadow-lg">
+      <div className="ml-0 md:ml-4 border rounded p-6 bg-white w-full md:w-1/3 shadow-lg">
         {/* Title for the inventory detail section */}
         <h1 className="text-xl font-bold text-gray-700 mb-4">Inventory Detail</h1>
 
