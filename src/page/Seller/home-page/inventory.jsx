@@ -69,10 +69,10 @@ const Inventory = () => {
             series={[
               {
                 data,
-                innerRadius: 80,
+                innerRadius: 70,
                 outerRadius: 100,
                 paddingAngle: 0,
-                cornerRadius: 10,
+                cornerRadius: 0,
                 startAngle: 0,
                 endAngle: 360,
                 cx: 150,
@@ -80,6 +80,7 @@ const Inventory = () => {
               },
             ]}
             width={315}
+            margin={{left: 25}}
             height={300}
           />
           
