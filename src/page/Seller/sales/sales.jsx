@@ -1,6 +1,10 @@
 import NavbarSeller from "../components/navbarSeller";
 import Details from "./details";
+import Distance from "./distance";
+import Orders from "./orders";
+import Profit from "./profit";
 import Shipment from "./shipment";
+import Warehouse from "./warehouse";
 
 const Sales = () => {
 
@@ -16,19 +20,26 @@ const Sales = () => {
             <Shipment />
           </div>
           <div className="w-2/3">
-            <div className="bg-white border rounded shadow p-4 mb-5">
+            <div className="bg-white border rounded shadow py-4 pl-3 pr-6 mb-5">
               <Details />
             </div>
             <div className="mt-5 flex">
               <div className="bg-white p-4 rounded shadow w-1/2 mr-5">
-                <h2 className="font-bold">Orders</h2>
-                {/* Placeholder for chart */}
+                <Orders />
               </div>
               <div className="bg-white p-4 rounded shadow w-1/2">
-                <h2 className="font-bold">Warehouse Activities</h2>
-                {/* Placeholder for chart */}
+                <Warehouse />
               </div>
             </div>
+          </div>
+        </div>
+
+        <div className="flex my-5">
+          <div className="border bg-white rounded shadow p-5 w-1/2 mr-2.5">
+            <Profit />
+          </div>
+          <div className="border bg-white rounded shadow p-5 w-1/2 ml-2.5">
+            <Distance />
           </div>
         </div>
       </div>

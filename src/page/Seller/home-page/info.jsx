@@ -1,7 +1,7 @@
 const Info = () => {
 
   return (
-    <div className="border rounded grid grid-cols-2 bg-white shadow-lg my-5">
+    <div className="border rounded grid grid-cols-1 sm:grid-cols-2 bg-white shadow-lg my-5">
       {/* Inventory Summary */}
       <div className="m-6">
         <h1 className="text-xl font-bold text-gray-800 m-3">Inventory Summary</h1>
