@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import NavbarSeller from '../components/navbarSeller';
 import { FiSearch, FiFilter, FiGrid, FiList } from 'react-icons/fi';
 import { categories, units, addProduct, getUniqueLocations } from './product-data';
 import CreateProductModal from '../components/CreateProductModal';
+import SuccessFeedback from '../components/SuccessFeedback';
 
 const ProductManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -14,6 +16,10 @@ const ProductManagement = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
+  const [showSuccessFeedback, setShowSuccessFeedback] = useState(false);
+  const [savedProductDetails, setSavedProductDetails] = useState(null);
+  const [actionType, setActionType] = useState('add');
+  const navigate = useNavigate();
 
   // Get current category's products
   const currentCategory = categories.find(cat => cat.value === selectedCategory);
@@ -43,14 +49,17 @@ const ProductManagement = () => {
           category.products[index] = { ...productData, id: editingProduct.id };
         }
       }
+      setActionType('edit');
     } else {
       // Add new product
       addProduct(productData);
+      setActionType('add');
     }
+    
     setIsModalOpen(false);
+    setSavedProductDetails(productData);
+    setShowSuccessFeedback(true);
     setEditingProduct(null);
-    setShowAlert(true);
-    setTimeout(() => setShowAlert(false), 3000);
   };
 
   const handleViewChange = (mode) => {
@@ -64,6 +73,14 @@ const ProductManagement = () => {
 
   // Get unique locations
   const locations = getUniqueLocations();
+
+  const handleProductClick = (productId) => {
+    navigate(`/product-management/product/${productId}`);
+  };
+
+  const handleAdvanceSettings = (productId) => {
+    navigate(`/product-management/edit-advanced/${productId}`);
+  };
 
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -160,7 +177,12 @@ const ProductManagement = () => {
         {/* Products Grid/List */}
         <div className={`grid ${viewMode === 'grid' ? 'grid-cols-5 gap-4' : 'gap-4'}`}>
           {currentProducts.map(product => (
-            <div key={product.id} className={`bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-4 ${viewMode === 'list' ? 'flex items-center' : ''}`}>
+            <div 
+              key={product.id} 
+              className={`bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-4 ${viewMode === 'list' ? 'flex items-center' : ''}`}
+              onClick={() => handleProductClick(product.id)}
+              style={{ cursor: 'pointer' }}
+            >
               <div className={`${viewMode === 'list' ? 'w-1/4' : 'aspect-square mb-4'}`}>
                 <img
                   src={product.image}
@@ -220,16 +242,15 @@ const ProductManagement = () => {
           categories={categories}
           units={units}
           editProduct={editingProduct}
+          onAdvanceSettings={() => handleAdvanceSettings(editingProduct?.id)}
         />
 
-        {showAlert && (
-          <div className="fixed top-4 right-4 bg-white rounded-lg shadow-lg p-4 z-50 flex items-center gap-2">
-            <svg className="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
-            <span>Product successfully saved!</span>
-          </div>
-        )}
+        <SuccessFeedback
+          isOpen={showSuccessFeedback}
+          onClose={() => setShowSuccessFeedback(false)}
+          action={actionType}
+          productDetails={savedProductDetails}
+        />
       </div>
     </div>
   );
