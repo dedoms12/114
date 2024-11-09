@@ -1,12 +1,14 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FiSearch } from 'react-icons/fi';
+import { useState } from 'react';
 
 const NavbarSeller = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const navItems = [
     { name: 'Home', path: '/dashboard', icon: '/images/Client/product-page/home-logo.svg' },
     { name: 'Products Management', path: '/product-management', icon: '/images/Client/product-page/client-package.svg' },
-    { name: 'Sales', path: '/sales', icon: '  /images/Client/product-page/client-shopping-cart.svg' },
+    { name: 'Sales', path: '/sales', icon: '/images/Client/product-page/client-shopping-cart.svg' },
   ];
 
   return (
@@ -18,7 +20,33 @@ const NavbarSeller = () => {
             <img src="/images/Client/product-page/PillLogo.svg" alt="PillPoint" className="h-12 w-12" />
             <span className="text-2xl font-semibold text-gray-800">PillPoint</span>
           </Link>
-          <div className="flex items-center space-x-16">
+
+          {/* Hamburger Icon for Mobile */}
+          <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="md:hidden">
+            <span className="text-gray-600">☰</span>
+          </button>
+
+          {/* Sidebar for Mobile */}
+          {isSidebarOpen && (
+            <div className="fixed inset-0 bg-white z-50 md:hidden">
+              <div className="flex flex-col p-4">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.path}
+                    className="flex items-center space-x-2 text-gray-600 hover:text-pill-blue mb-2"
+                    onClick={() => setIsSidebarOpen(false)}
+                  >
+                    <img src={item.icon} alt={item.name} className="w-5 h-5" />
+                    <span className="text-sm">{item.name}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Desktop Nav Items */}
+          <div className="hidden md:flex items-center space-x-16">
             {navItems.map((item) => (
               <Link
                 key={item.name}

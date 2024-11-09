@@ -3,10 +3,38 @@ import { LineChart } from "@mui/x-charts";
 const Details = () => {
 
   const chart = [
-    { name: 'Revenue', numeric: '₱152K', percent: 25, days: 'Total revenue compared to 7 days ago' },
-    { name: 'Cost', numeric: '₱82K', percent: 25, days: 'Total cost compared to 7 days ago' },
-    { name: 'Shipments', numeric: '₱2.140', percent: 25, days: 'Total shipments compared to 7 days ago' },
-    { name: 'Avg Delivery Time', numeric: '1.7 Hrs', percent: 25, days: 'Total delivery compared to 7 days ago' },
+    { 
+      name: 'Revenue', 
+      numeric: '₱152K', 
+      percent: 25, 
+      days: 'Total revenue compared to 7 days ago',
+      xdata: [1, 2, 3, 4, 5, 6, 7],
+      ydata: [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)],
+    },
+    { 
+      name: 'Cost', 
+      numeric: '₱82K', 
+      percent: 25, 
+      days: 'Total cost compared to 7 days ago',
+      xdata: [1, 2, 3, 4, 5, 6, 7],
+      ydata: [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)],
+    },
+    { 
+      name: 'Shipments', 
+      numeric: '₱2.140', 
+      percent: 25, 
+      days: 'Total shipments compared to 7 days ago',
+      xdata: [1, 2, 3, 4, 5, 6, 7],
+      ydata: [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)],
+    },
+    { 
+      name: 'Avg Delivery Time', 
+      numeric: '1.7 Hrs', 
+      percent: 25, 
+      days: 'Total delivery compared to 7 days ago',
+      xdata: [1, 2, 3, 4, 5, 6, 7],
+      ydata: [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)],
+    },
   ]
 
   return (
@@ -19,15 +47,16 @@ const Details = () => {
               <h1 className="text-3xl font-bold">{item.numeric}</h1>
             </div>
             <LineChart
-              xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7] }]}
-              series={[{ data: [4, 4, 3, 10, 6, 8, 8] }]}
+              xAxis={[{ data: item.xdata }]}
+              series={[{ data: item.ydata }]}
               width={300}
               height={150}
+              margin={{top: 20, bottom: 20}}
             />
           </div>
           <div className="flex justify-between text-center items-center">
             <span className="px-3 py-1 rounded-3xl bg-green-50 text-green-700">{item.percent}%</span>
-            <span className="text-sm">{item.days}</span>
+            <span className="text-xs">{item.days}</span>
           </div>
         </div>
       ))}

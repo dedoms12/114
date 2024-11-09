@@ -10,7 +10,7 @@ const Shipment = () => {
 
   return (
     <div>
-      <h2 className="font-bold">Shipment Overview</h2>
+      <h2 className="font-bold text-xl">Shipment Overview</h2>
       <PieChart
         series={[
           {
@@ -46,6 +46,13 @@ const Shipment = () => {
       </div>
       <div className="flex flex-col mt-10">
         <span className="font-semibold">Recent Shipments</span>
+        <div className="border p-5 rounded bg-gray-50 flex flex-col my-2">
+          <div className="flex justify-between">
+            <span className="text-blue-500 font-medium py-2">Shipment #12344</span>
+            <span className="rounded-full border-green-300 text-green-700 bg-green-200 font-medium text-xs px-2 py-3 w-24 text-center">Completed</span>
+          </div>
+          <span className="mt-2">-&gt; Delivered on 2023-08-15</span>
+        </div>
         <div className="border p-5 rounded bg-gray-50 flex flex-col my-2">
           <div className="flex justify-between">
             <span className="text-blue-500 font-medium py-2">Shipment #12345</span>
