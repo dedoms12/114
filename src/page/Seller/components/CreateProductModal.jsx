@@ -189,6 +189,20 @@ const CreateProductModal = ({ isOpen, onClose, onSave, categories, units, editPr
                     ))}
                   </select>
                 </div>
+
+                <div>
+                  <label className="block text-gray-700 mb-2">Location</label>
+                  <select
+                    value={formData.location}
+                    onChange={(e) => setFormData({...formData, location: e.target.value})}
+                    className="w-full p-2 bg-gray-50 rounded-md border"
+                    required
+                  >
+                    <option value="">Select Location</option>
+                    <option value="Ampayon, Agusan Del Norte">Ampayon, Agusan Del Norte</option>
+                    <option value="Butuan City, Agusan Del Norte">Butuan City, Agusan Del Norte</option>
+                  </select>
+                </div>
               </div>
             </section>
 

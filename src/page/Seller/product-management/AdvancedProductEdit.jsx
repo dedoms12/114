@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { FiArrowLeft, FiHome, FiPlus, FiTrash2, FiImage, FiDollarSign, FiTag, FiPackage } from 'react-icons/fi';
+import { FiArrowLeft, FiHome, FiPlus, FiTrash2, FiImage, FiDollarSign, FiTag, FiPackage, FiMapPin } from 'react-icons/fi';
 import NavbarSeller from '../components/navbarSeller';
 import { categories, units, getUniqueLocations } from './product-data';
 import SuccessFeedback from '../components/SuccessFeedback';
@@ -54,7 +54,9 @@ const AdvancedProductEdit = () => {
     price: '',
     quantity: '',
     unit: 'Item',
-    location: locations[0] || '',
+    location: '',
+    storageArea: '',
+    locationNotes: '',
     inventory: {
       stockAlert: 10,
       reorderPoint: 20,
@@ -73,6 +75,9 @@ const AdvancedProductEdit = () => {
     if (product) {
       setFormData({
         ...product,
+        location: product.location || '',
+        storageArea: product.storageArea || '',
+        locationNotes: product.locationNotes || '',
         price: product.price?.toString() || '',
         quantity: product.quantity?.toString() || '',
         images: product.images || [],
@@ -115,7 +120,8 @@ const AdvancedProductEdit = () => {
     { id: 'general', label: 'General Information', icon: FiTag },
     { id: 'media', label: 'Media Gallery', icon: FiImage },
     { id: 'purchase', label: 'Purchase Information', icon: FiDollarSign },
-    { id: 'inventory', label: 'Inventory Management', icon: FiPackage }
+    { id: 'inventory', label: 'Inventory Management', icon: FiPackage },
+    { id: 'location', label: 'Location Settings', icon: FiMapPin }
   ];
 
   const handleAddFeature = () => {
@@ -626,6 +632,56 @@ const AdvancedProductEdit = () => {
                     <option value="Discontinued">Discontinued</option>
                   </select>
                 </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'location':
+        return (
+          <div className="bg-white rounded-lg shadow p-6">
+            <h3 className="text-lg font-medium text-gray-800 mb-6">Location Settings</h3>
+            
+            <div className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Branch Location
+                </label>
+                <select
+                  value={formData.location}
+                  onChange={(e) => handleFormChange({ location: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="">Select Location</option>
+                  <option value="Ampayon, Agusan Del Norte">Ampayon, Agusan Del Norte</option>
+                  <option value="Butuan City, Agusan Del Norte">Butuan City, Agusan Del Norte</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Storage Area
+                </label>
+                <input
+                  type="text"
+                  value={formData.storageArea || ''}
+                  onChange={(e) => handleFormChange({ storageArea: e.target.value })}
+                  placeholder="e.g., Shelf A-1, Storage Room 2"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Notes
+                </label>
+                <textarea
+                  value={formData.locationNotes || ''}
+                  onChange={(e) => handleFormChange({ locationNotes: e.target.value })}
+                  placeholder="Any additional location-specific notes"
+                  rows="3"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                />
               </div>
             </div>
           </div>

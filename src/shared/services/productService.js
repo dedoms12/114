@@ -292,20 +292,44 @@ export const saveProduct = async (product) => {
     const allProducts = getAllProducts();
     const categoryKey = `${product.category}Products`.replace('-', '');
     
+    // Normalize the location
+    const normalizedLocation = normalizeLocation(product.location);
+    const updatedProduct = {
+      ...product,
+      location: normalizedLocation
+    };
+    
     if (product.id) {
       // Update existing product
       const index = allProducts[categoryKey].findIndex(p => p.id === product.id);
       if (index !== -1) {
-        allProducts[categoryKey][index] = product;
+        allProducts[categoryKey][index] = updatedProduct;
       }
     } else {
       // Add new product
-      product.id = Date.now();
-      allProducts[categoryKey].push(product);
+      updatedProduct.id = Date.now();
+      allProducts[categoryKey].push(updatedProduct);
     }
     
-    localStorage.setItem('pharmacyProducts', JSON.stringify(allProducts));
-    return product;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(allProducts));
+    
+    // Update seller data
+    const sellerStorage = localStorage.getItem('sellerProducts') || '{}';
+    const sellerProducts = JSON.parse(sellerStorage);
+    if (!sellerProducts[categoryKey]) {
+      sellerProducts[categoryKey] = [];
+    }
+    
+    const sellerIndex = sellerProducts[categoryKey].findIndex(p => p.id === product.id);
+    if (sellerIndex !== -1) {
+      sellerProducts[categoryKey][sellerIndex] = {
+        ...sellerProducts[categoryKey][sellerIndex],
+        location: normalizedLocation
+      };
+    }
+    
+    localStorage.setItem('sellerProducts', JSON.stringify(sellerProducts));
+    return updatedProduct;
   } catch (error) {
     console.error('Error saving product:', error);
     throw new Error('Failed to save product data: ' + error.message);
