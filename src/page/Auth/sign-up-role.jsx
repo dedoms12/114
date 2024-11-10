@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaUser } from 'react-icons/fa';
+import { FaUser, FaUserShield } from 'react-icons/fa';
 import { MdLocalPharmacy } from 'react-icons/md';
 
 const SignUpRole = () => {
@@ -10,17 +10,17 @@ const SignUpRole = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Navigate based on the selected role
     if (selectedRole === 'buyer') {
-      navigate('/home'); // Navigate to buyer page
+      navigate('/home');
     } else if (selectedRole === 'seller') {
-      navigate('/dashboard'); // Navigate to seller page
+      navigate('/dashboard');
+    } else if (selectedRole === 'admin') {
+      navigate('/admin/dashboard');
     }
   };
 
   return (
     <div className="flex h-screen">
-      {/* Left side - Role selection form */}
       <div className="w-full md:w-1/2 flex items-center justify-center p-8">
         <div className="w-full max-w-md">
           <img className="h-12 w-auto mb-6" src="/images/PillLogo.svg" alt="PillPoint Logo" />
@@ -76,6 +76,30 @@ const SignUpRole = () => {
                   )}
                 </div>
               </button>
+
+              <button
+                type="button"
+                onClick={() => setSelectedRole('admin')}
+                className={`w-full flex items-center justify-between px-4 py-3 border ${
+                  selectedRole === 'admin' 
+                    ? 'border-pill-blue bg-blue-50' 
+                    : 'border-gray-300'
+                } rounded-md shadow-sm hover:border-pill-blue focus:outline-none transition-colors`}
+              >
+                <div className="flex items-center">
+                  <FaUserShield className="h-5 w-5 mr-3 text-gray-600" />
+                  <span className="text-sm font-medium text-gray-700">An Admin</span>
+                </div>
+                <div className={`h-4 w-4 rounded-full border ${
+                  selectedRole === 'admin'
+                    ? 'border-pill-blue bg-pill-blue'
+                    : 'border-gray-300'
+                }`}>
+                  {selectedRole === 'admin' && (
+                    <div className="h-2 w-2 m-1 rounded-full bg-white" />
+                  )}
+                </div>
+              </button>
             </div>
 
             {selectedRole === 'seller' && (
@@ -118,7 +142,6 @@ const SignUpRole = () => {
         </div>
       </div>
 
-      {/* Right side - Background image */}
       <div className="hidden md:block w-1/2 bg-img-signup">
         <div className="flex h-full items-center justify-center text-center">
           <div>
