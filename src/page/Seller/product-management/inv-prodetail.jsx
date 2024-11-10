@@ -23,23 +23,36 @@ const InventoryProductDetail = () => {
   useEffect(() => {
     const loadProduct = async () => {
       try {
+        const categoryProducts = categories.flatMap(cat => cat.products);
+        const productFromCategory = categoryProducts.find(p => p.id === parseInt(id));
+        
+        if (!productFromCategory) {
+          console.error('Product not found');
+          navigate('/product-management');
+          return;
+        }
+
         const productData = await getProductById(id, true);
         if (productData) {
+          console.log('Found product:', productData);
           setProduct({
             ...productData,
-            expiryDate: productData.expiryDate || getDefaultExpiryDate()
+            category: productFromCategory.category,
+            expiryDate: productData.expiryDate || getDefaultExpiryDate(),
           });
         } else {
           console.error('Product not found');
+          navigate('/product-management');
         }
       } catch (error) {
         console.error('Error loading product:', error);
+        navigate('/product-management');
       } finally {
         setLoading(false);
       }
     };
     loadProduct();
-  }, [id]);
+  }, [id, navigate]);
 
   if (loading) {
     return (
@@ -54,6 +67,12 @@ const InventoryProductDetail = () => {
 
   const handleSaveProduct = async (updatedProduct) => {
     try {
+      const savedProduct = {
+        ...updatedProduct,
+        category: product.category,
+        id: product.id
+      };
+      await saveProduct(savedProduct);
       setShowUpdateModal(false);
       window.location.reload();
     } catch (error) {

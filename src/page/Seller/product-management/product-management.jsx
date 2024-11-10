@@ -187,22 +187,27 @@ const ProductManagement = () => {
           </div>
         </div>
 
-        {/* Products Grid */}
-        <div className={`
-          grid gap-6
-          ${viewMode === 'grid' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4' : 'grid-cols-1'}
-        `}>
+        {/* Products Grid/List View */}
+        <div className={viewMode === 'grid' ? 
+          `grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4` : 
+          `flex flex-col gap-4`
+        }>
           {currentProducts.map(product => (
             <div 
               key={product.id}
               onClick={() => handleProductClick(product.id)}
-              className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+              className={`bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer
+                ${viewMode === 'list' ? 'flex' : ''}`}
             >
-              <div className={`relative ${viewMode === 'list' ? 'w-48' : 'aspect-square'}`}>
+              {/* Product Image */}
+              <div className={`
+                relative 
+                ${viewMode === 'list' ? 'w-48 h-48 flex-shrink-0' : 'aspect-square'}
+              `}>
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-l-lg"
                 />
                 <div className="absolute top-3 right-3">
                   <span className={`
@@ -214,36 +219,87 @@ const ProductManagement = () => {
                 </div>
               </div>
 
-              <div className="p-4">
-                <h3 className="font-medium text-gray-900 mb-2 line-clamp-2">{product.name}</h3>
-                
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-lg font-semibold text-[#4C9BF5]">₱{product.price}</span>
-                  <span className="text-sm text-gray-500">{product.soldCount} Sold</span>
-                </div>
+              {/* Product Details */}
+              <div className={`
+                ${viewMode === 'list' ? 'flex flex-1 p-4' : 'p-4'}
+              `}>
+                {viewMode === 'list' ? (
+                  // List View Layout
+                  <div className="flex flex-1 justify-between">
+                    {/* Left Section - Main Info */}
+                    <div className="flex-1 pr-8">
+                      <h3 className="font-medium text-gray-900 text-lg mb-2">{product.name}</h3>
+                      <div className="space-y-2 text-sm text-gray-600">
+                        <p>Category: {product.category}</p>
+                        <p>Location: {product.location}</p>
+                        <p>Stock: {product.quantity} units</p>
+                      </div>
+                    </div>
 
-                <p className="text-sm text-gray-500 mb-4">{product.location}</p>
+                    {/* Middle Section - Price & Stats */}
+                    <div className="w-48 flex flex-col items-start">
+                      <div className="mb-2">
+                        <span className="text-2xl font-semibold text-[#4C9BF5]">₱{product.price}</span>
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        <p>{product.soldCount} Sold</p>
+                        <p>SKU: {product.id}</p>
+                      </div>
+                    </div>
 
-                <div className="flex gap-2">
-                  <button 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleEdit(product);
-                    }}
-                    className="flex-1 px-4 py-2 text-sm font-medium text-[#4C9BF5] bg-blue-50 rounded-md hover:bg-blue-100 transition-colors"
-                  >
-                    Edit
-                  </button>
-                  <button 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleAdvanceSettings(product.id);
-                    }}
-                    className="flex-1 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors"
-                  >
-                    Advanced
-                  </button>
-                </div>
+                    {/* Right Section - Actions */}
+                    <div className="w-32 flex flex-col justify-center space-y-2">
+                      <button 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleEdit(product);
+                        }}
+                        className="w-full px-4 py-2 text-sm font-medium text-[#4C9BF5] bg-blue-50 rounded-md hover:bg-blue-100 transition-colors"
+                      >
+                        Edit
+                      </button>
+                      <button 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleAdvanceSettings(product.id);
+                        }}
+                        className="w-full px-4 py-2 text-sm font-medium text-gray-700 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors"
+                      >
+                        Advanced
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  // Grid View Layout (Original)
+                  <>
+                    <h3 className="font-medium text-gray-900 mb-2 line-clamp-2">{product.name}</h3>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-lg font-semibold text-[#4C9BF5]">₱{product.price}</span>
+                      <span className="text-sm text-gray-500">{product.soldCount} Sold</span>
+                    </div>
+                    <p className="text-sm text-gray-500 mb-4">{product.location}</p>
+                    <div className="flex gap-2">
+                      <button 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleEdit(product);
+                        }}
+                        className="flex-1 px-4 py-2 text-sm font-medium text-[#4C9BF5] bg-blue-50 rounded-md hover:bg-blue-100 transition-colors"
+                      >
+                        Edit
+                      </button>
+                      <button 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleAdvanceSettings(product.id);
+                        }}
+                        className="flex-1 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors"
+                      >
+                        Advanced
+                      </button>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           ))}

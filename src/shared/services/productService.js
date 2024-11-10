@@ -1,7 +1,7 @@
-import { medicalProducts as defaultMedical } from '../../page/Client/product-page/medical-supplies/medsup-products';
-import { products as defaultGeneral } from '../../page/Client/product-page/general-health/gen-products';
-import { supplementProducts as defaultSupplements } from '../../page/Client/product-page/supplements/supple-products';
-import { personalCareProducts as defaultPersonalCare } from '../../page/Client/product-page/personal-care/pc-products';
+import { medicalProducts } from '../../page/Client/product-page/medical-supplies/medsup-products';
+import { products as generalProducts } from '../../page/Client/product-page/general-health/gen-products';
+import { supplementProducts } from '../../page/Client/product-page/supplements/supple-products';
+import { personalCareProducts } from '../../page/Client/product-page/personal-care/pc-products';
 
 const STORAGE_KEY = 'pharmacyProducts';
 
@@ -201,43 +201,59 @@ export const getProductById = (productId, includeSellerData = false) => {
   try {
     const numericId = parseInt(productId);
     
-    // First check in default product arrays
-    const allDefaultProducts = [
-      ...defaultMedical,
-      ...defaultGeneral,
-      ...defaultSupplements,
-      ...defaultPersonalCare
-    ];
+    // Get current category from URL
+    const path = window.location.pathname;
+    let products;
     
-    const defaultProduct = allDefaultProducts.find(p => p.id === numericId);
+    // Determine which product array to search based on URL path
+    if (path.includes('medical-supplies')) {
+      products = medicalProducts;
+    } else if (path.includes('general-health')) {
+      products = generalProducts;
+    } else if (path.includes('supplements')) {
+      products = supplementProducts;
+    } else if (path.includes('personal-care')) {
+      products = personalCareProducts;
+    } else {
+      // For product management view, search all products
+      products = [
+        ...medicalProducts,
+        ...generalProducts,
+        ...supplementProducts,
+        ...personalCareProducts
+      ];
+    }
+
+    // Find the product in the determined array
+    const product = products.find(p => p.id === numericId);
     
+    if (!product) {
+      console.error(`Product not found with ID: ${productId}`);
+      return null;
+    }
+
+    // If seller data is requested (for product management)
     if (includeSellerData) {
-      // Check localStorage for seller-specific data
-      const sellerStorage = localStorage.getItem('sellerProducts') || '{}';
-      const sellerProducts = JSON.parse(sellerStorage);
-      
-      for (const categoryKey in sellerProducts) {
-        const product = sellerProducts[categoryKey].find(p => p.id === numericId);
-        if (product) {
-          return {
-            ...defaultProduct,
-            ...product,
-            images: product.images || [defaultProduct?.image] || [],
-            description: {
-              ...defaultProduct?.description,
-              ...product.description
-            },
-            inventory: {
-              ...product.inventory,
-              stockStatus: product.inventory?.stockStatus || 'In Stock'
-            }
-          };
+      try {
+        const sellerStorage = localStorage.getItem('sellerProducts');
+        if (sellerStorage) {
+          const sellerProducts = JSON.parse(sellerStorage);
+          const sellerProduct = sellerProducts[product.id];
+          if (sellerProduct) {
+            return {
+              ...product,
+              ...sellerProduct,
+              images: sellerProduct.images || [product.image],
+            };
+          }
         }
+      } catch (error) {
+        console.error('Error loading seller data:', error);
       }
     }
-    
-    // Return default product if no seller data found
-    return defaultProduct || null;
+
+    return product;
+
   } catch (error) {
     console.error('Error getting product by ID:', error);
     return null;
@@ -290,20 +306,26 @@ const separateProductData = (product) => {
 export const saveProduct = async (product) => {
   try {
     const allProducts = getAllProducts();
-    const categoryKey = `${product.category}Products`.replace('-', '');
+    const categoryKey = `${product.category.replace(/-/g, '')}Products`;
     
     // Normalize the location
-    const normalizedLocation = normalizeLocation(product.location);
+    const normalizedLocation = product.location || 'Ampayon, Agusan Del Norte';
     const updatedProduct = {
       ...product,
       location: normalizedLocation
     };
     
+    if (!allProducts[categoryKey]) {
+      allProducts[categoryKey] = [];
+    }
+
     if (product.id) {
       // Update existing product
       const index = allProducts[categoryKey].findIndex(p => p.id === product.id);
       if (index !== -1) {
         allProducts[categoryKey][index] = updatedProduct;
+      } else {
+        allProducts[categoryKey].push(updatedProduct);
       }
     } else {
       // Add new product
@@ -322,10 +344,9 @@ export const saveProduct = async (product) => {
     
     const sellerIndex = sellerProducts[categoryKey].findIndex(p => p.id === product.id);
     if (sellerIndex !== -1) {
-      sellerProducts[categoryKey][sellerIndex] = {
-        ...sellerProducts[categoryKey][sellerIndex],
-        location: normalizedLocation
-      };
+      sellerProducts[categoryKey][sellerIndex] = updatedProduct;
+    } else {
+      sellerProducts[categoryKey].push(updatedProduct);
     }
     
     localStorage.setItem('sellerProducts', JSON.stringify(sellerProducts));
