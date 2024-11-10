@@ -64,7 +64,8 @@ const AdvancedProductEdit = () => {
       expiryDate: '',
       batchNumber: '',
       manufacturer: ''
-    }
+    },
+    expiryDate: ''
   });
 
   useEffect(() => {
@@ -86,7 +87,7 @@ const AdvancedProductEdit = () => {
           reorderPoint: product.inventory?.reorderPoint || 20,
           maxStock: product.inventory?.maxStock || 100,
           minStock: product.inventory?.minStock || 5,
-          stockStatus: product.inventory?.stockStatus || 'In Stock',
+          stockStatus: checkExpiryStatus(product.inventory?.expiryDate),
           expiryDate: product.inventory?.expiryDate || '',
           batchNumber: product.inventory?.batchNumber || '',
           manufacturer: product.inventory?.manufacturer || ''
@@ -218,8 +219,9 @@ const AdvancedProductEdit = () => {
         setShowSuccess(true);
         setIsDirty(false);
         
+        // Navigate after a short delay
         setTimeout(() => {
-          window.location.reload();
+          navigate('/product-management');
         }, 1500);
         
         return updatedProduct;
@@ -667,6 +669,25 @@ const AdvancedProductEdit = () => {
     window.addEventListener('beforeunload', handleBeforeUnload);
     return () => window.removeEventListener('beforeunload', handleBeforeUnload);
   }, [isDirty]);
+
+  const handleQuantityChange = (value) => {
+    setFormData(prev => ({
+      ...prev,
+      quantity: value
+    }));
+  };
+
+  const checkExpiryStatus = (expiryDate) => {
+    const currentDate = new Date();
+    const expiry = new Date(expiryDate);
+    const timeDiff = expiry - currentDate;
+    const daysUntilExpiry = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+    if (daysUntilExpiry <= 21) { // 3 weeks
+      return 'Near Expiry';
+    }
+    return 'In Stock'; // or any other default status
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">

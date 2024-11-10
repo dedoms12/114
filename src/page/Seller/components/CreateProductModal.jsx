@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FiX, FiPlus, FiTrash2 } from 'react-icons/fi';
+import { FiX, FiPlus, FiTrash2, FiImage } from 'react-icons/fi';
 import { getUniqueLocations } from '../product-management/product-data';
 import { medicalProducts } from '../../Client/product-page/medical-supplies/medsup-products';
 import { products as generalProducts } from '../../Client/product-page/general-health/gen-products';
@@ -18,10 +18,6 @@ const CreateProductModal = ({ isOpen, onClose, onSave, categories, units, editPr
       features: [],
       specifications: []
     },
-    shipping: {
-      standard: { price: '₱30', days: '10 Hours' },
-      express: { price: '₱50', days: '5 Hours' }
-    },
     images: [],
     quantity: '',
     unit: 'Item',
@@ -34,31 +30,27 @@ const CreateProductModal = ({ isOpen, onClose, onSave, categories, units, editPr
       expiryDate: '',
       batchNumber: '',
       manufacturer: ''
-    }
+    },
+    expiryDate: '',
   });
 
   useEffect(() => {
     if (editProduct) {
-      const productArray = editProduct.category === 'medical-supplies' ? medicalProducts : generalProducts;
-      const savedProduct = productArray.find(p => p.id === editProduct.id);
-
-      if (savedProduct) {
-        setFormData({
-          ...savedProduct,
-          price: savedProduct.price?.toString() || '',
-          quantity: savedProduct.quantity?.toString() || '',
-          description: {
-            main: savedProduct.description?.main || '',
-            subText: savedProduct.description?.subText || '',
-            features: savedProduct.description?.features || [],
-            specifications: savedProduct.description?.specifications || []
-          },
-          inventory: {
-            ...formData.inventory,
-            ...(savedProduct.inventory || {})
-          }
-        });
-      }
+      setFormData({
+        ...editProduct,
+        price: editProduct.price?.toString() || '',
+        quantity: editProduct.quantity?.toString() || '',
+        description: {
+          main: editProduct.description?.main || '',
+          subText: editProduct.description?.subText || '',
+          features: editProduct.description?.features || [],
+          specifications: editProduct.description?.specifications || []
+        },
+        inventory: {
+          ...formData.inventory,
+          ...(editProduct.inventory || {})
+        }
+      });
     }
   }, [editProduct]);
 
@@ -81,7 +73,7 @@ const CreateProductModal = ({ isOpen, onClose, onSave, categories, units, editPr
     const imageUrls = files.map(file => URL.createObjectURL(file));
     setFormData(prev => ({
       ...prev,
-      images: [...prev.images, ...imageUrls].slice(0, 3)
+      images: [...prev.images, ...imageUrls].slice(0, 5)
     }));
   };
 
@@ -109,6 +101,16 @@ const CreateProductModal = ({ isOpen, onClose, onSave, categories, units, editPr
     }));
   };
 
+  const handleAddSpecification = () => {
+    setFormData(prev => ({
+      ...prev,
+      description: {
+        ...prev.description,
+        specifications: [...prev.description.specifications, '']
+      }
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -119,62 +121,24 @@ const CreateProductModal = ({ isOpen, onClose, onSave, categories, units, editPr
 
       const updatedProduct = {
         ...formData,
-        id: editProduct?.id || Date.now(),
         price: parseFloat(formData.price),
         quantity: parseInt(formData.quantity),
-        lastUpdated: new Date().toISOString(),
-        description: {
-          ...formData.description,
-          features: formData.description.features.filter(f => f.trim() !== ''),
-          specifications: formData.description.specifications.filter(s => s.trim() !== '')
-        },
-        inventory: {
-          ...formData.inventory,
-          stockAlert: parseInt(formData.inventory.stockAlert),
-          reorderPoint: parseInt(formData.inventory.reorderPoint),
-          maxStock: parseInt(formData.inventory.maxStock),
-          minStock: parseInt(formData.inventory.minStock)
-        }
+        lastUpdated: new Date().toISOString()
       };
 
-      let productArray;
-      let productIndex;
-
-      if (updatedProduct.category === 'medical-supplies') {
-        productArray = medicalProducts;
-        productIndex = medicalProducts.findIndex(p => p.id === updatedProduct.id);
-      } else {
-        productArray = generalProducts;
-        productIndex = generalProducts.findIndex(p => p.id === updatedProduct.id);
-      }
-
-      if (editProduct && productIndex !== -1) {
-        productArray[productIndex] = updatedProduct;
-      } else {
-        productArray.push(updatedProduct);
-      }
-
-      try {
-        const allProducts = {
-          medicalProducts: medicalProducts,
-          generalProducts: generalProducts
-        };
-        localStorage.setItem('productData', JSON.stringify(allProducts));
-
-        await onSave(updatedProduct);
-        
-        onClose();
-        
-        alert('Product saved successfully!');
-        
-        window.location.reload();
-      } catch (error) {
-        throw new Error('Failed to save product data: ' + error.message);
-      }
+      await onSave(updatedProduct);
+      onClose();
     } catch (error) {
       console.error('Error saving product:', error);
-      alert('Failed to save product changes: ' + error.message);
+      alert('Failed to save product: ' + error.message);
     }
+  };
+
+  const handleQuantityChange = (value) => {
+    setFormData(prev => ({
+      ...prev,
+      quantity: value
+    }));
   };
 
   if (!isOpen) return null;
@@ -185,7 +149,8 @@ const CreateProductModal = ({ isOpen, onClose, onSave, categories, units, editPr
         <div className="fixed inset-0 bg-black opacity-30" onClick={onClose}></div>
         
         <div className="relative bg-white rounded-lg w-full max-w-4xl p-6">
-          <div className="flex justify-between items-center mb-6">
+          {/* Modal Header */}
+          <div className="flex justify-between items-center mb-6 pb-4 border-b">
             <h2 className="text-2xl font-semibold">
               {editProduct ? 'Edit Product' : 'Add New Product'}
             </h2>
@@ -194,126 +159,257 @@ const CreateProductModal = ({ isOpen, onClose, onSave, categories, units, editPr
             </button>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Basic Information */}
-            <div className="grid grid-cols-2 gap-6">
-              <div>
-                <label className="block text-gray-700 mb-2">Product Name</label>
-                <input
-                  type="text"
-                  value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
-                  className="w-full p-2 bg-gray-50 rounded-md border"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-gray-700 mb-2">Category</label>
-                <select
-                  value={formData.category}
-                  onChange={(e) => setFormData({...formData, category: e.target.value})}
-                  className="w-full p-2 bg-gray-50 rounded-md border"
-                >
-                  {categories.map((cat) => (
-                    <option key={cat.value} value={cat.value}>
-                      {cat.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            {/* Description */}
-            <div className="space-y-4">
-              <div>
-                <label className="block text-gray-700 mb-2">Main Description</label>
-                <textarea
-                  value={formData.description.main}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    description: { ...formData.description, main: e.target.value }
-                  })}
-                  className="w-full p-2 bg-gray-50 rounded-md border"
-                  rows={3}
-                  required
-                />
-              </div>
-
-              {/* Features */}
-              <div>
-                <div className="flex justify-between items-center mb-2">
-                  <label className="block text-gray-700">Features</label>
-                  <button
-                    type="button"
-                    onClick={() => setFormData(prev => ({
-                      ...prev,
-                      description: {
-                        ...prev.description,
-                        features: [...prev.description.features, '']
-                      }
-                    }))}
-                    className="text-blue-600 hover:text-blue-700"
-                  >
-                    <FiPlus className="inline mr-1" /> Add Feature
-                  </button>
+          <form onSubmit={handleSubmit} className="space-y-8">
+            {/* Section 1: Basic Information */}
+            <section>
+              <h3 className="text-lg font-medium text-gray-700 mb-4">Basic Information</h3>
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-gray-700 mb-2">Product Name</label>
+                  <input
+                    type="text"
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    className="w-full p-2 bg-gray-50 rounded-md border"
+                    required
+                  />
                 </div>
-                {formData.description.features.map((feature, index) => (
-                  <div key={index} className="flex gap-2 mb-2">
-                    <input
-                      type="text"
-                      value={feature}
-                      onChange={(e) => handleFeatureChange(index, e.target.value)}
-                      className="flex-1 p-2 bg-gray-50 rounded-md border"
-                    />
+
+                <div>
+                  <label className="block text-gray-700 mb-2">Category</label>
+                  <select
+                    value={formData.category}
+                    onChange={(e) => setFormData({...formData, category: e.target.value})}
+                    className="w-full p-2 bg-gray-50 rounded-md border"
+                  >
+                    {categories.map((cat) => (
+                      <option key={cat.value} value={cat.value}>
+                        {cat.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </section>
+
+            {/* Section 2: Pricing & Stock */}
+            <section className="border-t pt-6">
+              <h3 className="text-lg font-medium text-gray-700 mb-4">Pricing & Stock</h3>
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-gray-700 mb-2">Price</label>
+                  <input
+                    type="number"
+                    value={formData.price}
+                    onChange={(e) => setFormData({...formData, price: e.target.value})}
+                    className="w-full p-2 bg-gray-50 rounded-md border"
+                    required
+                    min="0"
+                    step="0.01"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-gray-700 mb-2">Quantity</label>
+                  <input
+                    type="number"
+                    value={formData.quantity}
+                    onChange={(e) => handleQuantityChange(e.target.value)}
+                    className="w-full p-2 bg-gray-50 rounded-md border"
+                    required
+                    min="0"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-gray-700 mb-2">Unit Type</label>
+                  <select
+                    value={formData.unit}
+                    onChange={(e) => setFormData({...formData, unit: e.target.value})}
+                    className="w-full p-2 bg-gray-50 rounded-md border"
+                  >
+                    {units.map((unit, index) => (
+                      <option key={index} value={unit}>{unit}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-gray-700 mb-2">Expiry Date</label>
+                  <input
+                    type="date"
+                    value={formData.expiryDate}
+                    onChange={(e) => setFormData({...formData, expiryDate: e.target.value})}
+                    className="w-full p-2 bg-gray-50 rounded-md border"
+                    required
+                  />
+                </div>
+              </div>
+            </section>
+
+            {/* Section 3: Description */}
+            <section className="border-t pt-6">
+              <h3 className="text-lg font-medium text-gray-700 mb-4">Description</h3>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-gray-700 mb-2">Main Description</label>
+                  <textarea
+                    value={formData.description.main}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      description: { ...formData.description, main: e.target.value }
+                    })}
+                    className="w-full p-2 bg-gray-50 rounded-md border"
+                    rows={3}
+                    required
+                  />
+                </div>
+              </div>
+            </section>
+
+            {/* Section 4: Features & Specifications */}
+            <section className="border-t pt-6">
+              <h3 className="text-lg font-medium text-gray-700 mb-4">Features & Specifications</h3>
+              <div className="grid grid-cols-2 gap-6">
+                {/* Features Column */}
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <label className="block text-gray-700">Features</label>
                     <button
                       type="button"
-                      onClick={() => {
-                        const newFeatures = formData.description.features.filter((_, i) => i !== index);
-                        setFormData(prev => ({
-                          ...prev,
-                          description: { ...prev.description, features: newFeatures }
-                        }));
-                      }}
-                      className="text-red-600 hover:text-red-700"
+                      onClick={() => setFormData(prev => ({
+                        ...prev,
+                        description: {
+                          ...prev.description,
+                          features: [...prev.description.features, '']
+                        }
+                      }))}
+                      className="text-blue-600 hover:text-blue-700"
                     >
-                      <FiTrash2 />
+                      <FiPlus className="inline mr-1" /> Add Feature
                     </button>
                   </div>
-                ))}
-              </div>
-            </div>
+                  <div className="space-y-2">
+                    {formData.description.features.map((feature, index) => (
+                      <div key={index} className="flex gap-2">
+                        <input
+                          type="text"
+                          value={feature}
+                          onChange={(e) => handleFeatureChange(index, e.target.value)}
+                          className="flex-1 p-2 bg-gray-50 rounded-md border"
+                          placeholder="Enter feature"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const newFeatures = formData.description.features.filter((_, i) => i !== index);
+                            setFormData(prev => ({
+                              ...prev,
+                              description: { ...prev.description, features: newFeatures }
+                            }));
+                          }}
+                          className="text-red-600 hover:text-red-700"
+                        >
+                          <FiTrash2 />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
 
-            {/* Pricing and Inventory */}
-            <div className="grid grid-cols-2 gap-6">
-              <div>
-                <label className="block text-gray-700 mb-2">Price</label>
-                <input
-                  type="number"
-                  value={formData.price}
-                  onChange={(e) => setFormData({...formData, price: e.target.value})}
-                  className="w-full p-2 bg-gray-50 rounded-md border"
-                  required
-                  min="0"
-                  step="0.01"
-                />
+                {/* Specifications Column */}
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <label className="block text-gray-700">Specifications</label>
+                    <button
+                      type="button"
+                      onClick={handleAddSpecification}
+                      className="text-blue-600 hover:text-blue-700"
+                    >
+                      <FiPlus className="inline mr-1" /> Add Specification
+                    </button>
+                  </div>
+                  <div className="space-y-2">
+                    {formData.description.specifications.map((spec, index) => (
+                      <div key={index} className="flex gap-2">
+                        <input
+                          type="text"
+                          value={spec}
+                          onChange={(e) => handleSpecificationChange(index, e.target.value)}
+                          className="flex-1 p-2 bg-gray-50 rounded-md border"
+                          placeholder="Enter specification"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const newSpecs = formData.description.specifications.filter((_, i) => i !== index);
+                            setFormData(prev => ({
+                              ...prev,
+                              description: { ...prev.description, specifications: newSpecs }
+                            }));
+                          }}
+                          className="text-red-600 hover:text-red-700"
+                        >
+                          <FiTrash2 />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
+            </section>
 
+            {/* Section 5: Media Gallery */}
+            <section className="border-t pt-6">
+              <h3 className="text-lg font-medium text-gray-700 mb-4">Media Gallery</h3>
               <div>
-                <label className="block text-gray-700 mb-2">Quantity</label>
-                <input
-                  type="number"
-                  value={formData.quantity}
-                  onChange={(e) => setFormData({...formData, quantity: e.target.value})}
-                  className="w-full p-2 bg-gray-50 rounded-md border"
-                  required
-                  min="0"
-                />
+                <label className="block text-gray-700 mb-2">Product Images</label>
+                <div className="border-2 border-dashed border-gray-300 rounded-lg p-4">
+                  <input
+                    type="file"
+                    multiple
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="hidden"
+                    id="image-upload"
+                  />
+                  <label
+                    htmlFor="image-upload"
+                    className="flex flex-col items-center cursor-pointer"
+                  >
+                    <FiImage className="w-8 h-8 text-gray-400" />
+                    <span className="mt-2 text-sm text-gray-600">
+                      Drop images here or click to upload
+                    </span>
+                  </label>
+                </div>
+                {/* Image Preview */}
+                <div className="grid grid-cols-5 gap-2 mt-2">
+                  {formData.images.map((image, index) => (
+                    <div key={index} className="relative">
+                      <img
+                        src={image}
+                        alt={`Preview ${index + 1}`}
+                        className="w-full h-20 object-cover rounded"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const newImages = formData.images.filter((_, i) => i !== index);
+                          setFormData(prev => ({ ...prev, images: newImages }));
+                        }}
+                        className="absolute top-0 right-0 p-1 bg-red-500 text-white rounded-full"
+                      >
+                        <FiTrash2 size={12} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            </section>
 
             {/* Action Buttons */}
-            <div className="flex justify-between pt-4">
+            <div className="flex justify-between pt-6 border-t">
               {editProduct && (
                 <button
                   type="button"

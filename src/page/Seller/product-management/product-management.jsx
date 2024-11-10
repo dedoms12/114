@@ -39,27 +39,45 @@ const ProductManagement = () => {
   // Calculate total pages
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
-  const handleSaveProduct = (productData) => {
-    if (editingProduct) {
-      // Update existing product
-      const category = categories.find(cat => cat.value === productData.category.toLowerCase());
-      if (category) {
-        const index = category.products.findIndex(p => p.id === editingProduct.id);
-        if (index !== -1) {
-          category.products[index] = { ...productData, id: editingProduct.id };
+  const handleSaveProduct = async (productData) => {
+    try {
+      if (editingProduct) {
+        // Update existing product
+        const category = categories.find(cat => cat.value === productData.category.toLowerCase());
+        if (category) {
+          const index = category.products.findIndex(p => p.id === editingProduct.id);
+          if (index !== -1) {
+            category.products[index] = { ...productData, id: editingProduct.id };
+          }
         }
+        setActionType('edit');
+      } else {
+        // Add new product
+        const newProduct = {
+          ...productData,
+          id: Date.now(),
+          soldCount: 0
+        };
+        addProduct(newProduct);
+        setActionType('add');
       }
-      setActionType('edit');
-    } else {
-      // Add new product
-      addProduct(productData);
-      setActionType('add');
+      
+      setSavedProductDetails(productData);
+      setShowSuccessFeedback(true);
+      setIsModalOpen(false);
+      
+      // Add timeout to show success message before navigating
+      setTimeout(() => {
+        setShowSuccessFeedback(false);
+        // If editing, navigate to product detail
+        if (editingProduct) {
+          navigate(`/product-management/product/${editingProduct.id}`);
+        }
+      }, 2000);
+    } catch (error) {
+      console.error('Error saving product:', error);
+      alert('Failed to save product: ' + error.message);
     }
-    
-    setIsModalOpen(false);
-    setSavedProductDetails(productData);
-    setShowSuccessFeedback(true);
-    setEditingProduct(null);
   };
 
   const handleViewChange = (mode) => {
@@ -83,131 +101,147 @@ const ProductManagement = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-gray-50 min-h-screen">
       <NavbarSeller />
-      <div className="p-6 max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        {/* Header Section */}
         <div className="flex justify-between items-center mb-6">
           <div>
-            <h1 className="text-2xl font-bold">Product Management</h1>
+            <h1 className="text-2xl font-semibold text-gray-900">Product Management</h1>
             <p className="text-sm text-gray-500">See All</p>
           </div>
           <button 
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center gap-2 bg-[#4C9BF5] text-white px-4 py-2 rounded-md hover:bg-blue-600"
+            className="inline-flex items-center px-6 py-2.5 bg-[#4C9BF5] text-white text-sm font-medium rounded-md hover:bg-blue-600 transition-colors"
           >
             + Create New Product
           </button>
         </div>
 
-        <div className="bg-white rounded-lg p-4 mb-6">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-4">
+        {/* Search and Filters Bar */}
+        <div className="bg-white p-4 rounded-lg shadow-sm mb-6">
+          <div className="flex flex-wrap items-center gap-4">
+            {/* Search */}
+            <div className="flex-1 min-w-[280px]">
               <div className="relative">
                 <input
                   type="text"
-                  placeholder="Search"
+                  placeholder="Search products..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 pr-4 py-2 border rounded-md w-64"
+                  className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#4C9BF5] focus:border-transparent"
                 />
                 <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
               </div>
-              
-              <div className="flex items-center gap-2">
-                <FiFilter className="text-gray-400" />
-                <select
-                  value={selectedLocation}
-                  onChange={(e) => setSelectedLocation(e.target.value)}
-                  className="border rounded-md p-2"
-                >
-                  {locations.map((location, index) => (
-                    <option key={index} value={location}>
-                      {location}
-                    </option>
-                  ))}
-                </select>
-              </div>
             </div>
 
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-500">Grouped By:</span>
+            {/* Location Filter */}
+            <div className="min-w-[200px]">
+              <select
+                value={selectedLocation}
+                onChange={(e) => setSelectedLocation(e.target.value)}
+                className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#4C9BF5] focus:border-transparent appearance-none bg-white"
+              >
+                {locations.map((location, index) => (
+                  <option key={index} value={location}>{location}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Category Filter */}
+            <div className="min-w-[200px]">
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="border rounded-md p-2"
+                className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#4C9BF5] focus:border-transparent appearance-none bg-white"
               >
                 {categories.map(category => (
                   <option key={category.id} value={category.value}>{category.name}</option>
                 ))}
               </select>
-              
-              <div className="flex gap-2 border rounded-md p-1">
-                <button
-                  onClick={() => handleViewChange('grid')}
-                  className={`p-2 rounded ${viewMode === 'grid' ? 'bg-blue-50 text-[#4C9BF5]' : 'text-gray-400'}`}
-                >
-                  <FiGrid />
-                </button>
-                <button
-                  onClick={() => handleViewChange('list')}
-                  className={`p-2 rounded ${viewMode === 'list' ? 'bg-blue-50 text-[#4C9BF5]' : 'text-gray-400'}`}
-                >
-                  <FiList />
-                </button>
-              </div>
+            </div>
+
+            {/* View Toggle */}
+            <div className="flex bg-gray-100 rounded-lg p-1">
+              <button
+                onClick={() => handleViewChange('grid')}
+                className={`p-2 rounded-md transition-colors ${
+                  viewMode === 'grid' 
+                    ? 'bg-white text-[#4C9BF5] shadow-sm' 
+                    : 'text-gray-500 hover:text-gray-700'
+                }`}
+              >
+                <FiGrid size={20} />
+              </button>
+              <button
+                onClick={() => handleViewChange('list')}
+                className={`p-2 rounded-md transition-colors ${
+                  viewMode === 'list' 
+                    ? 'bg-white text-[#4C9BF5] shadow-sm' 
+                    : 'text-gray-500 hover:text-gray-700'
+                }`}
+              >
+                <FiList size={20} />
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Category Section */}
-        <div className="bg-white rounded-lg p-4 mb-6">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <span className="text-xl font-semibold">{currentCategory?.name}</span>
-              <span className="text-sm text-gray-500">
-                {currentCategory?.products.length} Products | {filteredProducts.length} Items
-              </span>
-            </div>
-            <button className="text-gray-400">
-              <FiFilter />
-            </button>
-          </div>
-        </div>
-
-        {/* Products Grid/List */}
-        <div className={`grid ${viewMode === 'grid' ? 'grid-cols-5 gap-4' : 'gap-4'}`}>
+        {/* Products Grid */}
+        <div className={`
+          grid gap-6
+          ${viewMode === 'grid' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4' : 'grid-cols-1'}
+        `}>
           {currentProducts.map(product => (
             <div 
-              key={product.id} 
-              className={`bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-4 ${viewMode === 'list' ? 'flex items-center' : ''}`}
+              key={product.id}
               onClick={() => handleProductClick(product.id)}
-              style={{ cursor: 'pointer' }}
+              className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer"
             >
-              <div className={`${viewMode === 'list' ? 'w-1/4' : 'aspect-square mb-4'}`}>
+              <div className={`relative ${viewMode === 'list' ? 'w-48' : 'aspect-square'}`}>
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-cover"
                 />
+                <div className="absolute top-3 right-3">
+                  <span className={`
+                    inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium
+                    ${product.quantity > 0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}
+                  `}>
+                    {product.quantity > 0 ? 'In Stock' : 'Out of Stock'}
+                  </span>
+                </div>
               </div>
-              <div className={`${viewMode === 'list' ? 'w-3/4 pl-4' : ''}`}>
-                <h3 className="text-sm font-medium mb-2 line-clamp-2">{product.name}</h3>
+
+              <div className="p-4">
+                <h3 className="font-medium text-gray-900 mb-2 line-clamp-2">{product.name}</h3>
+                
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-lg font-semibold text-[#F1511B]">₱{product.price}</span>
+                  <span className="text-lg font-semibold text-[#4C9BF5]">₱{product.price}</span>
                   <span className="text-sm text-gray-500">{product.soldCount} Sold</span>
                 </div>
-                <div className="flex items-center gap-1 mb-2">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className={`text-sm ${i < product.rating ? 'text-yellow-400' : 'text-gray-300'}`}>★</span>
-                  ))}
-                </div>
-                <p className="text-xs text-gray-500 mb-4">{product.location}</p>
+
+                <p className="text-sm text-gray-500 mb-4">{product.location}</p>
+
                 <div className="flex gap-2">
-                  <button className="flex-1 bg-[#4C9BF5] text-white px-3 py-1.5 rounded hover:bg-blue-600" onClick={() => handleEdit(product)}>
+                  <button 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleEdit(product);
+                    }}
+                    className="flex-1 px-4 py-2 text-sm font-medium text-[#4C9BF5] bg-blue-50 rounded-md hover:bg-blue-100 transition-colors"
+                  >
                     Edit
                   </button>
-                  <button className="flex-1 border border-red-500 text-red-500 px-3 py-1.5 rounded hover:bg-red-50">
-                    Delete
+                  <button 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleAdvanceSettings(product.id);
+                    }}
+                    className="flex-1 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors"
+                  >
+                    Advanced
                   </button>
                 </div>
               </div>
@@ -216,22 +250,25 @@ const ProductManagement = () => {
         </div>
 
         {/* Pagination */}
-        <div className="flex justify-center mt-6 gap-2">
-          {[...Array(totalPages)].map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentPage(index + 1)}
-              className={`px-3 py-1 rounded ${
-                currentPage === index + 1 
-                  ? 'bg-[#4C9BF5] text-white' 
-                  : 'bg-white text-gray-600 hover:bg-gray-50'
-              }`}
-            >
-              {index + 1}
-            </button>
-          ))}
+        <div className="flex justify-center mt-8">
+          <nav className="flex items-center gap-2">
+            {[...Array(totalPages)].map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentPage(index + 1)}
+                className={`px-4 py-2 rounded-md ${
+                  currentPage === index + 1 
+                    ? 'bg-[#4C9BF5] text-white' 
+                    : 'bg-white text-gray-600 hover:bg-gray-50'
+                }`}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </nav>
         </div>
 
+        {/* Modals */}
         <CreateProductModal
           isOpen={isModalOpen}
           onClose={() => {
