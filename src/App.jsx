@@ -28,6 +28,7 @@ import { SearchProvider } from './page/Client/_components/context/SearchContext'
 import SearchResults from './page/Client/product-page/search-overview/SearchResults';
 import InventoryProductDetail from './page/Seller/product-management/inv-prodetail';
 import AdvancedProductEdit from './page/Seller/product-management/AdvancedProductEdit';
+import SellerProfile from './page/Seller/seller-profile/seller-profile.jsx';
 
 function App() {
   return (
@@ -68,6 +69,7 @@ function App() {
               <Route path="/product-management/product/:id" element={<InventoryProductDetail />} />
               <Route path="/product-management/edit-advanced/:id" element={<AdvancedProductEdit />} />
               <Route path="/product-management/inventory/:id" element={<InventoryProductDetail />} />
+              <Route path="/seller-profile" element={<SellerProfile />} />
             </Routes>
           </Router>
           <ToastContainer position="top-right" autoClose={2000} />

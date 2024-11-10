@@ -74,13 +74,13 @@ const NavbarSeller = () => {
             </div>
 
             {/* User Profile */}
-            <div className="flex items-center space-x-2">
+            <Link to="/seller-profile" className="flex items-center space-x-2">
               <img
                 src="/images/Client/product-page/client-account.svg"
                 alt="User"
-                className="w-6 h-6"
+                className="w-6 h-6 cursor-pointer hover:opacity-80"
               />
-            </div>
+            </Link>
           </div>
         </div>
       </div>
