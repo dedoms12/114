@@ -56,7 +56,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image1stbatch-11.svg",
       "/images/Client/product-page/gen-health/image1stbatch-11.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 2,
@@ -115,7 +115,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image1stbatch-10.svg",
       "/images/Client/product-page/gen-health/image1stbatch-10.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 3,
@@ -174,7 +174,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image1stbatch-9.svg",
       "/images/Client/product-page/gen-health/image1stbatch-9.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 4,
@@ -233,7 +233,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image1stbatch-8.svg",
       "/images/Client/product-page/gen-health/image1stbatch-8.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 5,
@@ -292,7 +292,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image1stbatch-7.svg",
       "/images/Client/product-page/gen-health/image1stbatch-7.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 6,
@@ -351,7 +351,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image1stbatch-6.svg",
       "/images/Client/product-page/gen-health/image1stbatch-6.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 7,
@@ -410,7 +410,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image1stbatch-1.svg",
       "/images/Client/product-page/gen-health/image1stbatch-1.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 8,
@@ -469,7 +469,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image1stbatch-2.svg",
       "/images/Client/product-page/gen-health/image1stbatch-2.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 9,
@@ -528,7 +528,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image1stbatch-3.svg",
       "/images/Client/product-page/gen-health/image1stbatch-3.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 10,
@@ -587,7 +587,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image1stbatch-4.svg",
       "/images/Client/product-page/gen-health/image1stbatch-4.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 11,
@@ -646,7 +646,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image1stbatch-5.svg",
       "/images/Client/product-page/gen-health/image1stbatch-5.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 12,
@@ -705,7 +705,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image1stbatch-1.1.svg",
       "/images/Client/product-page/gen-health/image1stbatch-1.1.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 13,
@@ -764,7 +764,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image2ndbatch-6.svg",
       "/images/Client/product-page/gen-health/image2ndbatch-6.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 14,
@@ -823,7 +823,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image2ndbatch-3.svg",
       "/images/Client/product-page/gen-health/image2ndbatch-3.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 15,
@@ -882,7 +882,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image2ndbatch-9.svg",
       "/images/Client/product-page/gen-health/image2ndbatch-9.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 16,
@@ -941,7 +941,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image2ndbatch-8.svg",
       "/images/Client/product-page/gen-health/image2ndbatch-8.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 17,
@@ -1000,7 +1000,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image2ndbatch-10.svg",
       "/images/Client/product-page/gen-health/image2ndbatch-10.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 18,
@@ -1059,7 +1059,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image2ndbatch-5.svg",
       "/images/Client/product-page/gen-health/image2ndbatch-5.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 19,
@@ -1118,7 +1118,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image2ndbatch-4.svg",
       "/images/Client/product-page/gen-health/image2ndbatch-4.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 20,
@@ -1177,7 +1177,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image2ndbatch-1.svg",
       "/images/Client/product-page/gen-health/image2ndbatch-1.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 21,
@@ -1236,7 +1236,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image2ndbatch-7.svg",
       "/images/Client/product-page/gen-health/image2ndbatch-7.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 22,
@@ -1295,7 +1295,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image2ndbatch-2.svg",
       "/images/Client/product-page/gen-health/image2ndbatch-2.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 23,
@@ -1354,7 +1354,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image2ndbatch-11.svg",
       "/images/Client/product-page/gen-health/image2ndbatch-11.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 24,
@@ -1413,7 +1413,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image2ndbatch-12.svg",
       "/images/Client/product-page/gen-health/image2ndbatch-12.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 25,
@@ -1472,7 +1472,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image3rdbatch-7.svg",
       "/images/Client/product-page/gen-health/image3rdbatch-7.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 26,
@@ -1531,7 +1531,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image3rdbatch-4.svg",
       "/images/Client/product-page/gen-health/image3rdbatch-4.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 27,
@@ -1590,7 +1590,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image3rdbatch-8.svg",
       "/images/Client/product-page/gen-health/image3rdbatch-8.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 28,
@@ -1649,7 +1649,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image3rdbatch-2.svg",
       "/images/Client/product-page/gen-health/image3rdbatch-2.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 29,
@@ -1708,7 +1708,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image3rdbatch.svg",
       "/images/Client/product-page/gen-health/image3rdbatch.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 30,
@@ -1767,7 +1767,7 @@ export const products = [
       "/images/Client/product-page/gen-health/image3rdbatch-1.svg",
       "/images/Client/product-page/gen-health/image3rdbatch-1.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   },
   {
     id: 31,
@@ -1826,6 +1826,6 @@ export const products = [
       "/images/Client/product-page/gen-health/image3rdbatch-9.svg",
       "/images/Client/product-page/gen-health/image3rdbatch-9.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Ampayon, Agusan del Norte"
   }
 ];

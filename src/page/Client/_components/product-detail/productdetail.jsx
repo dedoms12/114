@@ -9,6 +9,7 @@ import { personalCareProducts } from '../../product-page/personal-care/pc-produc
 import ReviewsModal from './ReviewsModal';
 import { useCart } from '../context/CartContext';
 import { toast } from 'react-toastify';
+import { getProductById } from '../../../../shared/services/productService';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -20,6 +21,7 @@ const ProductDetail = () => {
   const [selectedShipping, setSelectedShipping] = useState('standard');
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
   const { dispatch } = useCart();
 
   const handleGoBack = () => {
@@ -33,34 +35,30 @@ const ProductDetail = () => {
   };
 
   useEffect(() => {
-    let productData;
-    const productId = parseInt(id);
-    const path = location.pathname;
+    const loadProduct = async () => {
+      try {
+        const productData = await getProductById(id);
+        if (productData) {
+          setProduct(productData);
+        } else {
+          console.error('Product not found');
+        }
+      } catch (error) {
+        console.error('Error loading product:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    if (path.includes('general-health')) {
-      productData = products.find(p => p.id === productId);
-    } else if (path.includes('medical-supplies')) {
-      productData = medicalProducts.find(p => p.id === productId);
-    } else if (path.includes('supplements')) {
-      productData = supplementProducts.find(p => p.id === productId);
-    } else if (path.includes('personal-care')) {
-      productData = personalCareProducts.find(p => p.id === productId);
-    }
+    loadProduct();
+  }, [id]);
 
-    if (!productData) {
-      const category = path.split('/')[1];
-      navigate(`/${category}`, { 
-        replace: true,
-        state: { from: location.state?.from }
-      });
-      return;
-    }
-
-    setProduct(productData);
-  }, [id, location.pathname, navigate, location.state]);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   if (!product) {
-    return null;
+    return <div>Product not found</div>;
   }
 
   const defaultImage = product?.image || product?.images?.[0];
