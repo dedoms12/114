@@ -18,7 +18,7 @@ import OrderConfirmation from './page/Client/order-check/check';
 import ContactPage from './page/Client/contact-us/contact-page';
 import Dashboard from './page/Seller/home-page/dashboard.jsx';
 import HeroPage from './page/heropage.jsx';
-import Sales from './page/Seller/sales/sales.jsx';
+import Sales from './page/Seller/sales/sales-logistics.jsx';
 import ProductManagement from './page/Seller/product-management/product-management.jsx';
 import Stores from './page/Client/stores-page/stores.jsx';
 import { OrderProvider } from './page/Client/_components/context/OrderContext';
