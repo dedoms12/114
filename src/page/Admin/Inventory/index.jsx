@@ -9,21 +9,21 @@ const AdminInventory = () => {
       count: '298',
       label: 'Medicines Available',
       action: 'View Full List',
-      buttonClass: 'bg-blue-50'
+      buttonClass: 'text-blue-600 bg-blue-50'
     },
     {
       icon: '📦',
       count: '02',
       label: 'Medicine Groups',
       action: 'View Groups',
-      buttonClass: 'bg-green-50'
+      buttonClass: 'text-green-600 bg-green-50'
     },
     {
       icon: '⚠️',
       count: '01',
       label: 'Medicine Shortage',
       action: 'Resolve Now',
-      buttonClass: 'bg-red-50'
+      buttonClass: 'text-red-600 bg-red-50'
     }
   ];
 
@@ -46,12 +46,12 @@ const AdminInventory = () => {
 
           <div className="grid grid-cols-3 gap-6">
             {stats.map((stat, index) => (
-              <div key={index} className="bg-white rounded-lg border">
+              <div key={index} className="bg-white rounded-lg shadow-sm">
                 <div className="flex flex-col items-center p-6">
                   <div className="text-4xl mb-4">{stat.icon}</div>
                   <div className="text-2xl font-bold mb-2">{stat.count}</div>
                   <div className="text-gray-600 mb-4">{stat.label}</div>
-                  <button className={`w-full py-2 ${stat.buttonClass} rounded-lg hover:opacity-90 transition-opacity`}>
+                  <button className={`w-full py-2 ${stat.buttonClass} rounded-lg hover:opacity-90 transition-opacity text-sm font-medium`}>
                     {stat.action} →
                   </button>
                 </div>

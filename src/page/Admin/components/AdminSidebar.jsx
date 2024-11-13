@@ -1,19 +1,34 @@
 import { Link } from 'react-router-dom';
-import { FiGrid, FiPackage, FiFileText, FiSettings, FiUsers, FiBell, FiMessageSquare, FiSliders, FiShield, FiHelpCircle } from 'react-icons/fi';
+import { FiGrid, FiPackage, FiFileText, FiSettings, FiUsers, FiBell, FiMessageSquare, FiSliders, FiShield, FiHelpCircle, FiChevronDown } from 'react-icons/fi';
 import ProfileMenu from './ProfileMenu';
+import { useState } from 'react';
 
 const AdminSidebar = () => {
+  const [isInventoryOpen, setIsInventoryOpen] = useState(false);
+  const [isReportsOpen, setIsReportsOpen] = useState(false);
+
   const menuItems = [
     { icon: FiGrid, label: 'Dashboard', path: '/admin/dashboard' },
-    { icon: FiPackage, label: 'Inventory', path: '/admin/inventory' },
-    { icon: FiFileText, label: 'Reports', path: '/admin/reports' },
-    { icon: FiSettings, label: 'Configuration', path: '/admin/configuration' },
+    {
+      icon: FiPackage,
+      label: 'Inventory',
+      path: '/admin/inventory',
+      subItems: [
+        { label: 'List of Medicines', path: '/admin/inventory/medicines' },
+        { label: 'Registered Pharmacies', path: '/admin/inventory/groups' }
+      ]
+    },
+    {
+      icon: FiFileText,
+      label: 'Reports',
+      path: '/admin/reports',
+      subItems: [
+        { label: 'Sales Report', path: '/admin/reports/sales' },
+        { label: 'Total Registered Users', path: '/admin/reports/users' }
+      ]
+    },
     { icon: FiUsers, label: 'Contact Management', path: '/admin/contacts' },
-    { icon: FiBell, label: 'Notifications', path: '/admin/notifications', badge: '01' },
-    { icon: FiMessageSquare, label: 'Chat with Visitors', path: '/admin/chat' },
     { icon: FiSliders, label: 'Application Settings', path: '/admin/settings' },
-    { icon: FiShield, label: 'Covid -19', path: '/admin/covid' },
-    { icon: FiHelpCircle, label: 'Get Technical Help', path: '/admin/help' },
   ];
 
   return (
@@ -29,19 +44,50 @@ const AdminSidebar = () => {
 
       <nav className="mt-6">
         {menuItems.map((item, index) => (
-          <Link
-            key={index}
-            to={item.path}
-            className="flex items-center gap-3 px-6 py-3 hover:bg-[#2A3547] transition-colors"
-          >
-            <item.icon className="w-5 h-5" />
-            <span>{item.label}</span>
-            {item.badge && (
-              <span className="ml-auto bg-red-500 text-xs px-2 py-1 rounded-full">
-                {item.badge}
-              </span>
+          <div key={index}>
+            {item.subItems ? (
+              <div>
+                <button
+                  onClick={() => {
+                    if (item.label === 'Inventory') setIsInventoryOpen(!isInventoryOpen);
+                    if (item.label === 'Reports') setIsReportsOpen(!isReportsOpen);
+                  }}
+                  className="w-full flex items-center justify-between px-6 py-3 hover:bg-[#2A3547] transition-colors"
+                >
+                  <div className="flex items-center gap-3">
+                    <item.icon className="w-5 h-5" />
+                    <span>{item.label}</span>
+                  </div>
+                  <FiChevronDown className={`w-4 h-4 transition-transform ${
+                    (item.label === 'Inventory' && isInventoryOpen) || 
+                    (item.label === 'Reports' && isReportsOpen) ? 'rotate-180' : ''
+                  }`} />
+                </button>
+                {((item.label === 'Inventory' && isInventoryOpen) || 
+                  (item.label === 'Reports' && isReportsOpen)) && (
+                  <div className="bg-[#2A3547]">
+                    {item.subItems.map((subItem, subIndex) => (
+                      <Link
+                        key={subIndex}
+                        to={subItem.path}
+                        className="flex items-center pl-14 py-2 hover:bg-[#374151] transition-colors text-sm"
+                      >
+                        {subItem.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link
+                to={item.path}
+                className="flex items-center gap-3 px-6 py-3 hover:bg-[#2A3547] transition-colors"
+              >
+                <item.icon className="w-5 h-5" />
+                <span>{item.label}</span>
+              </Link>
             )}
-          </Link>
+          </div>
         ))}
       </nav>
     </div>

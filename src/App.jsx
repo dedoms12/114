@@ -29,6 +29,17 @@ import SearchResults from './page/Client/product-page/search-overview/SearchResu
 import InventoryProductDetail from './page/Seller/product-management/inv-prodetail';
 import AdvancedProductEdit from './page/Seller/product-management/AdvancedProductEdit';
 import SellerProfile from './page/Seller/seller-profile/seller-profile.jsx';
+import AdminDashboard from './page/Admin/Dashboard/AdminDashboard.jsx';
+import AdminInventory from './page/Admin/Inventory/index.jsx';
+import AdminReports from './page/Admin/Reports/index.jsx';
+import MedicineList from './page/Admin/Inventory/MedicineList.jsx';
+import MedicineGroups from './page/Admin/Inventory/MedicineGroups.jsx';
+import SalesReport from './page/Admin/Reports/SalesReport.jsx';
+import RegisteredUsers from './page/Admin/Reports/RegisteredUsers.jsx';
+import ContactManagement from './page/Admin/ContactManagement/index.jsx';
+import AdminSettings from './page/Admin/Settings/index.jsx';
+
+
 
 function App() {
   return (
@@ -64,6 +75,17 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/product-management" element={<ProductManagement />} />
               <Route path="/sales" element={<Sales />} />
+
+              {/* Admin's route */}
+              <Route path="/admin/dashboard" element={<AdminDashboard />} />
+              <Route path="/admin/inventory" element={<AdminInventory />} />
+              <Route path="/admin/inventory/medicines" element={<MedicineList />} />
+              <Route path="/admin/inventory/groups" element={<MedicineGroups />} />
+              <Route path="/admin/reports" element={<AdminReports />} />
+              <Route path="/admin/reports/sales" element={<SalesReport />} />
+              <Route path="/admin/reports/users" element={<RegisteredUsers />} />
+              <Route path="/admin/contacts" element={<ContactManagement />} />
+              <Route path="/admin/settings" element={<AdminSettings />} />
               
               <Route path="/search-results" element={<SearchResults />} />
               <Route path="/product-management/product/:id" element={<InventoryProductDetail />} />
