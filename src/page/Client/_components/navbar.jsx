@@ -100,7 +100,9 @@ const NavBar = () => {
                   alt="User" 
                   className="w-6 h-6"
                 />
-                <span className="text-sm text-gray-600">{currentUser.name}</span>
+                <span className="text-sm text-gray-600">
+                  {currentUser?.firstName || 'User'}
+                </span>
               </div>
             </div>
           </div>

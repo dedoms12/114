@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import NavBar from '../_components/navbar';
 import { toast } from 'react-toastify';
-import ReviewModal from '../_components/product-detail/ReviewsModal';
 import { FaBox, FaTruck, FaReceipt, FaUser, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 import { useOrders } from '../_components/context/OrderContext';
 
@@ -22,9 +21,6 @@ const OrderConfirmation = () => {
       position: "top-right",
       autoClose: 2000,
     });
-    setTimeout(() => {
-      navigate('/user-profile');
-    }, 2000);
   };
 
   const handleCancel = () => {
@@ -41,19 +37,9 @@ const OrderConfirmation = () => {
     }
   };
 
-  const handleReview = (product) => {
-    setSelectedProduct(product);
+  const handleNavigateToReview = () => {
     setIsSuccessModalOpen(false);
-    setIsReviewModalOpen(true);
-  };
-
-  const handleReviewSubmit = (reviewData) => {
-    // Handle the review submission
-    toast.success('Review submitted successfully!', {
-      position: "top-right",
-      autoClose: 2000,
-    });
-    setIsReviewModalOpen(false);
+    navigate('/user-profile');
   };
 
   const getDeliveryTime = (shippingType) => {
@@ -64,6 +50,24 @@ const OrderConfirmation = () => {
     <div className="min-h-screen bg-gray-50">
       <NavBar />
       <div className="max-w-4xl mx-auto px-4 py-8">
+        <div 
+          onClick={() => navigate('/cart')}
+          className="flex items-center mb-4 text-gray-600 hover:text-gray-800 cursor-pointer w-fit"
+        >
+          <svg 
+            className="w-5 h-5 mr-2" 
+            fill="none" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            strokeWidth="2" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+          >
+            <path d="M15 19l-7-7 7-7" />
+          </svg>
+          <span>Back to Cart</span>
+        </div>
+
         {/* Order Status Banner */}
         <div className="bg-white rounded-lg shadow-sm p-8 mb-6">
           <div className="text-center">
@@ -201,7 +205,7 @@ const OrderConfirmation = () => {
         </div>
       </div>
 
-      {/* Success Modal */}
+      {/* Updated Success Modal */}
       {isSuccessModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-8 max-w-md w-full">
@@ -212,18 +216,18 @@ const OrderConfirmation = () => {
               <h2 className="text-xl font-semibold mb-4">Order Received!</h2>
               <p className="text-gray-600 mb-6">Would you like to review your purchased items?</p>
               <div className="space-y-4">
-                {orderDetails?.items.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => handleReview(item)}
-                    className="w-full bg-[#4C9BF5] text-white px-6 py-2 rounded-md hover:bg-blue-600 mb-2 flex items-center justify-center gap-2"
-                  >
-                    <FaReceipt />
-                    Review {item.name}
-                  </button>
-                ))}
                 <button
-                  onClick={() => navigate('/cart')}
+                  onClick={handleNavigateToReview}
+                  className="w-full bg-[#4C9BF5] text-white px-6 py-2 rounded-md hover:bg-blue-600 mb-2 flex items-center justify-center gap-2"
+                >
+                  <FaReceipt />
+                  Review Product
+                </button>
+                <button
+                  onClick={() => {
+                    setIsSuccessModalOpen(false);
+                    navigate('/cart');
+                  }}
                   className="w-full border border-gray-300 px-6 py-2 rounded-md hover:bg-gray-50 flex items-center justify-center gap-2"
                 >
                   <FaBox />
@@ -234,13 +238,6 @@ const OrderConfirmation = () => {
           </div>
         </div>
       )}
-
-      <ReviewModal
-        isOpen={isReviewModalOpen}
-        onClose={() => setIsReviewModalOpen(false)}
-        product={selectedProduct}
-        onReviewSubmit={handleReviewSubmit}
-      />
     </div>
   );
 };

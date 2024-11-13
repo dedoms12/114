@@ -5,11 +5,15 @@ import { useOrders } from '../_components/context/OrderContext';
 import { FaEllipsisH } from 'react-icons/fa';
 import EditProfileModal from '../_components/modals/EditProfileModal';
 
+import OrderReviewModal from '../_components/check-review/OrderReviewModal';
+
 const UserProfile = () => {
   const navigate = useNavigate();
   const { orders, currentUser, setCurrentUser } = useOrders();
   const [activeTab, setActiveTab] = useState('All Orders');
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   
   const tabs = ["All Orders", "To Received", "Complete", "Cancelled"];
 
@@ -66,13 +70,125 @@ const UserProfile = () => {
     setCurrentUser(updatedData);
   };
 
+  const handleReviewClick = (product) => {
+    setSelectedProduct(product);
+    setIsReviewModalOpen(true);
+  };
+
+  const handleReviewSubmit = (reviewData) => {
+    console.log('Review submitted:', reviewData);
+    setIsReviewModalOpen(false);
+    navigate('/user-profile');
+  };
+
+  const renderOrderItems = (order, item) => (
+    <div key={item.id} className="flex items-center justify-between mb-4">
+      <div className="flex items-center space-x-4">
+        <img
+          src={item.image}
+          alt={item.name}
+          className="w-16 h-16 object-contain rounded"
+        />
+        <div>
+          <h3 className="font-medium">{item.name}</h3>
+          <p className="text-sm text-gray-500">Quantity: {item.quantity}</p>
+          <p className="text-sm font-medium text-blue-600">
+            ₱{item.price * item.quantity}
+          </p>
+        </div>
+      </div>
+      {order.status === 'Completed' && (
+        <button
+          onClick={() => handleReviewClick(item)}
+          className="px-4 py-2 text-sm bg-[#4C9BF5] text-white rounded-md hover:bg-blue-600"
+        >
+          Write Review
+        </button>
+      )}
+    </div>
+  );
+
+  const renderProfileSection = () => (
+    <div className="bg-white rounded-lg p-6 shadow-sm">
+      {/* Profile Header */}
+      <div className="flex items-start justify-between mb-6">
+        <div className="flex items-center space-x-4">
+          <div className="w-24 h-24 bg-gray-900 rounded-full flex items-center justify-center text-3xl text-white">
+            {currentUser?.firstName?.charAt(0) || 'A'}
+          </div>
+          <div>
+            <h2 className="text-xl font-semibold mb-1">
+              {currentUser?.firstName} {currentUser?.lastName}
+            </h2>
+            <p className="text-gray-500 text-sm">{currentUser?.email}</p>
+          </div>
+        </div>
+        <button 
+          onClick={() => setIsEditModalOpen(true)} 
+          className="px-4 py-2 border rounded-lg text-sm hover:bg-gray-50 flex items-center gap-2"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+          </svg>
+          Edit profile
+        </button>
+      </div>
+
+      {/* Profile Details Grid */}
+      <div className="grid grid-cols-2 gap-4 mb-6">
+        <div className="space-y-1">
+          <p className="text-sm text-gray-500">Gender</p>
+          <p className="text-sm font-medium">{currentUser?.gender || 'Not specified'}</p>
+        </div>
+        <div className="space-y-1">
+          <p className="text-sm text-gray-500">Status</p>
+          <p className="text-sm font-medium">{currentUser?.status || 'Not specified'}</p>
+        </div>
+        <div className="space-y-1">
+          <p className="text-sm text-gray-500">Education</p>
+          <p className="text-sm font-medium">{currentUser?.education || 'Not specified'}</p>
+        </div>
+        <div className="space-y-1">
+          <p className="text-sm text-gray-500">Location</p>
+          <p className="text-sm font-medium">{currentUser?.location || 'Not specified'}</p>
+        </div>
+      </div>
+
+      {/* Contact Information */}
+      <div className="border-t pt-4 space-y-3">
+        <h3 className="text-sm font-medium text-gray-700 mb-2">Contact Information</h3>
+        <div className="flex items-center text-sm">
+          <svg className="w-4 h-4 text-gray-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          <span>{currentUser?.phone || 'Not specified'}</span>
+        </div>
+        <div className="flex items-center text-sm">
+          <svg className="w-4 h-4 text-gray-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <span>{currentUser?.address || 'Not specified'}</span>
+        </div>
+      </div>
+
+      {/* About Me Section */}
+      <div className="border-t mt-4 pt-4">
+        <h3 className="text-sm font-medium text-gray-700 mb-2">About Me</h3>
+        <p className="text-sm text-gray-600">
+          {currentUser?.bio || 'No bio provided'}
+        </p>
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-gray-50">
       <NavBar />
       <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Left Column - Orders */}
-          <div className="col-span-2">
+          <div className="md:col-span-2">
             <div className="flex space-x-6 border-b mb-6">
               {tabs.map((tab) => (
                 <button
@@ -114,22 +230,7 @@ const UserProfile = () => {
                   </div>
 
                   {/* Order Items */}
-                  {order.items.map((item) => (
-                    <div key={item.id} className="flex items-center space-x-4 mb-4">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="w-16 h-16 object-contain rounded"
-                      />
-                      <div>
-                        <h3 className="font-medium">{item.name}</h3>
-                        <p className="text-sm text-gray-500">Quantity: {item.quantity}</p>
-                        <p className="text-sm font-medium text-blue-600">
-                          ₱{item.price * item.quantity}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+                  {order.items.map((item) => renderOrderItems(order, item))}
 
                   {/* Order Timeline */}
                   <div className="mt-4 pt-4 border-t">
@@ -152,32 +253,9 @@ const UserProfile = () => {
             </div>
           </div>
 
-          {/* Right Column - Profile Info */}
+          {/* Right Column */}
           <div className="space-y-8">
-            {/* Profile Section */}
-            <div className="bg-white rounded-lg p-6 shadow-sm">
-              <div className="flex flex-col items-center">
-                <div className="w-24 h-24 bg-gray-900 rounded-full flex items-center justify-center text-3xl text-white mb-4">
-                  A
-                </div>
-                <h2 className="text-xl font-semibold">Ashley Gonzalez</h2>
-                <p className="text-gray-500">Ampayon, Agusan Del Norte</p>
-                <button 
-                  onClick={() => setIsEditModalOpen(true)} 
-                  className="mt-4 px-4 py-2 border rounded-lg text-sm hover:bg-gray-50"
-                >
-                  Edit profile
-                </button>
-              </div>
-              <div className="mt-6">
-                <h3 className="font-medium mb-2">About Me</h3>
-                <p className="text-gray-600 text-sm">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                  Maecenas dignissim scelerisque ex ac vehicula. Nullam id eros vel 
-                  dolor porttitor lacinia tincidunt quis felis. Aliquam ut.
-                </p>
-              </div>
-            </div>
+            {renderProfileSection()}
 
             {/* Following Section */}
             <div className="bg-white rounded-lg p-6 shadow-sm">
@@ -224,11 +302,18 @@ const UserProfile = () => {
           </div>
         </div>
       </div>
+
       <EditProfileModal
         isOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
         currentUser={currentUser}
         onSave={handleProfileUpdate}
+      />
+      <OrderReviewModal
+        isOpen={isReviewModalOpen}
+        onClose={() => setIsReviewModalOpen(false)}
+        product={selectedProduct}
+        onReviewSubmit={handleReviewSubmit}
       />
     </div>
   );

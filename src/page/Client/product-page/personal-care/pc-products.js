@@ -1,4 +1,12 @@
-export const personalCareProducts = [
+import { stores } from '../../home-page/store';
+
+// Helper function to get random store
+const getRandomStore = () => {
+  return stores[Math.floor(Math.random() * stores.length)];
+};
+
+// Original products array
+const originalPersonalCareProducts = [
   {
     id: 1,
     name: "COLGATE Plax 500ml Fresh Tea",
@@ -864,3 +872,9 @@ export const personalCareProducts = [
     ]
   }
 ];
+
+// Export products with random store info
+export const personalCareProducts = originalPersonalCareProducts.map(product => ({
+  ...product,
+  storeInfo: getRandomStore()
+}));

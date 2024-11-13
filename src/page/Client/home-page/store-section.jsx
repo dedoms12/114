@@ -1,70 +1,23 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { getTopStores, getLatestStores } from './store';
 
 const StoreSection = () => {
-  const topStores = [
-    {
-      id: 1,
-      name: "D18 Pharmacy",
-      logo: "/images/Client/product-page/Store Section/imagestore.svg",
-      action: "SHOP NOW"
-    },
-    {
-      id: 2,
-      name: "iCure Pharmacy",
-      logo: "/images/Client/product-page/Store Section/imagestore-1.svg",
-      action: "SHOP NOW"
-    },
-    {
-      id: 3,
-      name: "Dr. Care",
-      logo: "/images/Client/product-page/Store Section/imagestore-2.svg",
-      action: "SHOP NOW"
-    },
-    {
-      id: 4,
-      name: "Daan Pharmacy",
-      logo: "/images/Client/product-page/Store Section/imagestore-3.svg",
-      action: "SHOP NOW"
-    }
-  ];
-
-  const latestStores = [
-    {
-      id: 1,
-      name: "Medical Advantage",
-      logo: "/images/Client/product-page/Store Section/imagestore-4.svg",
-      action: "SHOP NOW"
-    },
-    {
-      id: 2,
-      name: "JS Alaan Pharmacy",
-      logo: "/images/Client/product-page/Store Section/imagestore-5.svg",
-      action: "SHOP NOW"
-    },
-    {
-      id: 3,
-      name: "iCure Pharmacy",
-      logo: "/images/Client/product-page/Store Section/imagestore-6.svg",
-      action: "SHOP NOW"
-    },
-    {
-      id: 4,
-      name: "Medicare Pharmacy",
-      logo: "/images/Client/product-page/Store Section/imagestore-7.svg",
-      action: "SHOP NOW"
-    }
-  ];
+  const topStores = getTopStores();
+  const latestStores = getLatestStores();
 
   const StoreCard = ({ store }) => (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-4 w-full">
-      <div className="flex flex-col items-center">
-        <img src={store.logo} alt={store.name} className="w-16 h-16 object-contain mb-3" />
-        <h3 className="text-sm font-medium text-center mb-2">{store.name}</h3>
-        <button className="text-[#F1511B] text-sm font-medium hover:underline">
-          {store.action}
-        </button>
+    <Link to={`/store/${store.id}`}>
+      <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-4 w-full hover:shadow-md transition-shadow">
+        <div className="flex flex-col items-center">
+          <img src={store.logo} alt={store.name} className="w-16 h-16 object-contain mb-3" />
+          <h3 className="text-sm font-medium text-center mb-2">{store.name}</h3>
+          <button className="text-[#F1511B] text-sm font-medium hover:underline">
+            {store.action}
+          </button>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 
   return (

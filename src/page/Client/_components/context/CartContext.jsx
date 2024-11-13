@@ -36,7 +36,6 @@ const cartReducer = (state, action) => {
       newState = state.filter(item => 
         !(item.id === action.payload.id && item.category === action.payload.category)
       );
-      toast.info('Product removed from cart');
       break;
 
     case 'UPDATE_QUANTITY':

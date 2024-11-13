@@ -38,66 +38,74 @@ import SalesReport from './page/Admin/Reports/SalesReport.jsx';
 import RegisteredUsers from './page/Admin/Reports/RegisteredUsers.jsx';
 import ContactManagement from './page/Admin/ContactManagement/index.jsx';
 import AdminSettings from './page/Admin/Settings/index.jsx';
+import StoreDetails from './page/Client/storefront-page/storedetails';
+import { Toaster } from 'react-hot-toast';
 
 
 
 function App() {
   return (
-    <SearchProvider>
-      <OrderProvider>
-        <CartProvider>
-          <Router>
-            <Routes>
-              <Route path="/" element={<HeroPage />} />
-              <Route path="/signin" element={<SignIn />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/sign-up-role" element={<SignUpRole />} />
+    <>
+      <Toaster position="top-center" />
+      <SearchProvider>
+        <OrderProvider>
+          <CartProvider>
+            <Router>
+              <Routes>
+                <Route path="/" element={<HeroPage />} />
+                <Route path="/signin" element={<SignIn />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/sign-up-role" element={<SignUpRole />} />
 
-              {/* Buyer's route */}
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/general-health" element={<GeneralHealth />} />
-              <Route path="/general-health/product/:id" element={<ProductDetail />} />
-              <Route path="/medical-supplies" element={<MedicalSupplies />} />
-              <Route path="/medical-supplies/product/:id" element={<ProductDetail />} />
-              <Route path="/personal-care" element={<PersonalCare />} />
-              <Route path="/personal-care/product/:id" element={<ProductDetail />} />
-              <Route path="/supplements" element={<Supplements />} />
-              <Route path="/supplements/product/:id" element={<ProductDetail />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/order-confirmation" element={<OrderConfirmation />} />
-              <Route path="/stores" element={<Stores />} />
-              <Route path="/user-profile" element={<UserProfile />} />
-              <Route path="/chatbot" element={<ChatbotPage />} />
-              
-              {/* Seller's route */}
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/product-management" element={<ProductManagement />} />
-              <Route path="/sales" element={<Sales />} />
+                {/* Buyer's route */}
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/general-health" element={<GeneralHealth />} />
+                <Route path="/general-health/product/:id" element={<ProductDetail />} />
+                <Route path="/medical-supplies" element={<MedicalSupplies />} />
+                <Route path="/medical-supplies/product/:id" element={<ProductDetail />} />
+                <Route path="/personal-care" element={<PersonalCare />} />
+                <Route path="/personal-care/product/:id" element={<ProductDetail />} />
+                <Route path="/supplements" element={<Supplements />} />
+                <Route path="/supplements/product/:id" element={<ProductDetail />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/order-confirmation" element={<OrderConfirmation />} />
+                <Route path="/stores" element={<Stores />} />
+                <Route path="/user-profile" element={<UserProfile />} />
+                <Route path="/chatbot" element={<ChatbotPage />} />
+                <Route path="/store/:id/product/:productId" element={<ProductDetail />} />
+                
+                {/* Seller's route */}
+                <Route path="/seller/dashboard" element={<Dashboard />} />
+                <Route path="/seller/product-management" element={<ProductManagement />} />
+                <Route path="/seller/sales" element={<Sales />} />
 
-              {/* Admin's route */}
-              <Route path="/admin/dashboard" element={<AdminDashboard />} />
-              <Route path="/admin/inventory" element={<AdminInventory />} />
-              <Route path="/admin/inventory/medicines" element={<MedicineList />} />
-              <Route path="/admin/inventory/groups" element={<MedicineGroups />} />
-              <Route path="/admin/reports" element={<AdminReports />} />
-              <Route path="/admin/reports/sales" element={<SalesReport />} />
-              <Route path="/admin/reports/users" element={<RegisteredUsers />} />
-              <Route path="/admin/contacts" element={<ContactManagement />} />
-              <Route path="/admin/settings" element={<AdminSettings />} />
-              
-              <Route path="/search-results" element={<SearchResults />} />
-              <Route path="/product-management/product/:id" element={<InventoryProductDetail />} />
-              <Route path="/product-management/edit-advanced/:id" element={<AdvancedProductEdit />} />
-              <Route path="/product-management/inventory/:id" element={<InventoryProductDetail />} />
-              <Route path="/seller-profile" element={<SellerProfile />} />
-            </Routes>
-          </Router>
-          <ToastContainer position="top-right" autoClose={2000} />
-        </CartProvider>
-      </OrderProvider>
-    </SearchProvider>
+                {/* Admin's route */}
+                <Route path="/admin/dashboard" element={<AdminDashboard />} />
+                <Route path="/admin/inventory" element={<AdminInventory />} />
+                <Route path="/admin/inventory/medicines" element={<MedicineList />} />
+                <Route path="/admin/inventory/groups" element={<MedicineGroups />} />
+                <Route path="/admin/reports" element={<AdminReports />} />
+                <Route path="/admin/reports/sales" element={<SalesReport />} />
+                <Route path="/admin/reports/users" element={<RegisteredUsers />} />
+                <Route path="/admin/contacts" element={<ContactManagement />} />
+                <Route path="/admin/settings" element={<AdminSettings />} />
+                
+                <Route path="/search-results" element={<SearchResults />} />
+                <Route path="/product-management/product/:id" element={<InventoryProductDetail />} />
+                <Route path="/product-management/edit-advanced/:id" element={<AdvancedProductEdit />} />
+                <Route path="/product-management/inventory/:id" element={<InventoryProductDetail />} />
+                <Route path="/seller-profile" element={<SellerProfile />} />
+                <Route path="/store/:id" element={<StoreDetails />} />
+               
+              </Routes>
+            </Router>
+            <ToastContainer position="top-right" autoClose={2000} />
+          </CartProvider>
+        </OrderProvider>
+      </SearchProvider>
+    </>
   );
 }
 

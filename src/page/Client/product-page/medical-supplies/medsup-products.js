@@ -1,4 +1,12 @@
-export const medicalProducts = [
+import { stores } from '../../home-page/store';
+
+// Helper function to get random store
+const getRandomStore = () => {
+  return stores[Math.floor(Math.random() * stores.length)];
+};
+
+// Original products array
+const originalMedicalProducts = [
   {
     id: 1,
     name: "Indoplas Sterile Latex Surgical Gloves Powder Free - (5.5 Pair)",
@@ -735,3 +743,9 @@ export const medicalProducts = [
     location: "Quezon City, Metro Manila"
   }
 ];
+
+// Export products with random store info
+export const medicalProducts = originalMedicalProducts.map(product => ({
+  ...product,
+  storeInfo: getRandomStore()
+}));
