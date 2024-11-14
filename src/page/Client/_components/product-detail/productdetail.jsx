@@ -11,6 +11,9 @@ import { useCart } from '../context/CartContext';
 import { toast } from 'react-toastify';
 import { getProductById } from '../../../../shared/services/productService';
 import { stores } from '../../home-page/store';
+import ReviewCard from './ReviewCard';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -88,38 +91,14 @@ const ProductDetail = () => {
     }
   };
 
-  const ReviewCard = ({ review }) => (
-    <div className="border-b border-gray-200 py-4">
-      <div className="flex items-center gap-4 mb-2">
-        <div className="flex">
-          {[...Array(5)].map((_, i) => (
-            <svg
-              key={i}
-              className={`w-4 h-4 ${i < review.rating ? 'text-[#FF8A00]' : 'text-gray-300'}`}
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-          ))}
-        </div>
-        <span className="text-sm text-gray-500">{review.date}</span>
-      </div>
-      <p className="text-sm text-gray-700 mb-3">{review.comment}</p>
-      {review.images && review.images.length > 0 && (
-        <div className="flex gap-2">
-          {review.images.map((img, index) => (
-            <img
-              key={index}
-              src={img}
-              alt={`Review ${index + 1}`}
-              className="w-20 h-20 object-cover rounded-md"
-            />
-          ))}
-        </div>
-      )}
-    </div>
-  );
+  const calculateAverageRating = (review) => {
+    if (!review.ratings) {
+      return review.rating || 0;
+    }
+    const { productQuality, sellerService, deliverySpeed } = review.ratings;
+    const sum = (productQuality || 0) + (sellerService || 0) + (deliverySpeed || 0);
+    return sum > 0 ? Math.round((sum / 3) * 10) / 10 : 0;
+  };
 
   const handleAddToCart = () => {
     dispatch({
@@ -413,7 +392,33 @@ const ProductDetail = () => {
         {/* Reviews Section (Full Width) */}
         <div className="bg-white rounded-lg p-6">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-medium">Reviews</h2>
+            <div className="flex items-center gap-4">
+              <h2 className="text-xl font-medium">Reviews</h2>
+              <div className="flex items-center gap-2">
+                <span className="text-2xl font-bold text-[#FF8A00]">
+                  {product?.reviews?.length > 0
+                    ? (product.reviews.reduce((acc, review) => acc + calculateAverageRating(review), 0) / product.reviews.length).toFixed(1)
+                    : '0.0'}
+                </span>
+                <div className="flex">
+                  {[...Array(5)].map((_, i) => (
+                    <svg
+                      key={i}
+                      className={`w-5 h-5 ${
+                        i < Math.floor(product?.rating || 0) ? 'text-[#FF8A00]' : 'text-gray-300'
+                      }`}
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <span className="text-sm text-gray-500">
+                  ({product?.reviews?.length || 0} reviews)
+                </span>
+              </div>
+            </div>
             <div className="flex items-center gap-4">
               <button 
                 onClick={() => setIsReviewModalOpen(true)} 
@@ -443,7 +448,7 @@ const ProductDetail = () => {
             </div>
           </div>
           <div className="space-y-6">
-            {product?.reviews?.map((review) => (
+            {product?.reviews?.slice(0, 3).map((review) => (
               <ReviewCard key={review.id} review={review} />
             ))}
           </div>
@@ -453,6 +458,18 @@ const ProductDetail = () => {
         isOpen={isReviewModalOpen}
         onClose={() => setIsReviewModalOpen(false)}
         product={product}
+      />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
       />
     </div>
   );

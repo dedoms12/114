@@ -211,7 +211,7 @@ const OrderConfirmation = () => {
           <div className="bg-white rounded-lg p-8 max-w-md w-full">
             <div className="text-center">
               <div className="flex justify-center mb-4">
-                <img src="/images/success-check.svg" alt="Success" className="w-24" />
+                <img src="/images/Client/check/Image 48check.svg" alt="Success" className="w-24" />
               </div>
               <h2 className="text-xl font-semibold mb-4">Order Received!</h2>
               <p className="text-gray-600 mb-6">Would you like to review your purchased items?</p>

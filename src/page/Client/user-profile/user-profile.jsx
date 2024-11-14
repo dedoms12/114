@@ -4,8 +4,10 @@ import NavBar from '../_components/navbar';
 import { useOrders } from '../_components/context/OrderContext';
 import { FaEllipsisH } from 'react-icons/fa';
 import EditProfileModal from '../_components/modals/EditProfileModal';
+import UserProfileReviewModal from './UserProfileReviewModal';
+import ReviewCard from '../_components/product-detail/ReviewCard';
 
-import OrderReviewModal from '../_components/check-review/OrderReviewModal';
+import { toast } from 'react-hot-toast';
 
 const UserProfile = () => {
   const navigate = useNavigate();
@@ -14,6 +16,7 @@ const UserProfile = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [userReviews, setUserReviews] = useState([]);
   
   const tabs = ["All Orders", "To Received", "Complete", "Cancelled"];
 
@@ -67,18 +70,51 @@ const UserProfile = () => {
   };
 
   const handleProfileUpdate = (updatedData) => {
-    setCurrentUser(updatedData);
+    setCurrentUser(prev => ({
+      ...prev,
+      ...updatedData,
+      tags: updatedData.tags
+    }));
+    toast.success('Profile updated successfully');
   };
 
   const handleReviewClick = (product) => {
-    setSelectedProduct(product);
+    const enhancedProduct = {
+      id: product.id,
+      name: product.name,
+      category: product.category || 'general',
+      image: product.image,
+    };
+    setSelectedProduct(enhancedProduct);
     setIsReviewModalOpen(true);
   };
 
   const handleReviewSubmit = (reviewData) => {
-    console.log('Review submitted:', reviewData);
-    setIsReviewModalOpen(false);
-    navigate('/user-profile');
+    if (!selectedProduct) return;
+    
+    try {
+      setUserReviews(prev => [...prev, {
+        ...reviewData,
+        id: Date.now(),
+        productName: selectedProduct.name,
+        productImage: selectedProduct.image
+      }]);
+      
+      toast.success('Review submitted successfully!');
+      setIsReviewModalOpen(false);
+    } catch (error) {
+      toast.error('Failed to submit review');
+      console.error('Review submission error:', error);
+    }
+  };
+
+  const handleLogout = () => {
+    // Clear user data from context/state
+    setCurrentUser(null);
+    // Clear any stored tokens
+    localStorage.removeItem('token');
+    // Redirect to login page
+    navigate('/login');
   };
 
   const renderOrderItems = (order, item) => (
@@ -123,15 +159,26 @@ const UserProfile = () => {
             <p className="text-gray-500 text-sm">{currentUser?.email}</p>
           </div>
         </div>
-        <button 
-          onClick={() => setIsEditModalOpen(true)} 
-          className="px-4 py-2 border rounded-lg text-sm hover:bg-gray-50 flex items-center gap-2"
-        >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-          </svg>
-          Edit profile
-        </button>
+        <div className="flex flex-col gap-2">
+          <button 
+            onClick={() => setIsEditModalOpen(true)} 
+            className="px-4 py-2 border rounded-lg text-sm hover:bg-gray-50 flex items-center gap-2"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+            </svg>
+            Edit profile
+          </button>
+          <button 
+            onClick={handleLogout} 
+            className="px-4 py-2 border border-red-200 rounded-lg text-sm text-red-500 hover:bg-red-50 flex items-center gap-2"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+            Logout
+          </button>
+        </div>
       </div>
 
       {/* Profile Details Grid */}
@@ -178,6 +225,60 @@ const UserProfile = () => {
         <p className="text-sm text-gray-600">
           {currentUser?.bio || 'No bio provided'}
         </p>
+      </div>
+
+      {/* Tags Section */}
+      <div className="border-t mt-4 pt-4">
+        <h3 className="text-sm font-medium text-gray-700 mb-2">Tags</h3>
+        <div className="flex flex-wrap gap-2">
+          {currentUser?.tags?.map((tag, index) => (
+            <span
+              key={index}
+              className={`px-3 py-1 rounded-full text-sm ${
+                tag.type === 'blue'
+                  ? 'bg-blue-100 text-blue-600'
+                  : 'bg-teal-100 text-teal-600'
+              }`}
+            >
+              {tag.name}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderReviewsSection = () => (
+    <div className="bg-white rounded-lg p-6 shadow-sm mt-8">
+      <h2 className="text-xl font-medium mb-6">My Reviews</h2>
+      <div className="space-y-6">
+        {userReviews.length === 0 ? (
+          <p className="text-gray-500 text-center py-4">No reviews yet</p>
+        ) : (
+          userReviews.map(review => (
+            <div key={review.id} className="border-b pb-6">
+              {/* Product Info */}
+              <div className="flex items-center gap-4 mb-4">
+                <img 
+                  src={review.productImage} 
+                  alt={review.productName}
+                  className="w-16 h-16 object-cover rounded-md"
+                />
+                <div>
+                  <h3 className="font-medium">{review.productName}</h3>
+                  <p className="text-sm text-gray-500">
+                    {new Date(review.date).toLocaleDateString()}
+                  </p>
+                </div>
+              </div>
+              {/* Review Card */}
+              <ReviewCard review={{
+                ...review,
+                user: currentUser?.firstName + ' ' + currentUser?.lastName
+              }} />
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
@@ -251,6 +352,7 @@ const UserProfile = () => {
                 </div>
               ))}
             </div>
+            {renderReviewsSection()}
           </div>
 
           {/* Right Column */}
@@ -277,28 +379,6 @@ const UserProfile = () => {
                 </button>
               </div>
             </div>
-
-            {/* Tags Section */}
-            <div className="bg-white rounded-lg p-6 shadow-sm">
-              <h3 className="font-medium mb-4">Tags</h3>
-              <div className="flex flex-wrap gap-2">
-                {tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className={`px-3 py-1 rounded-full text-sm ${
-                      tag.type === 'blue'
-                        ? 'bg-blue-100 text-blue-600'
-                        : 'bg-teal-100 text-teal-600'
-                    }`}
-                  >
-                    {tag.name}
-                  </span>
-                ))}
-              </div>
-              <button className="text-blue-500 text-sm hover:underline mt-4">
-                See all →
-              </button>
-            </div>
           </div>
         </div>
       </div>
@@ -309,9 +389,12 @@ const UserProfile = () => {
         currentUser={currentUser}
         onSave={handleProfileUpdate}
       />
-      <OrderReviewModal
+      <UserProfileReviewModal
         isOpen={isReviewModalOpen}
-        onClose={() => setIsReviewModalOpen(false)}
+        onClose={() => {
+          setIsReviewModalOpen(false);
+          setSelectedProduct(null);
+        }}
         product={selectedProduct}
         onReviewSubmit={handleReviewSubmit}
       />
