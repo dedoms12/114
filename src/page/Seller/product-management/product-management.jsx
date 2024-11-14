@@ -12,7 +12,7 @@ const ProductManagement = () => {
   const [selectedCategory, setSelectedCategory] = useState('medical-supplies');
   const [currentPage, setCurrentPage] = useState(1);
   const [viewMode, setViewMode] = useState('grid');
-  const productsPerPage = 10;
+  const productsPerPage = 8;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
@@ -189,7 +189,7 @@ const ProductManagement = () => {
 
         {/* Products Grid/List View */}
         <div className={viewMode === 'grid' ? 
-          `grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4` : 
+          `grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-fr` : 
           `flex flex-col gap-4`
         }>
           {currentProducts.map(product => (
@@ -308,19 +308,56 @@ const ProductManagement = () => {
         {/* Pagination */}
         <div className="flex justify-center mt-8">
           <nav className="flex items-center gap-2">
-            {[...Array(totalPages)].map((_, index) => (
+            {/* Add Previous button */}
+            {currentPage > 1 && (
               <button
-                key={index}
-                onClick={() => setCurrentPage(index + 1)}
-                className={`px-4 py-2 rounded-md ${
-                  currentPage === index + 1 
-                    ? 'bg-[#4C9BF5] text-white' 
-                    : 'bg-white text-gray-600 hover:bg-gray-50'
-                }`}
+                onClick={() => setCurrentPage(prev => prev - 1)}
+                className="px-4 py-2 rounded-md bg-white text-gray-600 hover:bg-gray-50"
               >
-                {index + 1}
+                Previous
               </button>
-            ))}
+            )}
+
+            {/* Page numbers */}
+            {[...Array(totalPages)].map((_, index) => {
+              // Show first page, last page, and pages around current page
+              if (
+                index === 0 ||
+                index === totalPages - 1 ||
+                (index >= currentPage - 2 && index <= currentPage)
+              ) {
+                return (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentPage(index + 1)}
+                    className={`px-4 py-2 rounded-md ${
+                      currentPage === index + 1 
+                        ? 'bg-[#4C9BF5] text-white' 
+                        : 'bg-white text-gray-600 hover:bg-gray-50'
+                    }`}
+                  >
+                    {index + 1}
+                  </button>
+                );
+              } else if (
+                index === currentPage - 3 ||
+                index === currentPage + 1
+              ) {
+                // Show ellipsis
+                return <span key={index} className="px-2">...</span>;
+              }
+              return null;
+            })}
+
+            {/* Add Next button */}
+            {currentPage < totalPages && (
+              <button
+                onClick={() => setCurrentPage(prev => prev + 1)}
+                className="px-4 py-2 rounded-md bg-white text-gray-600 hover:bg-gray-50"
+              >
+                Next
+              </button>
+            )}
           </nav>
         </div>
 

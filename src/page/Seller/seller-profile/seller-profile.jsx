@@ -1,14 +1,62 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import NavbarSeller from '../components/navbarSeller';
-import { FiEdit2, FiUpload, FiLogOut, FiMessageSquare, FiStar, FiClock, FiAward, FiX, FiPackage, FiFileText } from 'react-icons/fi';
+import { FiEdit2, FiUpload, FiLogOut, FiMessageSquare, FiStar, FiClock, FiAward, FiX, FiPackage, FiFileText, FiThumbsUp, FiMessageCircle, FiFilter, FiSettings, FiBell, FiLock, FiShield, FiCreditCard, FiToggleRight, FiChevronRight } from 'react-icons/fi';
 import EditStoreModal from './EditStoreModal';
 import EditProfileModal from './EditProfileModal';
+import CreateProductModal from '../components/CreateProductModal';
+import DocumentSection from './DocumentSection';
 
 const SellerProfile = () => {
-  const [activeTab, setActiveTab] = useState('overview');
-  const [showStoreModal, setShowStoreModal] = useState(false);
-  const [showProfileModal, setShowProfileModal] = useState(false);
-  
+  const documentSections = [
+    {
+      id: 1,
+      title: 'Business Name Registration Certificate',
+      description: 'Official registration document from DTI or SEC',
+      status: 'Verified',
+      validUntil: '2025-12-31',
+      documents: [
+        {
+          id: 1,
+          name: 'business-registration-2024.pdf',
+          uploadDate: '2024-01-15',
+          url: '/path-to-document.pdf'
+        }
+      ]
+    },
+    {
+      id: 2,
+      title: 'Business Permit',
+      description: 'Local government business permit',
+      status: 'Pending',
+      validUntil: '2025-12-31',
+      documents: []
+    },
+    {
+      id: 3,
+      title: 'Tax Identification Number',
+      description: 'BIR registration and TIN certificate',
+      status: 'Verified',
+      validUntil: '2025-12-31',
+      documents: [
+        {
+          id: 2,
+          name: 'tin-certificate.pdf',
+          uploadDate: '2024-01-15',
+          url: '/path-to-document.pdf'
+        }
+      ]
+    },
+    {
+      id: 4,
+      title: 'FDA License',
+      description: 'Food and Drug Administration License',
+      status: 'Pending',
+      validUntil: null,
+      documents: []
+    }
+  ];
+
   const mockData = {
     store: {
       photo: null,
@@ -42,9 +90,53 @@ const SellerProfile = () => {
       role: 'Team 1 Manager',
       email: 'ashley.g@pillpoint.com',
       phone: '+63 912 345 6789',
-      about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+      about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     }
   };
+
+  const mockReviews = [
+    {
+      id: 1,
+      customerName: 'John Doe',
+      rating: 5,
+      date: '2024-03-15',
+      comment: 'Great service and fast delivery! The medicines were properly packaged.',
+      productName: 'Paracetamol 500mg',
+      helpful: 12,
+      reply: null
+    },
+    {
+      id: 2,
+      customerName: 'Maria Garcia',
+      rating: 4,
+      date: '2024-03-14',
+      comment: 'Good product quality but delivery took a bit longer than expected.',
+      productName: 'Vitamin C 500mg',
+      helpful: 8,
+      reply: {
+        date: '2024-03-14',
+        text: 'Thank you for your feedback. We apologize for the delay and are working to improve our delivery times.'
+      }
+    },
+    // Add more mock reviews as needed
+  ];
+
+  const [activeTab, setActiveTab] = useState('overview');
+  const [showStoreModal, setShowStoreModal] = useState(false);
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [storeData, setStoreData] = useState(mockData.store);
+  const [sellerData, setSellerData] = useState(mockData.seller);
+  const [notificationSettings, setNotificationSettings] = useState({
+    orderUpdates: true,
+    reviewAlerts: true,
+    stockAlerts: false
+  });
+  const [storePreferences, setStorePreferences] = useState({
+    storeVisibility: true,
+    automaticOrders: false,
+    holidayMode: false,
+    maintenanceMode: false
+  });
 
   const StatsCard = ({ label, value, trend }) => (
     <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
@@ -67,9 +159,9 @@ const SellerProfile = () => {
       <div className="bg-white rounded-lg shadow-sm p-6">
         <div className="text-center mb-6">
           <div className="w-24 h-24 mx-auto mb-4 relative group">
-            {mockData.store.photo ? (
+            {storeData.photo ? (
               <img 
-                src={mockData.store.photo}
+                src={storeData.photo}
                 alt="Store Profile"
                 className="w-full h-full rounded-full object-cover"
               />
@@ -94,7 +186,10 @@ const SellerProfile = () => {
                   if (file) {
                     const reader = new FileReader();
                     reader.onloadend = () => {
-                      mockData.store.photo = reader.result;
+                      setStoreData(prevStore => ({
+                        ...prevStore,
+                        photo: reader.result
+                      }));
                     };
                     reader.readAsDataURL(file);
                   }
@@ -102,9 +197,9 @@ const SellerProfile = () => {
               />
             </div>
           </div>
-          <h2 className="text-xl font-semibold">{mockData.store.name}</h2>
-          <p className="text-gray-600">{mockData.store.type}</p>
-          <p className="text-sm text-gray-500">{mockData.store.location}</p>
+          <h2 className="text-xl font-semibold">{storeData.name}</h2>
+          <p className="text-gray-600">{storeData.type}</p>
+          <p className="text-sm text-gray-500">{storeData.location}</p>
         </div>
       </div>
     );
@@ -132,6 +227,26 @@ const SellerProfile = () => {
     );
   };
 
+  const ToggleSwitch = ({ isOn, onToggle, disabled = false }) => (
+    <button
+      onClick={onToggle}
+      disabled={disabled}
+      className={`relative w-11 h-6 transition-colors duration-300 rounded-full ${
+        disabled 
+          ? 'bg-gray-200 cursor-not-allowed' 
+          : isOn 
+            ? 'bg-blue-600' 
+            : 'bg-gray-200'
+      }`}
+    >
+      <span 
+        className={`absolute w-4 h-4 transition-transform duration-300 transform bg-white rounded-full top-1 ${
+          isOn ? 'translate-x-6' : 'translate-x-1'
+        }`} 
+      />
+    </button>
+  );
+
   const renderTabContent = () => {
     switch(activeTab) {
       case 'overview':
@@ -139,15 +254,65 @@ const SellerProfile = () => {
           <div className="space-y-6">
             {/* Stats Cards */}
             <div className="grid grid-cols-4 gap-4">
-              {Object.entries(mockData.store.stats).map(([key, value]) => (
-                <StatsCard key={key} label={key} value={value} trend={mockData.store.stats[key].trend} />
+              {Object.entries(storeData.stats).map(([key, value]) => (
+                <StatsCard 
+                  key={key} 
+                  label={key} 
+                  value={value} 
+                  trend={value.trend} 
+                />
               ))}
+            </div>
+
+            {/* Store Performance Cards */}
+            <div className="grid grid-cols-3 gap-4">
+              {/* Response Rate */}
+              <div className="bg-white p-6 rounded-lg shadow-sm">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center space-x-2">
+                    <FiMessageSquare className="text-blue-500" />
+                    <h3 className="font-medium text-gray-700">Response Rate</h3>
+                  </div>
+                  <span className="text-lg font-semibold text-green-600">
+                    {storeData.performance.responseRate}%
+                  </span>
+                </div>
+                <p className="text-sm text-gray-500">Average response time: {storeData.responseTime}</p>
+              </div>
+
+              {/* Fulfillment Rate */}
+              <div className="bg-white p-6 rounded-lg shadow-sm">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center space-x-2">
+                    <FiPackage className="text-blue-500" />
+                    <h3 className="font-medium text-gray-700">Fulfillment Rate</h3>
+                  </div>
+                  <span className="text-lg font-semibold text-green-600">
+                    {storeData.performance.fulfillmentRate}%
+                  </span>
+                </div>
+                <p className="text-sm text-gray-500">Orders completed successfully</p>
+              </div>
+
+              {/* Store Rating */}
+              <div className="bg-white p-6 rounded-lg shadow-sm">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center space-x-2">
+                    <FiStar className="text-blue-500" />
+                    <h3 className="font-medium text-gray-700">Store Rating</h3>
+                  </div>
+                  <span className="text-lg font-semibold text-blue-600">
+                    {storeData.rating}
+                  </span>
+                </div>
+                <p className="text-sm text-gray-500">{storeData.reviews} reviews</p>
+              </div>
             </div>
 
             {/* Store Info */}
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="font-semibold">About Store</h3>
+                <h3 className="text-lg font-semibold text-gray-800">About Store</h3>
                 <button 
                   onClick={() => setShowStoreModal(true)}
                   className="flex items-center text-sm text-blue-600 hover:text-blue-700"
@@ -155,13 +320,42 @@ const SellerProfile = () => {
                   <FiEdit2 className="mr-1" /> Edit Store
                 </button>
               </div>
-              <p className="text-gray-600">{mockData.store.description}</p>
+              <div className="space-y-4">
+                <p className="text-gray-600">{storeData.description}</p>
+                
+                {/* Store Details */}
+                <div className="grid grid-cols-2 gap-4 mt-4">
+                  <div>
+                    <h4 className="text-sm font-medium text-gray-500">Location</h4>
+                    <p className="mt-1">{storeData.location}</p>
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-medium text-gray-500">Store Type</h4>
+                    <p className="mt-1">{storeData.type}</p>
+                  </div>
+                </div>
+
+                {/* Certificates Section */}
+                <div className="mt-6">
+                  <h4 className="text-sm font-medium text-gray-500 mb-2">Store Certificates</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {storeData.certificates.map((cert, index) => (
+                      <span 
+                        key={index}
+                        className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm"
+                      >
+                        {cert}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Seller Info */}
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="font-semibold">Seller Information</h3>
+                <h3 className="text-lg font-semibold text-gray-800">Seller Information</h3>
                 <button 
                   onClick={() => setShowProfileModal(true)}
                   className="flex items-center text-sm text-blue-600 hover:text-blue-700"
@@ -169,23 +363,41 @@ const SellerProfile = () => {
                   <FiEdit2 className="mr-1" /> Edit Profile
                 </button>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-6">
                 <div>
-                  <p className="text-sm text-gray-500">Full Name</p>
-                  <p className="font-medium">{mockData.seller.name}</p>
+                  <h4 className="text-sm font-medium text-gray-500">Name</h4>
+                  <p className="mt-1 font-medium text-gray-900">{sellerData.name}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">Role</p>
-                  <p className="font-medium">{mockData.seller.role}</p>
+                  <h4 className="text-sm font-medium text-gray-500">Role</h4>
+                  <p className="mt-1 font-medium text-gray-900">{sellerData.role}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">Email</p>
-                  <p className="font-medium">{mockData.seller.email}</p>
+                  <h4 className="text-sm font-medium text-gray-500">Email</h4>
+                  <p className="mt-1 font-medium text-gray-900">{sellerData.email}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">Phone</p>
-                  <p className="font-medium">{mockData.seller.phone}</p>
+                  <h4 className="text-sm font-medium text-gray-500">Phone</h4>
+                  <p className="mt-1 font-medium text-gray-900">{sellerData.phone}</p>
                 </div>
+                <div className="col-span-2">
+                  <h4 className="text-sm font-medium text-gray-500">About</h4>
+                  <p className="mt-1 text-gray-600">{sellerData.about}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Recent Activity */}
+            <div className="bg-white p-6 rounded-lg shadow-sm">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold text-gray-800">Recent Activity</h3>
+                <button className="text-sm text-blue-600 hover:text-blue-700">
+                  View All
+                </button>
+              </div>
+              <div className="space-y-4">
+                {/* Add your recent activity items here */}
+                <p className="text-gray-500 text-center py-4">No recent activity</p>
               </div>
             </div>
           </div>
@@ -194,97 +406,304 @@ const SellerProfile = () => {
         return (
           <div className="space-y-6">
             <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-xl font-semibold mb-6">Legislative Documents</h3>
+              <h3 className="text-xl font-semibold mb-8">Legislative Documents</h3>
               
-              {/* Business Name Registration Certificate */}
-              <div className="mb-8">
-                <div className="flex justify-between items-center mb-4">
-                  <div>
-                    <h4 className="text-lg font-medium">Business Name Registration Certificate</h4>
-                    <p className="text-sm text-gray-500 mt-1">Mar 2021</p>
+              {/* Document Sections */}
+              {documentSections.map((section, index) => (
+                <DocumentSection 
+                  key={section.id}
+                  {...section}
+                  isLast={index === documentSections.length - 1}
+                />
+              ))}
+            </div>
+          </div>
+        );
+      case 'reviews':
+        return (
+          <div className="space-y-6">
+            {/* Reviews Header */}
+            <div className="bg-white p-6 rounded-lg shadow-sm">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-semibold">Customer Reviews</h3>
+                <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-2">
+                    <FiStar className="text-yellow-400 w-5 h-5" />
+                    <span className="text-2xl font-semibold">{storeData.rating}</span>
+                    <span className="text-gray-500">({storeData.reviews} reviews)</span>
                   </div>
-                  <div className="relative">
-                    <button className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 flex items-center">
-                      <FiUpload className="mr-2" />
-                      Upload
-                    </button>
-                    <input
-                      type="file"
-                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                      accept=".pdf,.doc,.docx"
-                    />
-                  </div>
+                  <button className="flex items-center px-3 py-2 text-sm text-gray-600 bg-gray-50 rounded-md hover:bg-gray-100">
+                    <FiFilter className="mr-2" /> Filter
+                  </button>
+                </div>
+              </div>
+
+              {/* Rating Statistics */}
+              <div className="grid grid-cols-2 gap-6 mb-8">
+                <div className="space-y-2">
+                  {[5, 4, 3, 2, 1].map(stars => (
+                    <div key={stars} className="flex items-center space-x-4">
+                      <div className="flex items-center w-24">
+                        {Array(stars).fill(null).map((_, i) => (
+                          <FiStar key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                        ))}
+                      </div>
+                      <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+                        <div 
+                          className="h-full bg-yellow-400 rounded-full"
+                          style={{ width: `${Math.random() * 100}%` }}
+                        />
+                      </div>
+                      <span className="text-sm text-gray-500 w-16">
+                        {Math.floor(Math.random() * 100)}%
+                      </span>
+                    </div>
+                  ))}
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="relative group">
-                    <img
-                      src="/path-to-document-preview-1.jpg"
-                      alt="Document Preview"
-                      className="w-full h-48 object-cover rounded-lg"
-                    />
-                    <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button className="p-1.5 bg-blue-500 text-white rounded-full hover:bg-blue-600">
-                        <FiX className="w-4 h-4" />
-                      </button>
-                    </div>
+                  <div className="bg-blue-50 p-4 rounded-lg">
+                    <div className="text-2xl font-semibold text-blue-600">98%</div>
+                    <div className="text-sm text-gray-600">Response Rate</div>
                   </div>
-                  <div className="relative group">
-                    <img
-                      src="/path-to-document-preview-2.jpg"
-                      alt="Document Preview"
-                      className="w-full h-48 object-cover rounded-lg"
-                    />
-                    <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button className="p-1.5 bg-blue-500 text-white rounded-full hover:bg-blue-600">
-                        <FiX className="w-4 h-4" />
-                      </button>
-                    </div>
+                  <div className="bg-green-50 p-4 rounded-lg">
+                    <div className="text-2xl font-semibold text-green-600">95%</div>
+                    <div className="text-sm text-gray-600">Satisfaction Rate</div>
                   </div>
                 </div>
               </div>
+            </div>
 
-              {/* Business Permit */}
-              <div className="mb-8">
-                <div className="flex justify-between items-center mb-4">
-                  <div>
-                    <h4 className="text-lg font-medium">Business Permit</h4>
-                    <p className="text-sm text-gray-500 mt-1">Mar 2021</p>
+            {/* Reviews List */}
+            <div className="space-y-4">
+              {mockReviews.map(review => (
+                <div key={review.id} className="bg-white p-6 rounded-lg shadow-sm">
+                  <div className="flex justify-between mb-4">
+                    <div>
+                      <h4 className="font-medium">{review.customerName}</h4>
+                      <div className="flex items-center space-x-2 mt-1">
+                        <div className="flex">
+                          {Array(5).fill(null).map((_, i) => (
+                            <FiStar 
+                              key={i}
+                              className={`w-4 h-4 ${
+                                i < review.rating ? 'text-yellow-400 fill-current' : 'text-gray-300'
+                              }`}
+                            />
+                          ))}
+                        </div>
+                        <span className="text-sm text-gray-500">
+                          {new Date(review.date).toLocaleDateString()}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="text-sm text-gray-500">
+                      Product: {review.productName}
+                    </div>
                   </div>
-                  <div className="relative">
-                    <button className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 flex items-center">
-                      <FiUpload className="mr-2" />
-                      Upload
+                  
+                  <p className="text-gray-600 mb-4">{review.comment}</p>
+                  
+                  <div className="flex items-center justify-between">
+                    <button className="flex items-center text-sm text-gray-500 hover:text-blue-600">
+                      <FiThumbsUp className="mr-1" /> Helpful ({review.helpful})
                     </button>
-                    <input
-                      type="file"
-                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                      accept=".pdf,.doc,.docx"
-                    />
+                    <button className="flex items-center text-sm text-blue-600 hover:text-blue-700">
+                      <FiMessageCircle className="mr-1" /> Reply
+                    </button>
+                  </div>
+
+                  {review.reply && (
+                    <div className="mt-4 pl-4 border-l-2 border-gray-200">
+                      <div className="text-sm text-gray-500 mb-1">
+                        Your response • {new Date(review.reply.date).toLocaleDateString()}
+                      </div>
+                      <p className="text-gray-600">{review.reply.text}</p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      case 'settings':
+        return (
+          <div className="space-y-6">
+            {/* General Settings */}
+            <div className="bg-white p-6 rounded-lg shadow-sm">
+              <h3 className="text-xl font-semibold mb-6">Store Settings</h3>
+              
+              <div className="space-y-6">
+                {/* Notification Settings */}
+                <div className="border-b pb-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center space-x-3">
+                      <FiBell className="text-gray-400" />
+                      <h4 className="font-medium">Notifications</h4>
+                    </div>
+                    <button 
+                      className="text-blue-600 hover:text-blue-700 text-sm"
+                      onClick={() => {
+                        // Toggle all notifications
+                        const allOn = Object.values(notificationSettings).every(v => v);
+                        setNotificationSettings({
+                          orderUpdates: !allOn,
+                          reviewAlerts: !allOn,
+                          stockAlerts: !allOn
+                        });
+                      }}
+                    >
+                      {Object.values(notificationSettings).every(v => v) ? 'Disable All' : 'Enable All'}
+                    </button>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-gray-700">Order Updates</p>
+                        <p className="text-sm text-gray-500">Get notified about new orders and updates</p>
+                      </div>
+                      <ToggleSwitch
+                        isOn={notificationSettings.orderUpdates}
+                        onToggle={() => setNotificationSettings(prev => ({
+                          ...prev,
+                          orderUpdates: !prev.orderUpdates
+                        }))}
+                      />
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-gray-700">Review Alerts</p>
+                        <p className="text-sm text-gray-500">Receive notifications for new reviews</p>
+                      </div>
+                      <ToggleSwitch
+                        isOn={notificationSettings.reviewAlerts}
+                        onToggle={() => setNotificationSettings(prev => ({
+                          ...prev,
+                          reviewAlerts: !prev.reviewAlerts
+                        }))}
+                      />
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-gray-700">Stock Alerts</p>
+                        <p className="text-sm text-gray-500">Get alerts for low stock items</p>
+                      </div>
+                      <ToggleSwitch
+                        isOn={notificationSettings.stockAlerts}
+                        onToggle={() => setNotificationSettings(prev => ({
+                          ...prev,
+                          stockAlerts: !prev.stockAlerts
+                        }))}
+                      />
+                    </div>
                   </div>
                 </div>
-                {/* Similar grid for document previews */}
-              </div>
 
-              {/* Tax Identification Number */}
-              <div>
-                <div className="flex justify-between items-center mb-4">
-                  <div>
-                    <h4 className="text-lg font-medium">Tax Identification Number</h4>
-                    <p className="text-sm text-gray-500 mt-1">Mar 2021</p>
+                {/* Security Settings */}
+                <div className="border-b pb-6">
+                  <div className="flex items-center space-x-3 mb-4">
+                    <FiShield className="text-gray-400" />
+                    <h4 className="font-medium">Security</h4>
                   </div>
-                  <div className="relative">
-                    <button className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 flex items-center">
-                      <FiUpload className="mr-2" />
-                      Upload
-                    </button>
-                    <input
-                      type="file"
-                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                      accept=".pdf,.doc,.docx"
-                    />
+                  <div className="space-y-4">
+                    {[
+                      { 
+                        icon: FiLock, 
+                        text: 'Change Password',
+                        description: 'Update your account password',
+                        action: () => {/* Implement password change logic */}
+                      },
+                      { 
+                        icon: FiCreditCard, 
+                        text: 'Payment Security',
+                        description: 'Manage payment security settings',
+                        action: () => {/* Implement payment security settings */}
+                      },
+                      { 
+                        icon: FiSettings, 
+                        text: 'Two-Factor Authentication',
+                        description: 'Add an extra layer of security',
+                        action: () => {/* Implement 2FA settings */}
+                      }
+                    ].map((item) => (
+                      <button 
+                        key={item.text}
+                        onClick={item.action}
+                        className="w-full flex items-center justify-between p-4 rounded-lg hover:bg-gray-50 transition-colors"
+                      >
+                        <div className="flex items-center space-x-3">
+                          <item.icon className="text-gray-400" />
+                          <div className="text-left">
+                            <p className="text-gray-700">{item.text}</p>
+                            <p className="text-sm text-gray-500">{item.description}</p>
+                          </div>
+                        </div>
+                        <FiChevronRight className="text-gray-400" />
+                      </button>
+                    ))}
                   </div>
                 </div>
-                {/* Similar grid for document previews */}
+
+                {/* Store Preferences */}
+                <div>
+                  <div className="flex items-center space-x-3 mb-4">
+                    <FiToggleRight className="text-gray-400" />
+                    <h4 className="font-medium">Store Preferences</h4>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-gray-700">Store Visibility</p>
+                        <p className="text-sm text-gray-500">Make your store visible to customers</p>
+                      </div>
+                      <ToggleSwitch
+                        isOn={storePreferences.storeVisibility}
+                        onToggle={() => setStorePreferences(prev => ({
+                          ...prev,
+                          storeVisibility: !prev.storeVisibility
+                        }))}
+                      />
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-gray-700">Automatic Order Acceptance</p>
+                        <p className="text-sm text-gray-500">Automatically accept new orders</p>
+                      </div>
+                      <ToggleSwitch
+                        isOn={storePreferences.automaticOrders}
+                        onToggle={() => setStorePreferences(prev => ({
+                          ...prev,
+                          automaticOrders: !prev.automaticOrders
+                        }))}
+                      />
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-gray-700">Holiday Mode</p>
+                        <p className="text-sm text-gray-500">Temporarily close your store</p>
+                      </div>
+                      <ToggleSwitch
+                        isOn={storePreferences.holidayMode}
+                        onToggle={() => setStorePreferences(prev => ({
+                          ...prev,
+                          holidayMode: !prev.holidayMode
+                        }))}
+                      />
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-gray-700">Maintenance Mode</p>
+                        <p className="text-sm text-gray-500">Put your store in maintenance mode</p>
+                      </div>
+                      <ToggleSwitch
+                        isOn={storePreferences.maintenanceMode}
+                        onToggle={() => setStorePreferences(prev => ({
+                          ...prev,
+                          maintenanceMode: !prev.maintenanceMode
+                        }))}
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -309,42 +728,84 @@ const SellerProfile = () => {
   };
 
   const QuickActions = () => {
+    const navigate = useNavigate();
+    const [showCreateModal, setShowCreateModal] = useState(false);
+
+    // Define categories and units for CreateProductModal
+    const categories = [
+      { name: 'Medical Supplies', value: 'medical-supplies' },
+      { name: 'Medicines', value: 'medicines' },
+      { name: 'General Products', value: 'general-products' }
+    ];
+
+    const units = ['Item', 'Box', 'Pack', 'Bottle', 'Tablet'];
+
+    const handleSaveProduct = async (productData) => {
+      try {
+        // Here you would typically make an API call to save the product
+        console.log('Saving product:', productData);
+        // After successful save, you might want to show a success message
+        alert('Product added successfully!');
+      } catch (error) {
+        console.error('Error saving product:', error);
+        alert('Failed to add product');
+      }
+    };
+
     return (
       <div className="bg-white p-4 rounded-lg shadow-sm mb-4">
         <h3 className="font-medium mb-3">Quick Actions</h3>
         <div className="grid grid-cols-2 gap-2">
-          <button className="p-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md flex items-center">
+          <button 
+            onClick={() => setShowCreateModal(true)}
+            className="p-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md flex items-center"
+          >
             <FiPackage className="mr-2" /> Add Product
           </button>
-          <button className="p-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md flex items-center">
+          <button 
+            onClick={() => navigate('/seller/product-management')}
+            className="p-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md flex items-center"
+          >
             <FiFileText className="mr-2" /> View Orders
           </button>
         </div>
+
+        {/* Create Product Modal */}
+        <CreateProductModal
+          isOpen={showCreateModal}
+          onClose={() => setShowCreateModal(false)}
+          onSave={handleSaveProduct}
+          categories={categories}
+          units={units}
+        />
       </div>
     );
   };
 
-  const BusinessHours = () => {
+  const BusinessHours = ({ businessHours, onEdit }) => {
     return (
       <div className="bg-white p-6 rounded-lg shadow-sm mb-4">
         <div className="flex justify-between items-center mb-4">
           <h3 className="font-semibold">Business Hours</h3>
-          <button className="text-sm text-blue-600 hover:text-blue-700">
+          <button 
+            onClick={onEdit}
+            className="text-sm text-blue-600 hover:text-blue-700 flex items-center"
+          >
             <FiEdit2 className="inline mr-1" /> Edit
           </button>
         </div>
         <div className="space-y-2">
           <div className="flex justify-between">
-            <span>Monday - Friday</span>
-            <span>9:00 AM - 6:00 PM</span>
+            <span className="text-gray-600">Monday - Friday</span>
+            <span className="font-medium">{businessHours.weekdays}</span>
           </div>
           <div className="flex justify-between">
-            <span>Saturday</span>
-            <span>9:00 AM - 1:00 PM</span>
+            <span className="text-gray-600">Saturday</span>
+            <span className="font-medium">{businessHours.saturday}</span>
           </div>
           <div className="flex justify-between">
-            <span>Sunday</span>
-            <span className="text-red-500">Closed</span>
+            <span className="text-gray-600">Sunday</span>
+            <span className="font-medium">{businessHours.sunday}</span>
           </div>
         </div>
       </div>
@@ -374,7 +835,13 @@ const SellerProfile = () => {
       <ProfileCard />
       <ProfileCompletion />
       <QuickActions />
-      <BusinessHours />
+      <BusinessHours 
+        businessHours={storeData.businessHours}
+        onEdit={() => {
+          setActiveTab('hours');  // Set the active tab to hours
+          setShowStoreModal(true);
+        }}
+      />
       <PerformanceMetrics />
     </div>
   );
@@ -385,6 +852,26 @@ const SellerProfile = () => {
       {renderTabContent()}
     </div>
   );
+
+  const handleStoreUpdate = (updatedStore) => {
+    setStoreData(prevStore => ({
+      ...prevStore,
+      ...updatedStore,
+      businessHours: {
+        ...prevStore.businessHours,
+        ...updatedStore.businessHours
+      }
+    }));
+    setShowStoreModal(false);
+  };
+
+  const handleProfileUpdate = (updatedProfile) => {
+    setSellerData(prevProfile => ({
+      ...prevProfile,
+      ...updatedProfile
+    }));
+    setShowProfileModal(false);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -402,12 +889,14 @@ const SellerProfile = () => {
       <EditStoreModal 
         isOpen={showStoreModal} 
         onClose={() => setShowStoreModal(false)} 
-        storeData={mockData.store} 
+        storeData={storeData} 
+        onUpdate={handleStoreUpdate} 
       />
       <EditProfileModal 
         isOpen={showProfileModal} 
         onClose={() => setShowProfileModal(false)} 
-        profileData={mockData.seller} 
+        profileData={sellerData} 
+        onUpdate={handleProfileUpdate} 
       />
     </div>
   );
