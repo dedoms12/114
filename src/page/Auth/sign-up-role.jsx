@@ -2,20 +2,58 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaUser, FaUserShield } from 'react-icons/fa';
 import { MdLocalPharmacy } from 'react-icons/md';
+import { addUser } from './userData';
+import toast from 'react-hot-toast';
 
 const SignUpRole = () => {
   const navigate = useNavigate();
   const [selectedRole, setSelectedRole] = useState('');
   const [pharmacyName, setPharmacyName] = useState('');
+  const [adminKey, setAdminKey] = useState('');
+  const [adminKeyError, setAdminKeyError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (selectedRole === 'buyer') {
-      navigate('/home');
-    } else if (selectedRole === 'seller') {
-      navigate('/dashboard');
-    } else if (selectedRole === 'admin') {
-      navigate('/admin/dashboard');
+    
+    try {
+      const signupData = JSON.parse(localStorage.getItem('signupData') || '{}');
+      
+      const userData = {
+        ...signupData,
+        role: selectedRole,
+        ...(selectedRole === 'seller' && { pharmacyName }),
+        ...(selectedRole === 'admin' && { adminKey }),
+        createdAt: new Date().toISOString()
+      };
+
+      // Add user to the database
+      addUser(userData);
+      
+      // Clear signup data and show success message
+      localStorage.removeItem('signupData');
+      toast.success('Account created successfully!');
+
+      // Navigate based on role
+      switch (selectedRole) {
+        case 'buyer':
+          navigate('/home');
+          break;
+        case 'seller':
+          navigate('/seller/dashboard');
+          break;
+        case 'admin':
+          navigate('/admin/dashboard');
+          break;
+        default:
+          navigate('/home');
+      }
+    } catch (error) {
+      if (error.message === 'Invalid admin key') {
+        setAdminKeyError('Invalid admin key');
+        toast.error('Invalid admin key');
+      } else {
+        toast.error(error.message || 'Failed to create account');
+      }
     }
   };
 
@@ -119,10 +157,42 @@ const SignUpRole = () => {
               </div>
             )}
 
+            {selectedRole === 'admin' && (
+              <div className="mt-4">
+                <label htmlFor="adminKey" className="block text-sm font-medium text-gray-700">
+                  Admin Key
+                </label>
+                <div className="relative mt-1">
+                  <input
+                    id="adminKey"
+                    type="text"
+                    value={adminKey}
+                    onChange={(e) => {
+                      setAdminKey(e.target.value);
+                      setAdminKeyError('');
+                    }}
+                    className={`mt-1 block w-full px-3 py-2 border ${
+                      adminKeyError ? 'border-red-500' : 'border-gray-300'
+                    } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-pill-blue focus:border-pill-blue sm:text-sm`}
+                    placeholder="Enter admin key"
+                    maxLength={6}
+                    required
+                  />
+                  {adminKeyError && (
+                    <p className="text-red-500 text-xs mt-1">{adminKeyError}</p>
+                  )}
+                </div>
+              </div>
+            )}
+
             <div className="pt-4">
               <button
                 type="submit"
-                disabled={!selectedRole || (selectedRole === 'seller' && !pharmacyName)}
+                disabled={
+                  !selectedRole || 
+                  (selectedRole === 'seller' && !pharmacyName) ||
+                  (selectedRole === 'admin' && (!adminKey || adminKey.length !== 6))
+                }
                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-pill-blue hover:bg-pill-teal focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pill-blue disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Create an Account

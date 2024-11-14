@@ -34,8 +34,11 @@ const NavBar = () => {
   const handleLogout = () => {
     setCurrentUser(null);
     localStorage.removeItem('token');
-    navigate('/login');
+    navigate('/signin');
   };
+
+  // Get first name from full name
+  const firstName = currentUser?.name?.split(' ')[0] || 'User';
 
   return (
     <>
@@ -104,10 +107,10 @@ const NavBar = () => {
                   className="flex items-center space-x-2 hover:opacity-80"
                 >
                   <div className="w-8 h-8 bg-gray-900 rounded-full flex items-center justify-center text-sm text-white">
-                    {currentUser?.firstName?.charAt(0) || 'A'}
+                    {firstName.charAt(0)}
                   </div>
                   <span className="text-sm hidden md:block">
-                    {currentUser?.firstName} {currentUser?.lastName}
+                    {firstName}
                   </span>
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
