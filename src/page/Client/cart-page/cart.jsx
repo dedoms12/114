@@ -1,11 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import NavBar from '../_components/navbar';
 import { useCart } from '../_components/context/CartContext';
 import CartMightLike from './CartMightLike';
+import { toast } from 'react-hot-toast';
 
 const Cart = () => {
   const { cartItems, dispatch } = useCart();
+  const navigate = useNavigate();
 
   const SHIPPING_RATES = {
     standard: 30,
@@ -29,6 +31,8 @@ const Cart = () => {
   };
 
   const calculateTotal = () => {
+    if (cartItems.length === 0) return 0;
+    
     const itemsTotal = cartItems
       .filter(item => item.selected)
       .reduce((total, item) => total + (item.price * item.quantity), 0);
@@ -57,6 +61,24 @@ const Cart = () => {
       type: 'TOGGLE_SELECT',
       payload: { id, category }
     });
+  };
+
+  const hasSelectedItems = () => {
+    return cartItems.some(item => item.selected);
+  };
+
+  const handleCheckoutClick = () => {
+    if (cartItems.length === 0) {
+      toast.error('Your cart is empty. Please add items to proceed.');
+      return;
+    }
+    
+    if (!hasSelectedItems()) {
+      toast.warning('Please select at least one item to proceed with checkout.');
+      return;
+    }
+    
+    navigate('/checkout');
   };
 
   return (
@@ -163,34 +185,52 @@ const Cart = () => {
           {/* Order Summary - Remains mostly the same */}
           <div className="col-span-1">
             <div className="bg-white rounded-lg shadow-sm p-6 sticky top-4">
-              <h2 className="text-lg font-semibold mb-4">Order Summary</h2>
-              <div className="space-y-4">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Subtotal</span>
-                  <span className="font-medium">
-                    ₱ {cartItems
-                      .filter(item => item.selected)
-                      .reduce((total, item) => total + (item.price * item.quantity), 0)}
-                  </span>
+              {cartItems.length === 0 ? (
+                <div className="text-center py-8">
+                  <p className="text-gray-500 mb-4">Your cart is empty</p>
+                  <Link to="/home">
+                    <button className="bg-[#4C9BF5] text-white px-6 py-2 rounded-md hover:bg-blue-600 transition-colors">
+                      Continue Shopping
+                    </button>
+                  </Link>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Shipping Fee</span>
-                  <span className="font-medium">₱ {calculateShipping()}</span>
-                </div>
-                <div className="border-t pt-4">
-                  <div className="flex justify-between">
-                    <span className="font-semibold">Total</span>
-                    <span className="font-semibold text-[#F1511B]">
-                      ₱ {calculateTotal()}
-                    </span>
+              ) : (
+                <>
+                  <h2 className="text-lg font-semibold mb-4">Order Summary</h2>
+                  <div className="space-y-4">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Subtotal</span>
+                      <span className="font-medium">
+                        ₱ {cartItems
+                          .filter(item => item.selected)
+                          .reduce((total, item) => total + (item.price * item.quantity), 0)}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Shipping Fee</span>
+                      <span className="font-medium">₱ {calculateShipping()}</span>
+                    </div>
+                    <div className="border-t pt-4">
+                      <div className="flex justify-between">
+                        <span className="font-semibold">Total</span>
+                        <span className="font-semibold text-[#F1511B]">
+                          ₱ {calculateTotal()}
+                        </span>
+                      </div>
+                    </div>
+                    <button 
+                      onClick={handleCheckoutClick}
+                      className={`w-full py-3 rounded-md transition-colors ${
+                        hasSelectedItems()
+                          ? 'bg-[#4C9BF5] text-white hover:bg-blue-600'
+                          : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      }`}
+                    >
+                      Proceed to Checkout
+                    </button>
                   </div>
-                </div>
-                <Link to="/checkout">
-                  <button className="w-full bg-[#4C9BF5] text-white py-3 rounded-md hover:bg-blue-600 transition-colors">
-                    Proceed to Checkout
-                  </button>
-                </Link>
-              </div>
+                </>
+              )}
             </div>
           </div>
         </div>

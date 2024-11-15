@@ -10,11 +10,12 @@ import { useSearch } from './context/SearchContext';
 const NavBar = () => {
   const { cartItems } = useCart();
   const navigate = useNavigate();
-  const { currentUser } = useOrders();
+  const { currentUser, setCurrentUser } = useOrders();
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
   const { performSearch } = useSearch();
   const [searchInput, setSearchInput] = useState('');
-  
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+
   const navItems = [
     { name: 'Home', path: '/home', icon: '/images/Client/product-page/home-logo.svg' },
     { name: 'Products', path: '/general-health', icon: '/images/Client/product-page/client-package.svg' },
@@ -29,6 +30,15 @@ const NavBar = () => {
     performSearch(searchInput);
     navigate('/search-results');
   };
+
+  const handleLogout = () => {
+    setCurrentUser(null);
+    localStorage.removeItem('token');
+    navigate('/signin');
+  };
+
+  // Get first name from full name
+  const firstName = currentUser?.name?.split(' ')[0] || 'User';
 
   return (
     <>
@@ -91,16 +101,40 @@ const NavBar = () => {
               </Link>
 
               {/* User Profile */}
-              <div 
-                onClick={() => navigate('/user-profile')} 
-                className="flex items-center space-x-2 cursor-pointer hover:text-pill-blue"
-              >
-                <img 
-                  src="/images/Client/product-page/client-account.svg" 
-                  alt="User" 
-                  className="w-6 h-6"
-                />
-                <span className="text-sm text-gray-600">{currentUser.name}</span>
+              <div className="relative">
+                <button
+                  onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                  className="flex items-center space-x-2 hover:opacity-80"
+                >
+                  <div className="w-8 h-8 bg-gray-900 rounded-full flex items-center justify-center text-sm text-white">
+                    {firstName.charAt(0)}
+                  </div>
+                  <span className="text-sm hidden md:block">
+                    {firstName}
+                  </span>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+
+                {/* Dropdown Menu */}
+                {isUserMenuOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                    <Link
+                      to="/user-profile"
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      onClick={() => setIsUserMenuOpen(false)}
+                    >
+                      Profile
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-50"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>

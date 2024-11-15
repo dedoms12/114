@@ -1,11 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { products } from '../product-page/general-health/gen-products';
 import { medicalProducts } from '../product-page/medical-supplies/medsup-products';
 import { personalCareProducts } from '../product-page/personal-care/pc-products';
 import { supplementProducts } from '../product-page/supplements/supple-products';
 
 const CartMightLike = () => {
+  const navigate = useNavigate();
   const allProducts = [
     ...products,
     ...medicalProducts,
@@ -20,13 +21,22 @@ const CartMightLike = () => {
 
   const randomProducts = getRandomProducts();
 
+  const handleProductClick = (product) => {
+    navigate(`/${product.category}/product/${product.id}`, {
+      state: { 
+        from: '/cart',
+        scrollPosition: window.pageYOffset 
+      }
+    });
+  };
+
   return (
     <div className="grid grid-cols-5 gap-4">
       {randomProducts.map((product) => (
-        <Link 
+        <div 
           key={product.id} 
-          to={`/${product.category}/product/${product.id}`}
-          className="bg-white rounded-lg p-4 border border-gray-200 hover:shadow-md transition-shadow"
+          onClick={() => handleProductClick(product)}
+          className="bg-white rounded-lg p-4 border border-gray-200 hover:shadow-md transition-shadow cursor-pointer"
         >
           <div className="mb-3">
             <img 
@@ -59,7 +69,7 @@ const CartMightLike = () => {
             </div>
             <p className="text-xs text-gray-500 mt-1">{product.location}</p>
           </div>
-        </Link>
+        </div>
       ))}
     </div>
   );

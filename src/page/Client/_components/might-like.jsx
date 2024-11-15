@@ -1,11 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { products } from '../product-page/general-health/gen-products';
 import { medicalProducts } from '../product-page/medical-supplies/medsup-products';
 import { personalCareProducts } from '../product-page/personal-care/pc-products';
 import { supplementProducts } from '../product-page/supplements/supple-products';
 
 const YouMightLike = ({ vertical = false }) => {
+  const navigate = useNavigate();
   const allProducts = [
     ...products,
     ...medicalProducts,
@@ -20,14 +21,23 @@ const YouMightLike = ({ vertical = false }) => {
 
   const randomProducts = getRandomProducts(vertical ? 4 : 8);
 
+  const handleProductClick = (product) => {
+    navigate(`/${product.category}/product/${product.id}`, {
+      state: { 
+        from: window.location.pathname,
+        scrollPosition: window.pageYOffset 
+      }
+    });
+  };
+
   if (vertical) {
     return (
       <div className="space-y-4">
         {randomProducts.map((product) => (
-          <Link 
+          <div 
             key={product.id} 
-            to={`/product/${product.id}`}
-            className="block bg-white rounded-lg p-4 border border-gray-200 hover:shadow-md transition-shadow"
+            onClick={() => handleProductClick(product)}
+            className="block bg-white rounded-lg p-4 border border-gray-200 hover:shadow-md transition-shadow cursor-pointer"
           >
             <div className="flex gap-4">
               <img 
@@ -63,7 +73,7 @@ const YouMightLike = ({ vertical = false }) => {
                 </div>
               </div>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     );
@@ -78,10 +88,10 @@ const YouMightLike = ({ vertical = false }) => {
             <h2 className="text-xl font-medium text-gray-800 mb-6">You Might Like</h2>
             <div className="grid grid-cols-4 gap-4">
               {randomProducts.map((product) => (
-                <Link 
+                <div 
                   key={product.id} 
-                  to={`/product/${product.id}`}
-                  className="bg-white rounded-lg p-4 border border-gray-200 hover:shadow-md transition-shadow"
+                  onClick={() => handleProductClick(product)}
+                  className="bg-white rounded-lg p-4 border border-gray-200 hover:shadow-md transition-shadow cursor-pointer"
                 >
                   <div className="mb-3">
                     <img 
@@ -115,7 +125,7 @@ const YouMightLike = ({ vertical = false }) => {
                     </div>
                     <p className="text-xs text-gray-500">{product.location}</p>
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
           </div>

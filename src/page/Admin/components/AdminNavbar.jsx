@@ -1,8 +1,21 @@
 import { useState } from 'react';
 import { FiSearch, FiChevronDown, FiSun } from 'react-icons/fi';
+import { Link, useNavigate } from 'react-router-dom';
 
 const AdminNavbar = () => {
+  const navigate = useNavigate();
   const [language, setLanguage] = useState('English (US)');
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState(() => {
+    const user = localStorage.getItem('currentUser');
+    return user ? JSON.parse(user) : null;
+  });
+
+  const firstName = currentUser?.name?.split(' ')[0] || 'Admin';
+
+  const handleLogout = () => {
+    navigate('/signin');
+  };
 
   return (
     <nav className="bg-white border-b">
@@ -20,7 +33,7 @@ const AdminNavbar = () => {
             </button>
           </div>
 
-          {/* Right Side - Language and Time */}
+          {/* Right Side */}
           <div className="flex items-center space-x-6">
             {/* Language Selector */}
             <div className="flex items-center space-x-2">
@@ -47,6 +60,43 @@ const AdminNavbar = () => {
                   second: '2-digit'
                 })}
               </div>
+            </div>
+
+            {/* User Profile Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                className="flex items-center space-x-2 hover:opacity-80"
+              >
+                <div className="w-8 h-8 bg-gray-900 rounded-full flex items-center justify-center text-sm text-white">
+                  {firstName.charAt(0)}
+                </div>
+                <span className="text-sm hidden md:block">
+                  {firstName}
+                </span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {/* Dropdown Menu */}
+              {isUserMenuOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                  <Link
+                    to="/admin/settings"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    onClick={() => setIsUserMenuOpen(false)}
+                  >
+                    Settings
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-50"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

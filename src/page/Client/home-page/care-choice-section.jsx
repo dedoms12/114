@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const CareChoiceSection = () => {
   const navigate = useNavigate();
@@ -10,49 +10,96 @@ const CareChoiceSection = () => {
 
   const careChoiceProducts = [
     {
+      id: 24,
+      name: "DISPOSABLE Face Mask 3-Ply with Earloop (50pcs)",
+      price: 27,
+      rating: 4,
+      soldCount: 1256,
+      image: "/images/Client/product-page/gen-health/image2ndbatch-12.svg",
+      category: "general-health"
+    },
+    {
       id: 1,
-      name: "Indoplas Disposable Face Mask 3-Ply With Earloop | Box (50 Pcs)",
-      price: "59",
-      image: "/images/Client/product-page/Care Choice/imagecare-8.svg",
-      soldCount: "1,205",
+      name: "CASINO Ethyl Alcohol Regular 500ml",
+      price: 98,
       rating: 5,
-      location: "Quezon City, Metro Manila"
+      soldCount: 801,
+      image: "/images/Client/product-page/gen-health/image1stbatch-11.svg",
+      category: "general-health"
     },
     {
       id: 2,
-      name: "Casino Ethyl Alcohol Regular 500ml",
-      price: "99",
-      image: "/images/Client/product-page/Care Choice/imagecare-7.svg",
-      soldCount: "801",
+      name: "Fern-C 568 18mg",
+      price: 8,
       rating: 5,
-      location: "Quezon City, Metro Manila"
+      soldCount: 1264,
+      image: "/images/Client/product-page/supplements/image1stbatch-10.svg",
+      category: "supplements"
     },
     {
-      id: 3,
-      name: "Biogesic Caplet 500mg 500 -MRP 10's",
-      price: "43",
-      image: "/images/Client/product-page/Care Choice/imagecare-6.svg",
-      soldCount: "3",
+      id: 12,
+      name: "Biogesic Caplet 500mg 500 - MRP 10's",
+      price: 43,
       rating: 5,
-      location: "Quezon City, Metro Manila"
+      soldCount: 5500,
+      image: "/images/Client/product-page/supplements/image1stbatch-6.svg",
+      category: "supplements",
+      description: {
+        main: "Paracetamol Pain Reliever",
+        subText: "For Fever and Mild Pain",
+        features: [
+          "Fast Pain Relief",
+          "Fever Reducer",
+          "Easy to Swallow",
+          "Trusted Brand"
+        ],
+        specifications: [
+          "500mg per caplet",
+          "10 caplets per pack",
+          "For adults and children",
+          "Store below 30°C",
+          "Keep away from moisture"
+        ]
+      },
+      shipping: {
+        standard: { price: "₱30", days: "10 Hours" },
+        express: { price: "₱50", days: "5 Hours" }
+      },
+      reviews: [
+        {
+          id: 1,
+          user: "PainFree",
+          rating: 5,
+          date: "2024-03-14",
+          comment: "Always reliable for fever and headache.",
+          images: []
+        }
+      ],
+      images: [
+        "/images/Client/product-page/supplements/image1stbatch-6.svg",
+        "/images/Client/product-page/supplements/image1stbatch-6.svg",
+        "/images/Client/product-page/supplements/image1stbatch-6.svg"
+      ],
+      location: "Butuan City, Agusan Del Norte"
     },
-    {
-      id: 4,
-      name: "STRESSTABS Multivitamins + Iron 8 Tablets",
-      price: "257",
-      image: "/images/Client/product-page/Care Choice/imagecare-9.svg",
-      soldCount: "4.6k",
-      rating: 5,
-      location: "Quezon City, Metro Manila"
-    }
   ];
 
-  const ProductCard = ({ product }) => (
-    <Link 
-      to={`/general-health/product/${product.id}`} 
-      state={{ from: '/' }}
-    >
-      <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-4 hover:shadow-md transition-shadow h-full">
+  const ProductCard = ({ product }) => {
+    const handleProductClick = () => {
+      navigate(`/${product.category}/product/${product.id}`, {
+        state: { 
+          from: '/',
+          productData: product,
+          scrollPosition: window.pageYOffset
+        }
+      });
+    };
+
+    return (
+      <div 
+        onClick={handleProductClick}
+        className="bg-white rounded-lg shadow-sm border border-gray-100 p-4 hover:shadow-md transition-shadow cursor-pointer"
+      >
         <div className="aspect-square mb-4 h-48">
           <img
             src={product.image}
@@ -80,8 +127,8 @@ const CareChoiceSection = () => {
           </div>
         </div>
       </div>
-    </Link>
-  );
+    );
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

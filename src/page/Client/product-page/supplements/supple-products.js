@@ -1,4 +1,12 @@
-export const supplementProducts = [
+import { stores } from '../../home-page/store';
+
+// Helper function to get random store
+const getRandomStore = () => {
+  return stores[Math.floor(Math.random() * stores.length)];
+};
+
+// Original products array
+const originalSupplementProducts = [
   {
     id: 1,
     name: "Tempra Pediatric Drops Orange 30ml",
@@ -44,7 +52,7 @@ export const supplementProducts = [
       "/images/Client/product-page/supplements/image1stbatch-11.svg",
       "/images/Client/product-page/supplements/image1stbatch-11.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Butuan City, Agusan Del Norte"
   },
   {
     id: 2,
@@ -90,7 +98,7 @@ export const supplementProducts = [
       "/images/Client/product-page/supplements/image1stbatch-10.svg",
       "/images/Client/product-page/supplements/image1stbatch-10.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Butuan City, Agusan Del Norte"
   },
   {
     id: 3,
@@ -137,7 +145,7 @@ export const supplementProducts = [
       "/images/Client/product-page/supplements/image1stbatch-8.svg",
       "/images/Client/product-page/supplements/image1stbatch-8.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Butuan City, Agusan Del Norte"
   },
   {
     id: 4,
@@ -183,7 +191,7 @@ export const supplementProducts = [
       "/images/Client/product-page/supplements/image1stbatch-9.svg",
       "/images/Client/product-page/supplements/image1stbatch-9.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Butuan City, Agusan Del Norte"
   },
   {
     id: 5,
@@ -229,7 +237,7 @@ export const supplementProducts = [
       "/images/Client/product-page/supplements/image1stbatch-7.svg",
       "/images/Client/product-page/supplements/image1stbatch-7.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Butuan City, Agusan Del Norte"
   },
   {
     id: 6,
@@ -275,7 +283,7 @@ export const supplementProducts = [
       "/images/Client/product-page/supplements/image1stbatch.svg",
       "/images/Client/product-page/supplements/image1stbatch.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Butuan City, Agusan Del Norte"
   },
   {
     id: 7,
@@ -321,7 +329,7 @@ export const supplementProducts = [
       "/images/Client/product-page/supplements/image1stbatch-1.svg",
       "/images/Client/product-page/supplements/image1stbatch-1.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Butuan City, Agusan Del Norte"
   },
   {
     id: 8,
@@ -367,7 +375,7 @@ export const supplementProducts = [
       "/images/Client/product-page/supplements/image1stbatch-2.svg",
       "/images/Client/product-page/supplements/image1stbatch-2.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Butuan City, Agusan Del Norte"
   },
   {
     id: 9,
@@ -413,7 +421,7 @@ export const supplementProducts = [
       "/images/Client/product-page/supplements/image1stbatch-3.svg",
       "/images/Client/product-page/supplements/image1stbatch-3.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Butuan City, Agusan Del Norte"
   },
   {
     id: 10,
@@ -459,7 +467,7 @@ export const supplementProducts = [
       "/images/Client/product-page/supplements/image1stbatch-4.svg",
       "/images/Client/product-page/supplements/image1stbatch-4.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Butuan City, Agusan Del Norte"
   },
   {
     id: 11,
@@ -505,7 +513,7 @@ export const supplementProducts = [
       "/images/Client/product-page/supplements/image1stbatch-5.svg",
       "/images/Client/product-page/supplements/image1stbatch-5.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Butuan City, Agusan Del Norte"
   },
   {
     id: 12,
@@ -551,7 +559,7 @@ export const supplementProducts = [
       "/images/Client/product-page/supplements/image1stbatch-6.svg",
       "/images/Client/product-page/supplements/image1stbatch-6.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Butuan City, Agusan Del Norte"
   },
   {
     id: 13,
@@ -596,7 +604,7 @@ export const supplementProducts = [
       "/images/Client/product-page/supplements/image2ndbatch-10.svg",
       "/images/Client/product-page/supplements/image2ndbatch-10.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Butuan City, Agusan Del Norte"
   },
   {
     id: 14,
@@ -641,7 +649,7 @@ export const supplementProducts = [
       "/images/Client/product-page/supplements/image2ndbatch-5.svg",
       "/images/Client/product-page/supplements/image2ndbatch-5.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Butuan City, Agusan Del Norte"
   },
   {
     id: 15,
@@ -686,8 +694,14 @@ export const supplementProducts = [
       "/images/Client/product-page/supplements/image2ndbatch-8.svg",
       "/images/Client/product-page/supplements/image2ndbatch-8.svg"
     ],
-    location: "Quezon City, Metro Manila"
+    location: "Butuan City, Agusan Del Norte"
   }
 ];
+
+// Export products with random store info
+export const supplementProducts = originalSupplementProducts.map(product => ({
+  ...product,
+  storeInfo: getRandomStore()
+}));
 
 

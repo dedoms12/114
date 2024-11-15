@@ -1,13 +1,81 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { findUserByEmail } from './userData';
+import toast from 'react-hot-toast';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+  const [errors, setErrors] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.email) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Email is invalid';
+    }
+    if (!formData.password) {
+      newErrors.password = 'Password is required';
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your authentication logic here
-    navigate('/home');  // Navigate to home page after successful login
+    
+    if (!validateForm()) {
+      return;
+    }
+
+    const user = findUserByEmail(formData.email);
+    
+    if (!user || user.password !== formData.password) {
+      toast.error('Invalid email or password');
+      return;
+    }
+
+    // Store user data in localStorage
+    localStorage.setItem('currentUser', JSON.stringify({
+      name: user.name,
+      email: user.email,
+      role: user.role
+    }));
+
+    // Navigate based on user role
+    switch (user.role) {
+      case 'buyer':
+        navigate('/home');
+        break;
+      case 'seller':
+        navigate('/seller/dashboard');
+        break;
+      case 'admin':
+        navigate('/admin/dashboard');
+        break;
+      default:
+        navigate('/home');
+    }
+  };
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+    // Clear error when user starts typing
+    if (errors[e.target.name]) {
+      setErrors({
+        ...errors,
+        [e.target.name]: ''
+      });
+    }
   };
 
   return (
@@ -27,11 +95,35 @@ const SignIn = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-              <input type="email" id="email" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"/>
+              <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="name@example.com"/>
+              {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
             </div>
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
-              <input type="password" id="password" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"/>
+            <div className="relative">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                Password
+              </label>
+              <div className="relative mt-1">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 pr-10 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                />
+                <button
+                  type="button"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? (
+                    <FiEyeOff className="h-5 w-5 text-gray-400" />
+                  ) : (
+                    <FiEye className="h-5 w-5 text-gray-400" />
+                  )}
+                </button>
+              </div>
+              {errors.password && <p className="text-red-500 text-xs">{errors.password}</p>}
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center">

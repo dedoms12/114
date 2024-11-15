@@ -1,4 +1,12 @@
-export const products = [
+import { stores } from '../../home-page/store';
+
+// Helper function to get random store
+const getRandomStore = () => {
+  return stores[Math.floor(Math.random() * stores.length)];
+};
+
+// Original products array
+const originalProducts = [
   {
     id: 1,
     name: "CASINO Ethyl Alcohol Regular 500ml",
@@ -1829,3 +1837,9 @@ export const products = [
     location: "Ampayon, Agusan del Norte"
   }
 ];
+
+// Export products with random store info
+export const products = originalProducts.map(product => ({
+  ...product,
+  storeInfo: getRandomStore()
+}));

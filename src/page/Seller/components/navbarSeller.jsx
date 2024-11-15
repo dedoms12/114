@@ -1,14 +1,27 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FiSearch } from 'react-icons/fi';
 import { useState } from 'react';
 
 const NavbarSeller = () => {
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState(() => {
+    const user = localStorage.getItem('currentUser');
+    return user ? JSON.parse(user) : null;
+  });
+
+  const firstName = currentUser?.name?.split(' ')[0] || 'Seller';
+
+  const handleLogout = () => {
+    // Add any logout cleanup logic here
+    navigate('/signin');
+  };
 
   const navItems = [
-    { name: 'Home', path: '/dashboard', icon: '/images/Client/product-page/home-logo.svg' },
-    { name: 'Products Management', path: '/product-management', icon: '/images/Client/product-page/client-package.svg' },
-    { name: 'Sales', path: '/sales', icon: '/images/Client/product-page/client-shopping-cart.svg' },
+    { name: 'Home', path: '/seller/dashboard', icon: '/images/Client/product-page/home-logo.svg' },
+    { name: 'Products Management', path: '/seller/product-management', icon: '/images/Client/product-page/client-package.svg' },
+    { name: 'Sales', path: '/seller/sales', icon: '/images/Client/product-page/client-shopping-cart.svg' },
   ];
 
   return (
@@ -16,7 +29,7 @@ const NavbarSeller = () => {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between">
           {/* Logo and Nav Items */}
-          <Link to="/dashboard" className="flex items-center space-x-2">
+          <Link to="/seller/dashboard" className="flex items-center space-x-2">
             <img src="/images/Client/product-page/PillLogo.svg" alt="PillPoint" className="h-12 w-12" />
             <span className="text-2xl font-semibold text-gray-800">PillPoint</span>
           </Link>
@@ -73,14 +86,42 @@ const NavbarSeller = () => {
               </button>
             </div>
 
-            {/* User Profile */}
-            <Link to="/seller-profile" className="flex items-center space-x-2">
-              <img
-                src="/images/Client/product-page/client-account.svg"
-                alt="User"
-                className="w-6 h-6 cursor-pointer hover:opacity-80"
-              />
-            </Link>
+            {/* User Profile Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                className="flex items-center space-x-2 hover:opacity-80"
+              >
+                <div className="w-8 h-8 bg-gray-900 rounded-full flex items-center justify-center text-sm text-white">
+                  {firstName.charAt(0)}
+                </div>
+                <span className="text-sm hidden md:block">
+                  {firstName}
+                </span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {/* Dropdown Menu */}
+              {isUserMenuOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                  <Link
+                    to="/seller-profile"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    onClick={() => setIsUserMenuOpen(false)}
+                  >
+                    Profile
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-50"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
