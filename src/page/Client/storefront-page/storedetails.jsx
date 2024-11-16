@@ -129,7 +129,6 @@ const TopProductCard = ({ product }) => {
 
 const StoreDetails = () => {
   const { id } = useParams();
-  const storeData = stores.find(store => store.id === parseInt(id));
   const [activeTab, setActiveTab] = useState('home');
   const [sortBy, setSortBy] = useState('popular');
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -176,7 +175,7 @@ const StoreDetails = () => {
   };
 
   // Store banner slider
-  const storeBanners = storeData?.banners.map((banner, index) => ({
+  const storeBanners = stores.find(store => store.id === parseInt(id))?.banners.map((banner, index) => ({
     id: index + 1,
     image: banner
   })) || [];
@@ -188,56 +187,62 @@ const StoreDetails = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const renderStoreHeader = () => (
-    <div className="bg-white shadow-sm">
-      <div className="max-w-7xl mx-auto">
-        <div className="px-6 py-4 border-b">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
+  const renderStoreHeader = () => {
+    const currentStore = stores.find(s => s.id === parseInt(id));
+    
+    return (
+      <div className="border-b bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-20 h-20 rounded-full overflow-hidden border border-gray-200">
               <img 
-                src={storeData?.logo}
-                alt={`${storeData?.name} Logo`}
-                className="w-16 h-16 rounded-full"
+                src={currentStore?.logo} 
+                alt={currentStore?.name}
+                className="w-full h-full object-cover"
               />
-              <div>
-                <h1 className="text-xl font-semibold">{storeData?.name}</h1>
-                <div className="flex items-center gap-4 mt-1">
-                  <div className="flex items-center gap-1">
-                    <span className="text-[#F1511B] font-medium">{storeData?.rating}</span>
-                    <div className="flex text-yellow-400">
-                      {[...Array(5)].map((_, i) => (
-                        <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                        </svg>
-                      ))}
-                    </div>
-                    <span className="text-gray-500 text-sm">({storeData?.ratingCount})</span>
-                  </div>
-                  <span className="text-gray-600">|</span>
-                  <span className="text-gray-600">{storeData?.followers} Followers</span>
-                  <span className="text-gray-600">|</span>
-                  <span className="text-gray-600">{storeData?.productCount} Products</span>
+            </div>
+            <div>
+              <h1 className="text-xl font-semibold">{currentStore?.name}</h1>
+              <div className="flex items-center gap-4 text-sm text-gray-600 mt-1">
+                <span>Products: {currentStore?.productCount}</span>
+                <span>Followers: {currentStore?.followers}</span>
+                <div className="flex items-center gap-1">
+                  <span>Rating: {currentStore?.rating}</span>
+                  <span className="text-xs">({currentStore?.ratingCount} Rating)</span>
                 </div>
-                <div className="flex items-center gap-4 mt-1 text-sm text-gray-500">
-                  <span>Chat Response: {storeData?.chatResponse} (Within Hours)</span>
-                  <span>•</span>
-                  <span>Member since {storeData?.memberSince}</span>
-                </div>
+                <span>Joined: {currentStore?.memberSince}</span>
+              </div>
+              <div className="flex items-center gap-2 mt-2">
+                <button className="px-6 py-1.5 bg-pill-blue text-white rounded-sm hover:bg-blue-600">
+                  Follow
+                </button>
+                <button className="px-6 py-1.5 border border-gray-300 rounded-sm hover:bg-gray-50">
+                  Chat
+                </button>
               </div>
             </div>
-            <div className="flex gap-3">
-              <button className="px-6 py-2 bg-[#4C9BF5] text-white rounded-md hover:bg-[#3d7cc4] transition-colors">
-                Follow
+          </div>
+
+          {/* Navigation Tabs */}
+          <div className="flex space-x-8 border-b">
+            {NAVIGATION_TABS.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`pb-4 px-1 ${
+                  activeTab === tab.id
+                    ? 'border-b-2 border-pill-blue text-pill-blue'
+                    : 'text-gray-500 hover:text-gray-700'
+                }`}
+              >
+                {tab.label}
               </button>
-              <button className="px-6 py-2 border border-[#4C9BF5] text-[#4C9BF5] rounded-md hover:bg-blue-50 transition-colors">
-                Chat
-              </button>
-            </div>
+            ))}
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   const getCurrentProducts = () => {
     const filteredProducts = getActiveProducts()
