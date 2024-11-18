@@ -754,7 +754,7 @@ const AdvancedProductEdit = () => {
         <div className="mb-8">
           <div className="flex items-center text-sm text-gray-500">
             <button
-              onClick={() => navigate('/product-management')}
+              onClick={() => navigate('/seller/product-management')}
               className="flex items-center text-blue-600 hover:text-blue-700"
             >
               <FiArrowLeft className="mr-2" />

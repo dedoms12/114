@@ -53,7 +53,7 @@ function App() {
             <Router>
               <Routes>
                 {/* Common/Auth Routes */}
-                <Route path="/" element={<HeroPage />} />
+                <Route path="/" element={<SignIn />} />
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/sign-up-role" element={<SignUpRole />} />
