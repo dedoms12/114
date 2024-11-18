@@ -213,7 +213,10 @@ const AdvancedProductEdit = () => {
       const productIndex = productArray.findIndex(p => p.id === parseInt(id));
       
       if (productIndex !== -1) {
-        productArray[productIndex] = updatedProduct;
+        // Remove from current position
+        productArray.splice(productIndex, 1);
+        // Add to beginning of array
+        productArray.unshift(updatedProduct);
         
         // Save to localStorage
         const allProducts = {
@@ -227,7 +230,11 @@ const AdvancedProductEdit = () => {
         
         // Navigate after a short delay
         setTimeout(() => {
-          navigate('/product-management');
+          if (isDraft) {
+            navigate(`/seller/product-management/product/${id}`);
+          } else {
+            navigate('/seller/product-management');
+          }
         }, 1500);
         
         return updatedProduct;
@@ -250,16 +257,30 @@ const AdvancedProductEdit = () => {
 
   const handlePublish = async () => {
     try {
-      const updatedProduct = await handleSave(false);
-      if (updatedProduct) {
-        setFormData(prev => ({
-          ...prev,
-          status: 'published'
-        }));
+      const category = categories.find(cat => cat.value === formData.category.toLowerCase());
+      if (category) {
+        // Remove existing product
+        const index = category.products.findIndex(p => p.id === parseInt(id));
+        if (index !== -1) {
+          category.products.splice(index, 1);
+        }
+        // Add updated product to beginning of array
+        category.products.unshift({ ...formData, id: parseInt(id) });
+        
+        // Save to localStorage
+        const allProducts = {
+          medicalProducts: medicalProducts,
+          generalProducts: generalProducts
+        };
+        localStorage.setItem('productData', JSON.stringify(allProducts));
+        
+        setShowSuccess(true);
+        setTimeout(() => {
+          navigate('/seller/product-management');
+        }, 1500);
       }
     } catch (error) {
       console.error('Error publishing product:', error);
-      alert('Failed to publish product');
     }
   };
 

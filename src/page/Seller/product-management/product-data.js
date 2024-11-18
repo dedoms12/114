@@ -17,12 +17,8 @@ export const units = ['Item', 'Box', 'Pack', 'Bottle', 'Piece'];
 export const addProduct = (newProduct) => {
   const category = categories.find(cat => cat.value === newProduct.category.toLowerCase());
   if (category) {
-    // Determine the location
-    const existingBranch = branches.find(branch => branch.name === newProduct.location);
-    const location = existingBranch ? existingBranch.name : 'All Branches';
-
     const product = {
-      id: category.products.length + 1,
+      id: Date.now(),
       name: newProduct.name,
       price: parseFloat(newProduct.price),
       rating: 5,
@@ -33,12 +29,12 @@ export const addProduct = (newProduct) => {
       shipping: newProduct.shipping,
       reviews: [],
       images: newProduct.images,
-      location: location,
+      location: newProduct.location || 'All Locations',
       quantity: newProduct.quantity,
       unit: newProduct.unit
     };
 
-    category.products.push(product);
+    category.products.unshift(product);
     return true;
   }
   return false;

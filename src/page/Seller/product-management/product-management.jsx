@@ -45,10 +45,13 @@ const ProductManagement = () => {
         // Update existing product
         const category = categories.find(cat => cat.value === productData.category.toLowerCase());
         if (category) {
+          // Remove existing product
           const index = category.products.findIndex(p => p.id === editingProduct.id);
           if (index !== -1) {
-            category.products[index] = { ...productData, id: editingProduct.id };
+            category.products.splice(index, 1);
           }
+          // Add updated product to beginning of array
+          category.products.unshift({ ...productData, id: editingProduct.id });
         }
         setActionType('edit');
       } else {
@@ -65,15 +68,15 @@ const ProductManagement = () => {
       setSavedProductDetails(productData);
       setShowSuccessFeedback(true);
       setIsModalOpen(false);
+      setCurrentPage(1); // Reset to first page
       
       // Add timeout to show success message before navigating
       setTimeout(() => {
         setShowSuccessFeedback(false);
-        // If editing, navigate to product detail
         if (editingProduct) {
           navigate(`/product-management/product/${editingProduct.id}`);
         }
-      }, 2000);
+      }, 1500);
     } catch (error) {
       console.error('Error saving product:', error);
       alert('Failed to save product: ' + error.message);
