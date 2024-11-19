@@ -242,7 +242,7 @@ const ProductManagement = () => {
                     {/* Middle Section - Price & Stats */}
                     <div className="w-48 flex flex-col items-start">
                       <div className="mb-2">
-                        <span className="text-2xl font-semibold text-[#4C9BF5]">₱{product.price}</span>
+                        <span className="text-2xl font-semibold text-[#FF6B6B]">₱{product.price}</span>
                       </div>
                       <div className="text-sm text-gray-500">
                         <p>{product.soldCount} Sold</p>
@@ -277,7 +277,7 @@ const ProductManagement = () => {
                   <>
                     <h3 className="font-medium text-gray-900 mb-2 line-clamp-2">{product.name}</h3>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-lg font-semibold text-[#4C9BF5]">₱{product.price}</span>
+                      <span className="text-lg font-semibold text-[#FF6B6B]">₱{product.price}</span>
                       <span className="text-sm text-gray-500">{product.soldCount} Sold</span>
                     </div>
                     <p className="text-sm text-gray-500 mb-4">{product.location}</p>

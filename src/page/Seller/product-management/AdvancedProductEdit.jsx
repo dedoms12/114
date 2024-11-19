@@ -180,6 +180,19 @@ const AdvancedProductEdit = () => {
     setIsDirty(true);
   };
 
+  // Update the handleImageDelete function
+  const handleImageDelete = (indexToDelete) => {
+    try {
+      setFormData(prevData => ({
+        ...prevData,
+        images: prevData.images.filter((_, index) => index !== indexToDelete)
+      }));
+      setIsDirty(true);
+    } catch (error) {
+      console.error('Error deleting image:', error);
+    }
+  };
+
   // Update the handleSave function to preserve images
   const handleSave = async (isDraft = true) => {
     try {
@@ -454,27 +467,33 @@ const AdvancedProductEdit = () => {
                 </label>
               </div>
 
-              <div className="grid grid-cols-4 gap-4">
-                {formData.images.map((image, index) => (
-                  <div key={index} className="relative group">
-                    <img
-                      src={image}
-                      alt={`Product ${index + 1}`}
-                      className="w-full h-32 object-cover rounded-lg"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const newImages = formData.images.filter((_, i) => i !== index);
-                        handleFormChange({ images: newImages });
-                      }}
-                      className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                      <FiTrash2 />
-                    </button>
-                  </div>
-                ))}
-              </div>
+              {formData.images && formData.images.length > 0 ? (
+                <div className="grid grid-cols-4 gap-4">
+                  {formData.images.map((image, index) => (
+                    <div key={`image-${index}`} className="relative group">
+                      <img
+                        src={image}
+                        alt={`Product ${index + 1}`}
+                        className="w-full h-32 object-cover rounded-lg"
+                      />
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleImageDelete(index);
+                        }}
+                        className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                      >
+                        <FiTrash2 size={16} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-4 text-gray-500">
+                  No images uploaded yet
+                </div>
+              )}
             </div>
           </div>
         );
