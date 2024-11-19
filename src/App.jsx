@@ -46,6 +46,7 @@ import { OrderCustomerProvider } from './page/Seller/context/OrderCustomerContex
 import BlacklistedStores from './page/Admin/Inventory/Blocklist Management/blacklist.jsx';
 import BlacklistManagement from './page/Admin/Inventory/Blocklist Management/blacklist.jsx';
 import { BlocklistProvider } from './page/Admin/Inventory/context/BlocklistContext';
+import StoreVerificationList from './page/Admin/Reports/StoreVerification/StoreVerificationList';
 
 
 
@@ -115,6 +116,7 @@ function App() {
                   <Route path="/admin/reports" element={<AdminReports />} />
                   <Route path="/admin/reports/sales" element={<SalesReport />} />
                   <Route path="/admin/reports/users" element={<RegisteredUsers />} />
+                  <Route path="/admin/reports/store-verification" element={<StoreVerificationList />} />
                   <Route path="/admin/contacts" element={<ContactManagement />} />
                   <Route path="/admin/settings" element={<AdminSettings />} />
                 </Routes>

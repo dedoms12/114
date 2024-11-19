@@ -1,16 +1,18 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { 
   FiHome, FiPackage, FiFileText, FiSettings, FiHelpCircle, 
-  FiChevronDown, FiMenu, FiMessageSquare, FiList, FiShoppingBag, FiAlertCircle, FiBarChart2, FiUsers 
+  FiChevronDown, FiMenu, FiMessageSquare, FiList, FiShoppingBag, FiAlertCircle, FiBarChart2, FiUsers, FiCheckCircle 
 } from 'react-icons/fi';
 import ProfileMenu from './ProfileMenu';
 import { useState, useEffect } from 'react';
 
 const AdminSidebar = () => {
-  const [activeSection, setActiveSection] = useState('');
   const [isMobile, setIsMobile] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [isInventoryOpen, setIsInventoryOpen] = useState(false);
+  const [dropdownStates, setDropdownStates] = useState({
+    inventory: false,
+    reports: false
+  });
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -52,7 +54,8 @@ const AdminSidebar = () => {
       description: 'Analytics and monitoring',
       subItems: [
         { icon: FiBarChart2, label: 'Sales Report', path: '/admin/reports/sales' },
-        { icon: FiUsers, label: 'Registered Users', path: '/admin/reports/users' }
+        { icon: FiUsers, label: 'Registered Users', path: '/admin/reports/users' },
+        { icon: FiCheckCircle, label: 'Store Verification', path: '/admin/reports/store-verification' }
       ]
     },
     {
@@ -62,6 +65,13 @@ const AdminSidebar = () => {
       description: 'User inquiries and support'
     }
   ];
+
+  const toggleDropdown = (section) => {
+    setDropdownStates(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
 
   return (
     <aside className="h-screen flex flex-col bg-[#1C2434] text-white">
@@ -79,7 +89,7 @@ const AdminSidebar = () => {
               <button
                 onClick={() => {
                   if (item.subItems) {
-                    setIsInventoryOpen(!isInventoryOpen);
+                    toggleDropdown(item.label.toLowerCase());
                   } else {
                     navigate(item.path);
                   }
@@ -98,14 +108,18 @@ const AdminSidebar = () => {
                       <p className="text-xs text-gray-400">{item.description}</p>
                     </div>
                     {item.subItems && (
-                      <FiChevronDown className={`w-4 h-4 transition-transform ${isInventoryOpen ? 'rotate-180' : ''}`} />
+                      <FiChevronDown 
+                        className={`w-4 h-4 transition-transform ${
+                          dropdownStates[item.label.toLowerCase()] ? 'rotate-180' : ''
+                        }`} 
+                      />
                     )}
                   </>
                 )}
               </button>
 
               {/* Dropdown Menu */}
-              {item.subItems && isInventoryOpen && !isCollapsed && (
+              {item.subItems && dropdownStates[item.label.toLowerCase()] && !isCollapsed && (
                 <div className="ml-4 mt-2 space-y-1">
                   {item.subItems.map((subItem, subIndex) => (
                     <Link
