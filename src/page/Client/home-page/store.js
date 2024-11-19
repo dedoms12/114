@@ -15,7 +15,11 @@ export const stores = [
       "/images/Client/product-page/banner1.svg",
       "/images/Client/product-page/banner2.svg",
       "/images/Client/product-page/banner3.svg"
-    ]
+    ],
+    status: 'active',
+    blacklistReason: null,
+    blacklistDate: null,
+    reportCount: 0
   },
   {
     id: 2,
@@ -32,7 +36,11 @@ export const stores = [
       "/images/Client/product-page/banner1.svg",
       "/images/Client/product-page/banner2.svg",
       "/images/Client/product-page/banner3.svg"
-    ]
+    ],
+    status: 'active',
+    blacklistReason: null,
+    blacklistDate: null,
+    reportCount: 0
   },
   {
     id: 3,
@@ -49,7 +57,11 @@ export const stores = [
       "/images/Client/product-page/banner1.svg",
       "/images/Client/product-page/banner2.svg",
       "/images/Client/product-page/banner3.svg"
-    ]
+    ],
+    status: 'active',
+    blacklistReason: null,
+    blacklistDate: null,
+    reportCount: 0
   },
   {
     id: 4,
@@ -66,7 +78,11 @@ export const stores = [
       "/images/Client/product-page/banner1.svg",
       "/images/Client/product-page/banner2.svg",
       "/images/Client/product-page/banner3.svg"
-    ]
+    ],
+    status: 'active',
+    blacklistReason: null,
+    blacklistDate: null,
+    reportCount: 0
   },
   // Latest Stores
   {
@@ -84,7 +100,11 @@ export const stores = [
       "/images/Client/product-page/banner1.svg",
       "/images/Client/product-page/banner2.svg",
       "/images/Client/product-page/banner3.svg"
-    ]
+    ],
+    status: 'active',
+    blacklistReason: null,
+    blacklistDate: null,
+    reportCount: 0
   },
   {
     id: 6,
@@ -101,7 +121,11 @@ export const stores = [
       "/images/Client/product-page/banner1.svg",
       "/images/Client/product-page/banner2.svg",
       "/images/Client/product-page/banner3.svg"
-    ]
+    ],
+    status: 'active',
+    blacklistReason: null,
+    blacklistDate: null,
+    reportCount: 0
   },
   {
     id: 7,
@@ -118,7 +142,11 @@ export const stores = [
       "/images/Client/product-page/banner1.svg",
       "/images/Client/product-page/banner2.svg",
       "/images/Client/product-page/banner3.svg"
-    ]
+    ],
+    status: 'active',
+    blacklistReason: null,
+    blacklistDate: null,
+    reportCount: 0
   },
   {
     id: 8,
@@ -135,7 +163,11 @@ export const stores = [
       "/images/Client/product-page/banner1.svg",
       "/images/Client/product-page/banner2.svg",
       "/images/Client/product-page/banner3.svg"
-    ]
+    ],
+    status: 'active',
+    blacklistReason: null,
+    blacklistDate: null,
+    reportCount: 0
   }
 ];
 
