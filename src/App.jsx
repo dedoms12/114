@@ -40,6 +40,7 @@ import ContactManagement from './page/Admin/ContactManagement/index.jsx';
 import AdminSettings from './page/Admin/Settings/index.jsx';
 import StoreDetails from './page/Client/storefront-page/storedetails';
 import { Toaster } from 'react-hot-toast';
+import BlacklistedStores from './page/Admin/Inventory/BlacklistedStores';
 
 
 
@@ -104,6 +105,7 @@ function App() {
                 <Route path="/admin/reports/users" element={<RegisteredUsers />} />
                 <Route path="/admin/contacts" element={<ContactManagement />} />
                 <Route path="/admin/settings" element={<AdminSettings />} />
+                <Route path="/admin/blacklisted-stores" element={<BlacklistedStores />} />
               </Routes>
             </Router>
             <ToastContainer position="top-right" autoClose={2000} />

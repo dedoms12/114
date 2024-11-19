@@ -33,6 +33,15 @@ const RegisteredUsers = () => {
     return matchesSearch && matchesRole;
   });
 
+  const checkBlacklistStatus = (user) => {
+    // Get blacklisted users from localStorage or your data source
+    const blacklistedEntities = JSON.parse(localStorage.getItem('blacklistedEntities') || '{"users":[]}');
+    const isBlacklisted = blacklistedEntities.users.some(
+      (blacklistedUser) => blacklistedUser.email === user.email && blacklistedUser.status === 'banned'
+    );
+    return isBlacklisted ? 'banned' : user.status;
+  };
+
   return (
     <div className="flex h-screen">
       <AdminSidebar />
@@ -102,11 +111,13 @@ const RegisteredUsers = () => {
                     <td className="px-6 py-4 text-sm text-gray-500">{user.joinDate}</td>
                     <td className="px-6 py-4">
                       <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                        user.status === 'active' 
+                        checkBlacklistStatus(user) === 'active' 
                           ? 'bg-green-100 text-green-800' 
-                          : 'bg-red-100 text-red-800'
+                          : checkBlacklistStatus(user) === 'banned'
+                          ? 'bg-red-100 text-red-800'
+                          : 'bg-yellow-100 text-yellow-800'
                       }`}>
-                        {user.status}
+                        {checkBlacklistStatus(user)}
                       </span>
                     </td>
                   </tr>
