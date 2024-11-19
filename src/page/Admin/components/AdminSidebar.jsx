@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FiGrid, FiPackage, FiFileText, FiSettings, FiUsers, FiBell, FiMessageSquare, FiSliders, FiShield, FiHelpCircle, FiChevronDown, FiAlertTriangle } from 'react-icons/fi';
+import { FiGrid, FiPackage, FiFileText, FiSettings, FiUsers, FiBell, FiMessageSquare, FiSliders, FiShield, FiHelpCircle, FiChevronDown } from 'react-icons/fi';
 import ProfileMenu from './ProfileMenu';
 import { useState } from 'react';
 
@@ -29,12 +29,6 @@ const AdminSidebar = () => {
     },
     { icon: FiUsers, label: 'Contact Management', path: '/admin/contacts' },
     { icon: FiSliders, label: 'Application Settings', path: '/admin/settings' },
-    {
-      icon: FiAlertTriangle,
-      label: 'Blacklisted Stores',
-      path: '/admin/blacklisted-stores',
-      badge: '1'
-    }
   ];
 
   return (
