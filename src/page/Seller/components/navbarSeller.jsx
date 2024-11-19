@@ -22,7 +22,7 @@ const NavbarSeller = () => {
     { name: 'Home', path: '/seller/dashboard', icon: '/images/Client/product-page/home-logo.svg' },
     { name: 'Products Management', path: '/seller/product-management', icon: '/images/Client/product-page/client-package.svg' },
     { name: 'Sales', path: '/seller/sales', icon: '/images/Client/product-page/client-shopping-cart.svg' },
-    { name: 'Records', icon: '/images/Seller/Records/collectionsellercollection.svg', dropdown: [
+    { name: 'Records', icon: '/images/Seller/Records/collectionicon.svg', dropdown: [
       { name: 'Customer List', path: '/seller/records/customers' },
       { name: 'Order List', path: '/seller/records/orders' }
     ] }
