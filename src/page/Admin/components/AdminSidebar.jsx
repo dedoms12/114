@@ -15,6 +15,8 @@ const AdminSidebar = () => {
   });
   const location = useLocation();
   const navigate = useNavigate();
+  const [showSupportModal, setShowSupportModal] = useState(false);
+  const [supportHoverTimeout, setSupportHoverTimeout] = useState(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -72,6 +74,99 @@ const AdminSidebar = () => {
       [section]: !prev[section]
     }));
   };
+
+  const handleSupportMouseEnter = () => {
+    if (supportHoverTimeout) clearTimeout(supportHoverTimeout);
+    setShowSupportModal(true);
+  };
+
+  const handleSupportMouseLeave = () => {
+    const timeout = setTimeout(() => {
+      setShowSupportModal(false);
+    }, 300); // 300ms delay before hiding
+    setSupportHoverTimeout(timeout);
+  };
+
+  const handleModalMouseEnter = () => {
+    if (supportHoverTimeout) clearTimeout(supportHoverTimeout);
+  };
+
+  const handleModalMouseLeave = () => {
+    setShowSupportModal(false);
+  };
+
+  const SupportSection = () => (
+    <div className="relative">
+      <button
+        onMouseEnter={handleSupportMouseEnter}
+        onMouseLeave={handleSupportMouseLeave}
+        className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#2A3547]"
+      >
+        <FiHelpCircle className="w-5 h-5" />
+        {!isCollapsed && <span>Support</span>}
+      </button>
+      
+      {showSupportModal && !isCollapsed && (
+        <div
+          onMouseEnter={handleModalMouseEnter}
+          onMouseLeave={handleModalMouseLeave}
+          className="absolute bottom-0 left-full ml-2 w-80 bg-white text-gray-900 rounded-lg shadow-xl p-4 transition-opacity duration-200"
+        >
+          <div className="space-y-4">
+            <div className="flex items-center gap-2 border-b pb-2">
+              <img src="/images/PillLogo.svg" alt="PillPoint" className="h-6 w-6" />
+              <h3 className="font-semibold">PillPoint Support</h3>
+            </div>
+            
+            <div className="space-y-3">
+              <div className="hover:bg-gray-50 p-2 rounded-lg transition-colors">
+                <h4 className="font-medium text-sm">Version</h4>
+                <p className="text-sm text-gray-600">v2.1.0 (Latest)</p>
+              </div>
+              
+              <div className="hover:bg-gray-50 p-2 rounded-lg transition-colors">
+                <h4 className="font-medium text-sm">Contact Support</h4>
+                <p className="text-sm text-gray-600">support@pillpoint.com</p>
+                <p className="text-sm text-gray-600">+1 234 567 8900</p>
+              </div>
+              
+              <div className="hover:bg-gray-50 p-2 rounded-lg transition-colors">
+                <h4 className="font-medium text-sm">Documentation</h4>
+                <a 
+                  href="#" 
+                  className="text-sm text-blue-600 hover:text-blue-800 block"
+                >
+                  View Admin Guide
+                </a>
+                <a 
+                  href="#" 
+                  className="text-sm text-blue-600 hover:text-blue-800 block"
+                >
+                  API Documentation
+                </a>
+              </div>
+              
+              <div className="hover:bg-gray-50 p-2 rounded-lg transition-colors">
+                <h4 className="font-medium text-sm">Quick Links</h4>
+                <a 
+                  href="#" 
+                  className="text-sm text-blue-600 hover:text-blue-800 block"
+                >
+                  FAQs
+                </a>
+                <a 
+                  href="#" 
+                  className="text-sm text-blue-600 hover:text-blue-800 block"
+                >
+                  Report an Issue
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 
   return (
     <aside className="h-screen flex flex-col bg-[#1C2434] text-white">
@@ -155,13 +250,7 @@ const AdminSidebar = () => {
           <FiSettings className="w-5 h-5" />
           {!isCollapsed && <span>Settings</span>}
         </Link>
-        <Link
-          to="/admin/support"
-          className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#2A3547]"
-        >
-          <FiHelpCircle className="w-5 h-5" />
-          {!isCollapsed && <span>Support</span>}
-        </Link>
+        <SupportSection />
       </div>
     </aside>
   );
