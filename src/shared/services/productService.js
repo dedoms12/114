@@ -114,11 +114,6 @@ export const updateProduct = (category, productId, updatedProduct) => {
 // Add new product
 export const addProduct = (category, newProduct) => {
   try {
-    const storeStatus = checkStoreStatus(newProduct.storeId);
-    if (!storeStatus.allowed) {
-      throw new Error(`Store is blacklisted: ${storeStatus.reason}`);
-    }
-    
     const allProducts = getAllProducts();
     const categoryKey = `${category}Products`.replace('-', '');
     
@@ -360,16 +355,4 @@ export const saveProduct = async (product) => {
     console.error('Error saving product:', error);
     throw new Error('Failed to save product data: ' + error.message);
   }
-};
-
-// Add this function to check store status
-export const checkStoreStatus = (storeId) => {
-  const store = stores.find(s => s.id === storeId);
-  if (!store) return { allowed: false, reason: 'Store not found' };
-  
-  return {
-    allowed: store.status === 'active',
-    reason: store.blacklistReason,
-    blacklistDate: store.blacklistDate
-  };
 }; 
