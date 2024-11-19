@@ -43,6 +43,7 @@ import { Toaster } from 'react-hot-toast';
 import CustomerList from './page/Seller/records/customers/CustomerList.jsx';
 import OrderList from './page/Seller/records/orders/OrderList.jsx';
 import { OrderCustomerProvider } from './page/Seller/context/OrderCustomerContext';
+import BlacklistedStores from './page/Admin/Inventory/BlacklistedStores';
 
 
 
@@ -107,6 +108,7 @@ function App() {
                   <Route path="/admin/reports/users" element={<RegisteredUsers />} />
                   <Route path="/admin/contacts" element={<ContactManagement />} />
                   <Route path="/admin/settings" element={<AdminSettings />} />
+                  <Route path="/admin/blacklisted-stores" element={<BlacklistedStores />} />
                 </Routes>
               </Router>
             </OrderCustomerProvider>
