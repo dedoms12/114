@@ -30,6 +30,15 @@ const MedicineGroups = () => {
     }
   ];
 
+  const checkBlacklistStatus = (pharmacy) => {
+    // Get blacklisted stores from localStorage or your data source
+    const blacklistedEntities = JSON.parse(localStorage.getItem('blacklistedEntities') || '{"stores":[]}');
+    const isBlacklisted = blacklistedEntities.stores.some(
+      (blacklistedStore) => blacklistedStore.name === pharmacy.name && blacklistedStore.status === 'blacklisted'
+    );
+    return isBlacklisted ? 'blacklisted' : pharmacy.status;
+  };
+
   const filteredPharmacies = pharmacies.filter(pharmacy =>
     pharmacy.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     pharmacy.address.toLowerCase().includes(searchTerm.toLowerCase())
@@ -70,11 +79,13 @@ const MedicineGroups = () => {
                     <span className="text-sm text-gray-500">License: {pharmacy.licenseNumber}</span>
                   </div>
                   <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
-                    pharmacy.status === 'active' 
+                    checkBlacklistStatus(pharmacy) === 'active' 
                       ? 'bg-green-100 text-green-800' 
-                      : 'bg-red-100 text-red-800'
+                      : checkBlacklistStatus(pharmacy) === 'blacklisted'
+                      ? 'bg-red-100 text-red-800'
+                      : 'bg-yellow-100 text-yellow-800'
                   }`}>
-                    {pharmacy.status}
+                    {checkBlacklistStatus(pharmacy)}
                   </span>
                 </div>
 
