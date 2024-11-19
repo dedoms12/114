@@ -1,148 +1,255 @@
 import AdminNavbar from '../components/AdminNavbar';
 import AdminSidebar from '../components/AdminSidebar';
-import { FiDownload, FiFileText } from 'react-icons/fi';
-import { useState, useRef, useEffect } from 'react';
-
-// Custom Excel Icon component
-const ExcelIcon = () => (
-  <svg 
-    width="16" 
-    height="16" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round"
-  >
-    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-    <path d="M14 2v6h6" />
-    <path d="M8 13h2" />
-    <path d="M8 17h2" />
-    <path d="M14 13h2" />
-    <path d="M14 17h2" />
-  </svg>
-);
-
-const DownloadDropdown = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  const handleDownload = (format) => {
-    // Add download logic here based on format
-    console.log(`Downloading ${format} report`);
-    setIsOpen(false);
-  };
-
-  return (
-    <div className="relative" ref={dropdownRef}>
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg border hover:bg-gray-50"
-      >
-        <FiDownload className="w-5 h-5" />
-        <span>Download Report</span>
-      </button>
-
-      {isOpen && (
-        <div className="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border overflow-hidden z-50">
-          <button
-            onClick={() => handleDownload('excel')}
-            className="flex items-center gap-2 w-full px-4 py-2 text-gray-700 hover:bg-gray-50"
-          >
-            <ExcelIcon className="w-4 h-4 text-green-600" />
-            Excel
-          </button>
-          <button
-            onClick={() => handleDownload('pdf')}
-            className="flex items-center gap-2 w-full px-4 py-2 text-gray-700 hover:bg-gray-50"
-          >
-            <FiFileText className="w-4 h-4 text-red-600" />
-            PDF
-          </button>
-        </div>
-      )}
-    </div>
-  );
-};
+import { FiShield, FiUserCheck, FiPackage, FiAlertOctagon, FiTrendingUp, FiTrendingDown } from 'react-icons/fi';
+import { useState } from 'react';
+import { LineChart, BarChart } from '@mui/x-charts';
 
 const AdminDashboard = () => {
-  const stats = [
+  const monitoringStats = [
     {
-      icon: '🛡️',
-      status: 'Good',
-      label: 'Inventory Status',
-      action: 'View Detailed Report',
-      color: 'green'
+      icon: FiUserCheck,
+      status: '156',
+      label: 'Pending Verifications',
+      description: 'Seller accounts awaiting approval',
+      color: 'yellow',
+      action: 'Review Now'
     },
     {
-      icon: '💰',
-      status: 'Rs. 8,55,875',
-      label: 'Revenue',
-      subLabel: 'Jan 2022',
-      action: 'View Detailed Report',
-      color: 'yellow'
-    },
-    {
-      icon: '💊',
+      icon: FiPackage,
       status: '298',
-      label: 'Medicines Available',
-      action: 'Visit Inventory',
-      color: 'blue'
+      label: 'Active Medicines',
+      description: 'Currently listed products',
+      color: 'blue',
+      action: 'View List'
     },
     {
-      icon: '⚠️',
-      status: '01',
-      label: 'Medicine Shortage',
-      action: 'Resolve Now',
-      color: 'red'
+      icon: FiShield,
+      status: '45',
+      label: 'Quality Checks',
+      description: 'Products requiring review',
+      color: 'green',
+      action: 'Review'
+    },
+    {
+      icon: FiAlertOctagon,
+      status: '3',
+      label: 'Reported Items',
+      description: 'Products flagged by users',
+      color: 'red',
+      action: 'Investigate'
     }
   ];
 
-  return (
-    <div className="flex h-screen">
-      <AdminSidebar />
-      <div className="flex-1 flex flex-col">
-        <AdminNavbar />
-        <div className="flex-1 bg-gray-100 p-6">
-          <div className="flex justify-between items-center mb-6">
-            <div>
-              <h1 className="text-2xl font-bold">Dashboard</h1>
-              <p className="text-sm text-gray-600">A quick data overview of the inventory.</p>
-            </div>
-            <DownloadDropdown />
-          </div>
+  const criticalAlerts = [
+    {
+      type: 'Verification',
+      message: 'New pharmacy registration requires document verification',
+      time: '10 minutes ago',
+      priority: 'high',
+      action: 'Verify Now'
+    },
+    {
+      type: 'Product',
+      message: 'Multiple reports on medicine quality concerns',
+      time: '1 hour ago',
+      priority: 'high',
+      action: 'Review'
+    },
+    {
+      type: 'Compliance',
+      message: 'Seller license expiring in 5 days',
+      time: '2 hours ago',
+      priority: 'medium',
+      action: 'Notify'
+    }
+  ];
 
-          <div className="grid grid-cols-4 gap-6 mb-8">
-            {stats.map((stat, index) => (
-              <div key={index} className={`bg-white p-6 rounded-lg border-t-4 border-${stat.color}-500`}>
-                <div className="text-center">
-                  <div className="text-3xl mb-2">{stat.icon}</div>
-                  <div className="text-xl font-bold">{stat.status}</div>
-                  <div className="text-sm text-gray-600">{stat.label}</div>
-                  {stat.subLabel && (
-                    <div className="text-sm text-gray-500">{stat.subLabel}</div>
-                  )}
-                  <button className={`mt-4 text-${stat.color}-600 text-sm hover:underline`}>
-                    {stat.action} →
+  const verificationData = {
+    dates: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    datasets: [
+      {
+        label: 'New Pharmacy Registrations',
+        data: [32, 45, 38, 52, 48, 60],
+        color: '#818CF8' // indigo-400
+      },
+      {
+        label: 'Document Verifications',
+        data: [28, 40, 35, 48, 42, 55],
+        color: '#34D399' // emerald-400
+      },
+      {
+        label: 'License Validations',
+        data: [25, 38, 32, 45, 40, 52],
+        color: '#60A5FA' // blue-400
+      },
+      {
+        label: 'Rejected Applications',
+        data: [4, 5, 3, 4, 6, 5],
+        color: '#F87171' // red-400
+      }
+    ]
+  };
+
+  const verificationBreakdown = {
+    total: 298,
+    data: [
+      { value: 60, label: 'Fully Verified', color: '#34D399' },
+      { value: 25, label: 'Pending Documents', color: '#FBBF24' },
+      { value: 10, label: 'License Expired', color: '#F87171' },
+      { value: 5, label: 'Under Review', color: '#818CF8' }
+    ]
+  };
+
+  return (
+    <div className="flex h-screen bg-gray-50">
+      <AdminSidebar />
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <AdminNavbar />
+        <div className="flex-1 overflow-y-auto p-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex justify-between items-center mb-6">
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900">Admin Control Center</h1>
+                <p className="text-sm text-gray-600">Monitor and manage platform safety & compliance</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <select className="px-4 py-2 bg-white border rounded-lg text-sm">
+                  <option>Last 24 Hours</option>
+                  <option>Last 7 Days</option>
+                  <option>Last 30 Days</option>
+                </select>
+                <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700">
+                  Export Summary
+                </button>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+              {monitoringStats.map((stat, index) => (
+                <div key={index} className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className={`p-3 rounded-lg bg-${stat.color}-50`}>
+                      <stat.icon className={`w-6 h-6 text-${stat.color}-600`} />
+                    </div>
+                  </div>
+                  <div className="mb-3">
+                    <div className="text-2xl font-bold text-gray-900">{stat.status}</div>
+                    <div className="text-sm font-medium text-gray-900">{stat.label}</div>
+                    <div className="text-xs text-gray-500">{stat.description}</div>
+                  </div>
+                  <button className={`w-full py-2 text-sm font-medium text-${stat.color}-600 bg-${stat.color}-50 rounded-lg hover:bg-${stat.color}-100`}>
+                    {stat.action}
                   </button>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
 
-          {/* Add the remaining dashboard sections here */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="lg:col-span-2 bg-white rounded-lg shadow-sm p-6">
+                <div className="flex justify-between items-center mb-6">
+                  <div>
+                    <h2 className="text-lg font-semibold">Verification Activity</h2>
+                    <p className="text-sm text-gray-500">Pharmacy registration and verification progress</p>
+                  </div>
+                  <div className="flex gap-2">
+                    <button className="px-3 py-1 text-sm bg-indigo-50 text-indigo-600 rounded-lg font-medium">
+                      Daily
+                    </button>
+                    <button className="px-3 py-1 text-sm bg-gray-100 rounded-lg">Weekly</button>
+                    <button className="px-3 py-1 text-sm bg-gray-100 rounded-lg">Monthly</button>
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-4 gap-4 mb-6">
+                  {verificationBreakdown.data.map((item, index) => (
+                    <div key={index} className="text-center">
+                      <div className="text-2xl font-bold" style={{ color: item.color }}>
+                        {item.value}%
+                      </div>
+                      <div className="text-sm text-gray-600">{item.label}</div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="h-80">
+                  <LineChart
+                    series={verificationData.datasets.map(dataset => ({
+                      data: dataset.data,
+                      label: dataset.label,
+                      color: dataset.color,
+                      showMark: true,
+                      curve: "natural",
+                      area: true,
+                      stack: false,
+                      opacity: 0.2
+                    }))}
+                    xAxis={[{
+                      data: verificationData.dates,
+                      scaleType: 'band',
+                      tickLabelStyle: {
+                        angle: 0,
+                        textAnchor: 'middle',
+                      }
+                    }]}
+                    yAxis={[{
+                      tickMinStep: 1,
+                      tickLabelStyle: {
+                        fontSize: 12
+                      }
+                    }]}
+                    sx={{
+                      '.MuiLineElement-root': {
+                        strokeWidth: 2,
+                      },
+                      '.MuiAreaElement-root': {
+                        fillOpacity: 0.1
+                      }
+                    }}
+                    height={300}
+                    margin={{ top: 20, right: 20, bottom: 30, left: 40 }}
+                    legend={{
+                      direction: 'row',
+                      position: { vertical: 'top', horizontal: 'middle' },
+                      padding: 20,
+                      itemMarkWidth: 10,
+                      itemMarkHeight: 2,
+                      gap: 15
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className="bg-white rounded-lg shadow-sm p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-lg font-semibold">Critical Alerts</h2>
+                  <button className="text-sm text-indigo-600 hover:text-indigo-700 font-medium">
+                    View All
+                  </button>
+                </div>
+                <div className="space-y-4">
+                  {criticalAlerts.map((alert, index) => (
+                    <div key={index} className="p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
+                      <div className="flex items-start gap-3">
+                        <div className={`w-2 h-2 rounded-full mt-2 ${
+                          alert.priority === 'high' ? 'bg-red-500' : 'bg-yellow-500'
+                        }`} />
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-sm font-medium text-gray-900">{alert.type}</span>
+                            <span className="text-xs text-gray-500">{alert.time}</span>
+                          </div>
+                          <p className="text-sm text-gray-600 mb-2">{alert.message}</p>
+                          <button className="text-xs font-medium text-indigo-600 hover:text-indigo-700">
+                            {alert.action} 
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

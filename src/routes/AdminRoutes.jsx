@@ -1,4 +1,4 @@
-import BlacklistedStores from '../page/Admin/Inventory/BlacklistedStores';
+import BlacklistedStores from '../page/Admin/Inventory/Blocklist Management/blacklist';
 
 // Add this to your routes array
 {

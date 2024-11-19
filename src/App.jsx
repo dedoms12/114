@@ -32,8 +32,8 @@ import SellerProfile from './page/Seller/seller-profile/seller-profile.jsx';
 import AdminDashboard from './page/Admin/Dashboard/AdminDashboard.jsx';
 import AdminInventory from './page/Admin/Inventory/index.jsx';
 import AdminReports from './page/Admin/Reports/index.jsx';
-import MedicineList from './page/Admin/Inventory/MedicineList.jsx';
-import MedicineGroups from './page/Admin/Inventory/MedicineGroups.jsx';
+import MedicineList from './page/Admin/Inventory/Medicine Management/MedicineList.jsx';
+import MedicineGroups from './page/Admin/Inventory/Medicine Stores/MedicineGroups.jsx';
 import SalesReport from './page/Admin/Reports/SalesReport.jsx';
 import RegisteredUsers from './page/Admin/Reports/RegisteredUsers.jsx';
 import ContactManagement from './page/Admin/ContactManagement/index.jsx';
@@ -43,7 +43,9 @@ import { Toaster } from 'react-hot-toast';
 import CustomerList from './page/Seller/records/customers/CustomerList.jsx';
 import OrderList from './page/Seller/records/orders/OrderList.jsx';
 import { OrderCustomerProvider } from './page/Seller/context/OrderCustomerContext';
-import BlacklistedStores from './page/Admin/Inventory/BlacklistedStores';
+import BlacklistedStores from './page/Admin/Inventory/Blocklist Management/blacklist.jsx';
+import BlacklistManagement from './page/Admin/Inventory/Blocklist Management/blacklist.jsx';
+import { BlocklistProvider } from './page/Admin/Inventory/context/BlocklistContext';
 
 
 
@@ -100,15 +102,21 @@ function App() {
 
                   {/* Admin Routes */}
                   <Route path="/admin/dashboard" element={<AdminDashboard />} />
-                  <Route path="/admin/inventory" element={<AdminInventory />} />
-                  <Route path="/admin/inventory/medicines" element={<MedicineList />} />
-                  <Route path="/admin/inventory/groups" element={<MedicineGroups />} />
+                  <Route path="/admin/inventory/*" element={
+                    <BlocklistProvider>
+                      <Routes>
+                        <Route path="/" element={<AdminInventory />} />
+                        <Route path="/medicines" element={<MedicineList />} />
+                        <Route path="/stores" element={<MedicineGroups />} />
+                        <Route path="/blocklist" element={<BlacklistManagement />} />
+                      </Routes>
+                    </BlocklistProvider>
+                  } />
                   <Route path="/admin/reports" element={<AdminReports />} />
                   <Route path="/admin/reports/sales" element={<SalesReport />} />
                   <Route path="/admin/reports/users" element={<RegisteredUsers />} />
                   <Route path="/admin/contacts" element={<ContactManagement />} />
                   <Route path="/admin/settings" element={<AdminSettings />} />
-                  <Route path="/admin/blacklisted-stores" element={<BlacklistedStores />} />
                 </Routes>
               </Router>
             </OrderCustomerProvider>
