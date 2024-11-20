@@ -180,6 +180,19 @@ const AdvancedProductEdit = () => {
     setIsDirty(true);
   };
 
+  // Update the handleImageDelete function
+  const handleImageDelete = (indexToDelete) => {
+    try {
+      setFormData(prevData => ({
+        ...prevData,
+        images: prevData.images.filter((_, index) => index !== indexToDelete)
+      }));
+      setIsDirty(true);
+    } catch (error) {
+      console.error('Error deleting image:', error);
+    }
+  };
+
   // Update the handleSave function to preserve images
   const handleSave = async (isDraft = true) => {
     try {
@@ -213,7 +226,10 @@ const AdvancedProductEdit = () => {
       const productIndex = productArray.findIndex(p => p.id === parseInt(id));
       
       if (productIndex !== -1) {
-        productArray[productIndex] = updatedProduct;
+        // Remove from current position
+        productArray.splice(productIndex, 1);
+        // Add to beginning of array
+        productArray.unshift(updatedProduct);
         
         // Save to localStorage
         const allProducts = {
@@ -227,7 +243,11 @@ const AdvancedProductEdit = () => {
         
         // Navigate after a short delay
         setTimeout(() => {
-          navigate('/product-management');
+          if (isDraft) {
+            navigate(`/seller/product-management/product/${id}`);
+          } else {
+            navigate('/seller/product-management');
+          }
         }, 1500);
         
         return updatedProduct;
@@ -250,16 +270,30 @@ const AdvancedProductEdit = () => {
 
   const handlePublish = async () => {
     try {
-      const updatedProduct = await handleSave(false);
-      if (updatedProduct) {
-        setFormData(prev => ({
-          ...prev,
-          status: 'published'
-        }));
+      const category = categories.find(cat => cat.value === formData.category.toLowerCase());
+      if (category) {
+        // Remove existing product
+        const index = category.products.findIndex(p => p.id === parseInt(id));
+        if (index !== -1) {
+          category.products.splice(index, 1);
+        }
+        // Add updated product to beginning of array
+        category.products.unshift({ ...formData, id: parseInt(id) });
+        
+        // Save to localStorage
+        const allProducts = {
+          medicalProducts: medicalProducts,
+          generalProducts: generalProducts
+        };
+        localStorage.setItem('productData', JSON.stringify(allProducts));
+        
+        setShowSuccess(true);
+        setTimeout(() => {
+          navigate('/seller/product-management');
+        }, 1500);
       }
     } catch (error) {
       console.error('Error publishing product:', error);
-      alert('Failed to publish product');
     }
   };
 
@@ -433,27 +467,33 @@ const AdvancedProductEdit = () => {
                 </label>
               </div>
 
-              <div className="grid grid-cols-4 gap-4">
-                {formData.images.map((image, index) => (
-                  <div key={index} className="relative group">
-                    <img
-                      src={image}
-                      alt={`Product ${index + 1}`}
-                      className="w-full h-32 object-cover rounded-lg"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const newImages = formData.images.filter((_, i) => i !== index);
-                        handleFormChange({ images: newImages });
-                      }}
-                      className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                      <FiTrash2 />
-                    </button>
-                  </div>
-                ))}
-              </div>
+              {formData.images && formData.images.length > 0 ? (
+                <div className="grid grid-cols-4 gap-4">
+                  {formData.images.map((image, index) => (
+                    <div key={`image-${index}`} className="relative group">
+                      <img
+                        src={image}
+                        alt={`Product ${index + 1}`}
+                        className="w-full h-32 object-cover rounded-lg"
+                      />
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleImageDelete(index);
+                        }}
+                        className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                      >
+                        <FiTrash2 size={16} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-4 text-gray-500">
+                  No images uploaded yet
+                </div>
+              )}
             </div>
           </div>
         );
@@ -754,7 +794,7 @@ const AdvancedProductEdit = () => {
         <div className="mb-8">
           <div className="flex items-center text-sm text-gray-500">
             <button
-              onClick={() => navigate('/product-management')}
+              onClick={() => navigate('/seller/product-management')}
               className="flex items-center text-blue-600 hover:text-blue-700"
             >
               <FiArrowLeft className="mr-2" />

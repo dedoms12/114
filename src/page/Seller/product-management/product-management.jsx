@@ -45,10 +45,13 @@ const ProductManagement = () => {
         // Update existing product
         const category = categories.find(cat => cat.value === productData.category.toLowerCase());
         if (category) {
+          // Remove existing product
           const index = category.products.findIndex(p => p.id === editingProduct.id);
           if (index !== -1) {
-            category.products[index] = { ...productData, id: editingProduct.id };
+            category.products.splice(index, 1);
           }
+          // Add updated product to beginning of array
+          category.products.unshift({ ...productData, id: editingProduct.id });
         }
         setActionType('edit');
       } else {
@@ -65,15 +68,15 @@ const ProductManagement = () => {
       setSavedProductDetails(productData);
       setShowSuccessFeedback(true);
       setIsModalOpen(false);
+      setCurrentPage(1); // Reset to first page
       
       // Add timeout to show success message before navigating
       setTimeout(() => {
         setShowSuccessFeedback(false);
-        // If editing, navigate to product detail
         if (editingProduct) {
           navigate(`/product-management/product/${editingProduct.id}`);
         }
-      }, 2000);
+      }, 1500);
     } catch (error) {
       console.error('Error saving product:', error);
       alert('Failed to save product: ' + error.message);
@@ -239,7 +242,7 @@ const ProductManagement = () => {
                     {/* Middle Section - Price & Stats */}
                     <div className="w-48 flex flex-col items-start">
                       <div className="mb-2">
-                        <span className="text-2xl font-semibold text-[#4C9BF5]">₱{product.price}</span>
+                        <span className="text-2xl font-semibold text-[#FF6B6B]">₱{product.price}</span>
                       </div>
                       <div className="text-sm text-gray-500">
                         <p>{product.soldCount} Sold</p>
@@ -274,7 +277,7 @@ const ProductManagement = () => {
                   <>
                     <h3 className="font-medium text-gray-900 mb-2 line-clamp-2">{product.name}</h3>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-lg font-semibold text-[#4C9BF5]">₱{product.price}</span>
+                      <span className="text-lg font-semibold text-[#FF6B6B]">₱{product.price}</span>
                       <span className="text-sm text-gray-500">{product.soldCount} Sold</span>
                     </div>
                     <p className="text-sm text-gray-500 mb-4">{product.location}</p>

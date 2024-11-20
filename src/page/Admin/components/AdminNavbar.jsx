@@ -22,7 +22,7 @@ const AdminNavbar = () => {
       <div className="px-6 py-2">
         <div className="flex items-center justify-between">
           {/* Search Bar */}
-          <div className="relative flex-1 max-w-2xl">
+          <div className="relative flex-1 max-w-2x1">
             <input
               type="text"
               placeholder="Search for anything here.."
@@ -37,7 +37,7 @@ const AdminNavbar = () => {
           <div className="flex items-center space-x-6">
             {/* Language Selector */}
             <div className="flex items-center space-x-2">
-              <img src="/images/Admin/language.svg" alt="Language" className="w-5 h-5" />
+              <img src="/images/Admin/globe.svg" alt="Language" className="w-5 h-5" />
               <span className="text-sm text-gray-600">{language}</span>
               <FiChevronDown className="w-4 h-4 text-gray-400" />
             </div>

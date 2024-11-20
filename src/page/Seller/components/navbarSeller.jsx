@@ -22,7 +22,24 @@ const NavbarSeller = () => {
     { name: 'Home', path: '/seller/dashboard', icon: '/images/Client/product-page/home-logo.svg' },
     { name: 'Products Management', path: '/seller/product-management', icon: '/images/Client/product-page/client-package.svg' },
     { name: 'Sales', path: '/seller/sales', icon: '/images/Client/product-page/client-shopping-cart.svg' },
+    { name: 'Records', icon: '/images/Seller/Records/collectionicon.svg', dropdown: [
+      { name: 'Customer List', path: '/seller/records/customers' },
+      { name: 'Order List', path: '/seller/records/orders' }
+    ] }
   ];
+
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const handleDropdownClick = (itemName) => {
+    if (activeDropdown === itemName) {
+      setActiveDropdown(null);
+      setIsDropdownOpen(false);
+    } else {
+      setActiveDropdown(itemName);
+      setIsDropdownOpen(true);
+    }
+  };
 
   return (
     <nav className="bg-[#FCFFFE] shadow-sm py-4">
@@ -61,14 +78,55 @@ const NavbarSeller = () => {
           {/* Desktop Nav Items */}
           <div className="hidden md:flex items-center space-x-16">
             {navItems.map((item) => (
-              <Link
+              <div
                 key={item.name}
-                to={item.path}
-                className="flex items-center space-x-2 text-gray-600 hover:text-pill-blue"
+                className="relative"
               >
-                <img src={item.icon} alt={item.name} className="w-5 h-5" />
-                <span className="text-sm">{item.name}</span>
-              </Link>
+                {item.dropdown ? (
+                  <>
+                    <div
+                      onClick={() => handleDropdownClick(item.name)}
+                      className="flex items-center space-x-2 text-gray-600 hover:text-pill-blue cursor-pointer"
+                    >
+                      <img src={item.icon} alt={item.name} className="w-5 h-5" />
+                      <span className="text-sm">{item.name}</span>
+                      <svg 
+                        className={`w-4 h-4 transition-transform ${activeDropdown === item.name ? 'rotate-180' : ''}`} 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                    {activeDropdown === item.name && (
+                      <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                        {item.dropdown.map((dropItem) => (
+                          <Link
+                            key={dropItem.name}
+                            to={dropItem.path}
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            onClick={() => {
+                              setActiveDropdown(null);
+                              setIsDropdownOpen(false);
+                            }}
+                          >
+                            {dropItem.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <Link
+                    to={item.path}
+                    className="flex items-center space-x-2 text-gray-600 hover:text-pill-blue"
+                  >
+                    <img src={item.icon} alt={item.name} className="w-5 h-5" />
+                    <span className="text-sm">{item.name}</span>
+                  </Link>
+                )}
+              </div>
             ))}
           </div>
 

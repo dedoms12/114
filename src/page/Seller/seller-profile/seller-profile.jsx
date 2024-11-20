@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavbarSeller from '../components/navbarSeller';
-import { FiEdit2, FiUpload, FiLogOut, FiMessageSquare, FiStar, FiClock, FiAward, FiX, FiPackage, FiFileText, FiThumbsUp, FiMessageCircle, FiFilter, FiSettings, FiBell, FiLock, FiShield, FiCreditCard, FiToggleRight, FiChevronRight } from 'react-icons/fi';
+import { FiEdit2, FiUpload, FiLogOut, FiMessageSquare, FiStar, FiClock, FiAward, FiX, FiPackage, FiFileText, FiThumbsUp, FiMessageCircle, FiFilter, FiSettings, FiBell, FiLock, FiShield, FiCreditCard, FiToggleRight, FiChevronRight, FiTrash2, FiDownload } from 'react-icons/fi';
 import EditStoreModal from './EditStoreModal';
 import EditProfileModal from './EditProfileModal';
 import CreateProductModal from '../components/CreateProductModal';
@@ -405,17 +405,134 @@ const SellerProfile = () => {
       case 'documents':
         return (
           <div className="space-y-6">
+            {/* Document Status Overview */}
             <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-xl font-semibold mb-8">Legislative Documents</h3>
-              
-              {/* Document Sections */}
-              {documentSections.map((section, index) => (
-                <DocumentSection 
-                  key={section.id}
-                  {...section}
-                  isLast={index === documentSections.length - 1}
-                />
-              ))}
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-semibold">Legislative Documents</h3>
+                <div className="flex items-center space-x-4">
+                  <span className="text-sm text-gray-500">
+                    {documentSections.filter(doc => doc.status === 'Verified').length} of {documentSections.length} Verified
+                  </span>
+                  <button 
+                    className="px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 rounded-lg"
+                    onClick={() => {/* Implement bulk upload */}}
+                  >
+                    <FiUpload className="inline-block mr-2" />
+                    Bulk Upload
+                  </button>
+                </div>
+              </div>
+
+              {/* Document Status Cards */}
+              <div className="grid grid-cols-4 gap-4 mb-8">
+                <div className="bg-green-50 p-4 rounded-lg">
+                  <div className="text-2xl font-semibold text-green-600">
+                    {documentSections.filter(doc => doc.status === 'Verified').length}
+                  </div>
+                  <div className="text-sm text-gray-600">Verified</div>
+                </div>
+                <div className="bg-yellow-50 p-4 rounded-lg">
+                  <div className="text-2xl font-semibold text-yellow-600">
+                    {documentSections.filter(doc => doc.status === 'Pending').length}
+                  </div>
+                  <div className="text-sm text-gray-600">Pending</div>
+                </div>
+                <div className="bg-red-50 p-4 rounded-lg">
+                  <div className="text-2xl font-semibold text-red-600">
+                    {documentSections.filter(doc => doc.status === 'Expired').length}
+                  </div>
+                  <div className="text-sm text-gray-600">Expired</div>
+                </div>
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <div className="text-2xl font-semibold text-gray-600">
+                    {documentSections.filter(doc => doc.status === 'Not Submitted').length}
+                  </div>
+                  <div className="text-sm text-gray-600">Not Submitted</div>
+                </div>
+              </div>
+
+              {/* Document Sections with Enhanced UI */}
+              <div className="space-y-6">
+                {documentSections.map((section, index) => (
+                  <div 
+                    key={section.id}
+                    className={`p-6 border rounded-lg ${
+                      section.status === 'Verified' ? 'border-green-200 bg-green-50/30' :
+                      section.status === 'Pending' ? 'border-yellow-200 bg-yellow-50/30' :
+                      'border-gray-200'
+                    }`}
+                  >
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <h4 className="text-lg font-medium text-gray-900">{section.title}</h4>
+                        <p className="text-sm text-gray-600 mt-1">{section.description}</p>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                          section.status === 'Verified' ? 'bg-green-100 text-green-700' :
+                          section.status === 'Pending' ? 'bg-yellow-100 text-yellow-700' :
+                          section.status === 'Expired' ? 'bg-red-100 text-red-700' :
+                          'bg-gray-100 text-gray-700'
+                        }`}>
+                          {section.status}
+                        </span>
+                        {section.validUntil && (
+                          <span className="text-sm text-gray-500">
+                            Valid until {new Date(section.validUntil).toLocaleDateString()}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Document List */}
+                    {section.documents.length > 0 ? (
+                      <div className="space-y-3">
+                        {section.documents.map(doc => (
+                          <div 
+                            key={doc.id}
+                            className="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200"
+                          >
+                            <div className="flex items-center space-x-3">
+                              <FiFileText className="text-gray-400" />
+                              <div>
+                                <p className="text-sm font-medium text-gray-700">{doc.name}</p>
+                                <p className="text-xs text-gray-500">
+                                  Uploaded on {new Date(doc.uploadDate).toLocaleDateString()}
+                                </p>
+                              </div>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <button 
+                                className="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-full"
+                                onClick={() => window.open(doc.url, '_blank')}
+                              >
+                                <FiDownload className="w-4 h-4" />
+                              </button>
+                              <button 
+                                className="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-full"
+                                onClick={() => {/* Implement delete */}}
+                              >
+                                <FiTrash2 className="w-4 h-4" />
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="flex flex-col items-center justify-center py-6 bg-gray-50 rounded-lg border border-dashed border-gray-300">
+                        <FiUpload className="w-8 h-8 text-gray-400 mb-2" />
+                        <p className="text-sm text-gray-600 mb-2">No documents uploaded yet</p>
+                        <button 
+                          className="px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 rounded-lg"
+                          onClick={() => {/* Implement upload */}}
+                        >
+                          Upload Document
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         );

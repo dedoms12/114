@@ -98,7 +98,7 @@ const InventoryProductDetail = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6">
           <button
-            onClick={() => navigate('/product-management')}
+            onClick={() => navigate('/seller/product-management')}
             className="flex items-center text-gray-600 hover:text-gray-800"
           >
             <FiArrowLeft className="mr-2" /> Back to Products
