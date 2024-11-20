@@ -150,6 +150,19 @@ const MedicineList = () => {
     }
   }, []);
 
+  // Add this effect to sync with blocklist changes
+  useEffect(() => {
+    if (medicines) {
+      setDetailModalContent(prev => {
+        if (prev.id) {
+          const updatedMedicine = medicines.find(med => med.id === prev.id);
+          return updatedMedicine ? { ...updatedMedicine } : prev;
+        }
+        return prev;
+      });
+    }
+  }, [medicines]);
+
   const handleAction = (medicine, action) => {
     setSelectedMedicine(medicine);
     switch(action) {
@@ -569,6 +582,23 @@ const MedicineList = () => {
       </div>
     </div>
   );
+
+  // Update the status display in the detail modal
+  const renderStatusBadge = (status) => {
+    const statusClasses = {
+      active: 'bg-green-100 text-green-800',
+      blocked: 'bg-red-100 text-red-800',
+      inactive: 'bg-yellow-100 text-yellow-800'
+    };
+
+    return (
+      <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
+        statusClasses[status] || statusClasses.active
+      }`}>
+        {status.charAt(0).toUpperCase() + status.slice(1)}
+      </span>
+    );
+  };
 
   return (
     <div className="flex h-screen">

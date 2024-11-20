@@ -9,6 +9,9 @@ import AdminNavbar from '../../components/AdminNavbar';
 import { storeVerifications } from './data/storeVerificationData';
 import DocumentManagementModal from './components/DocumentManagementModal';
 import EditBlockModal from '../../Inventory/Blocklist Management/components/EditBlockModal';
+import { toast } from 'react-hot-toast';
+import BlockStoreModal from '../../Inventory/Medicine Stores/components/BlockStoreModal';
+import { useBlocklist } from '../../Inventory/context/BlocklistContext';
 
 const StoreVerificationList = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -18,6 +21,13 @@ const StoreVerificationList = () => {
   const [selectedStore, setSelectedStore] = useState(null);
   const [showBlockModal, setShowBlockModal] = useState(false);
   const [storeToBlock, setStoreToBlock] = useState(null);
+  const { addBlockedStore } = useBlocklist();
+  const [blockDetails, setBlockDetails] = useState({
+    reason: '',
+    blockType: 'temporary',
+    reviewDate: '',
+    customReason: ''
+  });
 
   const handleDocumentUpdate = (storeId, docId, status, comment) => {
     setFilteredStores(prevStores =>
@@ -69,40 +79,70 @@ const StoreVerificationList = () => {
   };
 
   const handleBlock = (store) => {
-    setStoreToBlock(store);
+    setStoreToBlock({
+      id: store.id,
+      name: store.name,
+      email: store.email,
+      status: 'blocked'
+    });
     setShowBlockModal(true);
   };
 
-  const handleUnblock = (store) => {
-    setFilteredStores(prevStores =>
-      prevStores.map(s => {
-        if (s.id === store.id) {
-          return {
-            ...s,
-            verificationStatus: 'pending',
-            blockDetails: null
-          };
-        }
-        return s;
-      })
-    );
+  const handleBlockStore = async () => {
+    try {
+      const blockedStore = {
+        id: storeToBlock.id,
+        name: storeToBlock.name,
+        email: storeToBlock.email,
+        blockType: blockDetails.blockType,
+        reason: blockDetails.reason === 'other' ? blockDetails.customReason : blockDetails.reason,
+        reviewDate: blockDetails.blockType === 'temporary' ? blockDetails.reviewDate : null,
+        blacklistDate: new Date().toISOString(),
+        status: 'blocked'
+      };
+
+      const success = await addBlockedStore(blockedStore);
+      
+      if (success) {
+        setFilteredStores(prevStores =>
+          prevStores.map(store =>
+            store.id === storeToBlock.id
+              ? { ...store, verificationStatus: 'blocked', blockDetails }
+              : store
+          )
+        );
+        setShowBlockModal(false);
+        setStoreToBlock(null);
+        setBlockDetails({
+          reason: '',
+          blockType: 'temporary',
+          reviewDate: '',
+          customReason: ''
+        });
+        toast.success(`${storeToBlock.name} has been blocked`);
+      }
+    } catch (error) {
+      console.error('Error blocking store:', error);
+      toast.error('Failed to block store');
+    }
   };
 
-  const handleSaveBlock = (blockDetails) => {
-    setFilteredStores(prevStores =>
-      prevStores.map(store => {
-        if (store.id === storeToBlock.id) {
-          return {
-            ...store,
-            verificationStatus: 'blocked',
-            blockDetails
-          };
-        }
-        return store;
-      })
-    );
-    setShowBlockModal(false);
-    setStoreToBlock(null);
+  const handleUnblock = (store) => {
+    if (window.confirm(`Are you sure you want to unblock ${store.name}?`)) {
+      setFilteredStores(prevStores =>
+        prevStores.map(s => {
+          if (s.id === store.id) {
+            return {
+              ...s,
+              verificationStatus: 'pending',
+              blockDetails: null
+            };
+          }
+          return s;
+        })
+      );
+      toast.success(`${store.name} has been unblocked`);
+    }
   };
 
   const getStatusBadge = (status) => {
@@ -127,26 +167,26 @@ const StoreVerificationList = () => {
           setSelectedStore(store);
           setShowDocumentModal(true);
         }}
-        className="p-1.5 hover:bg-gray-100 rounded-full"
-        title="Manage Documents"
+        className="text-blue-600 hover:text-blue-800"
+        title="View Documents"
       >
-        <FiEye className="w-5 h-5 text-gray-600" />
+        <FiEye className="w-5 h-5" />
       </button>
-      {store.verificationStatus === 'blocked' ? (
+      {store.verificationStatus !== 'blocked' ? (
         <button
-          onClick={() => handleUnblock(store)}
-          className="p-1.5 hover:bg-green-100 rounded-full"
-          title="Unblock Store"
+          onClick={() => handleBlock(store)}
+          className="text-red-600 hover:text-red-800"
+          title="Block Store"
         >
-          <FiUnlock className="w-5 h-5 text-green-600" />
+          <FiSlash className="w-5 h-5" />
         </button>
       ) : (
         <button
-          onClick={() => handleBlock(store)}
-          className="p-1.5 hover:bg-red-100 rounded-full"
-          title="Block Store"
+          onClick={() => handleUnblock(store)}
+          className="text-green-600 hover:text-green-800"
+          title="Unblock Store"
         >
-          <FiSlash className="w-5 h-5 text-red-600" />
+          <FiUnlock className="w-5 h-5" />
         </button>
       )}
     </div>
@@ -251,10 +291,21 @@ const StoreVerificationList = () => {
           )}
 
           {showBlockModal && storeToBlock && (
-            <EditBlockModal
-              onClose={() => setShowBlockModal(false)}
-              onSave={handleSaveBlock}
-              item={storeToBlock}
+            <BlockStoreModal
+              isOpen={showBlockModal}
+              onClose={() => {
+                setShowBlockModal(false);
+                setStoreToBlock(null);
+                setBlockDetails({
+                  reason: '',
+                  blockType: 'temporary',
+                  reviewDate: '',
+                  customReason: ''
+                });
+              }}
+              onConfirm={handleBlockStore}
+              blockDetails={blockDetails}
+              setBlockDetails={setBlockDetails}
             />
           )}
         </div>

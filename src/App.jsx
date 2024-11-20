@@ -58,69 +58,71 @@ function App() {
         <OrderProvider>
           <CartProvider>
             <OrderCustomerProvider>
-              <Router>
-                <Routes>
-                  {/* Common/Auth Routes */}
-                  <Route path="/" element={<SignIn />} />
-                  <Route path="/signin" element={<SignIn />} />
-                  <Route path="/signup" element={<SignUp />} />
-                  <Route path="/sign-up-role" element={<SignUpRole />} />
+              <BlocklistProvider>
+                <Router>
+                  <Routes>
+                    {/* Common/Auth Routes */}
+                    <Route path="/" element={<SignIn />} />
+                    <Route path="/signin" element={<SignIn />} />
+                    <Route path="/signup" element={<SignUp />} />
+                    <Route path="/sign-up-role" element={<SignUpRole />} />
 
-                  {/* Buyer Routes */}
-                  <Route path="/home" element={<Home />} />
-                  <Route path="/contact" element={<ContactPage />} />
-                  
-                  {/* Product Category Routes */}
-                  <Route path="/general-health" element={<GeneralHealth />} />
-                  <Route path="/general-health/product/:id" element={<ProductDetail />} />
-                  <Route path="/medical-supplies" element={<MedicalSupplies />} />
-                  <Route path="/medical-supplies/product/:id" element={<ProductDetail />} />
-                  <Route path="/personal-care" element={<PersonalCare />} />
-                  <Route path="/personal-care/product/:id" element={<ProductDetail />} />
-                  <Route path="/supplements" element={<Supplements />} />
-                  <Route path="/supplements/product/:id" element={<ProductDetail />} />
-                  
-                  {/* Shopping Routes */}
-                  <Route path="/cart" element={<Cart />} />
-                  <Route path="/checkout" element={<Checkout />} />
-                  <Route path="/order-confirmation" element={<OrderConfirmation />} />
-                  
-                  {/* Store & Profile Routes */}
-                  <Route path="/stores" element={<Stores />} />
-                  <Route path="/store/:id" element={<StoreDetails />} />
-                  <Route path="/store/:id/product/:productId" element={<ProductDetail />} />
-                  <Route path="/user-profile" element={<UserProfile />} />
-                  <Route path="/chatbot" element={<ChatbotPage />} />
-                  <Route path="/search-results" element={<SearchResults />} />
+                    {/* Buyer Routes */}
+                    <Route path="/home" element={<Home />} />
+                    <Route path="/contact" element={<ContactPage />} />
+                    
+                    {/* Product Category Routes */}
+                    <Route path="/general-health" element={<GeneralHealth />} />
+                    <Route path="/general-health/product/:id" element={<ProductDetail />} />
+                    <Route path="/medical-supplies" element={<MedicalSupplies />} />
+                    <Route path="/medical-supplies/product/:id" element={<ProductDetail />} />
+                    <Route path="/personal-care" element={<PersonalCare />} />
+                    <Route path="/personal-care/product/:id" element={<ProductDetail />} />
+                    <Route path="/supplements" element={<Supplements />} />
+                    <Route path="/supplements/product/:id" element={<ProductDetail />} />
+                    
+                    {/* Shopping Routes */}
+                    <Route path="/cart" element={<Cart />} />
+                    <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/order-confirmation" element={<OrderConfirmation />} />
+                    
+                    {/* Store & Profile Routes */}
+                    <Route path="/stores" element={<Stores />} />
+                    <Route path="/store/:id" element={<StoreDetails />} />
+                    <Route path="/store/:id/product/:productId" element={<ProductDetail />} />
+                    <Route path="/user-profile" element={<UserProfile />} />
+                    <Route path="/chatbot" element={<ChatbotPage />} />
+                    <Route path="/search-results" element={<SearchResults />} />
 
-                  {/* Seller Routes */}
-                  <Route path="/seller/dashboard" element={<Dashboard />} />
-                  <Route path="/seller/product-management" element={<ProductManagement />} />
-                  <Route path="/seller/sales" element={<Sales />} />
-                  <Route path="/seller/records/customers" element={<CustomerList />} />
-                  <Route path="/seller/records/orders" element={<OrderList />} />
-                  <Route path="/seller-profile" element={<SellerProfile />} />
+                    {/* Seller Routes */}
+                    <Route path="/seller/dashboard" element={<Dashboard />} />
+                    <Route path="/seller/product-management" element={<ProductManagement />} />
+                    <Route path="/seller/sales" element={<Sales />} />
+                    <Route path="/seller/records/customers" element={<CustomerList />} />
+                    <Route path="/seller/records/orders" element={<OrderList />} />
+                    <Route path="/seller-profile" element={<SellerProfile />} />
 
-                  {/* Admin Routes */}
-                  <Route path="/admin/dashboard" element={<AdminDashboard />} />
-                  <Route path="/admin/inventory/*" element={
-                    <BlocklistProvider>
-                      <Routes>
-                        <Route path="/" element={<AdminInventory />} />
-                        <Route path="/medicines" element={<MedicineList />} />
-                        <Route path="/stores" element={<MedicineGroups />} />
-                        <Route path="/blocklist" element={<BlacklistManagement />} />
-                      </Routes>
-                    </BlocklistProvider>
-                  } />
-                  <Route path="/admin/reports" element={<AdminReports />} />
-                  <Route path="/admin/reports/sales" element={<SalesReport />} />
-                  <Route path="/admin/reports/users" element={<RegisteredUsers />} />
-                  <Route path="/admin/reports/store-verification" element={<StoreVerificationList />} />
-                  <Route path="/admin/contacts" element={<ContactManagement />} />
-                  <Route path="/admin/settings" element={<AdminSettings />} />
-                </Routes>
-              </Router>
+                    {/* Admin Routes */}
+                    <Route path="/admin/dashboard" element={<AdminDashboard />} />
+                    <Route path="/admin/inventory/*" element={
+                      <BlocklistProvider>
+                        <Routes>
+                          <Route path="/" element={<AdminInventory />} />
+                          <Route path="/medicines" element={<MedicineList />} />
+                          <Route path="/stores" element={<MedicineGroups />} />
+                          <Route path="/blocklist" element={<BlacklistManagement />} />
+                        </Routes>
+                      </BlocklistProvider>
+                    } />
+                    <Route path="/admin/reports" element={<AdminReports />} />
+                    <Route path="/admin/reports/sales" element={<SalesReport />} />
+                    <Route path="/admin/reports/users" element={<RegisteredUsers />} />
+                    <Route path="/admin/reports/store-verification" element={<StoreVerificationList />} />
+                    <Route path="/admin/contacts" element={<ContactManagement />} />
+                    <Route path="/admin/settings" element={<AdminSettings />} />
+                  </Routes>
+                </Router>
+              </BlocklistProvider>
             </OrderCustomerProvider>
             <ToastContainer position="top-right" autoClose={2000} />
           </CartProvider>

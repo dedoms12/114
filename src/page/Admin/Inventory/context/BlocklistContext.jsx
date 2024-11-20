@@ -72,13 +72,16 @@ export const BlocklistProvider = ({ children }) => {
       setMedicines(prev => 
         prev.map(med => 
           med.id === medicineId 
-            ? { ...med, status: 'active' }
+            ? { ...med, status: 'active', restrictions: [] }
             : med
         )
       );
-      toast.success('Medicine has been unblocked');
+
+      const medicineName = medicines.find(med => med.id === medicineId)?.name || 'Medicine';
+      toast.success(`${medicineName} has been unblocked`);
       return true;
     } catch (error) {
+      console.error('Error unblocking medicine:', error);
       toast.error('Failed to unblock medicine');
       return false;
     }

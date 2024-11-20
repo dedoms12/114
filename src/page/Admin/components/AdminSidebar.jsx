@@ -169,7 +169,7 @@ const AdminSidebar = () => {
   );
 
   return (
-    <aside className="h-screen flex flex-col bg-[#1C2434] text-white">
+    <aside className="min-h-screen flex flex-col bg-[#1C2434] text-white sticky top-0">
       {/* Header */}
       <div className="p-4 flex items-center gap-3 border-b border-gray-700">
         <img src="/images/PillLogo.svg" alt="PillPoint" className="h-8 w-8" />
@@ -242,7 +242,7 @@ const AdminSidebar = () => {
       </div>
 
       {/* Footer */}
-      <div className="p-4 border-t border-gray-700">
+      <div className="p-4 border-t border-gray-700 mt-auto">
         <Link
           to="/admin/settings"
           className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#2A3547]"

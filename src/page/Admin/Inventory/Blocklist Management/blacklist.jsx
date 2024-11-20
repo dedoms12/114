@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import EditBlockModal from './components/EditBlockModal';
 
 const BlacklistManagement = () => {
-  const { blockedItems, removeBlockedStore, updateBlockedMedicine, deleteBlockedMedicine } = useBlocklist();
+  const { blockedItems, removeBlockedStore, updateBlockedMedicine, deleteBlockedMedicine, removeBlockedMedicine } = useBlocklist();
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTab, setActiveTab] = useState('medicines');
   const [selectedFilters, setSelectedFilters] = useState({
@@ -23,7 +23,10 @@ const BlacklistManagement = () => {
 
   const handleUnblock = async (item) => {
     if (window.confirm(`Are you sure you want to unblock ${item.name}?`)) {
-      const success = await removeBlockedStore(item.id);
+      const success = activeTab === 'medicines' 
+        ? await removeBlockedMedicine(item.id)
+        : await removeBlockedStore(item.id);
+        
       if (success) {
         toast.success(`${item.name} has been unblocked`);
       }
