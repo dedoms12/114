@@ -4,7 +4,7 @@ import NavbarSeller from '../components/navbarSeller';
 import { FiSearch, FiFilter, FiGrid, FiList } from 'react-icons/fi';
 import { categories, units, addProduct, getUniqueLocations } from './product-data';
 import CreateProductModal from '../components/CreateProductModal';
-import SuccessFeedback from '../components/SuccessFeedback';
+import SuccessFeedback from '../components/successfeedback';
 
 const ProductManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
