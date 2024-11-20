@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import NavBar from '../../_components/Navbar';
-import ProductCard from '../../_components/ProductCard';
-import Categories from '../../_components/Categories';
-import YouMightLike from '../../_components/MightLike';
+import NavBar from '../../_components/navbar';
+import ProductCard from '../../_components/productcard';
+import Categories from '../../_components/categories';
+import YouMightLike from '../../_components/might-like';
 import { personalCareProducts } from './pc-products';
 import { useNavigate, useLocation } from 'react-router-dom';
 

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import NavBar from '../../_components/Navbar';
-import ProductCard from '../../_components/ProductCard';
+import NavBar from '../../_components/navbar';
+import ProductCard from '../../_components/productcard';
 import { products } from './gen-products';
-import Categories from '../../_components/Categories';
-import YouMightLike from '../../_components/MightLike';
+import Categories from '../../_components/categories';
+import YouMightLike from '../../_components/might-like';
 
 const GeneralHealth = () => {
   const navigate = useNavigate();

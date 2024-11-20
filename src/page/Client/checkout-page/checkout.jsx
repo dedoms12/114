@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import NavBar from '../_components/Navbar';
+import NavBar from '../_components/navbar';
 import { useCart } from '../_components/context/CartContext';
 import AddressModal from './AddressModal';
 import ShippingModal from './ShippingModal';

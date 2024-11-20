@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import NavBar from '../_components/Navbar';
+import NavBar from '../_components/navbar';
 import { useCart } from '../_components/context/CartContext';
 import CartMightLike from './CartMightLike';
 import { toast } from 'react-hot-toast';

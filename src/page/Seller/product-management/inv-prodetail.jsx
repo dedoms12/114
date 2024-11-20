@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FiArrowLeft, FiAlertCircle, FiPackage, FiCalendar, FiDollarSign, FiTag, FiMapPin } from 'react-icons/fi';
-import NavbarSeller from '../components/NavbarSeller';
+import NavbarSeller from '../components/navbarSeller';
 import CreateProductModal from '../components/CreateProductModal';
 import { getProductById } from '../../../shared/services/productService';
 import { categories, units } from './product-data';

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import NavBar from '../Navbar';
-import YouMightLike from '../MightLike';
+import NavBar from '../navbar';
+import YouMightLike from '../might-like';
 import { products } from '../../product-page/general-health/gen-products';
 import { medicalProducts } from '../../product-page/medical-supplies/medsup-products';
 import { supplementProducts } from '../../product-page/supplements/supple-products';

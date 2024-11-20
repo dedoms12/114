@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import NavbarSeller from '../../components/NavbarSeller';
+import NavbarSeller from '../../components/navbarSeller';
 import { FiSearch, FiFilter, FiDownload, FiEye, FiPackage, FiDollarSign, 
          FiClock, FiTruck, FiCheckCircle, FiXCircle } from 'react-icons/fi';
 import { 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FiArrowLeft, FiHome, FiPlus, FiTrash2, FiImage, FiDollarSign, FiTag, FiPackage, FiMapPin } from 'react-icons/fi';
-import NavbarSeller from '../components/NavbarSeller';
+import NavbarSeller from '../components/navbarSeller';
 import { categories, units, getUniqueLocations } from './product-data';
 import SuccessFeedback from '../components/successfeedback';
 import { medicalProducts } from '../../Client/product-page/medical-supplies/medsup-products';

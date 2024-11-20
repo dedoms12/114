@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-import NavBar from '../../_components/Navbar';
-import ProductCard from '../../_components/ProductCard';
-import Categories from '../../_components/Categories';
-import YouMightLike from '../../_components/MightLike';
-import ProductDetail from '../../_components/product-detail/ProductDetail';
+import NavBar from '../../_components/navbar';
+import ProductCard from '../../_components/productcard';
+import Categories from '../../_components/categories';
+import YouMightLike from '../../_components/might-like';
+import ProductDetail from '../../_components/product-detail/productdetail';
 import { medicalProducts } from './medsup-products';
 
 const MedicalSupplies = () => {

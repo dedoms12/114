@@ -1,7 +1,7 @@
-import NavbarSeller from '../components/NavbarSeller';
-import Info from './Info';
-import Inventory from './Inventory';
-import TopSelling from './TopSelling';
+import NavbarSeller from '../components/navbarSeller';
+import Info from './info';
+import Inventory from './inventory';
+import TopSelling from './top-selling';
 
 const Dashboard = () => {
   return (
