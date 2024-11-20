@@ -30,6 +30,14 @@ const MedicineGroups = () => {
   const [storeDetails, setStoreDetails] = useState(null);
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [storesPerPage] = useState(4);
+
+  // Calculate indexes
+  const indexOfLastStore = currentPage * storesPerPage;
+  const indexOfFirstStore = indexOfLastStore - storesPerPage;
+  const currentStores = pharmacies.slice(indexOfFirstStore, indexOfLastStore);
+  const totalPages = Math.ceil(pharmacies.length / storesPerPage);
 
   useEffect(() => {
     if (!pharmacies || pharmacies.length === 0) {
@@ -232,10 +240,11 @@ const MedicineGroups = () => {
 
   const renderContent = () => {
     const filteredPharmacies = getFilteredPharmacies();
+    const paginatedPharmacies = filteredPharmacies.slice(indexOfFirstStore, indexOfLastStore);
 
     return view === 'grid' ? (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {filteredPharmacies.map((pharmacy) => (
+        {paginatedPharmacies.map((pharmacy) => (
           <div key={pharmacy.id} className="bg-white rounded-lg shadow-sm p-6">
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-lg font-semibold">{pharmacy.name}</h3>
@@ -326,7 +335,7 @@ const MedicineGroups = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {filteredPharmacies.map((pharmacy) => (
+            {paginatedPharmacies.map((pharmacy) => (
               <tr key={pharmacy.id}>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm font-medium text-gray-900">{pharmacy.name}</div>
@@ -386,6 +395,57 @@ const MedicineGroups = () => {
             ))}
           </tbody>
         </table>
+      </div>
+    );
+  };
+
+  const Pagination = () => {
+    return (
+      <div className="mt-6 flex justify-center gap-2">
+        <button
+          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+          className="px-3 py-2 rounded-md bg-white text-gray-600 hover:bg-gray-50 disabled:opacity-50"
+        >
+          Previous
+        </button>
+        
+        {[...Array(totalPages)].map((_, index) => {
+          const pageNumber = index + 1;
+          if (
+            pageNumber === 1 ||
+            pageNumber === totalPages ||
+            (pageNumber >= currentPage - 1 && pageNumber <= currentPage + 1)
+          ) {
+            return (
+              <button
+                key={pageNumber}
+                onClick={() => setCurrentPage(pageNumber)}
+                className={`px-3 py-2 rounded-md ${
+                  currentPage === pageNumber
+                    ? 'bg-blue-500 text-white'
+                    : 'bg-white text-gray-600 hover:bg-gray-50'
+                }`}
+              >
+                {pageNumber}
+              </button>
+            );
+          } else if (
+            pageNumber === currentPage - 2 ||
+            pageNumber === currentPage + 2
+          ) {
+            return <span key={pageNumber} className="px-2 py-2">...</span>;
+          }
+          return null;
+        })}
+
+        <button
+          onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+          disabled={currentPage === totalPages}
+          className="px-3 py-2 rounded-md bg-white text-gray-600 hover:bg-gray-50 disabled:opacity-50"
+        >
+          Next
+        </button>
       </div>
     );
   };
@@ -477,6 +537,7 @@ const MedicineGroups = () => {
           </div>
 
           {renderContent()}
+          <Pagination />
         </div>
       </div>
 
