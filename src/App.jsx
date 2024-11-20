@@ -41,7 +41,7 @@ import AdminSettings from './page/Admin/Settings/index.jsx';
 import StoreDetails from './page/Client/storefront-page/storedetails';
 import { Toaster } from 'react-hot-toast';
 import CustomerList from './page/Seller/records/customers/CustomerList.jsx';
-import OrderList from './page/Seller/records/orders/OrderList.jsx';
+import OrderList from './page/Seller/records/orders/orderList.jsx';
 import { OrderCustomerProvider } from './page/Seller/context/OrderCustomerContext';
 import BlacklistedStores from './page/Admin/Inventory/Blocklist Management/blacklist.jsx';
 import BlacklistManagement from './page/Admin/Inventory/Blocklist Management/blacklist.jsx';

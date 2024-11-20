@@ -264,7 +264,7 @@ const AdvancedProductEdit = () => {
     try {
       await handleSave(true);
     } catch (error) {
-      // Implement error feedback
+      console.log(error)
     }
   };
 
