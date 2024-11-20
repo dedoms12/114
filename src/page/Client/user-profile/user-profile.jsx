@@ -4,7 +4,7 @@ import NavBar from '../_components/navbar';
 import { useOrders } from '../_components/context/OrderContext';
 import { FaEllipsisH } from 'react-icons/fa';
 import EditProfileModal from '../_components/modals/EditProfileModal';
-import UserProfileReviewModal from './UserProfileReviewModal';
+import UserProfileReviewModal from './userprofilereviewmodal';
 import ReviewCard from '../_components/product-detail/ReviewCard';
 
 import { toast } from 'react-hot-toast';
