@@ -81,7 +81,7 @@ const InventoryProductDetail = () => {
   };
 
   const handleAdvanceSettings = () => {
-    navigate(`/product-management/edit-advanced/${id}`);
+    navigate(`/seller/product-management/edit-advanced/${id}`);
   };
 
   const getStockStatus = (quantity) => {

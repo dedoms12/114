@@ -1,35 +1,28 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavbarSeller from '../components/navbarSeller';
-import { FiEdit2, FiUpload, FiLogOut, FiMessageSquare, FiStar, FiClock, FiAward, FiX, FiPackage, FiFileText, FiThumbsUp, FiMessageCircle, FiFilter, FiSettings, FiBell, FiLock, FiShield, FiCreditCard, FiToggleRight, FiChevronRight, FiTrash2, FiDownload } from 'react-icons/fi';
+import { FiEdit2, FiUpload, FiLogOut, FiMessageSquare, FiStar, FiClock, FiAward, FiX, FiPackage, FiFileText, FiThumbsUp, FiMessageCircle, FiFilter, FiSettings, FiBell, FiLock, FiShield, FiCreditCard, FiToggleRight, FiChevronRight, FiTrash2, FiDownload, FiMapPin, FiPhone, FiMail, FiShoppingBag } from 'react-icons/fi';
 import EditStoreModal from './EditStoreModal';
 import EditProfileModal from './EditProfileModal';
 import CreateProductModal from '../components/CreateProductModal';
 import DocumentSection from './DocumentSection';
 
 const SellerProfile = () => {
-  const documentSections = [
+  const [documentSections, setDocumentSections] = useState([
     {
       id: 1,
       title: 'Business Name Registration Certificate',
       description: 'Official registration document from DTI or SEC',
       status: 'Verified',
       validUntil: '2025-12-31',
-      documents: [
-        {
-          id: 1,
-          name: 'business-registration-2024.pdf',
-          uploadDate: '2024-01-15',
-          url: '/path-to-document.pdf'
-        }
-      ]
+      documents: []
     },
     {
       id: 2,
-      title: 'Business Permit',
-      description: 'Local government business permit',
-      status: 'Pending',
-      validUntil: '2025-12-31',
+      title: 'Pharmacy License',
+      description: 'FDA-issued pharmacy license',
+      status: 'Verified',
+      validUntil: '2025-06-30',
       documents: []
     },
     {
@@ -38,24 +31,9 @@ const SellerProfile = () => {
       description: 'BIR registration and TIN certificate',
       status: 'Verified',
       validUntil: '2025-12-31',
-      documents: [
-        {
-          id: 2,
-          name: 'tin-certificate.pdf',
-          uploadDate: '2024-01-15',
-          url: '/path-to-document.pdf'
-        }
-      ]
-    },
-    {
-      id: 4,
-      title: 'FDA License',
-      description: 'Food and Drug Administration License',
-      status: 'Pending',
-      validUntil: null,
       documents: []
     }
-  ];
+  ]);
 
   const mockData = {
     store: {
@@ -124,7 +102,12 @@ const SellerProfile = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [showStoreModal, setShowStoreModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
-  const [storeData, setStoreData] = useState(mockData.store);
+  const [activeModalTab, setActiveModalTab] = useState('basic');
+  const [storeData, setStoreData] = useState({
+    ...mockData.store,
+    email: 'store@pillpoint.com',
+    phone: '+63 912 345 6789',
+  });
   const [sellerData, setSellerData] = useState(mockData.seller);
   const [notificationSettings, setNotificationSettings] = useState({
     orderUpdates: true,
@@ -154,56 +137,54 @@ const SellerProfile = () => {
     </div>
   );
 
-  const ProfileCard = () => {
-    return (
-      <div className="bg-white rounded-lg shadow-sm p-6">
-        <div className="text-center mb-6">
-          <div className="w-24 h-24 mx-auto mb-4 relative group">
+  const ProfileCard = () => (
+    <div className="bg-white p-6 rounded-lg shadow-sm">
+      <div className="flex justify-between items-start mb-4">
+        <div className="flex items-center space-x-4">
+          <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-100">
             {storeData.photo ? (
               <img 
-                src={storeData.photo}
-                alt="Store Profile"
-                className="w-full h-full rounded-full object-cover"
+                src={storeData.photo} 
+                alt={storeData.name} 
+                className="w-full h-full object-cover"
               />
             ) : (
-              <img 
-                src="/images/Client/product-page/client-account.svg"
-                alt="Default Store Profile"
-                className="w-full h-full rounded-full object-cover"
-              />
+              <div className="w-full h-full flex items-center justify-center bg-blue-50 text-blue-500">
+                <FiShoppingBag size={24} />
+              </div>
             )}
-            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-              <label htmlFor="store-photo" className="cursor-pointer">
-                <FiUpload className="w-6 h-6 text-white" />
-              </label>
-              <input
-                type="file"
-                id="store-photo"
-                className="hidden"
-                accept="image/*"
-                onChange={(e) => {
-                  const file = e.target.files?.[0];
-                  if (file) {
-                    const reader = new FileReader();
-                    reader.onloadend = () => {
-                      setStoreData(prevStore => ({
-                        ...prevStore,
-                        photo: reader.result
-                      }));
-                    };
-                    reader.readAsDataURL(file);
-                  }
-                }}
-              />
+          </div>
+          <div>
+            <h2 className="text-xl font-semibold">{storeData.name}</h2>
+            <p className="text-gray-500">{storeData.type}</p>
+            <div className="mt-2 space-y-1">
+              <div className="flex items-center text-sm text-gray-500">
+                <FiMapPin className="mr-2" />
+                {storeData.location}
+              </div>
+              <div className="flex items-center text-sm text-gray-500">
+                <FiPhone className="mr-2" />
+                {storeData.phone || 'No phone provided'}
+              </div>
+              <div className="flex items-center text-sm text-gray-500">
+                <FiMail className="mr-2" />
+                {storeData.email || 'No email provided'}
+              </div>
             </div>
           </div>
-          <h2 className="text-xl font-semibold">{storeData.name}</h2>
-          <p className="text-gray-600">{storeData.type}</p>
-          <p className="text-sm text-gray-500">{storeData.location}</p>
         </div>
+        <button
+          onClick={() => {
+            setActiveModalTab('basic');
+            setShowStoreModal(true);
+          }}
+          className="text-gray-400 hover:text-gray-500"
+        >
+          <FiEdit2 size={20} />
+        </button>
       </div>
-    );
-  };
+    </div>
+  );
 
   const TabNavigation = () => {
     return (
@@ -246,6 +227,32 @@ const SellerProfile = () => {
       />
     </button>
   );
+
+  const handleAddDocumentSection = () => {
+    const newSection = {
+      id: Date.now(),
+      title: '',
+      description: '',
+      status: 'Pending',
+      validUntil: '',
+      documents: []
+    };
+    setDocumentSections(prev => [...prev, newSection]);
+  };
+
+  const handleUpdateDocumentSection = (sectionId, updatedData) => {
+    setDocumentSections(prev =>
+      prev.map(section =>
+        section.id === sectionId ? { ...section, ...updatedData } : section
+      )
+    );
+  };
+
+  const handleDeleteDocumentSection = (sectionId) => {
+    setDocumentSections(prev =>
+      prev.filter(section => section.id !== sectionId)
+    );
+  };
 
   const renderTabContent = () => {
     switch(activeTab) {
@@ -404,136 +411,28 @@ const SellerProfile = () => {
         );
       case 'documents':
         return (
-          <div className="space-y-6">
-            {/* Document Status Overview */}
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-xl font-semibold">Legislative Documents</h3>
-                <div className="flex items-center space-x-4">
-                  <span className="text-sm text-gray-500">
-                    {documentSections.filter(doc => doc.status === 'Verified').length} of {documentSections.length} Verified
-                  </span>
-                  <button 
-                    className="px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 rounded-lg"
-                    onClick={() => {/* Implement bulk upload */}}
-                  >
-                    <FiUpload className="inline-block mr-2" />
-                    Bulk Upload
-                  </button>
-                </div>
-              </div>
-
-              {/* Document Status Cards */}
-              <div className="grid grid-cols-4 gap-4 mb-8">
-                <div className="bg-green-50 p-4 rounded-lg">
-                  <div className="text-2xl font-semibold text-green-600">
-                    {documentSections.filter(doc => doc.status === 'Verified').length}
-                  </div>
-                  <div className="text-sm text-gray-600">Verified</div>
-                </div>
-                <div className="bg-yellow-50 p-4 rounded-lg">
-                  <div className="text-2xl font-semibold text-yellow-600">
-                    {documentSections.filter(doc => doc.status === 'Pending').length}
-                  </div>
-                  <div className="text-sm text-gray-600">Pending</div>
-                </div>
-                <div className="bg-red-50 p-4 rounded-lg">
-                  <div className="text-2xl font-semibold text-red-600">
-                    {documentSections.filter(doc => doc.status === 'Expired').length}
-                  </div>
-                  <div className="text-sm text-gray-600">Expired</div>
-                </div>
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <div className="text-2xl font-semibold text-gray-600">
-                    {documentSections.filter(doc => doc.status === 'Not Submitted').length}
-                  </div>
-                  <div className="text-sm text-gray-600">Not Submitted</div>
-                </div>
-              </div>
-
-              {/* Document Sections with Enhanced UI */}
-              <div className="space-y-6">
-                {documentSections.map((section, index) => (
-                  <div 
-                    key={section.id}
-                    className={`p-6 border rounded-lg ${
-                      section.status === 'Verified' ? 'border-green-200 bg-green-50/30' :
-                      section.status === 'Pending' ? 'border-yellow-200 bg-yellow-50/30' :
-                      'border-gray-200'
-                    }`}
-                  >
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <h4 className="text-lg font-medium text-gray-900">{section.title}</h4>
-                        <p className="text-sm text-gray-600 mt-1">{section.description}</p>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                          section.status === 'Verified' ? 'bg-green-100 text-green-700' :
-                          section.status === 'Pending' ? 'bg-yellow-100 text-yellow-700' :
-                          section.status === 'Expired' ? 'bg-red-100 text-red-700' :
-                          'bg-gray-100 text-gray-700'
-                        }`}>
-                          {section.status}
-                        </span>
-                        {section.validUntil && (
-                          <span className="text-sm text-gray-500">
-                            Valid until {new Date(section.validUntil).toLocaleDateString()}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Document List */}
-                    {section.documents.length > 0 ? (
-                      <div className="space-y-3">
-                        {section.documents.map(doc => (
-                          <div 
-                            key={doc.id}
-                            className="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200"
-                          >
-                            <div className="flex items-center space-x-3">
-                              <FiFileText className="text-gray-400" />
-                              <div>
-                                <p className="text-sm font-medium text-gray-700">{doc.name}</p>
-                                <p className="text-xs text-gray-500">
-                                  Uploaded on {new Date(doc.uploadDate).toLocaleDateString()}
-                                </p>
-                              </div>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <button 
-                                className="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-full"
-                                onClick={() => window.open(doc.url, '_blank')}
-                              >
-                                <FiDownload className="w-4 h-4" />
-                              </button>
-                              <button 
-                                className="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-full"
-                                onClick={() => {/* Implement delete */}}
-                              >
-                                <FiTrash2 className="w-4 h-4" />
-                              </button>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <div className="flex flex-col items-center justify-center py-6 bg-gray-50 rounded-lg border border-dashed border-gray-300">
-                        <FiUpload className="w-8 h-8 text-gray-400 mb-2" />
-                        <p className="text-sm text-gray-600 mb-2">No documents uploaded yet</p>
-                        <button 
-                          className="px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 rounded-lg"
-                          onClick={() => {/* Implement upload */}}
-                        >
-                          Upload Document
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
+          <div className="space-y-8">
+            {documentSections.map((section, index) => (
+              <DocumentSection
+                key={section.id}
+                {...section}
+                isLast={index === documentSections.length - 1}
+                onUpdate={(updatedData) => handleUpdateDocumentSection(section.id, updatedData)}
+                onDelete={() => handleDeleteDocumentSection(section.id)}
+                isEditable={true}
+              />
+            ))}
+            
+            {/* Add New Document Section Button */}
+            <button
+              onClick={handleAddDocumentSection}
+              className="w-full py-4 px-6 border-2 border-dashed border-gray-300 rounded-lg
+                text-gray-600 hover:text-blue-600 hover:border-blue-300 transition-colors
+                flex items-center justify-center space-x-2"
+            >
+              <FiUpload className="w-5 h-5" />
+              <span>Add New Document Section</span>
+            </button>
           </div>
         );
       case 'reviews':
@@ -899,35 +798,33 @@ const SellerProfile = () => {
     );
   };
 
-  const BusinessHours = ({ businessHours, onEdit }) => {
-    return (
-      <div className="bg-white p-6 rounded-lg shadow-sm mb-4">
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="font-semibold">Business Hours</h3>
-          <button 
-            onClick={onEdit}
-            className="text-sm text-blue-600 hover:text-blue-700 flex items-center"
-          >
-            <FiEdit2 className="inline mr-1" /> Edit
-          </button>
+  const BusinessHours = ({ businessHours, onEdit }) => (
+    <div className="bg-white p-6 rounded-lg shadow-sm space-y-4">
+      <div className="flex justify-between items-center">
+        <h3 className="font-semibold">Business Hours</h3>
+        <button 
+          onClick={onEdit}
+          className="text-sm text-blue-600 hover:text-blue-700 flex items-center"
+        >
+          <FiEdit2 className="inline mr-1" /> Edit
+        </button>
+      </div>
+      <div className="space-y-3">
+        <div className="flex justify-between">
+          <span className="text-gray-600">Monday - Friday</span>
+          <span className="font-medium">{businessHours?.weekdays}</span>
         </div>
-        <div className="space-y-2">
-          <div className="flex justify-between">
-            <span className="text-gray-600">Monday - Friday</span>
-            <span className="font-medium">{businessHours.weekdays}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-600">Saturday</span>
-            <span className="font-medium">{businessHours.saturday}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-600">Sunday</span>
-            <span className="font-medium">{businessHours.sunday}</span>
-          </div>
+        <div className="flex justify-between">
+          <span className="text-gray-600">Saturday</span>
+          <span className="font-medium">{businessHours?.saturday}</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-gray-600">Sunday</span>
+          <span className="font-medium">{businessHours?.sunday}</span>
         </div>
       </div>
-    );
-  };
+    </div>
+  );
 
   const PerformanceMetrics = () => {
     return (
@@ -955,7 +852,7 @@ const SellerProfile = () => {
       <BusinessHours 
         businessHours={storeData.businessHours}
         onEdit={() => {
-          setActiveTab('hours');  // Set the active tab to hours
+          setActiveModalTab('hours');  // Set the active tab to hours
           setShowStoreModal(true);
         }}
       />
@@ -974,10 +871,14 @@ const SellerProfile = () => {
     setStoreData(prevStore => ({
       ...prevStore,
       ...updatedStore,
+      photo: updatedStore.photo,
       businessHours: {
         ...prevStore.businessHours,
         ...updatedStore.businessHours
-      }
+      },
+      location: updatedStore.location,
+      phone: updatedStore.phone,
+      email: updatedStore.email
     }));
     setShowStoreModal(false);
   };
@@ -1007,7 +908,8 @@ const SellerProfile = () => {
         isOpen={showStoreModal} 
         onClose={() => setShowStoreModal(false)} 
         storeData={storeData} 
-        onUpdate={handleStoreUpdate} 
+        onUpdate={handleStoreUpdate}
+        initialTab={activeModalTab}
       />
       <EditProfileModal 
         isOpen={showProfileModal} 

@@ -96,11 +96,11 @@ const ProductManagement = () => {
   const locations = getUniqueLocations();
 
   const handleProductClick = (productId) => {
-    navigate(`/product-management/product/${productId}`);
+    navigate(`/seller/product-management/product/${productId}`);
   };
 
   const handleAdvanceSettings = (productId) => {
-    navigate(`/product-management/edit-advanced/${productId}`);
+    navigate(`/seller/product-management/edit-advanced/${productId}`);
   };
 
   return (
@@ -199,8 +199,7 @@ const ProductManagement = () => {
             <div 
               key={product.id}
               onClick={() => handleProductClick(product.id)}
-              className={`bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer
-                ${viewMode === 'list' ? 'flex' : ''}`}
+              className="bg-white rounded-lg shadow-sm p-4 cursor-pointer hover:shadow-md transition-shadow"
             >
               {/* Product Image */}
               <div className={`

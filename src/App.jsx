@@ -97,6 +97,8 @@ function App() {
                     {/* Seller Routes */}
                     <Route path="/seller/dashboard" element={<Dashboard />} />
                     <Route path="/seller/product-management" element={<ProductManagement />} />
+                    <Route path="/seller/product-management/product/:id" element={<InventoryProductDetail />} />
+                    <Route path="/seller/product-management/edit-advanced/:id" element={<AdvancedProductEdit />} />
                     <Route path="/seller/sales" element={<Sales />} />
                     <Route path="/seller/records/customers" element={<CustomerList />} />
                     <Route path="/seller/records/orders" element={<OrderList />} />
