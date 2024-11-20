@@ -42,16 +42,53 @@ const ProductManagement = () => {
   const handleSaveProduct = async (productData) => {
     try {
       if (editingProduct) {
-        // Update existing product
+        // Update existing product while preserving existing data
         const category = categories.find(cat => cat.value === productData.category.toLowerCase());
         if (category) {
-          // Remove existing product
           const index = category.products.findIndex(p => p.id === editingProduct.id);
           if (index !== -1) {
+            // Preserve existing data while updating with new values
+            const updatedProduct = {
+              ...editingProduct,           // Keep existing data
+              ...productData,              // Override with new data
+              id: editingProduct.id,       // Ensure ID remains the same
+              quantity: editingProduct.quantity, // Preserve quantity
+              soldCount: editingProduct.soldCount, // Preserve sold count
+              images: productData.images?.length > 0 ? 
+                productData.images : editingProduct.images, // Preserve images if no new ones
+              inventory: {
+                ...editingProduct.inventory,
+                ...productData.inventory
+              }
+            };
+            
+            // Remove existing product
             category.products.splice(index, 1);
+            // Add updated product to beginning of array
+            category.products.unshift(updatedProduct);
+            
+            // Save to localStorage
+            try {
+              const savedData = localStorage.getItem('productData') || '{}';
+              const parsedData = JSON.parse(savedData);
+              
+              if (updatedProduct.category.toLowerCase().includes('medical')) {
+                const medIndex = parsedData.medicalProducts?.findIndex(p => p.id === updatedProduct.id);
+                if (medIndex !== -1) {
+                  parsedData.medicalProducts[medIndex] = updatedProduct;
+                }
+              } else {
+                const genIndex = parsedData.generalProducts?.findIndex(p => p.id === updatedProduct.id);
+                if (genIndex !== -1) {
+                  parsedData.generalProducts[genIndex] = updatedProduct;
+                }
+              }
+              
+              localStorage.setItem('productData', JSON.stringify(parsedData));
+            } catch (error) {
+              console.error('Error saving to localStorage:', error);
+            }
           }
-          // Add updated product to beginning of array
-          category.products.unshift({ ...productData, id: editingProduct.id });
         }
         setActionType('edit');
       } else {
@@ -74,7 +111,7 @@ const ProductManagement = () => {
       setTimeout(() => {
         setShowSuccessFeedback(false);
         if (editingProduct) {
-          navigate(`/product-management/product/${editingProduct.id}`);
+          navigate(`/seller/product-management/product/${editingProduct.id}`);
         }
       }, 1500);
     } catch (error) {

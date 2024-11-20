@@ -67,16 +67,51 @@ const InventoryProductDetail = () => {
 
   const handleSaveProduct = async (updatedProduct) => {
     try {
+      // Create the saved product with necessary fields
       const savedProduct = {
         ...updatedProduct,
         category: product.category,
         id: product.id
       };
-      await saveProduct(savedProduct);
+
+      // Update the product in the categories array
+      const category = categories.find(cat => cat.value === savedProduct.category.toLowerCase());
+      if (category) {
+        const index = category.products.findIndex(p => p.id === savedProduct.id);
+        if (index !== -1) {
+          category.products[index] = savedProduct;
+        }
+      }
+
+      // Update the local state
+      setProduct(savedProduct);
       setShowUpdateModal(false);
-      window.location.reload();
+      
+      // Save to localStorage to persist changes
+      try {
+        const savedData = localStorage.getItem('productData') || '{}';
+        const parsedData = JSON.parse(savedData);
+        
+        // Update the appropriate product list
+        if (savedProduct.category.toLowerCase().includes('medical')) {
+          const medIndex = parsedData.medicalProducts?.findIndex(p => p.id === savedProduct.id);
+          if (medIndex !== -1) {
+            parsedData.medicalProducts[medIndex] = savedProduct;
+          }
+        } else {
+          const genIndex = parsedData.generalProducts?.findIndex(p => p.id === savedProduct.id);
+          if (genIndex !== -1) {
+            parsedData.generalProducts[genIndex] = savedProduct;
+          }
+        }
+        
+        localStorage.setItem('productData', JSON.stringify(parsedData));
+      } catch (error) {
+        console.error('Error saving to localStorage:', error);
+      }
     } catch (error) {
       console.error('Error saving product:', error);
+      alert('Failed to save product changes');
     }
   };
 
