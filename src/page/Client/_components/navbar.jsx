@@ -4,7 +4,7 @@ import { useCart } from './context/CartContext';
 import { FiSearch } from 'react-icons/fi';
 import { useOrders } from './context/OrderContext';
 import ChatbotButton from './ChatbotButton';
-import ChatbotModal from '../chatbot-page/chatbot-modal';
+import ChatbotModal from '../chatbot-page/ChatbotModal';
 import { useSearch } from './context/SearchContext';
 
 const NavBar = () => {

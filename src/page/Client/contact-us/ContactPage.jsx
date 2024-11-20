@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import NavBar from '../_components/navbar';
+import NavBar from '../_components/Navbar';
 import { toast } from 'react-toastify';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaQuestionCircle, FaClock, FaHeadset } from 'react-icons/fa';
 

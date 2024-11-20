@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import NavbarSeller from '../components/navbarSeller';
+import NavbarSeller from '../components/NavbarSeller';
 import { FiSearch, FiFilter, FiGrid, FiList } from 'react-icons/fi';
 import { categories, units, addProduct, getUniqueLocations } from './product-data';
 import CreateProductModal from '../components/CreateProductModal';
