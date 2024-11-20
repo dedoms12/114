@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import NavbarSeller from '../../components/NavbarSeller';
+import NavbarSeller from '../../components/navbarSeller';
 import { FiSearch, FiFilter, FiMail, FiPhone, FiShoppingBag, FiCalendar, FiMap, 
          FiClock, FiDollarSign, FiGrid, FiList, FiDownload, FiEye, FiUsers, FiUserCheck, 
          FiUserPlus, FiUser } from 'react-icons/fi';

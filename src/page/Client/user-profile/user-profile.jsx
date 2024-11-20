@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import NavBar from '../_components/Navbar';
+import NavBar from '../_components/navbar';
 import { useOrders } from '../_components/context/OrderContext';
 import { FaEllipsisH } from 'react-icons/fa';
 import EditProfileModal from '../_components/modals/EditProfileModal';
-import UserProfileReviewModal from './UserProfileReviewModal';
+import UserProfileReviewModal from './userprofilereviewmodal';
 import ReviewCard from '../_components/product-detail/ReviewCard';
 
 import { toast } from 'react-hot-toast';

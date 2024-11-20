@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSearch } from '../../_components/context/SearchContext';
-import NavBar from '../../_components/Navbar';
-import ProductCard from '../../_components/ProductCard';
-import Categories from '../../_components/Categories';
-import YouMightLike from '../../_components/MightLike';
+import NavBar from '../../_components/navbar';
+import ProductCard from '../../_components/productcard';
+import Categories from '../../_components/categories';
+import YouMightLike from '../../_components/might-like';
 
 const SearchResults = () => {
   const navigate = useNavigate();

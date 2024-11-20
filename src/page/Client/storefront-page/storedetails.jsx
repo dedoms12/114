@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
-import NavBar from '../_components/Navbar';
-import ProductCard from '../_components/ProductCard';
-import Categories from '../_components/Categories';
+import NavBar from '../_components/navbar';
+import ProductCard from '../_components/productcard';
+import Categories from '../_components/categories';
 import { products as generalHealthProducts } from '../product-page/general-health/gen-products';
 import { medicalProducts } from '../product-page/medical-supplies/medsup-products';
 import { personalCareProducts } from '../product-page/personal-care/pc-products';

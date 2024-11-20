@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import NavbarSeller from '../components/NavbarSeller';
+import NavbarSeller from '../components/navbarSeller';
 import { FiEdit2, FiUpload, FiLogOut, FiMessageSquare, FiStar, FiClock, FiAward, FiX, FiPackage, FiFileText, FiThumbsUp, FiMessageCircle, FiFilter, FiSettings, FiBell, FiLock, FiShield, FiCreditCard, FiToggleRight, FiChevronRight, FiTrash2, FiDownload } from 'react-icons/fi';
 import EditStoreModal from './EditStoreModal';
 import EditProfileModal from './EditProfileModal';

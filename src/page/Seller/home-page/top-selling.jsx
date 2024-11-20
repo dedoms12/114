@@ -1,4 +1,4 @@
-import TopProductsSection from "../../Client/home-page/TopProdSection";
+import TopProductsSection from "../../Client/home-page/top-prod-section";
 
 const TopSelling = () => {
 

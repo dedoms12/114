@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import NavBar from '../_components/Navbar';
+import NavBar from '../_components/navbar';
 import { toast } from 'react-toastify';
 import { FaBox, FaTruck, FaReceipt, FaUser, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 import { useOrders } from '../_components/context/OrderContext';

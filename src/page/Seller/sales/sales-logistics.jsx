@@ -1,5 +1,5 @@
 import { BarChart, Gauge, gaugeClasses, LineChart, PieChart } from "@mui/x-charts";
-import NavbarSeller from "../components/NavbarSeller";
+import NavbarSeller from "../components/navbarSeller";
 import { Stack } from "@mui/material";
 
 const Sales = () => {

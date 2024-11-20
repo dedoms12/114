@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import NavBar from '../_components/Navbar';
-import ProductSection from './ProductSection';
-import StoreSection from './StoreSection';
-import TopProductsSection from './TopProdSection';
-import CareChoiceSection from './CareChoiceSection';
+import NavBar from './../_components/navbar';
+import ProductSection from './product-section';
+import StoreSection from './store-section';
+import TopProductsSection from './top-prod-section';
+import CareChoiceSection from './care-choice-section';
 
 const Home = () => {
   const navigate = useNavigate();
