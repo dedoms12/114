@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import NavBar from '../_components/navbar';
 import { useOrders } from '../_components/context/OrderContext';
 import { FaEllipsisH } from 'react-icons/fa';
@@ -11,21 +11,80 @@ import { toast } from 'react-hot-toast';
 
 const UserProfile = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { orders, currentUser, setCurrentUser } = useOrders();
-  const [activeTab, setActiveTab] = useState('All Orders');
+  const [activeTab, setActiveTab] = useState('Complete');
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [userReviews, setUserReviews] = useState([]);
+  const [justCompletedOrder, setJustCompletedOrder] = useState(null);
   
   const tabs = ["All Orders", "To Received", "Complete", "Cancelled"];
+
+  useEffect(() => {
+    // Handle active tab from navigation state
+    if (location.state?.activeTab) {
+      setActiveTab(location.state.activeTab);
+    }
+
+    // Handle completed order
+    if (location.state?.justCompleted) {
+      setActiveTab('Complete');
+      const completedOrder = orders.find(
+        order => order.id === location.state.completedOrderId
+      );
+      if (completedOrder) {
+        setJustCompletedOrder(completedOrder);
+        setTimeout(() => {
+          const orderElement = document.getElementById(`order-${completedOrder.id}`);
+          if (orderElement) {
+            orderElement.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      }
+    }
+    
+    // Handle cancelled order
+    if (location.state?.cancelledOrderId) {
+      const cancelledOrder = orders.find(
+        order => order.id === location.state.cancelledOrderId
+      );
+      if (cancelledOrder) {
+        scrollToOrder(cancelledOrder.id);
+      }
+    }
+    
+    // Handle order tracking
+    if (location.state?.trackingOrderId) {
+      const trackedOrder = orders.find(
+        order => order.id === location.state.trackingOrderId
+      );
+      if (trackedOrder) {
+        scrollToOrder(trackedOrder.id);
+      }
+    }
+  }, [location.state, orders]);
+
+  // Helper function for scrolling to orders
+  const scrollToOrder = (orderId) => {
+    setTimeout(() => {
+      const orderElement = document.getElementById(`order-${orderId}`);
+      if (orderElement) {
+        orderElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
 
   const filterOrders = () => {
     switch (activeTab) {
       case 'To Received':
         return orders.filter(order => order.status === 'To be Delivered');
       case 'Complete':
-        return orders.filter(order => order.status === 'Completed');
+        return orders.filter(order => 
+          order.status === 'Completed' || 
+          order.id === location.state?.completedOrderId
+        );
       case 'Cancelled':
         return orders.filter(order => order.status === 'Cancelled');
       default:
@@ -63,8 +122,15 @@ const UserProfile = () => {
 
   const handleOrderClick = (order) => {
     if (order.status === 'To be Delivered') {
+      const enhancedOrder = {
+        ...order,
+        trackingHistory: order.trackingHistory || []
+      };
       navigate('/order-confirmation', { 
-        state: { orderDetails: order }
+        state: { 
+          orderDetails: enhancedOrder,
+          fromUserProfile: true 
+        }
       });
     }
   };
@@ -84,9 +150,11 @@ const UserProfile = () => {
       name: product.name,
       category: product.category || 'general',
       image: product.image,
+      orderId: justCompletedOrder?.id
     };
     setSelectedProduct(enhancedProduct);
     setIsReviewModalOpen(true);
+    setJustCompletedOrder(null);
   };
 
   const handleReviewSubmit = (reviewData) => {
@@ -133,7 +201,7 @@ const UserProfile = () => {
           </p>
         </div>
       </div>
-      {order.status === 'Completed' && (
+      {(order.status === 'Completed' || order.id === location.state?.completedOrderId) && (
         <button
           onClick={() => handleReviewClick(item)}
           className="px-4 py-2 text-sm bg-[#4C9BF5] text-white rounded-md hover:bg-blue-600"
@@ -309,10 +377,11 @@ const UserProfile = () => {
             <div className="space-y-4">
               {filterOrders().map((order) => (
                 <div 
-                  key={order.id} 
+                  key={order.id}
+                  id={`order-${order.id}`} 
                   className={`bg-white rounded-lg p-6 shadow-sm cursor-pointer transition-all duration-200 ${
                     order.status === 'To be Delivered' ? 'hover:shadow-md' : ''
-                  }`}
+                  } ${justCompletedOrder?.id === order.id ? 'ring-2 ring-blue-500' : ''}`}
                   onClick={() => handleOrderClick(order)}
                 >
                   <div className="border-b pb-4 mb-4">

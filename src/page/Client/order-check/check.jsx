@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import NavBar from '../_components/navbar';
 import { toast } from 'react-toastify';
@@ -8,38 +8,98 @@ import { useOrders } from '../_components/context/OrderContext';
 const OrderConfirmation = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const { orders, updateOrderStatus } = useOrders();
+  const [orderDetails, setOrderDetails] = useState(null);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
-  const { orderDetails } = location.state || {};
-  const { updateOrderStatus } = useOrders();
+  const [showConfirmButton, setShowConfirmButton] = useState(false);
 
-  const handleReceived = () => {
-    updateOrderStatus(orderDetails.id, 'Completed');
-    setIsSuccessModalOpen(true);
-    toast.success('Order received successfully!', {
-      position: "top-right",
-      autoClose: 2000,
-    });
+  useEffect(() => {
+    if (location.state?.orderDetails) {
+      const order = location.state.orderDetails;
+      setOrderDetails(order);
+      setShowConfirmButton(location.state?.fromUserProfile || false);
+    }
+  }, [location.state]);
+
+  const handleReceived = async () => {
+    if (!orderDetails?.id) {
+      toast.error('Order details not found');
+      return;
+    }
+
+    try {
+      // Find the current order in orders array
+      const currentOrder = orders.find(o => o.id === orderDetails.id);
+      if (!currentOrder) {
+        throw new Error('Order not found');
+      }
+
+      // Update order status
+      const success = await updateOrderStatus(orderDetails.id, 'Completed');
+      if (!success) {
+        throw new Error('Failed to update order status');
+      }
+
+      // Update local state
+      setOrderDetails(prev => ({
+        ...prev,
+        status: 'Completed',
+        trackingHistory: [
+          ...prev.trackingHistory,
+          {
+            status: 'Completed',
+            date: new Date().toISOString(),
+            description: 'Order has been delivered successfully'
+          }
+        ]
+      }));
+
+      toast.success('Order received successfully!');
+      setIsSuccessModalOpen(true);
+
+    } catch (error) {
+      console.error('Error in handleReceived:', error);
+      toast.error('Failed to update order status. Please try again.');
+    }
   };
 
-  const handleCancel = () => {
+  const handleCancel = async () => {
     const confirmed = window.confirm('Are you sure you want to cancel this order?');
     if (confirmed) {
-      updateOrderStatus(orderDetails.id, 'Cancelled');
-      toast.info('Order cancelled successfully', {
-        position: "top-right",
-        autoClose: 2000,
-      });
-      setTimeout(() => {
-        navigate('/user-profile');
-      }, 2000);
+      try {
+        const success = await updateOrderStatus(orderDetails.id, 'Cancelled');
+        
+        if (!success) {
+          throw new Error('Failed to cancel order');
+        }
+
+        toast.info('Order cancelled successfully', {
+          position: "top-right",
+          autoClose: 2000,
+        });
+
+        navigate('/user-profile', {
+          state: { 
+            activeTab: 'Cancelled',
+            cancelledOrderId: orderDetails.id
+          }
+        });
+      } catch (error) {
+        toast.error('Failed to cancel order');
+        console.error('Error cancelling order:', error);
+      }
     }
   };
 
   const handleNavigateToReview = () => {
     setIsSuccessModalOpen(false);
-    navigate('/user-profile');
+    navigate('/user-profile', {
+      state: { 
+        justCompleted: true,
+        completedOrderId: orderDetails.id,
+        activeTab: 'Complete'
+      }
+    });
   };
 
   const getDeliveryTime = (shippingType) => {
@@ -197,11 +257,24 @@ const OrderConfirmation = () => {
             Cancel Order
           </button>
           <button
-            onClick={handleReceived}
-            className="bg-[#4C9BF5] text-white px-8 py-3 rounded-md hover:bg-blue-600 transition-colors"
+            onClick={() => navigate('/user-profile', { 
+              state: { 
+                activeTab: 'All Orders',
+                trackingOrderId: orderDetails.id 
+              }
+            })}
+            className="bg-white border border-[#4C9BF5] text-[#4C9BF5] px-8 py-3 rounded-md hover:bg-blue-50 transition-colors"
           >
-            Confirm Receipt
+            Track Order
           </button>
+          {showConfirmButton && (
+            <button
+              onClick={handleReceived}
+              className="bg-[#4C9BF5] text-white px-8 py-3 rounded-md hover:bg-blue-600 transition-colors"
+            >
+              Confirm Receipt
+            </button>
+          )}
         </div>
       </div>
 

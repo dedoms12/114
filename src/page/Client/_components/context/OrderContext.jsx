@@ -3,45 +3,7 @@ import React, { createContext, useContext, useState } from 'react';
 const OrderContext = createContext();
 
 export const OrderProvider = ({ children }) => {
-  const [orders, setOrders] = useState([
-    {
-      id: 1,
-      orderCode: "ORD001",
-      status: "To be Delivered",
-      items: [
-        {
-          id: 1,
-          name: "Paracetamol",
-          quantity: 2,
-          price: 150,
-          image: "/images/Client/order-sample/imagecare.svg"
-        }
-      ],
-      trackingHistory: [
-        { status: "Order Placed", date: "2024-03-15T10:30:00" },
-        { status: "Processing", date: "2024-03-15T11:00:00" }
-      ]
-    },
-    {
-      id: 2,
-      orderCode: "ORD002",
-      status: "To be Delivered",
-      items: [
-        {
-          id: 2,
-          name: "Vitamin C",
-          quantity: 1,
-          price: 200,
-          image: "/images/Client/order-sample/image1stbatch.svg"
-        }
-      ],
-      trackingHistory: [
-        { status: "Order Placed", date: "2024-03-14T15:30:00" },
-        { status: "Processing", date: "2024-03-14T16:00:00" }
-      ]
-    },
-    // Add completed and cancelled orders similarly
-  ]);
+  const [orders, setOrders] = useState([]);
   const [currentUser, setCurrentUser] = useState({
     name: 'Ashley',
     location: 'Ampayon, Agusan Del Norte',
@@ -65,24 +27,41 @@ export const OrderProvider = ({ children }) => {
     setOrders(prev => [newOrder, ...prev]);
   };
 
-  const updateOrderStatus = (orderId, newStatus) => {
-    setOrders(prev => 
-      prev.map(order => {
-        if (order.id === orderId) {
-          const newTrackingEntry = {
-            status: newStatus,
-            date: new Date().toISOString(),
-            description: getStatusDescription(newStatus)
-          };
-          return {
-            ...order,
-            status: newStatus,
-            trackingHistory: [...order.trackingHistory, newTrackingEntry]
-          };
-        }
-        return order;
-      })
-    );
+  const updateOrderStatus = async (orderId, newStatus) => {
+    try {
+      // Find the order first
+      const orderExists = orders.some(order => order.id === orderId);
+      if (!orderExists) {
+        throw new Error('Order not found');
+      }
+
+      // Update orders state
+      setOrders(prevOrders => 
+        prevOrders.map(order => {
+          if (order.id === orderId) {
+            const updatedOrder = {
+              ...order,
+              status: newStatus,
+              trackingHistory: [
+                ...order.trackingHistory,
+                {
+                  status: newStatus,
+                  date: new Date().toISOString(),
+                  description: getStatusDescription(newStatus)
+                }
+              ]
+            };
+            return updatedOrder;
+          }
+          return order;
+        })
+      );
+      
+      return true;
+    } catch (error) {
+      console.error('Error updating order status:', error);
+      return false;
+    }
   };
 
   const getStatusDescription = (status) => {
