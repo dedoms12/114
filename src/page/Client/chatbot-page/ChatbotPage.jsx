@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FaRobot, FaPaperPlane, FaCog, FaArrowLeft } from 'react-icons/fa';
-import NavBar from '../_components/navbar';
+import NavBar from '../_components/Navbar';
 
 const ChatbotPage = () => {
   const location = useLocation();
