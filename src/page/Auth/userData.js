@@ -12,7 +12,22 @@ const users = [
     email: 'test3@pillpoint.com',
     password: 'test333',
     role: 'admin'
+  },
+  {
+    id: 3,
+    name: 'Tester1',
+    email: 'test1@pillpoint.com',
+    password: 'test111',
+    role: 'buyer'
+  },
+  {
+    id: 4,
+    name: 'Tester2',
+    email: 'test2@pillpoint.com',
+    password: 'test222',
+    role: 'seller'
   }
+
 ];
 
 // Admin registration key
