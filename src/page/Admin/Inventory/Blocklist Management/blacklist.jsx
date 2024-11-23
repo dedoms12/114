@@ -8,6 +8,8 @@ import {
 import { useBlocklist } from '../context/BlocklistContext';
 import { toast } from 'react-toastify';
 import EditBlockModal from './components/EditBlockModal';
+import { Tooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 
 const BlacklistManagement = () => {
   const { blockedItems, removeBlockedStore, updateBlockedMedicine, deleteBlockedMedicine, removeBlockedMedicine } = useBlocklist();
@@ -256,26 +258,33 @@ const BlacklistManagement = () => {
   const renderActionButtons = (item) => (
     <div className="flex items-center space-x-2">
       <button
+        data-tooltip-id={`edit-tooltip-${item.id}`}
+        data-tooltip-content="Edit block details"
         onClick={() => handleEdit(item)}
         className="text-blue-600 hover:text-blue-800"
-        title="Edit"
       >
         <FiEdit2 className="w-5 h-5" />
       </button>
       <button
+        data-tooltip-id={`delete-tooltip-${item.id}`}
+        data-tooltip-content="Remove from blocklist"
         onClick={() => handleDelete(item)}
         className="text-red-600 hover:text-red-800"
-        title="Delete"
       >
         <FiTrash2 className="w-5 h-5" />
       </button>
       <button
+        data-tooltip-id={`unblock-tooltip-${item.id}`}
+        data-tooltip-content="Unblock item"
         onClick={() => handleUnblock(item)}
         className="text-green-600 hover:text-green-800"
-        title="Unblock"
       >
         <FiCheck className="w-5 h-5" />
       </button>
+
+      <Tooltip id={`edit-tooltip-${item.id}`} place="top" />
+      <Tooltip id={`delete-tooltip-${item.id}`} place="top" />
+      <Tooltip id={`unblock-tooltip-${item.id}`} place="top" />
     </div>
   );
 

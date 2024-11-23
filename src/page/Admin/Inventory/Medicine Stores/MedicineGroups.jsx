@@ -11,12 +11,28 @@ import BlockStoreModal from './components/BlockStoreModal';
 import { useBlocklist } from '../context/BlocklistContext';
 import { toast } from 'react-toastify';
 import StoreDetailModal from './components/StoreDetailModal';
+import { Tooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 
 const MedicineGroups = () => {
   const { pharmacies, setPharmacies, addBlockedStore } = useBlocklist();
   const [searchTerm, setSearchTerm] = useState('');
   const [view, setView] = useState('grid');
   const [selectedStatus, setSelectedStatus] = useState('all');
+  
+  // Define getStoresPerPage before using it
+  const getStoresPerPage = () => {
+    if (view === 'grid') {
+      return window.innerWidth >= 768 ? 4 : 2; // 4 for desktop, 2 for mobile
+    }
+    return 5; // For table view
+  };
+
+  // Now we can use getStoresPerPage in our state initialization
+  const [storesPerPage, setStoresPerPage] = useState(getStoresPerPage());
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  // Rest of your state declarations
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [selectedStore, setSelectedStore] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -30,8 +46,15 @@ const MedicineGroups = () => {
   const [storeDetails, setStoreDetails] = useState(null);
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
-  const [currentPage, setCurrentPage] = useState(1);
-  const [storesPerPage] = useState(4);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setStoresPerPage(getStoresPerPage());
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [view]);
 
   // Calculate indexes
   const indexOfLastStore = currentPage * storesPerPage;
@@ -180,33 +203,51 @@ const MedicineGroups = () => {
 
   const handleDelete = async (storeId) => {
     try {
+      // Show confirmation dialog
+      const confirmed = window.confirm('Are you sure you want to delete this pharmacy? This action cannot be undone.');
+      if (!confirmed) return;
+
+      // Here you would typically make an API call to delete the store
+      // await api.deleteStore(storeId);
+
       // Update local state
       const updatedPharmacies = pharmacies.filter(store => store.id !== storeId);
-      // setPharmacies(updatedPharmacies); // Uncomment when state is properly set up
-      toast.success('Store deleted successfully');
+      setPharmacies(updatedPharmacies);
+      
+      // Show success message
+      toast.success('Pharmacy deleted successfully');
     } catch (error) {
-      console.error('Error deleting store:', error);
-      toast.error('Failed to delete store');
+      console.error('Error deleting pharmacy:', error);
+      toast.error('Failed to delete pharmacy');
     }
   };
 
   const handleSave = async () => {
     try {
-      // API call would go here
+      if (!storeDetails) return;
+
+      // Validate required fields
+      if (!storeDetails.name || !storeDetails.licenseNumber) {
+        toast.error('Please fill in all required fields');
+        return;
+      }
+
+      // Here you would typically make an API call to update the store
       // await api.updateStore(storeDetails.id, storeDetails);
       
       // Update local state
       const updatedPharmacies = pharmacies.map(store =>
         store.id === storeDetails.id ? storeDetails : store
       );
-      // setPharmacies(updatedPharmacies); // Uncomment when state is properly set up
+      setPharmacies(updatedPharmacies);
       
+      // Close modal and reset editing state
       setShowDetailModal(false);
       setIsEditing(false);
-      toast.success('Store updated successfully');
+      toast.success('Pharmacy updated successfully');
     } catch (error) {
-      console.error('Error updating store:', error);
-      toast.error('Failed to update store');
+      console.error('Error updating pharmacy:', error);
+      toast.error('Failed to update pharmacy');
     }
   };
 
@@ -243,74 +284,69 @@ const MedicineGroups = () => {
     const paginatedPharmacies = filteredPharmacies.slice(indexOfFirstStore, indexOfLastStore);
 
     return view === 'grid' ? (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {paginatedPharmacies.map((pharmacy) => (
-          <div key={pharmacy.id} className="bg-white rounded-lg shadow-sm p-6">
-            <div className="flex items-center justify-between mb-2">
-              <h3 className="text-lg font-semibold">{pharmacy.name}</h3>
-              {renderStatusBadge(pharmacy.status)}
-            </div>
+          <div key={pharmacy.id} className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <div className="p-4">
+              {/* Header */}
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-lg font-semibold truncate">{pharmacy.name}</h3>
+                {renderStatusBadge(pharmacy.status)}
+              </div>
+              
+              {/* Info */}
+              <div className="space-y-2 text-sm">
+                <div className="flex items-center text-gray-600">
+                  <FiMapPin className="w-4 h-4 mr-2 shrink-0" />
+                  <span className="truncate">{pharmacy.address}</span>
+                </div>
+                <div className="flex items-center text-gray-600">
+                  <FiPhone className="w-4 h-4 mr-2 shrink-0" />
+                  <span>{pharmacy.phone}</span>
+                </div>
+              </div>
 
-            <div className="space-y-3">
-              <div className="flex items-center text-gray-600">
-                <FiMapPin className="w-4 h-4 mr-2" />
-                <span className="text-sm">{pharmacy.address}</span>
-              </div>
-              <div className="flex items-center text-gray-600">
-                <FiPhone className="w-4 h-4 mr-2" />
-                <span className="text-sm">{pharmacy.phone}</span>
-              </div>
-              <div className="flex items-center text-gray-600">
-                <FiMail className="w-4 h-4 mr-2" />
-                <span className="text-sm">{pharmacy.email}</span>
-              </div>
-            </div>
-
-            <div className="mt-4">
-              <p className="text-sm font-medium text-gray-600 mb-2">Medicine Groups:</p>
-              <div className="flex flex-wrap gap-2">
-                {pharmacy.medicineGroups.map((group, index) => (
-                  <span 
-                    key={index}
-                    className="px-2 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-medium"
-                  >
+              {/* Tags */}
+              <div className="mt-3 flex flex-wrap gap-1">
+                {pharmacy.medicineGroups.slice(0, 2).map((group, index) => (
+                  <span key={index} className="px-2 py-1 bg-blue-50 text-blue-600 rounded-full text-xs">
                     {group}
                   </span>
                 ))}
+                {pharmacy.medicineGroups.length > 2 && (
+                  <span className="px-2 py-1 bg-gray-50 text-gray-600 rounded-full text-xs">
+                    +{pharmacy.medicineGroups.length - 2}
+                  </span>
+                )}
               </div>
-            </div>
 
-            <div className="mt-4 flex justify-end gap-2">
-              <button
-                onClick={() => handleAction(pharmacy, 'view')}
-                className="p-2 text-gray-600 hover:text-blue-600"
-              >
-                <FiEye className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => handleAction(pharmacy, 'edit')}
-                className="p-2 text-gray-600 hover:text-blue-600"
-              >
-                <FiEdit2 className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => handleAction(pharmacy, 'block')}
-                className="p-2 text-gray-600 hover:text-red-600"
-              >
-                <FiSlash className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => handleAction(pharmacy, 'delete')}
-                className="p-2 text-gray-600 hover:text-red-600"
-              >
-                <FiTrash2 className="w-4 h-4" />
-              </button>
+              {/* Actions */}
+              <div className="mt-4 pt-3 border-t flex justify-end gap-2">
+                <button
+                  onClick={() => handleAction(pharmacy, 'view')}
+                  className="p-1.5 text-gray-600 hover:text-blue-600"
+                >
+                  <FiEye className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => handleAction(pharmacy, 'edit')}
+                  className="p-1.5 text-gray-600 hover:text-blue-600"
+                >
+                  <FiEdit2 className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => handleAction(pharmacy, 'block')}
+                  className="p-1.5 text-gray-600 hover:text-red-600"
+                >
+                  <FiSlash className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           </div>
         ))}
       </div>
     ) : (
-      <div className="bg-white rounded-lg shadow overflow-hidden">
+      <div className="bg-white rounded-lg shadow-sm overflow-hidden">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
@@ -366,29 +402,42 @@ const MedicineGroups = () => {
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <div className="flex justify-end gap-2">
                     <button
+                      data-tooltip-id={`view-store-${pharmacy.id}`}
+                      data-tooltip-content="View pharmacy details"
                       onClick={() => handleAction(pharmacy, 'view')}
                       className="text-gray-600 hover:text-blue-600"
                     >
                       <FiEye className="w-4 h-4" />
                     </button>
                     <button
+                      data-tooltip-id={`edit-store-${pharmacy.id}`}
+                      data-tooltip-content="Edit pharmacy information"
                       onClick={() => handleAction(pharmacy, 'edit')}
                       className="text-gray-600 hover:text-blue-600"
                     >
                       <FiEdit2 className="w-4 h-4" />
                     </button>
                     <button
+                      data-tooltip-id={`block-store-${pharmacy.id}`}
+                      data-tooltip-content={pharmacy.status === 'blocked' ? 'Unblock pharmacy' : 'Block pharmacy'}
                       onClick={() => handleAction(pharmacy, 'block')}
                       className="text-gray-600 hover:text-red-600"
                     >
                       <FiSlash className="w-4 h-4" />
                     </button>
                     <button
+                      data-tooltip-id={`delete-store-${pharmacy.id}`}
+                      data-tooltip-content="Delete pharmacy"
                       onClick={() => handleAction(pharmacy, 'delete')}
                       className="text-gray-600 hover:text-red-600"
                     >
                       <FiTrash2 className="w-4 h-4" />
                     </button>
+
+                    <Tooltip id={`view-store-${pharmacy.id}`} place="top" />
+                    <Tooltip id={`edit-store-${pharmacy.id}`} place="top" />
+                    <Tooltip id={`block-store-${pharmacy.id}`} place="top" />
+                    <Tooltip id={`delete-store-${pharmacy.id}`} place="top" />
                   </div>
                 </td>
               </tr>
@@ -465,105 +514,85 @@ const MedicineGroups = () => {
   }
 
   return (
-    <div className="flex h-screen">
+    <div className="h-screen flex">
       <AdminSidebar />
       <div className="flex-1 flex flex-col">
         <AdminNavbar />
-        <div className="flex-1 bg-gray-100 p-6">
-          {/* Enhanced Header with Actions */}
+        <div className="flex-1 bg-gray-100 p-6 flex flex-col h-[calc(100vh-64px)]">
+          {/* Header Section */}
           <div className="flex justify-between items-center mb-6">
             <div>
               <h1 className="text-2xl font-bold">Pharmacy Management</h1>
               <p className="text-sm text-gray-600">Monitor and manage registered pharmacies</p>
             </div>
-            <div className="flex items-center gap-4">
-              <Link 
-                to="/admin/inventory/pharmacies/new"
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-              >
-                <FiPlus className="w-4 h-4" />
-                Add Pharmacy
-              </Link>
-              <button 
-                onClick={() => window.location.reload()}
-                className="p-2 text-gray-600 hover:text-gray-800"
-              >
-                <FiRefreshCw className="w-5 h-5" />
-              </button>
-            </div>
+            {/* Action buttons */}
           </div>
 
-          {/* Enhanced Filters Section */}
+          {/* Filters Section */}
           <div className="bg-white p-4 rounded-lg shadow-sm mb-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="relative">
-                <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Search pharmacies..."
-                  className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
+            <div className="flex flex-col md:flex-row gap-4">
+              {/* Search Bar */}
+              <div className="flex-1">
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="Search pharmacies..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                  <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                </div>
               </div>
-              
-              {/* Add status and view toggles here */}
-              <select
-                className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-                value={selectedStatus}
-                onChange={(e) => setSelectedStatus(e.target.value)}
-              >
-                <option value="all">All Status</option>
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-                <option value="blocked">Blocked</option>
-              </select>
 
-              <div className="flex justify-end">
-                <button 
-                  onClick={() => setView('grid')}
-                  className={`p-2 rounded ${view === 'grid' ? 'bg-blue-50 text-blue-600' : 'text-gray-600'}`}
+              {/* Filter Buttons */}
+              <div className="flex gap-2">
+                <div className="relative">
+                  <select
+                    value={selectedStatus}
+                    onChange={(e) => setSelectedStatus(e.target.value)}
+                    className="appearance-none pl-10 pr-8 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  >
+                    <option value="all">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                    <option value="blocked">Blocked</option>
+                  </select>
+                  <FiFilter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                </div>
+
+                {/* View Toggle */}
+                <button
+                  onClick={() => setView(view === 'grid' ? 'table' : 'grid')}
+                  className="p-2 border rounded-lg hover:bg-gray-50"
+                  title={view === 'grid' ? 'Switch to table view' : 'Switch to grid view'}
                 >
-                  <FiGrid className="w-4 h-4" />
+                  {view === 'grid' ? <FiListIcon className="w-5 h-5" /> : <FiGrid className="w-5 h-5" />}
                 </button>
-                <button 
-                  onClick={() => setView('table')}
-                  className={`p-2 rounded ${view === 'table' ? 'bg-blue-50 text-blue-600' : 'text-gray-600'}`}
+
+                {/* Export Button */}
+                <button
+                  className="flex items-center gap-2 px-4 py-2 border rounded-lg hover:bg-gray-50"
+                  title="Export data"
                 >
-                  <FiListIcon className="w-4 h-4" />
+                  <FiDownload className="w-4 h-4" />
+                  <span>Export</span>
                 </button>
               </div>
             </div>
           </div>
 
-          {renderContent()}
-          <Pagination />
+          {/* Content Section - Fixed Height */}
+          <div className="flex-1 min-h-0">
+            {renderContent()}
+          </div>
+
+          {/* Pagination - Always at bottom */}
+          <div className="mt-auto pt-4">
+            <Pagination />
+          </div>
         </div>
       </div>
-
-      {/* Add Action Modal */}
-      {showActionModal && (
-        <BlockStoreModal
-          isOpen={showActionModal && actionType === 'block'}
-          onClose={() => setShowActionModal(false)}
-          onConfirm={handleBlockStore}
-          blockDetails={blockDetails}
-          setBlockDetails={setBlockDetails}
-        />
-      )}
-
-      {/* Add Detail Modal similar to MedicineList */}
-      {showDetailModal && (
-        <StoreDetailModal
-          isOpen={showDetailModal}
-          onClose={() => setShowDetailModal(false)}
-          store={storeDetails}
-          isEditing={isEditing}
-          setIsEditing={setIsEditing}
-          onSave={handleSave}
-          setStoreDetails={setStoreDetails}
-        />
-      )}
     </div>
   );
 };

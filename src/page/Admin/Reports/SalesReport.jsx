@@ -7,6 +7,8 @@ import {
 } from 'react-icons/fi';
 import { useState } from 'react';
 import { LineChart, BarChart } from '@mui/x-charts';
+import { Tooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 
 const SalesReport = () => {
   const [selectedPeriod, setSelectedPeriod] = useState('monthly');
@@ -55,8 +57,10 @@ const SalesReport = () => {
               </div>
               <div className="flex flex-wrap items-center gap-3">
                 <button 
+                  data-tooltip-id="filter-tooltip"
+                  data-tooltip-content="Show advanced filters"
                   onClick={() => setShowFilters(!showFilters)}
-                  className="flex items-center gap-2 px-4 py-2 bg-gray-50 text-gray-700 rounded-lg hover:bg-gray-100"
+                  className="flex items-center gap-2 px-4 py-2 bg-gray-50"
                 >
                   <FiFilter className="w-4 h-4" />
                   Filters
@@ -80,7 +84,11 @@ const SalesReport = () => {
                   <option value="monthly">Monthly</option>
                   <option value="yearly">Yearly</option>
                 </select>
-                <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                <button
+                  data-tooltip-id="export-tooltip"
+                  data-tooltip-content="Export sales report"
+                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white"
+                >
                   <FiDownload className="w-4 h-4" />
                   Export
                 </button>
@@ -174,6 +182,8 @@ const SalesReport = () => {
           </div>
         </div>
       </div>
+      <Tooltip id="filter-tooltip" place="top" />
+      <Tooltip id="export-tooltip" place="top" />
     </div>
   );
 };

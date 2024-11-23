@@ -3,8 +3,13 @@ import AdminSidebar from '../components/AdminSidebar';
 import { FiShield, FiUserCheck, FiPackage, FiAlertOctagon, FiTrendingUp, FiTrendingDown } from 'react-icons/fi';
 import { useState } from 'react';
 import { LineChart, BarChart } from '@mui/x-charts';
+import { useNavigate } from 'react-router-dom';
+import { Tooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 
 const AdminDashboard = () => {
+  const navigate = useNavigate();
+
   const monitoringStats = [
     {
       icon: FiUserCheck,
@@ -12,7 +17,9 @@ const AdminDashboard = () => {
       label: 'Pending Verifications',
       description: 'Seller accounts awaiting approval',
       color: 'yellow',
-      action: 'Review Now'
+      action: 'Review Now',
+      path: '/admin/reports/store-verification',
+      tooltip: 'View and manage pending pharmacy verifications'
     },
     {
       icon: FiPackage,
@@ -20,7 +27,9 @@ const AdminDashboard = () => {
       label: 'Active Medicines',
       description: 'Currently listed products',
       color: 'blue',
-      action: 'View List'
+      action: 'View List',
+      path: '/admin/inventory/medicines',
+      tooltip: 'Manage active medicine listings and inventory'
     },
     {
       icon: FiShield,
@@ -28,7 +37,9 @@ const AdminDashboard = () => {
       label: 'Quality Checks',
       description: 'Products requiring review',
       color: 'green',
-      action: 'Review'
+      action: 'Review',
+      path: '/admin/inventory',
+      tooltip: 'Review products flagged for quality inspection'
     },
     {
       icon: FiAlertOctagon,
@@ -36,7 +47,9 @@ const AdminDashboard = () => {
       label: 'Reported Items',
       description: 'Products flagged by users',
       color: 'red',
-      action: 'Investigate'
+      action: 'Investigate',
+      path: '/admin/inventory/blocklist',
+      tooltip: 'Investigate reported products and take action'
     }
   ];
 
@@ -126,7 +139,13 @@ const AdminDashboard = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
               {monitoringStats.map((stat, index) => (
-                <div key={index} className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
+                <div 
+                  key={index} 
+                  className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow cursor-pointer"
+                  onClick={() => navigate(stat.path)}
+                  data-tooltip-id={`stat-tooltip-${index}`}
+                  data-tooltip-content={stat.tooltip}
+                >
                   <div className="flex items-center justify-between mb-4">
                     <div className={`p-3 rounded-lg bg-${stat.color}-50`}>
                       <stat.icon className={`w-6 h-6 text-${stat.color}-600`} />
@@ -137,9 +156,16 @@ const AdminDashboard = () => {
                     <div className="text-sm font-medium text-gray-900">{stat.label}</div>
                     <div className="text-xs text-gray-500">{stat.description}</div>
                   </div>
-                  <button className={`w-full py-2 text-sm font-medium text-${stat.color}-600 bg-${stat.color}-50 rounded-lg hover:bg-${stat.color}-100`}>
+                  <button 
+                    className={`w-full py-2 text-sm font-medium text-${stat.color}-600 bg-${stat.color}-50 rounded-lg hover:bg-${stat.color}-100`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(stat.path);
+                    }}
+                  >
                     {stat.action}
                   </button>
+                  <Tooltip id={`stat-tooltip-${index}`} place="top" />
                 </div>
               ))}
             </div>
@@ -152,11 +178,28 @@ const AdminDashboard = () => {
                     <p className="text-sm text-gray-500">Pharmacy registration and verification progress</p>
                   </div>
                   <div className="flex gap-2">
-                    <button className="px-3 py-1 text-sm bg-indigo-50 text-indigo-600 rounded-lg font-medium">
+                    <button 
+                      className="px-3 py-1 text-sm bg-indigo-50 text-indigo-600 rounded-lg font-medium"
+                      data-tooltip-id="chart-period-tooltip"
+                      data-tooltip-content="View daily verification statistics"
+                    >
                       Daily
                     </button>
-                    <button className="px-3 py-1 text-sm bg-gray-100 rounded-lg">Weekly</button>
-                    <button className="px-3 py-1 text-sm bg-gray-100 rounded-lg">Monthly</button>
+                    <button 
+                      className="px-3 py-1 text-sm bg-gray-100 rounded-lg"
+                      data-tooltip-id="chart-period-tooltip"
+                      data-tooltip-content="View weekly verification statistics"
+                    >
+                      Weekly
+                    </button>
+                    <button 
+                      className="px-3 py-1 text-sm bg-gray-100 rounded-lg"
+                      data-tooltip-id="chart-period-tooltip"
+                      data-tooltip-content="View monthly verification statistics"
+                    >
+                      Monthly
+                    </button>
+                    <Tooltip id="chart-period-tooltip" place="top" />
                   </div>
                 </div>
                 
@@ -228,7 +271,25 @@ const AdminDashboard = () => {
                 </div>
                 <div className="space-y-4">
                   {criticalAlerts.map((alert, index) => (
-                    <div key={index} className="p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
+                    <div 
+                      key={index} 
+                      className="p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer"
+                      onClick={() => {
+                        switch(alert.type) {
+                          case 'Verification':
+                            navigate('/admin/reports/store-verification');
+                            break;
+                          case 'Product':
+                            navigate('/admin/inventory/medicines');
+                            break;
+                          case 'Compliance':
+                            navigate('/admin/reports/users');
+                            break;
+                        }
+                      }}
+                      data-tooltip-id={`alert-tooltip-${index}`}
+                      data-tooltip-content="Click to view details and take action"
+                    >
                       <div className="flex items-start gap-3">
                         <div className={`w-2 h-2 rounded-full mt-2 ${
                           alert.priority === 'high' ? 'bg-red-500' : 'bg-yellow-500'
@@ -244,6 +305,7 @@ const AdminDashboard = () => {
                           </button>
                         </div>
                       </div>
+                      <Tooltip id={`alert-tooltip-${index}`} place="left" />
                     </div>
                   ))}
                 </div>

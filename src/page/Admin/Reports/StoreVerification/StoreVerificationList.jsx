@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { 
   FiSearch, FiFilter, FiCheckCircle, 
   FiXCircle, FiClock, FiEye, FiDownload,
-  FiSlash, FiUnlock
+  FiSlash, FiUnlock, FiUserCheck
 } from 'react-icons/fi';
 import AdminSidebar from '../../components/AdminSidebar';
 import AdminNavbar from '../../components/AdminNavbar';
@@ -12,6 +12,8 @@ import EditBlockModal from '../../Inventory/Blocklist Management/components/Edit
 import { toast } from 'react-hot-toast';
 import BlockStoreModal from '../../Inventory/Medicine Stores/components/BlockStoreModal';
 import { useBlocklist } from '../../Inventory/context/BlocklistContext';
+import { Tooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 
 const StoreVerificationList = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -161,34 +163,26 @@ const StoreVerificationList = () => {
   };
 
   const renderActions = (store) => (
-    <div className="flex items-center space-x-3">
+    <div className="flex items-center gap-2">
       <button
-        onClick={() => {
-          setSelectedStore(store);
-          setShowDocumentModal(true);
-        }}
+        data-tooltip-id={`docs-tooltip-${store.id}`}
+        data-tooltip-content="View verification documents"
+        onClick={() => handleViewDocuments(store)}
         className="text-blue-600 hover:text-blue-800"
-        title="View Documents"
       >
         <FiEye className="w-5 h-5" />
       </button>
-      {store.verificationStatus !== 'blocked' ? (
-        <button
-          onClick={() => handleBlock(store)}
-          className="text-red-600 hover:text-red-800"
-          title="Block Store"
-        >
-          <FiSlash className="w-5 h-5" />
-        </button>
-      ) : (
-        <button
-          onClick={() => handleUnblock(store)}
-          className="text-green-600 hover:text-green-800"
-          title="Unblock Store"
-        >
-          <FiUnlock className="w-5 h-5" />
-        </button>
-      )}
+      <button
+        data-tooltip-id={`block-tooltip-${store.id}`}
+        data-tooltip-content="Block store"
+        onClick={() => handleBlock(store)}
+        className="text-red-600 hover:text-red-800"
+      >
+        <FiSlash className="w-5 h-5" />
+      </button>
+
+      <Tooltip id={`docs-tooltip-${store.id}`} place="top" />
+      <Tooltip id={`block-tooltip-${store.id}`} place="top" />
     </div>
   );
 

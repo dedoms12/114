@@ -7,9 +7,12 @@ import {
 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { Tooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 
 const AdminInventory = () => {
   const [selectedTimeframe, setSelectedTimeframe] = useState('weekly');
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   // Simplified inventory stats focusing on monitoring
   const inventoryStats = [
@@ -92,11 +95,11 @@ const AdminInventory = () => {
   ];
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50">
       <AdminSidebar />
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className={`${isCollapsed ? 'ml-16' : 'ml-64'} transition-all duration-300`}>
         <AdminNavbar />
-        <div className="flex-1 overflow-y-auto p-6">
+        <div className="p-6">
           <div className="max-w-7xl mx-auto">
             {/* Header Section */}
             <div className="flex justify-between items-center mb-6">
@@ -127,6 +130,8 @@ const AdminInventory = () => {
                 <Link
                   key={index}
                   to={stat.path}
+                  data-tooltip-id={`inventory-stat-${index}`}
+                  data-tooltip-content={`Click to view detailed ${stat.label.toLowerCase()} information`}
                   className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all"
                 >
                   <div className="flex justify-between items-start mb-4">
@@ -139,6 +144,7 @@ const AdminInventory = () => {
                   <h3 className="text-2xl font-bold mb-1">{stat.count}</h3>
                   <p className="text-gray-600">{stat.label}</p>
                   <p className="text-sm text-gray-500 mt-1">{stat.description}</p>
+                  <Tooltip id={`inventory-stat-${index}`} place="top" />
                 </Link>
               ))}
             </div>
@@ -149,6 +155,8 @@ const AdminInventory = () => {
                 <Link
                   key={index}
                   to={section.path}
+                  data-tooltip-id={`monitoring-section-${index}`}
+                  data-tooltip-content={section.description}
                   className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all"
                 >
                   <div className={`${section.color} text-white p-3 rounded-lg inline-flex mb-4`}>
@@ -167,6 +175,7 @@ const AdminInventory = () => {
                   <div className="mt-4 flex items-center text-sm font-medium text-blue-600">
                     View Details <FiArrowRight className="ml-2 w-4 h-4" />
                   </div>
+                  <Tooltip id={`monitoring-section-${index}`} place="top" />
                 </Link>
               ))}
             </div>

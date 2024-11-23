@@ -2,6 +2,8 @@ import AdminNavbar from '../components/AdminNavbar';
 import AdminSidebar from '../components/AdminSidebar';
 import { FiDollarSign, FiUsers, FiBarChart2, FiArrowRight, FiCheckCircle } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import { Tooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 
 const AdminReports = () => {
   const reports = [
@@ -59,6 +61,8 @@ const AdminReports = () => {
               <Link
                 key={index}
                 to={report.link}
+                data-tooltip-id={`report-card-${index}`}
+                data-tooltip-content={`View detailed ${report.title.toLowerCase()} and analytics`}
                 className="block bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200"
               >
                 <div className="p-6">
@@ -85,6 +89,7 @@ const AdminReports = () => {
                     View Details <FiArrowRight className="ml-2" />
                   </div>
                 </div>
+                <Tooltip id={`report-card-${index}`} place="top" />
               </Link>
             ))}
           </div>

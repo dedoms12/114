@@ -1,5 +1,7 @@
 import { FiX, FiUpload, FiMapPin, FiPhone, FiMail, FiGlobe, FiClock } from 'react-icons/fi';
 import { useRef } from 'react';
+import { Tooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 
 const StoreDetailModal = ({ 
   isOpen, 
@@ -45,14 +47,18 @@ const StoreDetailModal = ({
             {!isEditing ? (
               <>
                 <button
+                  data-tooltip-id="edit-store-details"
+                  data-tooltip-content="Edit store information"
                   onClick={() => setIsEditing(true)}
-                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg"
                 >
                   Edit
                 </button>
                 <button 
+                  data-tooltip-id="close-modal"
+                  data-tooltip-content="Close details view"
                   onClick={onClose}
-                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
+                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border"
                 >
                   Close
                 </button>
@@ -60,22 +66,31 @@ const StoreDetailModal = ({
             ) : (
               <>
                 <button
+                  data-tooltip-id="save-changes"
+                  data-tooltip-content="Save store changes"
                   onClick={onSave}
-                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg"
                 >
                   Save Changes
                 </button>
                 <button 
+                  data-tooltip-id="cancel-edit"
+                  data-tooltip-content="Cancel editing"
                   onClick={() => {
                     setIsEditing(false);
                     setStoreDetails(store);
                   }}
-                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
+                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border"
                 >
                   Cancel
                 </button>
               </>
             )}
+
+            <Tooltip id="edit-store-details" place="top" />
+            <Tooltip id="close-modal" place="top" />
+            <Tooltip id="save-changes" place="top" />
+            <Tooltip id="cancel-edit" place="top" />
           </div>
         </div>
 

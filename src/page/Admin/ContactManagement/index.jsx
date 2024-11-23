@@ -5,6 +5,8 @@ import {
   FiMail, FiPhone, FiMessageSquare, FiEdit2, 
   FiTrash2, FiSearch, FiFilter, FiEye, FiX 
 } from 'react-icons/fi';
+import { Tooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 
 const ContactManagement = () => {
   const [selectedFilter, setSelectedFilter] = useState('all');
@@ -209,12 +211,18 @@ const ContactManagement = () => {
 
           <div className="grid grid-cols-3 gap-6 mb-6">
             {contactStats.map((stat, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
+              <div 
+                key={index} 
+                data-tooltip-id={`contact-stat-${index}`}
+                data-tooltip-content={`View ${stat.label.toLowerCase()} details and metrics`}
+                className="bg-white p-6 rounded-lg shadow-sm"
+              >
                 <div className="flex items-center justify-between mb-4">
                   <stat.icon className={`w-8 h-8 ${stat.buttonClass}`} />
                   <div className="text-2xl font-bold">{stat.count}</div>
                 </div>
                 <div className="text-sm text-gray-600 mb-4">{stat.label}</div>
+                <Tooltip id={`contact-stat-${index}`} place="top" />
               </div>
             ))}
           </div>
@@ -293,10 +301,12 @@ const ContactManagement = () => {
                           setSelectedInquiry(inquiry);
                           setShowViewModal(true);
                         }}
+                        data-tooltip-id="view-tooltip"
+                        data-tooltip-content="View inquiry details"
                         className="text-blue-600 hover:text-blue-800 mr-3"
-                        title="View Details"
                       >
                         <FiEye className="w-4 h-4" />
+                        <Tooltip id="view-tooltip" place="top" />
                       </button>
                       <button 
                         onClick={() => {
