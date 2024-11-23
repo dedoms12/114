@@ -42,13 +42,13 @@ export const addProduct = (newProduct) => {
 
 // Remove the branches array and add this function
 export const getUniqueLocations = () => {
-  const locations = new Set();
-  categories.forEach(category => {
-    category.products.forEach(product => {
-      if (product.location) {
-        locations.add(product.location);
-      }
-    });
-  });
-  return ['All Locations', ...Array.from(locations)];
+  const savedLocations = localStorage.getItem('storeLocations');
+  const defaultLocations = ['All Locations', 'Ampayon, Agusan Del Norte', 'Butuan City, Agusan Del Norte'];
+  
+  if (savedLocations) {
+    const parsedLocations = JSON.parse(savedLocations);
+    return ['All Locations', ...new Set([...parsedLocations])];
+  }
+  
+  return defaultLocations;
 }; 

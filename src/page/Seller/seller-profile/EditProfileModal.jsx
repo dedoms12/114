@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { FiX, FiUser, FiMail, FiPhone, FiBriefcase } from 'react-icons/fi';
+import toast from 'react-hot-toast';
 
 const EditProfileModal = ({ isOpen, onClose, profileData, onUpdate }) => {
   const [formData, setFormData] = useState(profileData);
@@ -11,6 +12,7 @@ const EditProfileModal = ({ isOpen, onClose, profileData, onUpdate }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onUpdate(formData);
+    toast.success('Profile updated successfully!');
   };
 
   if (!isOpen) return null;

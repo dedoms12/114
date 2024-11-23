@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { FiX, FiUpload, FiMapPin, FiPhone, FiMail, FiClock } from 'react-icons/fi';
+import toast from 'react-hot-toast';
 
 const EditStoreModal = ({ isOpen, onClose, storeData, onUpdate, initialTab = 'basic' }) => {
   const [formData, setFormData] = useState({
@@ -41,11 +42,16 @@ const EditStoreModal = ({ isOpen, onClose, storeData, onUpdate, initialTab = 'ba
   const handleSubmit = (e) => {
     e.preventDefault();
     onUpdate(formData);
+    toast.success('Store information updated successfully!');
   };
 
   const handleImageUpload = (e) => {
     const file = e.target.files?.[0];
     if (file) {
+      if (file.size > 5 * 1024 * 1024) { // 5MB limit
+        toast.error('Image size should be less than 5MB');
+        return;
+      }
       const reader = new FileReader();
       reader.onloadend = () => {
         const imageDataUrl = reader.result;
@@ -56,6 +62,7 @@ const EditStoreModal = ({ isOpen, onClose, storeData, onUpdate, initialTab = 'ba
         }));
       };
       reader.readAsDataURL(file);
+      toast.success('Store image updated successfully!');
     }
   };
 

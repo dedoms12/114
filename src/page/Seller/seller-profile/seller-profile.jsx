@@ -6,6 +6,7 @@ import EditStoreModal from './EditStoreModal';
 import EditProfileModal from './EditProfileModal';
 import CreateProductModal from '../components/CreateProductModal';
 import DocumentSection from './DocumentSection';
+import { toast } from 'react-hot-toast';
 
 const SellerProfile = () => {
   const [documentSections, setDocumentSections] = useState([
@@ -243,9 +244,16 @@ const SellerProfile = () => {
   const handleUpdateDocumentSection = (sectionId, updatedData) => {
     setDocumentSections(prev =>
       prev.map(section =>
-        section.id === sectionId ? { ...section, ...updatedData } : section
+        section.id === sectionId 
+          ? { 
+              ...section, 
+              ...updatedData,
+              documents: updatedData.documents || section.documents 
+            }
+          : section
       )
     );
+    toast.success('Document section updated successfully');
   };
 
   const handleDeleteDocumentSection = (sectionId) => {

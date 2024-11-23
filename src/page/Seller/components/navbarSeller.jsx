@@ -10,6 +10,9 @@ const NavbarSeller = () => {
     const user = localStorage.getItem('currentUser');
     return user ? JSON.parse(user) : null;
   });
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [showSearchResults, setShowSearchResults] = useState(false);
 
   const firstName = currentUser?.name?.split(' ')[0] || 'Seller';
 
@@ -40,6 +43,59 @@ const NavbarSeller = () => {
       setIsDropdownOpen(true);
     }
   };
+
+  const handleSearch = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    if (query.trim()) {
+      const filtered = navItems.filter(item =>
+        item.name.toLowerCase().includes(query.toLowerCase())
+      );
+      setSearchResults(filtered);
+      setShowSearchResults(true);
+    } else {
+      setSearchResults([]);
+      setShowSearchResults(false);
+    }
+  };
+
+  const handleSearchItemClick = (item) => {
+    navigate(item.path);
+    setSearchQuery('');
+    setShowSearchResults(false);
+  };
+
+  const searchBarJSX = (
+    <div className="relative">
+      <input
+        type="text"
+        value={searchQuery}
+        onChange={handleSearch}
+        placeholder="Search pages..."
+        className="w-64 pl-4 pr-10 py-2 rounded-full border border-gray-200 focus:outline-none focus:border-pill-blue"
+      />
+      <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
+        <FiSearch className="w-5 h-5" />
+      </button>
+
+      {/* Search Results Dropdown */}
+      {showSearchResults && searchResults.length > 0 && (
+        <div className="absolute top-full left-0 mt-2 w-full bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+          {searchResults.map((item, index) => (
+            <div
+              key={index}
+              onClick={() => handleSearchItemClick(item)}
+              className="px-4 py-2 hover:bg-gray-50 cursor-pointer flex items-center space-x-2"
+            >
+              <FiSearch className="w-4 h-4 text-gray-400" />
+              <span className="text-sm text-gray-700">{item.name}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
 
   return (
     <nav className="bg-[#FCFFFE] shadow-sm py-4">
@@ -132,17 +188,7 @@ const NavbarSeller = () => {
 
           {/* Search bar and User */}
           <div className="flex items-center space-x-6">
-            {/* Search Bar */}
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search"
-                className="w-64 pl-4 pr-10 py-2 rounded-full border border-gray-200 focus:outline-none focus:border-pill-blue"
-              />
-              <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                <FiSearch className="w-5 h-5" />
-              </button>
-            </div>
+            {searchBarJSX}
 
             {/* User Profile Dropdown */}
             <div className="relative">

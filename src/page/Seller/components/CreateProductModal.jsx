@@ -1,17 +1,20 @@
 import { useState, useEffect } from 'react';
 import { FiX, FiPlus, FiTrash2, FiImage } from 'react-icons/fi';
 import { getUniqueLocations } from '../product-management/product-data';
+import LocationSelector from './LocationSelector';
 import { medicalProducts } from '../../Client/product-page/medical-supplies/medsup-products';
 import { products as generalProducts } from '../../Client/product-page/general-health/gen-products';
 
 const CreateProductModal = ({ isOpen, onClose, onSave, categories, units, editProduct = null, onAdvanceSettings }) => {
-  const locations = getUniqueLocations().filter(loc => loc !== 'All Locations');
+  const [availableLocations, setAvailableLocations] = useState(
+    getUniqueLocations().filter(loc => loc !== 'All Locations')
+  );
   
   const [formData, setFormData] = useState({
     name: '',
     price: '',
     category: 'medical-supplies',
-    location: locations[0] || '',
+    location: '',
     description: {
       main: '',
       subText: '',
@@ -141,6 +144,10 @@ const CreateProductModal = ({ isOpen, onClose, onSave, categories, units, editPr
     }));
   };
 
+  const handleLocationsUpdate = (updatedLocations) => {
+    setAvailableLocations(updatedLocations);
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -192,16 +199,12 @@ const CreateProductModal = ({ isOpen, onClose, onSave, categories, units, editPr
 
                 <div>
                   <label className="block text-gray-700 mb-2">Location</label>
-                  <select
+                  <LocationSelector
                     value={formData.location}
-                    onChange={(e) => setFormData({...formData, location: e.target.value})}
-                    className="w-full p-2 bg-gray-50 rounded-md border"
-                    required
-                  >
-                    <option value="">Select Location</option>
-                    <option value="Ampayon, Agusan Del Norte">Ampayon, Agusan Del Norte</option>
-                    <option value="Butuan City, Agusan Del Norte">Butuan City, Agusan Del Norte</option>
-                  </select>
+                    onChange={(location) => setFormData(prev => ({ ...prev, location }))}
+                    existingLocations={availableLocations}
+                    onLocationsUpdate={handleLocationsUpdate}
+                  />
                 </div>
               </div>
             </section>
