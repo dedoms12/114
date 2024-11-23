@@ -65,3 +65,59 @@ export const SearchProvider = ({ children }) => {
     </SearchContext.Provider>
   );
 }; 
+
+const searchCategories = {
+  products: {
+    path: '/search-results',
+    searchFields: ['name', 'category', 'description']
+  },
+  stores: {
+    path: '/stores',
+    searchFields: ['name', 'location']
+  },
+  pages: {
+    items: [
+      { name: 'Home', path: '/home' },
+      { name: 'Products', path: '/general-health' },
+      { name: 'Medical Supplies', path: '/medical-supplies' },
+      { name: 'Supplements', path: '/supplements' },
+      { name: 'Personal Care', path: '/personal-care' },
+      { name: 'Stores', path: '/stores' },
+      { name: 'Contact Us', path: '/contact' }
+    ]
+  }
+};
+
+export const performGlobalSearch = (query) => {
+  const searchTerm = query.toLowerCase();
+  
+  const results = {
+    products: searchInCategory([
+      ...products,
+      ...medicalProducts,
+      ...supplementProducts,
+      ...personalCareProducts
+    ], searchTerm),
+    stores: [], // Add store search logic if needed
+    pages: searchCategories.pages.items.filter(page => 
+      page.name.toLowerCase().includes(searchTerm)
+    ),
+    type: 'all'
+  };
+
+  return results;
+};
+
+const searchInCategory = (items, searchTerm) => {
+  return items.filter(item => {
+    const searchFields = [
+      item.name.toLowerCase(),
+      item.description?.main?.toLowerCase() || '',
+      item.description?.subText?.toLowerCase() || '',
+      ...(item.description?.features?.map(f => f.toLowerCase()) || []),
+      ...(item.description?.specifications?.map(s => s.toLowerCase()) || [])
+    ];
+    
+    return searchFields.some(field => field.includes(searchTerm));
+  });
+}; 

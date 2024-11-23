@@ -7,6 +7,7 @@ import ShippingModal from './ShippingModal';
 import PaymentModal from './PaymentModal';
 import { toast } from 'react-toastify';
 import { useOrders } from '../_components/context/OrderContext';
+import StepIndicator from '../_components/StepIndicator';
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -30,8 +31,8 @@ const Checkout = () => {
 
   const [selectedShipping, setSelectedShipping] = useState({
     type: 'Standard Delivery',
-    eta: '15-18 Mar',
-    price: 100
+    eta: '10 hours',
+    price: 30
   });
 
   const [paymentMethod, setPaymentMethod] = useState('Cash On Delivery');
@@ -87,6 +88,8 @@ const Checkout = () => {
       
       <div className="max-w-7xl mx-auto px-4 py-8">
         <h1 className="text-2xl font-semibold mb-6">Checkout</h1>
+
+        <StepIndicator currentStep={2} />
 
         {/* Delivery Address */}
         <div className="bg-white rounded-lg p-6 mb-6">

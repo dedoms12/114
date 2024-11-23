@@ -4,6 +4,7 @@ import NavBar from '../_components/navbar';
 import { toast } from 'react-toastify';
 import { FaBox, FaTruck, FaReceipt, FaUser, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 import { useOrders } from '../_components/context/OrderContext';
+import StepIndicator from '../_components/StepIndicator';
 
 const OrderConfirmation = () => {
   const location = useLocation();
@@ -103,12 +104,13 @@ const OrderConfirmation = () => {
   };
 
   const getDeliveryTime = (shippingType) => {
-    return shippingType === 'exclusive' ? '5 hours' : '10 hours';
+    return shippingType === 'express' ? '5 hours' : '10 hours';
   };
 
   return (
     <div className="min-h-screen bg-gray-50">
       <NavBar />
+      <StepIndicator currentStep={location.state?.fromUserProfile ? 5 : 3} />
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div 
           onClick={() => navigate('/cart')}
@@ -126,6 +128,40 @@ const OrderConfirmation = () => {
             <path d="M15 19l-7-7 7-7" />
           </svg>
           <span>Back to Cart</span>
+        </div>
+
+        {/* Add process explanation panel */}
+        <div className="relative inline-block mb-6">
+          <div className="group">
+            <button className="flex items-center text-blue-600 hover:text-blue-700">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span className="ml-2">Order Process Info</span>
+            </button>
+            
+            <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-300 absolute z-10 w-72 p-4 mt-2 bg-white rounded-lg shadow-lg border border-gray-200">
+              <h3 className="font-medium text-gray-800 mb-2">Order Process Steps:</h3>
+              <ol className="text-sm text-gray-600 space-y-2">
+                <li className="flex items-start">
+                  <span className="font-medium mr-2">1.</span>
+                  View your order details and receipt here
+                </li>
+                <li className="flex items-start">
+                  <span className="font-medium mr-2">2.</span>
+                  Click "Track Order" to monitor delivery status
+                </li>
+                <li className="flex items-start">
+                  <span className="font-medium mr-2">3.</span>
+                  Once delivered, return here to confirm receipt
+                </li>
+                <li className="flex items-start">
+                  <span className="font-medium mr-2">4.</span>
+                  After confirmation, you can review your purchase
+                </li>
+              </ol>
+            </div>
+          </div>
         </div>
 
         {/* Order Status Banner */}
@@ -168,7 +204,7 @@ const OrderConfirmation = () => {
               </div>
               <div className="flex justify-between items-center pb-2 border-b">
                 <span className="text-gray-600">Shipping Fee</span>
-                <span className="font-medium">₱ {orderDetails?.shipping === 'exclusive' ? '50' : '30'}</span>
+                <span className="font-medium">₱ {orderDetails?.shipping === 'express' ? '50' : '30'}</span>
               </div>
             </div>
           </div>

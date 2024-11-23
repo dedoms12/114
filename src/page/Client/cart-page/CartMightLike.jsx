@@ -8,10 +8,10 @@ import { supplementProducts } from '../product-page/supplements/supple-products'
 const CartMightLike = () => {
   const navigate = useNavigate();
   const allProducts = [
-    ...products,
-    ...medicalProducts,
-    ...personalCareProducts,
-    ...supplementProducts
+    ...products.map(p => ({ ...p, source: 'general' })),
+    ...medicalProducts.map(p => ({ ...p, source: 'medical' })),
+    ...personalCareProducts.map(p => ({ ...p, source: 'personal' })),
+    ...supplementProducts.map(p => ({ ...p, source: 'supplement' }))
   ];
 
   const getRandomProducts = () => {
@@ -34,7 +34,7 @@ const CartMightLike = () => {
     <div className="grid grid-cols-5 gap-4">
       {randomProducts.map((product) => (
         <div 
-          key={product.id} 
+          key={`${product.source}-${product.id}`}
           onClick={() => handleProductClick(product)}
           className="bg-white rounded-lg p-4 border border-gray-200 hover:shadow-md transition-shadow cursor-pointer"
         >

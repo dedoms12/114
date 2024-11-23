@@ -26,6 +26,25 @@ const cartReducer = (state, action) => {
   
   switch (action.type) {
     case 'ADD_TO_CART':
+      // Check if product already exists in cart
+      const existingItem = state.find(item => 
+        item.id === action.payload.id && 
+        item.category === action.payload.category &&
+        !item.isBuyNow
+      );
+
+      if (existingItem) {
+        // Update quantity of existing item
+        return state.map(item =>
+          item.id === action.payload.id && 
+          item.category === action.payload.category &&
+          !item.isBuyNow
+            ? { ...item, quantity: item.quantity + (action.payload.quantity || 1) }
+            : item
+        );
+      }
+
+      // If it's a buy now item or new item, add to cart
       const filteredState = action.payload.isBuyNow 
         ? state.filter(item => !item.isBuyNow)
         : state;

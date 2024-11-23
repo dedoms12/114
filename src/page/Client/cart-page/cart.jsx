@@ -1,17 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import NavBar from '../_components/navbar';
 import { useCart } from '../_components/context/CartContext';
 import CartMightLike from './CartMightLike';
 import { toast } from 'react-hot-toast';
+import StepIndicator from '../_components/StepIndicator';
 
 const Cart = () => {
   const { cartItems, dispatch } = useCart();
   const navigate = useNavigate();
+  const [selectedItems, setSelectedItems] = useState({});
+
+  useEffect(() => {
+    const initialSelected = cartItems.reduce((acc, item) => {
+      acc[`${item.category}-${item.id}`] = item.selected || false;
+      return acc;
+    }, {});
+    setSelectedItems(initialSelected);
+  }, [cartItems]);
 
   const SHIPPING_RATES = {
-    standard: 30,
-    express: 50
+    standard: {
+      price: 30,
+      time: '10 hours'
+    },
+    express: {
+      price: 50,
+      time: '5 hours'
+    }
   };
 
   const handleShippingChange = (id, category, shippingType) => {
@@ -25,7 +41,7 @@ const Cart = () => {
     return cartItems
       .filter(item => item.selected)
       .reduce((total, item) => {
-        const shippingRate = SHIPPING_RATES[item.shipping || 'standard'];
+        const shippingRate = SHIPPING_RATES[item.shipping || 'standard'].price;
         return total + shippingRate;
       }, 0);
   };
@@ -57,6 +73,11 @@ const Cart = () => {
   };
 
   const handleSelectItem = (id, category) => {
+    const key = `${category}-${id}`;
+    setSelectedItems(prev => ({
+      ...prev,
+      [key]: !prev[key]
+    }));
     dispatch({
       type: 'TOGGLE_SELECT',
       payload: { id, category }
@@ -81,11 +102,23 @@ const Cart = () => {
     navigate('/checkout');
   };
 
+  const handleProductClick = (item) => {
+    navigate(`/${item.category}/product/${item.id}`, {
+      state: { 
+        from: '/cart',
+        scrollPosition: window.pageYOffset 
+      }
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <NavBar />
       
       <div className="max-w-7xl mx-auto px-4 py-8">
+        <StepIndicator currentStep={1} />
+        
+
         <h1 className="text-2xl font-semibold mb-6">Shopping Cart</h1>
         
         <div className="grid grid-cols-3 gap-6">
@@ -117,23 +150,34 @@ const Cart = () => {
                       <div className="flex items-center space-x-4">
                         <input
                           type="checkbox"
-                          checked={item.selected}
+                          checked={selectedItems[`${item.category}-${item.id}`] || false}
                           onChange={() => handleSelectItem(item.id, item.category)}
                           className="w-4 h-4 text-blue-500 rounded"
                         />
-                        <img src={item.image} alt={item.name} className="w-20 h-20 object-contain" />
+                        <img 
+                          src={item.image} 
+                          alt={item.name} 
+                          className="w-20 h-20 object-contain cursor-pointer"
+                          onClick={() => handleProductClick(item)}
+                        />
                         <div>
-                          <h3 className="font-medium text-gray-800">{item.name}</h3>
+                          <h3 
+                            className="font-medium text-gray-800 cursor-pointer hover:text-blue-600"
+                            onClick={() => handleProductClick(item)}
+                          >
+                            {item.name}
+                          </h3>
                           <p className="text-sm text-gray-500">Variation: {item.variation}</p>
                         </div>
                       </div>
                     </div>
 
-                    {/* Quantity Controls - Redesigned to match reference */}
+                    {/* Quantity Controls with Tooltip */}
                     <div className="col-span-2">
-                      <div className="flex items-center justify-center">
+                      <div className="flex items-center justify-center group relative">
                         <div className="flex border rounded-md">
                           <button 
+                            title="Decrease quantity"
                             onClick={() => handleQuantityChange(item.id, item.category, -1, item.quantity)}
                             className="px-3 py-1 hover:bg-gray-100 border-r"
                           >
@@ -141,11 +185,15 @@ const Cart = () => {
                           </button>
                           <span className="px-4 py-1 border-r">{item.quantity}</span>
                           <button 
+                            title="Increase quantity"
                             onClick={() => handleQuantityChange(item.id, item.category, 1, item.quantity)}
                             className="px-3 py-1 hover:bg-gray-100"
                           >
                             +
                           </button>
+                        </div>
+                        <div className="invisible group-hover:visible absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2">
+                          Adjust quantity
                         </div>
                       </div>
                     </div>
@@ -173,8 +221,8 @@ const Cart = () => {
                       onChange={(e) => handleShippingChange(item.id, item.category, e.target.value)}
                       className="text-sm border rounded-md px-2 py-1"
                     >
-                      <option value="standard">Standard (₱30)</option>
-                      <option value="express">Express (₱50)</option>
+                      <option value="standard">Standard - ₱30 (10 hours)</option>
+                      <option value="express">Express - ₱50 (5 hours)</option>
                     </select>
                   </div>
                 </div>
@@ -188,9 +236,18 @@ const Cart = () => {
               {cartItems.length === 0 ? (
                 <div className="text-center py-8">
                   <p className="text-gray-500 mb-4">Your cart is empty</p>
+                  <div className="bg-gray-50 p-4 rounded-lg max-w-md mx-auto mb-4">
+                    <h3 className="font-medium text-gray-700 mb-2">Getting Started:</h3>
+                    <ul className="text-sm text-gray-600 text-left list-disc list-inside">
+                      <li>Browse products from our categories</li>
+                      <li>Click on products to view details</li>
+                      <li>Add items to cart using "Add to Cart" button</li>
+                      <li>Or use "Buy Now" for immediate checkout</li>
+                    </ul>
+                  </div>
                   <Link to="/home">
                     <button className="bg-[#4C9BF5] text-white px-6 py-2 rounded-md hover:bg-blue-600 transition-colors">
-                      Continue Shopping
+                      Start Shopping
                     </button>
                   </Link>
                 </div>
