@@ -9,1832 +9,347 @@ const getRandomStore = () => {
 const originalProducts = [
   {
     id: 1,
-    name: "CASINO Ethyl Alcohol Regular 500ml",
-    price: 98,
-    rating: 5,
-    soldCount: 801,
-    image: "/images/Client/product-page/gen-health/image1stbatch-11.svg",
-    category: "general-health",
-    description: {
-      main: "70% Solution Ethyl Alcohol for Antiseptic Disinfection",
-      subText: "Hospital-Grade Disinfectant for Personal and Professional Use",
-      features: [
-        "Quick-Drying Formula",
-        "No Sticky Residue",
-        "Pleasant Mild Scent",
-        "With Moisturizing Agents to Prevent Skin Dryness"
-      ],
-      specifications: [
-        "70% Ethyl Alcohol Content",
-        "FDA Approved",
-        "500ml Bottle with Secure Cap",
-        "Kills 99.9% of Germs",
-        "With Added Moisturizers",
-        "2 Years Shelf Life",
-        "Made in Philippines",
-        "For External Use Only"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
+  name: "GORGLITTER Men's Plaid Button Down Shirt Long Sleeve Casual Shirt Jackets",
+  price: 450,
+  image: "/images/Client/product-page/Menswear/tshirt1.jpg",
+  category: "menswear",
+  description: {
+    main: "A stylish and comfortable plaid button-down shirt for all-day wear.",
+    subText: "Perfect for casual outings and semi-formal events.",
+    features: [
+      "High-quality plaid fabric",
+      "Button-down closure",
+      "Long sleeves with button cuffs",
+      "Relaxed fit for added comfort"
     ],
-    images: [
-      "/images/Client/product-page/gen-health/image1stbatch-11.svg",
-      "/images/Client/product-page/gen-health/image1stbatch-11.svg",
-      "/images/Client/product-page/gen-health/image1stbatch-11.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
+    specifications: [
+      "Material: 80% Cotton, 20% Polyester",
+      "Machine washable",
+      "Available in multiple sizes",
+      "Made in the Philippines",
+      "Lightweight and breathable"
+    ]
+  },
+  shipping: {
+    standard: { price: "₱70", days: "2-3 Days" },
+    express: { price: "₱120", days: "1 Day" }
+  },
+  location: "Butuan City, Agusan del Norte"
   },
   {
     id: 2,
-    name: "SATOCHI Japan Diabetes Effervescent Tablets",
-    price: 989,
-    rating: 4,
-    soldCount: 1,
-    image: "/images/Client/product-page/gen-health/image1stbatch-10.svg",
-    category: "general-health",
+    name: "Wendoximz Golf Shirts for Men Dry Fit Men's Polo Shirts Men's Casual Plaid Turn-Down Collar Blouse Short Sleeve Solid Pocket Blouse Shirt, Size: XXXL, Beige",
+    price: 1200,
+    image: "/images/Client/product-page/Menswear/tshirt2.jpg",
+    category: "menswear",
     description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
+      main: "A stylish and comfortable golf shirt for men, featuring dry fit technology and a classic plaid design with a turn-down collar and a chest pocket.",
+      subText: "This short-sleeve polo shirt is perfect for casual golf outings, weekend wear, or everyday activities.",
       features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
+        "Dry fit technology for moisture-wicking comfort",
+        "Turn-down collar and button-up placket",
+        "Plaid design with solid color accents",
+        "Chest pocket for added convenience",
+        "Available in size XXXL for a relaxed fit"
       ],
       specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
+        "Material: 100% Polyester",
+        "Machine washable",
+        "Available in sizes S, M, L, XL, 2XL, 3XL",
+        "Imported"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱100", days: "3-5 Days" },
+      express: { price: "₱180", days: "1-2 Days" }
     },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image1stbatch-10.svg",
-      "/images/Client/product-page/gen-health/image1stbatch-10.svg",
-      "/images/Client/product-page/gen-health/image1stbatch-10.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
+    location: "Quezon City, Metro Manila"
   },
   {
     id: 3,
-    name: "SIMPLEE Green Tea Capsule Supplement",
-    price: 300,
-    rating: 5,
-    soldCount: 19,
-    image: "/images/Client/product-page/gen-health/image1stbatch-9.svg",
-    category: "general-health",
-    description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
-      features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
-      ],
-      specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
+    name: "Clothe Co. Men's Heavyweight Cotton T-Shirt Plain Tee (Available in Big & Tall)",
+  price: 650,
+  image: "/images/Client/product-page/Menswear/tshirt3.jpg",
+  category: "menswear",
+  description: {
+    main: "A durable and comfortable heavyweight cotton T-shirt, designed for both casual and work wear. Available in Big & Tall sizes for the perfect fit.",
+    subText: "Ideal for layering or wearing on its own, this plain tee is versatile and easy to pair with any outfit.",
+    features: [
+      "Heavyweight cotton fabric for durability",
+      "Breathable and soft for all-day comfort",
+      "Plain design for a clean, classic look",
+      "Available in Big & Tall sizes for a more comfortable fit"
     ],
-    images: [
-      "/images/Client/product-page/gen-health/image1stbatch-9.svg",
-      "/images/Client/product-page/gen-health/image1stbatch-9.svg",
-      "/images/Client/product-page/gen-health/image1stbatch-9.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
+    specifications: [
+      "Material: 100% Cotton",
+      "Machine washable",
+      "Available in sizes S, M, L, XL, 2XL, 3XL, 4XL",
+      "Imported"
+    ]
+  },
+  shipping: {
+    standard: { price: "₱70", days: "3-5 Days" },
+    express: { price: "₱120", days: "1-2 Days" }
+  },
+  location: "Taguig City, Metro Manila"
   },
   {
     id: 4,
-    name: "FERN-C 568.18mg",
-    price: 233,
-    rating: 4,
-    soldCount: 55,
-    image: "/images/Client/product-page/gen-health/image1stbatch-8.svg",
-    category: "general-health",
+    name: "Men Jacket Classic Baggy Coat Zip Up Outwear Baseball Clothing Long Sleeve Tops",
+    price: 1200,
+    image: "/images/Client/product-page/Menswear/tshirt4.jpg",
+    category: "menswear",
     description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
+      main: "A stylish and versatile classic baggy jacket with a zip-up closure, designed for a comfortable and relaxed fit. Perfect for casual wear and outdoor activities.",
+      subText: "This long sleeve jacket features a baseball-inspired design, making it an ideal outerwear piece for cooler weather.",
       features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
+        "Zip-up closure for easy wear",
+        "Classic baggy fit for a relaxed and comfortable look",
+        "Baseball-inspired style with ribbed cuffs and hem",
+        "Long sleeves for added warmth and comfort",
+        "Available in various sizes for the perfect fit"
       ],
       specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
+        "Material: 100% Polyester",
+        "Machine washable",
+        "Available in sizes S, M, L, XL, 2XL",
+        "Imported"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱100", days: "4-6 Days" },
+      express: { price: "₱160", days: "1-2 Days" }
     },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image1stbatch-8.svg",
-      "/images/Client/product-page/gen-health/image1stbatch-8.svg",
-      "/images/Client/product-page/gen-health/image1stbatch-8.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
+    location: "Davao City, Davao del Sur"
   },
   {
     id: 5,
-    name: "SLEEPASIL Capsule",
-    price: 13,
-    rating: 5,
-    soldCount: 104,
-    image: "/images/Client/product-page/gen-health/image1stbatch-7.svg",
-    category: "general-health",
+    name: "OH Solid Three-Buttons Polo - XL / Green",
+    price: 850,
+    image: "/images/Client/product-page/Menswear/tshirt5.jpg",
+    category: "menswear",
     description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
+      main: "A classic and comfortable polo shirt with three buttons, perfect for both casual outings and semi-formal events.",
+      subText: "This solid green polo shirt offers a clean and timeless look, making it a wardrobe essential for versatile styling.",
       features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
+        "Three-button placket for a classic polo look",
+        "Soft and breathable fabric for maximum comfort",
+        "Slim fit design for a more tailored appearance",
+        "Available in size XL for a relaxed fit"
       ],
       specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
+        "Material: 100% Cotton",
+        "Machine washable",
+        "Available in sizes S, M, L, XL, 2XL",
+        "Imported"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱80", days: "3-5 Days" },
+      express: { price: "₱130", days: "1-2 Days" }
     },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image1stbatch-7.svg",
-      "/images/Client/product-page/gen-health/image1stbatch-7.svg",
-      "/images/Client/product-page/gen-health/image1stbatch-7.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
+    location: "Cebu City, Cebu"
   },
   {
     id: 6,
-    name: "SALONPAS Medicated Patch 10s",
-    price: 63,
-    rating: 4,
-    soldCount: 15,
-    image: "/images/Client/product-page/gen-health/image1stbatch-6.svg",
-    category: "general-health",
+    name: "Men's Cargo Pants Multi Pocket Wide Leg Jogger Trousers",
+    price: 650,
+    image: "/images/Client/product-page/Menswear/pants1.jpg",
+    category: "menswear",
     description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
+      main: "Stylish and functional multi-pocket cargo pants.",
+      subText: "Perfect for streetwear or casual workwear.",
       features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
+        "Wide-leg fit",
+        "Multiple utility pockets",
+        "Durable material",
+        "Adjustable waistband"
       ],
       specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
+        "Material: 100% Cotton",
+        "Letter embroidery detail",
+        "Machine washable",
+        "Made in the Philippines",
+        "Comfortable and durable",
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱80", days: "4 Days" },
+      express: { price: "₱150", days: "2 Days" }
     },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image1stbatch-6.svg",
-      "/images/Client/product-page/gen-health/image1stbatch-6.svg",
-      "/images/Client/product-page/gen-health/image1stbatch-6.svg"
-    ],
     location: "Ampayon, Agusan del Norte"
   },
   {
     id: 7,
-    name: "VICKS VapoRub 25g",
-    price: 116,
-    rating: 3,
-    soldCount: 8,
-    image: "/images/Client/product-page/gen-health/image1stbatch-1.svg",
-    category: "general-health",
+    name: "SAYO TOMASYON Male Short Pants With Draw String",
+    price: 400,
+    image: "/images/Client/product-page/Menswear/pants2.jpg",
+    category: "menswear",
     description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
+      main: "Casual and stylish cargo shorts with drawstring waist.",
+      subText: "Great for summer days and active wear.",
       features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
+        "Elastic waistband with drawstring",
+        "Multiple pockets",
+        "Durable and lightweight",
+        "Relaxed fit"
       ],
       specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
+        "Material: 80% Cotton, 20% Polyester",
+        "Machine washable",
+        "Available in Khaki and Black",
+        "Made in the Philippines",
+        "Perfect for casual wear",
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱60", days: "3 Days" },
+      express: { price: "₱110", days: "1 Day" }
     },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image1stbatch-1.svg",
-      "/images/Client/product-page/gen-health/image1stbatch-1.svg",
-      "/images/Client/product-page/gen-health/image1stbatch-1.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
+    location: "Butuan City, Agusan del Norte"
   },
   {
     id: 8,
-    name: "BETADINE Solution 120ml",
-    price: 233,
-    rating: 5,
-    soldCount: 26,
-    image: "/images/Client/product-page/gen-health/image1stbatch-2.svg",
-    category: "general-health",
+    name: "Men's Shorts Multi-Pocket Cargo",
+    price: 350,
+    image: "/images/Client/product-page/Menswear/pants3.jpg",
+    category: "menswear",
     description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
+      main: "Practical and stylish multi-pocket cargo shorts.",
+      subText: "Perfect for outdoor activities and casual wear.",
       features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
+        "Elastic waistband",
+        "Knee-length design",
+        "Multiple utility pockets",
+        "Safari-style solid color"
       ],
       specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
+        "Material: 100% Cotton",
+        "Machine washable",
+        "Relaxed fit",
+        "Made in the Philippines",
+        "Lightweight and breathable",
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱70", days: "4 Days" },
+      express: { price: "₱120", days: "2 Days" }
     },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image1stbatch-2.svg",
-      "/images/Client/product-page/gen-health/image1stbatch-2.svg",
-      "/images/Client/product-page/gen-health/image1stbatch-2.svg"
-    ],
     location: "Ampayon, Agusan del Norte"
   },
   {
     id: 9,
-    name: "OMRON Arm Type Blood Pressure Monitor",
-    price: 2502,
-    rating: 4,
-    soldCount: 102,
-    image: "/images/Client/product-page/gen-health/image1stbatch-3.svg",
-    category: "general-health",
+    name: "SAYO TOMASYON Black Baggy Jeans Men Harem Pants",
+    price: 700,
+    image: "/images/Client/product-page/Menswear/pants4.jpg",
+    category: "menswear",
     description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
+      main: "Trendy black baggy jeans with a harem fit.",
+      subText: "Perfect for casual and streetwear looks.",
       features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
+        "Oversized fit",
+        "Wide-leg design",
+        "Durable denim fabric",
+        "Trendy and versatile"
       ],
       specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
+        "Material: 100% Denim",
+        "Machine washable",
+        "Made in the Philippines",
+        "Ideal for streetwear enthusiasts",
+        "Available in oversized fits",
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱80", days: "3 Days" },
+      express: { price: "₱140", days: "1 Day" }
     },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image1stbatch-3.svg",
-      "/images/Client/product-page/gen-health/image1stbatch-3.svg",
-      "/images/Client/product-page/gen-health/image1stbatch-3.svg"
-    ],
     location: "Ampayon, Agusan del Norte"
   },
   {
     id: 10,
-    name: "ENFAGROW A+ Four Powder 1.8kg",
-    price: 1648,
-    rating: 5,
-    soldCount: 56,
-    image: "/images/Client/product-page/gen-health/image1stbatch-4.svg",
-    category: "general-health",
+    name: "SAYO TOMASYON 2024 New Running Jogging Pants",
+    price: 600,
+    image: "/images/Client/product-page/Menswear/pants5.jpg",
+    category: "menswear",
     description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
+      main: "Soft and comfortable jogging pants for sports and casual wear.",
+      subText: "Designed for performance and style.",
       features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
+        "Elastic waistband with drawstring",
+        "Soft cotton fabric",
+        "Tapered fit",
+        "Breathable and lightweight"
       ],
       specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
+        "Material: 95% Cotton, 5% Spandex",
+        "Machine washable",
+        "Perfect for workouts and lounging",
+        "Made in the Philippines",
+        "Available in multiple sizes",
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱75", days: "2 Days" },
+      express: { price: "₱120", days: "1 Day" }
     },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image1stbatch-4.svg",
-      "/images/Client/product-page/gen-health/image1stbatch-4.svg",
-      "/images/Client/product-page/gen-health/image1stbatch-4.svg"
-    ],
     location: "Ampayon, Agusan del Norte"
   },
   {
     id: 11,
-    name: "DIFFLAM Forte Throat Spray 15ml",
-    price: 480,
-    rating: 3,
-    soldCount: 132,
-    image: "/images/Client/product-page/gen-health/image1stbatch-5.svg",
-    category: "general-health",
+    name: "Simwood Solid Color Drop Sleeve T-shirt - Blue Green 2nd / S",
+    price: 650,
+    image: "/images/Client/product-page/Menswear/tshirt6.jpg",
+    category: "menswear",
     description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
+      main: "A trendy and comfortable solid color drop sleeve t-shirt, perfect for casual wear or layering.",
+      subText: "This blue-green t-shirt features a relaxed fit and drop shoulders, offering both style and comfort for everyday wear.",
       features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
+        "Solid color design for a clean, minimalistic look",
+        "Drop sleeve style for a relaxed, contemporary fit",
+        "Soft and breathable fabric for all-day comfort",
+        "Available in size S for a more tailored fit"
       ],
       specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
+        "Material: 100% Cotton",
+        "Machine washable",
+        "Available in sizes S, M, L",
+        "Imported"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱70", days: "3-5 Days" },
+      express: { price: "₱120", days: "1-2 Days" }
     },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image1stbatch-5.svg",
-      "/images/Client/product-page/gen-health/image1stbatch-5.svg",
-      "/images/Client/product-page/gen-health/image1stbatch-5.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
+    location: "Makati City, Metro Manila"
   },
   {
     id: 12,
-    name: "INDOPLAS Powder-Free Examination Latex Gloves (100pcs)",
-    price: 159,
-    rating: 4,
-    soldCount: 104,
-    image: "/images/Client/product-page/gen-health/image1stbatch-1.1.svg",
-    category: "general-health",
+    name: "OH Plain Color Regular Fit T-Shirt - L / Dark Grey",
+    price: 600,
+    image: "/images/Client/product-page/Menswear/tshirt7.jpg",
+    category: "menswear",
     description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
+      main: "A versatile and classic plain color t-shirt in dark grey, offering a regular fit for a comfortable and relaxed feel.",
+      subText: "Perfect for casual wear, layering, or pairing with your favorite jeans or shorts for an effortlessly stylish look.",
       features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
+        "Plain color design for a minimalist style",
+        "Regular fit for comfort and ease of movement",
+        "Soft and breathable cotton fabric",
+        "Durable and easy to care for"
       ],
       specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
+        "Material: 100% Cotton",
+        "Machine washable",
+        "Available in sizes S, M, L, XL",
+        "Imported"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱70", days: "3-5 Days" },
+      express: { price: "₱120", days: "1-2 Days" }
     },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image1stbatch-1.1.svg",
-      "/images/Client/product-page/gen-health/image1stbatch-1.1.svg",
-      "/images/Client/product-page/gen-health/image1stbatch-1.1.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
-  },
-  {
-    id: 13,
-    name: "BELO Sun Expert Tinted Sunscreen SPF50 PA+++",
-    price: 180,
-    rating: 4,
-    soldCount: 56,
-    image: "/images/Client/product-page/gen-health/image2ndbatch-6.svg",
-    category: "general-health",
-    description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
-      features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
-      ],
-      specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image2ndbatch-6.svg",
-      "/images/Client/product-page/gen-health/image2ndbatch-6.svg",
-      "/images/Client/product-page/gen-health/image2ndbatch-6.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
-  },
-  {
-    id: 14,
-    name: "NEURAGION TAB 9+1 PR",
-    price: 222,
-    rating: 4,
-    soldCount: 322,
-    image: "/images/Client/product-page/gen-health/image2ndbatch-3.svg",
-    category: "general-health",
-    description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
-      features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
-      ],
-      specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image2ndbatch-3.svg",
-      "/images/Client/product-page/gen-health/image2ndbatch-3.svg",
-      "/images/Client/product-page/gen-health/image2ndbatch-3.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
-  },
-  {
-    id: 15,
-    name: "SNOW CAPS Gluta 500 FX Vitamin C 30s",
-    price: 1785,
-    rating: 5,
-    soldCount: 452,
-    image: "/images/Client/product-page/gen-health/image2ndbatch-9.svg",
-    category: "general-health",
-    description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
-      features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
-      ],
-      specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image2ndbatch-9.svg",
-      "/images/Client/product-page/gen-health/image2ndbatch-9.svg",
-      "/images/Client/product-page/gen-health/image2ndbatch-9.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
-  },
-  {
-    id: 16,
-    name: "GUARDIAN Essential Hand Wash Aloe 500ml",
-    price: 97,
-    rating: 4,
-    soldCount: 15,
-    image: "/images/Client/product-page/gen-health/image2ndbatch-8.svg",
-    category: "general-health",
-    description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
-      features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
-      ],
-      specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image2ndbatch-8.svg",
-      "/images/Client/product-page/gen-health/image2ndbatch-8.svg",
-      "/images/Client/product-page/gen-health/image2ndbatch-8.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
-  },
-  {
-    id: 17,
-    name: "IMMUNIPLUS Herbal Drink 12pcs",
-    price: 13,
-    rating: 4,
-    soldCount: 1,
-    image: "/images/Client/product-page/gen-health/image2ndbatch-10.svg",
-    category: "general-health",
-    description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
-      features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
-      ],
-      specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image2ndbatch-10.svg",
-      "/images/Client/product-page/gen-health/image2ndbatch-10.svg",
-      "/images/Client/product-page/gen-health/image2ndbatch-10.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
-  },
-  {
-    id: 18,
-    name: "GUARDIAN Multi-Care Mouthwash Original",
-    price: 99,
-    rating: 4,
-    soldCount: 132,
-    image: "/images/Client/product-page/gen-health/image2ndbatch-5.svg",
-    category: "general-health",
-    description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
-      features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
-      ],
-      specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image2ndbatch-5.svg",
-      "/images/Client/product-page/gen-health/image2ndbatch-5.svg",
-      "/images/Client/product-page/gen-health/image2ndbatch-5.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
-  },
-  {
-    id: 19,
-    name: "GUARDIAN Slim & Soft Toothbrush",
-    price: 129,
-    rating: 5,
-    soldCount: 85,
-    image: "/images/Client/product-page/gen-health/image2ndbatch-4.svg",
-    category: "general-health",
-    description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
-      features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
-      ],
-      specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image2ndbatch-4.svg",
-      "/images/Client/product-page/gen-health/image2ndbatch-4.svg",
-      "/images/Client/product-page/gen-health/image2ndbatch-4.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
-  },
-  {
-    id: 20,
-    name: "GUARDIAN 2-IN-1 BRUSH PICKS (150 Pcs)",
-    price: 69,
-    rating: 4,
-    soldCount: 8,
-    image: "/images/Client/product-page/gen-health/image2ndbatch-1.svg",
-    category: "general-health",
-    description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
-      features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
-      ],
-      specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image2ndbatch-1.svg",
-      "/images/Client/product-page/gen-health/image2ndbatch-1.svg",
-      "/images/Client/product-page/gen-health/image2ndbatch-1.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
-  },
-  {
-    id: 21,
-    name: "VICKS VAPODROPS HONEY LEMON MENTHOL LOZENGES (24X1)",
-    price: 199,
-    rating: 4,
-    soldCount: 156,
-    image: "/images/Client/product-page/gen-health/image2ndbatch-7.svg",
-    category: "general-health",
-    description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
-      features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
-      ],
-      specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image2ndbatch-7.svg",
-      "/images/Client/product-page/gen-health/image2ndbatch-7.svg",
-      "/images/Client/product-page/gen-health/image2ndbatch-7.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
-  },
-  {
-    id: 22,
-    name: "OMRON Body Composition Monitor HBF-212",
-    price: 2852,
-    rating: 4,
-    soldCount: 42,
-    image: "/images/Client/product-page/gen-health/image2ndbatch-2.svg",
-    category: "general-health",
-    description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
-      features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
-      ],
-      specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image2ndbatch-2.svg",
-      "/images/Client/product-page/gen-health/image2ndbatch-2.svg",
-      "/images/Client/product-page/gen-health/image2ndbatch-2.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
-  },
-  {
-    id: 23,
-    name: "SURGICAL One Step HIV 1.2 Pack of 3",
-    price: 199,
-    rating: 4,
-    soldCount: 446,
-    image: "/images/Client/product-page/gen-health/image2ndbatch-11.svg",
-    category: "general-health",
-    description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
-      features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
-      ],
-      specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image2ndbatch-11.svg",
-      "/images/Client/product-page/gen-health/image2ndbatch-11.svg",
-      "/images/Client/product-page/gen-health/image2ndbatch-11.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
-  },
-  {
-    id: 24,
-    name: "DISPOSABLE Face Mask 3-Ply with Earloop (50pcs)",
-    price: 27,
-    rating: 4,
-    soldCount: 1256,
-    image: "/images/Client/product-page/gen-health/image2ndbatch-12.svg",
-    category: "general-health",
-    description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
-      features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
-      ],
-      specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image2ndbatch-12.svg",
-      "/images/Client/product-page/gen-health/image2ndbatch-12.svg",
-      "/images/Client/product-page/gen-health/image2ndbatch-12.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
-  },
-  {
-    id: 25,
-    name: "BEROCCA Orange Flavor 10 Tablets",
-    price: 233,
-    rating: 4,
-    soldCount: 52,
-    image: "/images/Client/product-page/gen-health/image3rdbatch-7.svg",
-    category: "general-health",
-    description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
-      features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
-      ],
-      specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image3rdbatch-7.svg",
-      "/images/Client/product-page/gen-health/image3rdbatch-7.svg",
-      "/images/Client/product-page/gen-health/image3rdbatch-7.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
-  },
-  {
-    id: 26,
-    name: "BIOGESIC Caplet 500mg",
-    price: 43,
-    rating: 4,
-    soldCount: 3,
-    image: "/images/Client/product-page/gen-health/image3rdbatch-4.svg",
-    category: "general-health",
-    description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
-      features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
-      ],
-      specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image3rdbatch-4.svg",
-      "/images/Client/product-page/gen-health/image3rdbatch-4.svg",
-      "/images/Client/product-page/gen-health/image3rdbatch-4.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
-  },
-  {
-    id: 27,
-    name: "COLGATE Fresh Confidence Spicy Fresh 3s Pack",
-    price: 207,
-    rating: 5,
-    soldCount: 86,
-    image: "/images/Client/product-page/gen-health/image3rdbatch-8.svg",
-    category: "general-health",
-    description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
-      features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
-      ],
-      specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image3rdbatch-8.svg",
-      "/images/Client/product-page/gen-health/image3rdbatch-8.svg",
-      "/images/Client/product-page/gen-health/image3rdbatch-8.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
-  },
-  {
-    id: 28,
-    name: "GEISHA WHITE Intense Bar 65g x 3",
-    price: 82,
-    rating: 4,
-    soldCount: 446,
-    image: "/images/Client/product-page/gen-health/image3rdbatch-2.svg",
-    category: "general-health",
-    description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
-      features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
-      ],
-      specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image3rdbatch-2.svg",
-      "/images/Client/product-page/gen-health/image3rdbatch-2.svg",
-      "/images/Client/product-page/gen-health/image3rdbatch-2.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
-  },
-  {
-    id: 29,
-    name: "NIVEA Anti-Perspirant Extra Brightening Roll-On",
-    price: 164,
-    rating: 4,
-    soldCount: 452,
-    image: "/images/Client/product-page/gen-health/image3rdbatch.svg",
-    category: "general-health",
-    description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
-      features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
-      ],
-      specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image3rdbatch.svg",
-      "/images/Client/product-page/gen-health/image3rdbatch.svg",
-      "/images/Client/product-page/gen-health/image3rdbatch.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
-  },
-  {
-    id: 30,
-    name: "ORAL-B Dental Flossers Loose Box 60s",
-    price: 339,
-    rating: 5,
-    soldCount: 294,
-    image: "/images/Client/product-page/gen-health/image3rdbatch-1.svg",
-    category: "general-health",
-    description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
-      features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
-      ],
-      specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image3rdbatch-1.svg",
-      "/images/Client/product-page/gen-health/image3rdbatch-1.svg",
-      "/images/Client/product-page/gen-health/image3rdbatch-1.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
-  },
-  {
-    id: 31,
-    name: "CENTRUM Advance Tablet 100s",
-    price: 1125,
-    rating: 5,
-    soldCount: 756,
-    image: "/images/Client/product-page/gen-health/image3rdbatch-9.svg",
-    category: "general-health",
-    description: {
-      main: "Complete Daily Multivitamin for Adults",
-      subText: "Scientifically Formulated with 26 Key Nutrients",
-      features: [
-        "Supports Immune System Health",
-        "Promotes Energy and Metabolism",
-        "Maintains Bone Health",
-        "Supports Eye Health"
-      ],
-      specifications: [
-        "Serving Size: 1 Tablet Daily",
-        "Contains Vitamins A, C, D, E, K, B-Complex",
-        "With Essential Minerals Including Zinc, Iron, and Calcium",
-        "No Artificial Colors or Flavors",
-        "GMP Certified Manufacturing",
-        "Store in Cool, Dry Place",
-        "100 Tablets per Bottle",
-        "Suitable for Adults 18+"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    colors: ['blue', 'white'], // if applicable
-    ratings: 0, // total number of ratings
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality masks! The ear loops are comfortable and don't hurt even after wearing all day. Breathing is easy and I feel protected.",
-        images: []
-      },
-      {
-        id: 2,
-        user: "John D.",
-        rating: 4,
-        date: "2024-03-10",
-        comment: "Good protection and fits well. The nose wire could be a bit stronger but overall satisfied with the purchase.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/gen-health/image3rdbatch-9.svg",
-      "/images/Client/product-page/gen-health/image3rdbatch-9.svg",
-      "/images/Client/product-page/gen-health/image3rdbatch-9.svg"
-    ],
-    location: "Ampayon, Agusan del Norte"
+    location: "Quezon City, Metro Manila"
   }
 ];
 

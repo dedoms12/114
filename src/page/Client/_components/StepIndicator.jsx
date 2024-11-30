@@ -17,7 +17,7 @@ const StepIndicator = ({ currentStep }) => {
             <div className="flex flex-col items-center">
               <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
                 step.number <= currentStep 
-                  ? 'bg-[#4C9BF5] text-white'
+                  ? 'bg-[#D19B5A] text-white'
                   : 'bg-gray-200 text-gray-600'
               }`}>
                 {step.number}
@@ -26,7 +26,7 @@ const StepIndicator = ({ currentStep }) => {
             </div>
             {index < steps.length - 1 && (
               <div className={`w-16 h-1 mx-2 ${
-                step.number < currentStep ? 'bg-[#4C9BF5]' : 'bg-gray-200'
+                step.number < currentStep ? 'bg-[#D19B5A]' : 'bg-gray-200'
               }`} />
             )}
           </React.Fragment>

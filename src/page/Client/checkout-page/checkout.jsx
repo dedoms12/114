@@ -24,14 +24,14 @@ const Checkout = () => {
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   
   const [deliveryInfo, setDeliveryInfo] = useState({
-    name: 'Eddie Jr De Pedro',
+    name: 'Mugiwara',
     phone: '(+63)12345678',
-    address: 'Ampayon,Butuan City'
+    address: 'One piece, Butuan City'
   });
 
   const [selectedShipping, setSelectedShipping] = useState({
     type: 'Standard Delivery',
-    eta: '10 hours',
+    eta: '5 hours',
     price: 30
   });
 
@@ -71,7 +71,7 @@ const Checkout = () => {
     addOrder(orderDetails);
     
     toast.success('Order placed successfully!', {
-      position: "top-right",
+      position: "top-center",
       autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -86,13 +86,35 @@ const Checkout = () => {
     <div className="min-h-screen bg-gray-50">
       <NavBar />
       
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="pt-10 mx-20">
+      <StepIndicator currentStep={2} />
+      
+      </div>
+      <div className="max-w-4xl mx-60 px-4 pb-10">
+      <div 
+          onClick={() => navigate('/cart')}
+          className="flex items-center mb-4 text-gray-600 hover:text-gray-800 cursor-pointer w-fit"
+        >
+          <svg 
+            className="w-5 h-5 mr-2" 
+            fill="none" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            strokeWidth="2" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+          >
+            <path d="M15 19l-7-7 7-7" />
+          </svg>
+          <span>Back</span>
+        </div>
+      </div>
+      <div className="max-w-7xl mx-auto px-4 py-8 border-2 rounded-lg mx-60">
+      
         <h1 className="text-2xl font-semibold mb-6">Checkout</h1>
 
-        <StepIndicator currentStep={2} />
-
         {/* Delivery Address */}
-        <div className="bg-white rounded-lg p-6 mb-6">
+        <div className="bg-white rounded-lg p-6 mb-6 border-2">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center">
               <span className="text-blue-500 mr-2">📍</span>
@@ -100,9 +122,9 @@ const Checkout = () => {
             </div>
             <button 
               onClick={() => setIsAddressModalOpen(true)}
-              className="text-[#4C9BF5] hover:text-blue-700"
+              className="text-[blue] hover:text-yellow-500"
             >
-              Change
+              CHANGE
             </button>
           </div>
           <div className="ml-6">
@@ -112,7 +134,7 @@ const Checkout = () => {
         </div>
 
         {/* Products Section */}
-        <div className="bg-white rounded-lg p-6 mb-6">
+        <div className="bg-white rounded-lg p-6 mb-6 border-2">
           <div className="border-b pb-4 mb-4">
             <h2 className="font-medium">Products Ordered</h2>
           </div>
@@ -141,7 +163,7 @@ const Checkout = () => {
             </div>
             <button 
               onClick={() => setIsShippingModalOpen(true)}
-              className="text-[#FF5722] hover:text-orange-700"
+              className="text-[blue] hover:text-yellow-500"
             >
               CHANGE
             </button>
@@ -149,14 +171,14 @@ const Checkout = () => {
         </div>
 
         {/* Payment Method */}
-        <div className="bg-white rounded-lg p-6 mb-6">
+        <div className="bg-white rounded-lg p-6 mb-6 border-2">
           <div className="flex justify-between items-center">
             <h2 className="font-medium">Payment Method</h2>
             <div className="flex items-center">
               <span className="mr-4">{paymentMethod}</span>
               <button 
                 onClick={() => setIsPaymentModalOpen(true)}
-                className="text-[#FF5722] hover:text-orange-700"
+                className="text-[blue] hover:text-yellow-500"
               >
                 CHANGE
               </button>
@@ -165,7 +187,7 @@ const Checkout = () => {
         </div>
 
         {/* Order Summary */}
-        <div className="bg-white rounded-lg p-6">
+        <div className="bg-white rounded-lg p-6 border-2">
           <div className="space-y-4">
             <div className="flex justify-between">
               <span>Merchandise Subtotal:</span>
@@ -177,7 +199,7 @@ const Checkout = () => {
             </div>
             <div className="flex justify-between font-medium">
               <span>Total Payment:</span>
-              <span className="text-[#F1511B]">₱ {calculateSubtotal() + selectedShipping.price}</span>
+              <span className="text-[Black]">₱ {calculateSubtotal() + selectedShipping.price}</span>
             </div>
           </div>
           <button 

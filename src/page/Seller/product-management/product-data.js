@@ -5,10 +5,10 @@ import { personalCareProducts } from '../../Client/product-page/personal-care/pc
 import fs from 'fs';
 
 export const categories = [
-  { id: 1, name: 'General Health', value: 'general-health', products: generalProducts },
-  { id: 2, name: 'Medical Supplies', value: 'medical-supplies', products: medicalProducts },
-  { id: 3, name: 'Supplements', value: 'supplements', products: supplementProducts },
-  { id: 4, name: 'Personal Care', value: 'personal-care', products: personalCareProducts }
+  { id: 1, name: 'Menswear', value: 'general-health', products: generalProducts },
+  { id: 2, name: 'Womenswear', value: 'medical-supplies', products: medicalProducts },
+  { id: 3, name: 'Kidswear', value: 'supplements', products: supplementProducts },
+  { id: 4, name: 'Shoes', value: 'personal-care', products: personalCareProducts }
 ];
 
 export const units = ['Item', 'Box', 'Pack', 'Bottle', 'Piece'];

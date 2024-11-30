@@ -9,739 +9,343 @@ const getRandomStore = () => {
 const originalMedicalProducts = [
   {
     id: 1,
-    name: "Indoplas Sterile Latex Surgical Gloves Powder Free - (5.5 Pair)",
-    price: 13,
-    rating: 5,
-    soldCount: 502,
-    image: "/images/Client/product-page/medsup/image1stbatch-11.svg",
-    category: "medical-supplies",
+    name: "Wedtrend Women's Vintage Tea Dress, Short Sleeve Cocktail Party Dress Work Church Casual Dress",
+    price: 950,
+    image: "/images/Client/product-page/Womenswear/dress1.jpg",
+    category: "womenswear",
     description: {
-      main: "Sterile Latex Surgical Gloves",
-      subText: "Medical Grade Powder-Free Examination Gloves",
+      main: "A classic vintage-inspired tea dress with a flattering silhouette.",
+      subText: "Perfect for cocktail parties, church services, or casual workdays.",
       features: [
-        "Powder-Free Formula",
-        "Textured Surface",
-        "Ambidextrous Design",
-        "Excellent Tactile Sensitivity"
+        "Short sleeves with a comfortable fit",
+        "Vintage tea dress style",
+        "Flared skirt for a feminine look",
+        "Button-down back closure"
       ],
       specifications: [
-        "Size: 5.5",
-        "Material: Natural Latex",
-        "Sterile",
-        "Single Use Only",
-        "Medical Grade",
-        "ISO 13485 Certified",
-        "Made in Philippines",
-        "Meets ASTM Standards"
+        "Material: 100% Polyester",
+        "Hand wash only",
+        "Available in sizes S-XL",
+        "Flattering fit for all body types",
+        "Made in the Philippines"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱80", days: "3-4 Days" },
+      express: { price: "₱140", days: "1-2 Days" }
     },
-    reviews: [
-      {
-        id: 1,
-        user: "Dr. Santos",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Excellent quality surgical gloves. Perfect fit and good tactile sensitivity.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/medsup/image1stbatch-11.svg",
-      "/images/Client/product-page/medsup/image1stbatch-11.svg",
-      "/images/Client/product-page/medsup/image1stbatch-11.svg"
-    ],
-    location: "Quezon City, Metro Manila"
+    location: "Davao City, Davao del Sur"
   },
   {
     id: 2,
-    name: "Children Colostomy Bag Medical Type Seal Ostomy Bag",
-    price: 455,
-    rating: 4,
-    soldCount: 25,
-    image: "/images/Client/product-page/medsup/image1stbatch-10.svg",
-    category: "medical-supplies",
+    name: "GREEN 1940S LAPEL BUTTONED SOLID DRESS",
+    price: 1200,
+    image: "/images/Client/product-page/Womenswear/dress2.jpg",
+    category: "womenswear",
     description: {
-      main: "Pediatric Colostomy Collection System",
-      subText: "Comfortable and Secure Ostomy Care Solution for Children",
+      main: "A retro-inspired 1940s lapel dress with a solid color and button details.",
+      subText: "Ideal for formal gatherings, vintage-themed parties, or elegant events.",
       features: [
-        "Skin-Friendly Adhesive",
-        "Odor-Proof Seal",
-        "Comfortable Fit",
-        "Easy to Apply and Remove"
+        "Classic lapel collar",
+        "Button-down front",
+        "Slim fit design with flared skirt",
+        "Elegant and timeless design"
       ],
       specifications: [
-        "Child-Specific Size",
-        "Hypoallergenic Material",
-        "Leak-Proof Design",
-        "Disposable",
-        "Includes Adhesive Seal",
-        "Medical Grade",
-        "Box of 10 Bags",
-        "CE Certified"
+        "Material: 85% Polyester, 15% Spandex",
+        "Machine washable",
+        "Available in sizes XS-XL",
+        "Perfect for vintage fashion enthusiasts",
+        "Made in the Philippines"
       ]
     },
     shipping: {
-      standard: { price: "₱40", days: "12 Hours" },
-      express: { price: "₱60", days: "6 Hours" }
+      standard: { price: "₱90", days: "4-5 Days" },
+      express: { price: "₱160", days: "2 Days" }
     },
-    reviews: [
-      {
-        id: 1,
-        user: "Maria L.",
-        rating: 5,
-        date: "2024-03-10",
-        comment: "Perfect size for children, very gentle on the skin.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/medsup/image1stbatch-10.svg",
-      "/images/Client/product-page/medsup/image1stbatch-10.svg",
-      "/images/Client/product-page/medsup/image1stbatch-10.svg"
-    ],
-    location: "Butuan City, Agusan Del Norte"
+    location: "Cebu City, Cebu"
   },
   {
     id: 3,
-    name: "Indoplas Nitrile Examination Gloves Box Of 100 (Medium) - 1 Box",
-    price: 149,
-    rating: 5,
-    soldCount: 2000,
-    image: "/images/Client/product-page/medsup/image1stbatch-8.svg",
-    category: "medical-supplies",
+    name: "Light Blue 1950s Vintage Dress with Sleeves",
+    price: 1200,
+    image: "/images/Client/product-page/Womenswear/dress3.jpg",
+    category: "womenswear",
     description: {
-      main: "Medical Grade Nitrile Examination Gloves",
-      subText: "Powder-Free Nitrile Examination Gloves for Professional Use",
+      main: "A classic 1950s-inspired vintage dress in light blue, featuring sleeves for a modest and elegant look.",
+      subText: "Perfect for vintage enthusiasts, this dress offers a flattering silhouette and timeless style.",
       features: [
-        "Powder-Free",
-        "Latex-Free",
-        "Textured Fingertips",
-        "Superior Puncture Resistance"
+        "1950s vintage-inspired design",
+        "Elegant light blue color for a refreshing look",
+        "Sleeves for added comfort and style",
+        "Flattering A-line shape that suits various body types"
       ],
       specifications: [
-        "Size: Medium",
-        "100 Gloves per Box",
-        "Medical Grade",
-        "Non-Sterile",
-        "Single Use",
-        "FDA Approved",
-        "Made in Malaysia",
-        "Meets EN 455 Standards"
+        "Material: 100% Cotton",
+        "Machine washable or hand wash recommended",
+        "Available in multiple sizes",
+        "Imported"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱90", days: "3-5 Days" },
+      express: { price: "₱150", days: "1-2 Days" }
     },
-    reviews: [
-      {
-        id: 1,
-        user: "Nurse Joy",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Excellent quality and durability. Perfect for medical procedures.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/medsup/image1stbatch-8.svg",
-      "/images/Client/product-page/medsup/image1stbatch-8.svg",
-      "/images/Client/product-page/medsup/image1stbatch-8.svg"
-    ],
-    location: "Quezon City, Metro Manila"
+    location: "Makati City, Metro Manila"
   },
   {
-    id: 4,
-    name: "Surgical Scrub Brush Medical Hand Washing Brushes Operating Room",
-    price: 79,
-    rating: 1,
-    soldCount: 100,
-    image: "/images/Client/product-page/medsup/image1stbatch-9.svg",
-    category: "medical-supplies",
+    id: 12,
+    name: "Women Y2K Peplum Shirt Puff Sleeve Tie Front Top Blouse Cute Going Out Babydoll Crop Top Summer (H-Yellow Solid Color Peplum Shirt, S)",
+    price: 850,
+    image: "/images/Client/product-page/Womenswear/shirt1.jpg",
+    category: "womenswear",
     description: {
-      main: "Surgical Grade Hand Scrub Brush",
-      subText: "Professional Medical Hand Washing Brush for Operating Room Use",
+      main: "A stylish Y2K-inspired peplum shirt with puff sleeves and a tie front design, perfect for a cute and chic summer look.",
+      subText: "This yellow babydoll crop top adds a playful touch to your wardrobe, ideal for going out or casual outings.",
       features: [
-        "Dual-Sided Design",
-        "Antimicrobial Bristles",
-        "Ergonomic Handle",
-        "Autoclavable Material"
+        "Y2K-inspired design with puff sleeves",
+        "Tie front detail for a customizable fit",
+        "Peplum cut for a flattering silhouette",
+        "Bright yellow solid color for a cheerful summer vibe"
       ],
       specifications: [
-        "Medical Grade Plastic",
-        "Sterilizable",
-        "Reusable",
-        "Length: 9cm",
-        "Width: 4cm",
-        "ISO 13485 Certified",
-        "CE Marked",
-        "For Professional Use"
+        "Material: 95% Cotton, 5% Spandex",
+        "Machine washable",
+        "Available in sizes S, M, L",
+        "Imported"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱70", days: "3-5 Days" },
+      express: { price: "₱120", days: "1-2 Days" }
     },
-    reviews: [
-      {
-        id: 1,
-        user: "Dr. Chen",
-        rating: 5,
-        date: "2024-03-12",
-        comment: "Essential tool for surgical hand scrubbing. Good quality.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/medsup/image1stbatch-9.svg",
-      "/images/Client/product-page/medsup/image1stbatch-9.svg",
-      "/images/Client/product-page/medsup/image1stbatch-9.svg"
-    ],
-    location: "Quezon City, Metro Manila"
-  },
+    location: "Taguig City, Metro Manila"
+  }  
+  ,
   {
     id: 5,
-    name: "Indoplas Kerxin KX3104 Stethoscope - Dual Head",
-    price: 149,
-    rating: 5,
-    soldCount: 10000,
-    image: "/images/Client/product-page/medsup/image1stbatch-7.svg",
-    category: "medical-supplies",
+    name: "floerns Women's Long Sleeve Rib Knit Tie Front Cropped Cardigan",
+    price: 750,
+    image: "/images/Client/product-page/Womenswear/shirt2.jpg",
+    category: "womenswear",
     description: {
-      main: "Professional Dual Head Stethoscope",
-      subText: "High-Quality Diagnostic Instrument for Medical Professionals",
+      main: "A stylish cropped cardigan with long sleeves and a ribbed knit pattern.",
+      subText: "Perfect for layering in colder weather or pairing with high-waisted pants.",
       features: [
-        "Dual-Head Design",
-        "Precision Acoustics",
-        "Comfortable Ear Tips",
-        "Durable Tubing"
+        "Ribbed knit fabric",
+        "Tie front design",
+        "Cropped fit for a modern look",
+        "Soft and breathable"
       ],
       specifications: [
-        "Chest Piece: Stainless Steel",
-        "Tubing Length: 28\"",
-        "Latex-Free",
-        "Includes Spare Parts",
-        "CE Certified",
-        "ISO 13485 Compliant",
-        "2-Year Warranty",
-        "Professional Grade"
+        "Material: 95% Cotton, 5% Spandex",
+        "Machine washable",
+        "Available in sizes S-XL",
+        "Versatile for any casual outfit"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱70", days: "3-4 Days" },
+      express: { price: "₱120", days: "2 Days" }
     },
-    reviews: [
-      {
-        id: 1,
-        user: "Dr. Garcia",
-        rating: 5,
-        date: "2024-03-14",
-        comment: "Excellent acoustic quality and comfortable to use.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/medsup/image1stbatch-7.svg",
-      "/images/Client/product-page/medsup/image1stbatch-7.svg",
-      "/images/Client/product-page/medsup/image1stbatch-7.svg"
-    ],
-    location: "Quezon City, Metro Manila"
+    location: "Manila, Metro Manila"
   },
   {
     id: 6,
-    name: "Indoplas 10cc Disposable Syringe Box",
-    price: 230,
-    rating: 5,
-    soldCount: 7400,
-    image: "/images/Client/product-page/medsup/image1stbatch.svg",
-    category: "medical-supplies",
+    name: "Alice Pearl Weekend Top - Coffee on Garmentory",
+    price: 800,
+    image: "/images/Client/product-page/Womenswear/shirt3.jpg",
+    category: "womenswear",
     description: {
-      main: "Sterile Disposable Syringes",
-      subText: "Medical Grade 10cc Syringes with Needles",
+      main: "A trendy top with pearl detailing and a relaxed fit.",
+      subText: "Great for a casual weekend outing or a cozy day at home.",
       features: [
-        "Sterile Packaging",
-        "Clear Barrel Markings",
-        "Smooth Plunger Action",
-        "Sharp Needle Point"
+        "Pearl embellishments on the sleeves",
+        "Relaxed fit for comfort",
+        "Short sleeves",
+        "Stylish and trendy"
       ],
       specifications: [
-        "Capacity: 10cc",
-        "Needle Size: 21G",
-        "Latex-Free",
-        "Single Use Only",
-        "EO Sterilized",
-        "Box of 100",
-        "ISO 13485 Certified",
-        "FDA Approved"
+        "Material: 100% Cotton",
+        "Machine washable",
+        "Available in sizes XS-XL",
+        "Perfect for pairing with jeans or skirts"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱80", days: "3-4 Days" },
+      express: { price: "₱130", days: "1-2 Days" }
     },
-    reviews: [
-      {
-        id: 1,
-        user: "Nurse Santos",
-        rating: 5,
-        date: "2024-03-13",
-        comment: "Reliable quality and smooth operation. Perfect for medical use.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/medsup/image1stbatch.svg",
-      "/images/Client/product-page/medsup/image1stbatch.svg",
-      "/images/Client/product-page/medsup/image1stbatch.svg"
-    ],
-    location: "Quezon City, Metro Manila"
+    location: "Cebu City, Cebu"
   },
   {
     id: 7,
-    name: "Warmhouse 800D Electric Centrifuge Machine Lab Laboratory",
-    price: 2349,
-    rating: 5,
-    soldCount: 30,
-    image: "/images/Client/product-page/medsup/image1stbatch-1.svg",
-    category: "medical-supplies",
+    name: "Chained Elegance Waffle Shirt",
+    price: 950,
+    image: "/images/Client/product-page/Womenswear/shirt4.jpg",
+    category: "womenswear",
     description: {
-      main: "Professional Laboratory Centrifuge",
-      subText: "High-Speed Electric Centrifuge for Medical and Laboratory Use",
+      main: "A chic waffle-knit shirt with a relaxed fit and trendy design.",
+      subText: "Perfect for layering or as a standalone top.",
       features: [
-        "Digital Speed Control",
-        "Timer Function",
-        "Safety Lock System",
-        "Low Noise Operation"
+        "Waffle-knit fabric",
+        "Loose, relaxed fit",
+        "Long sleeves",
+        "Versatile for any occasion"
       ],
       specifications: [
-        "Speed Range: 0-4000 RPM",
-        "Capacity: 6 x 20ml",
-        "Digital Display",
-        "Power: 220V/50Hz",
-        "CE Certified",
-        "1 Year Warranty",
-        "Includes 6 Tube Holders",
-        "Professional Grade"
+        "Material: 80% Polyester, 20% Cotton",
+        "Machine washable",
+        "Available in sizes S-XL",
+        "Stylish for both casual and semi-formal looks"
       ]
     },
     shipping: {
-      standard: { price: "₱50", days: "2-3 Days" },
-      express: { price: "₱100", days: "1 Day" }
+      standard: { price: "₱85", days: "2-3 Days" },
+      express: { price: "₱150", days: "1 Day" }
     },
-    reviews: [
-      {
-        id: 1,
-        user: "Lab Tech Maria",
-        rating: 5,
-        date: "2024-03-11",
-        comment: "Excellent performance and reliability. Perfect for our lab needs.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/medsup/image1stbatch-1.svg",
-      "/images/Client/product-page/medsup/image1stbatch-1.svg",
-      "/images/Client/product-page/medsup/image1stbatch-1.svg"
-    ],
-    location: "Quezon City, Metro Manila"
+    location: "Taguig City, Metro Manila"
   },
   {
     id: 8,
-    name: "Indoplas Powder Free Examination Latex Gloves Box Of 100 (Small)",
-    price: 159,
-    rating: 4,
-    soldCount: 10000,
-    image: "/images/Client/product-page/medsup/image1stbatch-2.svg",
-    category: "medical-supplies",
+    name: "Chained Elegance Waffle Shirt",
+    price: 950,
+    image: "/images/Client/product-page/Womenswear/skirt1.jpg",
+    category: "womenswear",
     description: {
-      main: "Latex Examination Gloves",
-      subText: "Medical Grade Powder-Free Latex Gloves",
+      main: "A chic waffle-knit shirt with a relaxed fit and trendy design.",
+      subText: "Perfect for layering or as a standalone top.",
       features: [
-        "Powder-Free",
-        "Natural Latex",
-        "Textured Surface",
-        "Excellent Sensitivity"
+        "Waffle-knit fabric",
+        "Loose, relaxed fit",
+        "Long sleeves",
+        "Versatile for any occasion"
       ],
       specifications: [
-        "Size: Small",
-        "100 Gloves per Box",
-        "Non-Sterile",
-        "Medical Grade",
-        "AQL 1.5",
-        "FDA Registered",
-        "EN 455 Compliant",
-        "Made in Malaysia"
+        "Material: 80% Polyester, 20% Cotton",
+        "Machine washable",
+        "Available in sizes S-XL",
+        "Stylish for both casual and semi-formal looks"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱85", days: "2-3 Days" },
+      express: { price: "₱150", days: "1 Day" }
     },
-    reviews: [
-      {
-        id: 1,
-        user: "Dr. Lee",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality and fit. Perfect for medical examinations.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/medsup/image1stbatch-2.svg",
-      "/images/Client/product-page/medsup/image1stbatch-2.svg",
-      "/images/Client/product-page/medsup/image1stbatch-2.svg"
-    ],
-    location: "Quezon City, Metro Manila"
+    location: "Taguig City, Metro Manila"
   },
   {
     id: 9,
-    name: "JOYS First Aid Kit Storage Box/Medicine Storage Kit Medicine",
-    price: 1299,
-    rating: 2,
-    soldCount: 7400,
-    image: "/images/Client/product-page/medsup/image2nd batch.svg",
-    category: "medical-supplies",
+    name: "Satin Skirt Drawstring Lace Casual Skirt Summer Solid Color Women Skirt",
+    price: 850,
+    image: "/images/Client/product-page/Womenswear/skirt2.jpg",
+    category: "womenswear",
     description: {
-      main: "Professional First Aid Storage Kit",
-      subText: "Comprehensive Medical Storage Solution",
+      main: "A satin skirt with a drawstring lace-up detail for a chic, casual summer look.",
+      subText: "Ideal for warm weather and versatile styling.",
       features: [
-        "Multiple Compartments",
-        "Durable Construction",
-        "Easy-Access Design",
-        "Portable Handle"
+        "Soft satin fabric",
+        "Adjustable drawstring waist",
+        "Lace-up detail for added flair",
+        "Available in various solid colors"
       ],
       specifications: [
-        "Material: High-Grade Plastic",
-        "Multiple Storage Layers",
-        "Secure Locking System",
-        "Water-Resistant",
-        "Impact-Resistant",
-        "Dimensions: Standard Size",
-        "Includes Dividers",
-        "Professional Grade"
+        "Material: 100% Satin",
+        "Hand wash or machine wash cold",
+        "Available in sizes S-XL",
+        "Perfect for casual outings or beach days"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱70", days: "3-4 Days" },
+      express: { price: "₱120", days: "2 Days" }
     },
-    reviews: [
-      {
-        id: 1,
-        user: "Dr. Rivera",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Excellent storage solution for medical supplies. Very organized.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/medsup/image2ndbatch.svg",
-      "/images/Client/product-page/medsup/image2ndbatch.svg",
-      "/images/Client/product-page/medsup/image2ndbatch.svg"
-    ],
-    location: "Quezon City, Metro Manila"
+    location: "Makati City, Metro Manila"
   },
   {
     id: 10,
-    name: "Portable 7 Compartment Miniature First Aid Kit/Medicine Box",
-    price: 107,
-    rating: 5,
-    soldCount: 100,
-    image: "/images/Client/product-page/medsup/image2nd batch-1.svg",
-    category: "medical-supplies",
+    name: "Modern Single-Breasted Slim Fit Solid Skirt - Pink / XL",
+    price: 750,
+    image: "/images/Client/product-page/Womenswear/skirt3.jpg",
+    category: "womenswear",
     description: {
-      main: "Compact Medicine Storage Solution",
-      subText: "Portable Multi-Compartment Medical Storage Box",
+      main: "A modern single-breasted slim-fit skirt in pink, designed for a sleek and stylish look.",
+      subText: "Perfect for both formal and casual settings, offering a flattering slim fit.",
       features: [
-        "7 Separate Compartments",
-        "Compact Design",
-        "Secure Closure",
-        "Travel-Friendly"
+        "Single-breasted design for a modern look",
+        "Slim fit for a sleek silhouette",
+        "Ideal for formal or semi-formal events",
+        "Available in multiple sizes and colors"
       ],
       specifications: [
-        "Material: Food-Grade Plastic",
-        "7 Individual Sections",
-        "Moisture-Resistant",
-        "Lightweight",
-        "Easy-Open Lid",
-        "Portable Size",
-        "Daily Organizer",
-        "BPA-Free"
+        "Material: 80% Cotton, 20% Polyester",
+        "Machine washable",
+        "Available in sizes S, M, L, XL",
+        "Imported"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱80", days: "3-5 Days" },
+      express: { price: "₱130", days: "1-2 Days" }
     },
-    reviews: [
-      {
-        id: 1,
-        user: "Maria P.",
-        rating: 3,
-        date: "2024-03-14",
-        comment: "Perfect size for daily medications. Very convenient to carry.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/medsup/image2nd batch-1.svg",
-      "/images/Client/product-page/medsup/image2ndbatch-1.svg",
-      "/images/Client/product-page/medsup/image2ndbatch-1.svg"
-    ],
     location: "Quezon City, Metro Manila"
   },
   {
     id: 11,
-    name: "OMRON Blood Pressure Digital Monitor High Precision",
-    price: 759,
-    rating: 5,
-    soldCount: 5200,
-    image: "/images/Client/product-page/medsup/image2nd batch-4.svg",
-    category: "medical-supplies",
+    name: "Youtalia Women's 3/4 Cuffed Sleeve Chiffon Printed V-Neck Casual Blouse Shirt Tops",
+    price: 950,
+    image: "/images/Client/product-page/Womenswear/shirt5.jpg",
+    category: "womenswear",
     description: {
-      main: "Professional Digital Blood Pressure Monitor",
-      subText: "High-Precision Blood Pressure Measurement Device",
+      main: "A breezy and stylish chiffon blouse with 3/4 cuffed sleeves and a flattering V-neck design, perfect for casual outings or office wear.",
+      subText: "Featuring a chic printed pattern, this blouse offers a relaxed fit with a feminine touch, ideal for warm weather.",
       features: [
-        "Digital Display",
-        "High Accuracy",
-        "Memory Function",
-        "Easy Operation"
+        "Light and breathable chiffon fabric",
+        "3/4 cuffed sleeves for an elegant look",
+        "Flattering V-neck design",
+        "Versatile printed pattern suitable for casual and semi-formal occasions"
       ],
       specifications: [
-        "Clinically Validated",
-        "LCD Display",
-        "Memory Storage",
-        "Battery Operated",
-        "Includes Arm Cuff",
-        "Auto Shut-Off",
-        "3 Year Warranty",
-        "OMRON Certified"
+        "Material: 100% Chiffon",
+        "Machine washable",
+        "Available in sizes S, M, L, XL",
+        "Imported"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱80", days: "3-5 Days" },
+      express: { price: "₱130", days: "1-2 Days" }
     },
-    reviews: [
-      {
-        id: 1,
-        user: "Dr. Cruz",
-        rating: 5,
-        date: "2024-03-13",
-        comment: "Accurate readings and easy to use. Highly recommended.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/medsup/image2ndbatch-4.svg",
-      "/images/Client/product-page/medsup/image2ndbatch-4.svg",
-      "/images/Client/product-page/medsup/image2ndbatch-4.svg"
-    ],
-    location: "Quezon City, Metro Manila"
+    location: "Cebu City, Cebu"
   },
   {
     id: 12,
-    name: "Philife-20-65mm Colostomy Bag for Baby A00 Ostomy Bag",
-    price: 1400,
-    rating: 5,
-    soldCount: 200,
-    image: "/images/Client/product-page/medsup/image2nd batch-5.svg",
-    category: "medical-supplies",
+    name: "Fashion Simple Women's Solid Color Long-sleeved Shirt - Ginger / 3XL",
+    price: 1050,
+    image: "/images/Client/product-page/Womenswear/shirt6.jpg",
+    category: "womenswear",
     description: {
-      main: "Pediatric Colostomy Collection System",
-      subText: "Specialized Ostomy Bag for Infants and Young Children",
+      main: "A versatile and comfortable long-sleeved shirt in a rich ginger color, offering a simple yet stylish design.",
+      subText: "Perfect for layering or wearing on its own, this solid color shirt is ideal for casual or semi-formal occasions.",
       features: [
-        "Gentle Adhesive",
-        "Leak-Proof Design",
-        "Skin-Friendly Material",
-        "Comfortable Fit"
+        "Simple and elegant design with a solid ginger color",
+        "Soft and breathable fabric for all-day comfort",
+        "Long sleeves for cooler weather or layering",
+        "Available in a range of sizes including 3XL for a relaxed fit"
       ],
       specifications: [
-        "Size: 20-65mm",
-        "Pediatric Specific",
-        "Hypoallergenic",
-        "Odor-Proof",
-        "Easy Application",
-        "Medical Grade",
-        "Box of 10",
-        "CE Certified"
+        "Material: 95% Cotton, 5% Spandex",
+        "Machine washable",
+        "Available in sizes S, M, L, XL, 2XL, 3XL",
+        "Imported"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱90", days: "3-5 Days" },
+      express: { price: "₱150", days: "1-2 Days" }
     },
-    reviews: [
-      {
-        id: 1,
-        user: "Nurse Anna",
-        rating: 5,
-        date: "2024-03-12",
-        comment: "Perfect for pediatric patients. Very gentle on sensitive skin.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/medsup/image2nd batch-5.svg",
-      "/images/Client/product-page/medsup/image2nd batch-5.svg",
-      "/images/Client/product-page/medsup/image2ndbatch-5.svg"
-    ],
-    location: "Quezon City, Metro Manila"
-  },
-  {
-    id: 13,
-    name: "Portable Low Noise Asthma Inhalers Compressor Nebulizer",
-    price: 1740,
-    rating: 5,
-    soldCount: 8400,
-    image: "/images/Client/product-page/medsup/image2nd batch-3.svg",
-    category: "medical-supplies",
-    description: {
-      main: "Portable Compressor Nebulizer",
-      subText: "Low Noise Medical Grade Nebulizer for Asthma Treatment",
-      features: [
-        "Low Noise Operation",
-        "Compact Design",
-        "Easy to Clean",
-        "Portable Size"
-      ],
-      specifications: [
-        "Power: AC 220V/50Hz",
-        "Particle Size: 0.5-5μm",
-        "Nebulization Rate: ≥0.2ml/min",
-        "Medication Cup Capacity: 6ml",
-        "Noise Level: ≤60dB",
-        "CE Certified",
-        "FDA Approved",
-        "1 Year Warranty"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    reviews: [
-      {
-        id: 1,
-        user: "Maria R.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Very quiet operation and effective nebulization. Perfect for home use.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/medsup/image2nd batch-3.svg",
-      "/images/Client/product-page/medsup/image2nd batch-3.svg",
-      "/images/Client/product-page/medsup/image2nd batch-3.svg"
-    ],
-    location: "Quezon City, Metro Manila"
-  },
-  {
-    id: 14,
-    name: "Anti-Skid Tip Protector Rubber 4 Pieces",
-    price: 145,
-    rating: 5,
-    soldCount: 502,
-    image: "/images/Client/product-page/medsup/image2nd batch-11.svg",
-    category: "medical-supplies",
-    description: {
-      main: "Medical Walking Aid Tip Protector",
-      subText: "Anti-Slip Rubber Tips for Walking Aids",
-      features: [
-        "Anti-Skid Design",
-        "Durable Rubber Material",
-        "Universal Fit",
-        "Easy Installation"
-      ],
-      specifications: [
-        "Set of 4 Pieces",
-        "Material: Medical Grade Rubber",
-        "Universal Size",
-        "Non-Marking",
-        "Wear-Resistant",
-        "Indoor/Outdoor Use",
-        "Fits Standard Walking Aids",
-        "ISO Certified"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    reviews: [
-      {
-        id: 1,
-        user: "PT John",
-        rating: 5,
-        date: "2024-03-14",
-        comment: "Excellent grip and durability. Perfect replacement tips.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/medsup/image2nd batch-11.svg",
-      "/images/Client/product-page/medsup/image2nd batch-11.svg",
-      "/images/Client/product-page/medsup/image2nd batch-11.svg"
-    ],
-    location: "Quezon City, Metro Manila"
-  },
-  {
-    id: 15,
-    name: "Venipuncture IV Training Pad Intradermal Silicone Human Model",
-    price: 172,
-    rating: 4,
-    soldCount: 25,
-    image: "/images/Client/product-page/medsup/image2nd batch-10.svg",
-    category: "medical-supplies",
-    description: {
-      main: "Medical Training Practice Pad",
-      subText: "Professional IV Insertion and Venipuncture Training Model",
-      features: [
-        "Realistic Skin Texture",
-        "Multiple Practice Veins",
-        "Durable Construction",
-        "Portable Design"
-      ],
-      specifications: [
-        "Material: Medical Grade Silicone",
-        "Size: Standard",
-        "Multiple Vein Channels",
-        "Self-Healing Material",
-        "Easy to Clean",
-        "Includes Practice Stand",
-        "Educational Grade",
-        "CE Certified"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    reviews: [
-      {
-        id: 1,
-        user: "Nurse Educator",
-        rating: 5,
-        date: "2024-03-13",
-        comment: "Excellent training tool. Very realistic feel for practice.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/medsup/image2nd batch-10.svg",
-      "/images/Client/product-page/medsup/image2nd batch-10.svg",
-      "/images/Client/product-page/medsup/image2nd batch-10.svg"
-    ],
-    location: "Quezon City, Metro Manila"
-  }
+    location: "Davao City, Davao del Sur"
+  }   
 ];
 
 // Export products with random store info

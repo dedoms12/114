@@ -136,17 +136,6 @@ const OrderModal = ({ order, onClose, onUpdateStatus }) => {
             </div>
             <p className="mt-1 text-sm text-blue-600">Order Date</p>
           </div>
-          <div className="bg-purple-50 p-4 rounded-lg">
-            <div className="flex items-center justify-between">
-              <div className="text-purple-600">
-                <FiMapPin size={20} />
-              </div>
-              <span className="text-sm font-semibold text-purple-600">
-                {order.branch}
-              </span>
-            </div>
-            <p className="mt-1 text-sm text-purple-600">Branch</p>
-          </div>
           <div className="bg-green-50 p-4 rounded-lg">
             <div className="flex items-center justify-between">
               <div className="text-green-600">

@@ -8,6 +8,7 @@ const Sales = () => {
     { id: 1, value: 500 },
     { id: 2, value: 300 },
     { id: 3, value: 200 },
+    { id: 4, value: 600 },
   ];
 
   const chartDetail = [
@@ -78,7 +79,7 @@ const Sales = () => {
         <h1 className="text-2xl font-bold mx-6 mb-6">Sales Logistics</h1>
 
         {/* Sales Logistics Overview */}
-        <div className="flex">
+        <div className="flex ">
 
           {/* Left Side */}
           <div className="bg-white p-4 rounded shadow w-1/3 mr-5">

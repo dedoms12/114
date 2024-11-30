@@ -1,33 +1,25 @@
 export const storeVerifications = [
   {
     id: 1,
-    name: "PharmaCare Plus",
-    email: "contact@pharmacareplus.com",
+    name: "EcoStyle Thrift",
+    email: "support@ecostylethrift.com",
     verificationStatus: "pending",
     verificationProgress: 65,
     blockDetails: null,
     documents: [
       {
         id: 1,
-        name: "Business Permit",
+        name: "Trade License",
         status: "verified",
-        url: "/documents/business-permit.pdf",
+        url: "/documents/trade-license.pdf",
         dateSubmitted: "2024-03-10T08:30:00Z",
         comments: []
       },
       {
         id: 2,
-        name: "FDA License",
+        name: "Environmental Compliance Certificate",
         status: "pending",
-        url: "/documents/fda-license.pdf",
-        dateSubmitted: "2024-03-10T08:30:00Z",
-        comments: []
-      },
-      {
-        id: 3,
-        name: "Pharmacist License",
-        status: "verified",
-        url: "/documents/pharmacist-license.pdf",
+        url: "/documents/environmental-compliance.pdf",
         dateSubmitted: "2024-03-10T08:30:00Z",
         comments: []
       }
@@ -37,8 +29,8 @@ export const storeVerifications = [
   },
   {
     id: 2,
-    name: "MediCare Pharmacy",
-    email: "admin@medicare-ph.com",
+    name: "Urban Threads Collective",
+    email: "info@urbanthreads.com",
     verificationStatus: "blocked",
     verificationProgress: 30,
     blockDetails: {
@@ -49,9 +41,9 @@ export const storeVerifications = [
     documents: [
       {
         id: 1,
-        name: "Business Permit",
+        name: "Trade License",
         status: "rejected",
-        url: "/documents/medicare-permit.pdf",
+        url: "/documents/trade-license.pdf",
         dateSubmitted: "2024-03-05T09:00:00Z",
         comments: [
           {
@@ -66,17 +58,17 @@ export const storeVerifications = [
   },
   {
     id: 3,
-    name: "HealthFirst Drugstore",
-    email: "verify@healthfirst.com",
+    name: "Vintage Vogue Hub",
+    email: "contact@vintagevoguehub.com",
     verificationStatus: "verified",
     verificationProgress: 100,
     blockDetails: null,
     documents: [
       {
         id: 1,
-        name: "Business Permit",
+        name: "Company Profile",
         status: "verified",
-        url: "/documents/healthfirst-permit.pdf",
+        url: "/documents/company-profile.pdf",
         dateSubmitted: "2024-02-28T08:00:00Z",
         comments: [
           {
@@ -87,9 +79,9 @@ export const storeVerifications = [
       },
       {
         id: 2,
-        name: "FDA License",
+        name: "Seller's Permit",
         status: "verified",
-        url: "/documents/healthfirst-fda.pdf",
+        url: "/documents/sellers-permit.pdf",
         dateSubmitted: "2024-02-28T08:00:00Z",
         comments: []
       }
@@ -97,29 +89,4 @@ export const storeVerifications = [
     submissionDate: "2024-02-28T08:00:00Z",
     lastUpdated: "2024-03-01T11:30:00Z"
   },
-  {
-    id: 4,
-    name: "QuickMeds Pharmacy",
-    email: "support@quickmeds.com",
-    verificationStatus: "rejected",
-    verificationProgress: 0,
-    blockDetails: null,
-    documents: [
-      {
-        id: 1,
-        name: "Business Permit",
-        status: "rejected",
-        url: "/documents/quickmeds-permit.pdf",
-        dateSubmitted: "2024-03-20T15:45:00Z",
-        comments: [
-          {
-            text: "Invalid document format. Please submit proper documentation.",
-            date: "2024-03-21T09:15:00Z"
-          }
-        ]
-      }
-    ],
-    submissionDate: "2024-03-20T15:45:00Z",
-    lastUpdated: "2024-03-21T09:15:00Z"
-  }
 ]; 

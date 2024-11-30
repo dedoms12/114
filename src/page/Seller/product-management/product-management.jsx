@@ -143,12 +143,11 @@ const ProductManagement = () => {
   return (
     <div className="bg-gray-50 min-h-screen">
       <NavbarSeller />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div className="max-w-7xl mx-40 px-4 sm:px-6 lg:px-8 py-6">
         {/* Header Section */}
         <div className="flex justify-between items-center mb-6">
           <div>
-            <h1 className="text-2xl font-semibold text-gray-900">Product Management</h1>
-            <p className="text-sm text-gray-500">See All</p>
+            <h1 className="text-2xl font-semibold text-gray-900">Products</h1>
           </div>
           <button 
             onClick={() => setIsModalOpen(true)}
@@ -176,57 +175,13 @@ const ProductManagement = () => {
             </div>
 
             {/* Location Filter */}
-            <div className="min-w-[200px]">
-              <select
-                value={selectedLocation}
-                onChange={(e) => setSelectedLocation(e.target.value)}
-                className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#4C9BF5] focus:border-transparent appearance-none bg-white"
-              >
-                {locations.map((location, index) => (
-                  <option key={index} value={location}>{location}</option>
-                ))}
-              </select>
-            </div>
 
             {/* Category Filter */}
-            <div className="min-w-[200px]">
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#4C9BF5] focus:border-transparent appearance-none bg-white"
-              >
-                {categories.map(category => (
-                  <option key={category.id} value={category.value}>{category.name}</option>
-                ))}
-              </select>
-            </div>
-
+  
             {/* View Toggle */}
-            <div className="flex bg-gray-100 rounded-lg p-1">
-              <button
-                onClick={() => handleViewChange('grid')}
-                className={`p-2 rounded-md transition-colors ${
-                  viewMode === 'grid' 
-                    ? 'bg-white text-[#4C9BF5] shadow-sm' 
-                    : 'text-gray-500 hover:text-gray-700'
-                }`}
-              >
-                <FiGrid size={20} />
-              </button>
-              <button
-                onClick={() => handleViewChange('list')}
-                className={`p-2 rounded-md transition-colors ${
-                  viewMode === 'list' 
-                    ? 'bg-white text-[#4C9BF5] shadow-sm' 
-                    : 'text-gray-500 hover:text-gray-700'
-                }`}
-              >
-                <FiList size={20} />
-              </button>
-            </div>
+
           </div>
         </div>
-
         {/* Products Grid/List View */}
         <div className={viewMode === 'grid' ? 
           `grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-fr` : 
@@ -253,7 +208,7 @@ const ProductManagement = () => {
                     inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium
                     ${product.quantity > 0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}
                   `}>
-                    {product.quantity > 0 ? 'In Stock' : 'Out of Stock'}
+                    {product.quantity > 0 ? 'In Stock' : 'Sold'}
                   </span>
                 </div>
               </div>
@@ -271,7 +226,7 @@ const ProductManagement = () => {
                       <div className="space-y-2 text-sm text-gray-600">
                         <p>Category: {product.category}</p>
                         <p>Location: {product.location}</p>
-                        <p>Stock: {product.quantity} units</p>
+                        <p>Stock: {product.quantity}</p>
                       </div>
                     </div>
 
@@ -313,28 +268,19 @@ const ProductManagement = () => {
                   <>
                     <h3 className="font-medium text-gray-900 mb-2 line-clamp-2">{product.name}</h3>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-lg font-semibold text-[#FF6B6B]">₱{product.price}</span>
-                      <span className="text-sm text-gray-500">{product.soldCount} Sold</span>
+                      <span className="text-lg font-semibold text-yellow-900">₱{product.price}</span>
                     </div>
                     <p className="text-sm text-gray-500 mb-4">{product.location}</p>
                     <div className="flex gap-2">
-                      <button 
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleEdit(product);
-                        }}
-                        className="flex-1 px-4 py-2 text-sm font-medium text-[#4C9BF5] bg-blue-50 rounded-md hover:bg-blue-100 transition-colors"
-                      >
-                        Edit
-                      </button>
+
                       <button 
                         onClick={(e) => {
                           e.stopPropagation();
                           handleAdvanceSettings(product.id);
                         }}
-                        className="flex-1 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors"
+                        className="flex-1 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-50 rounded-md hover:bg-pill-blue transition-colors border-2"
                       >
-                        Advanced
+                        Edit
                       </button>
                     </div>
                   </>

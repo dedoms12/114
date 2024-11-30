@@ -42,11 +42,16 @@ const UserProfileReviewModal = ({ isOpen, onClose, product, onReviewSubmit }) =>
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    console.log('Submitting the form...');
+    console.log('Review value:', review);
+  
+    // Validate that all ratings are provided
     if (Object.values(ratings).some(rating => rating === 0)) {
       toast.error('Please provide all ratings');
       return;
     }
 
+    // Validate review message
     if (!review.trim()) {
       toast.error('Please write a review');
       return;
@@ -55,14 +60,20 @@ const UserProfileReviewModal = ({ isOpen, onClose, product, onReviewSubmit }) =>
     const reviewData = {
       productId: product.id,
       ratings,
-      comment: review,
+      comment: review.trim(),
       images: previewImages,
       date: new Date().toLocaleDateString(),
       user: 'Current User' // This should be replaced with actual user data
     };
-
-    onReviewSubmit(reviewData);
-    resetForm();
+    
+    // Call the parent's review submission handler
+    try {
+      await onReviewSubmit(reviewData);
+      toast.success('Review submitted successfully');
+      resetForm(); // Reset form on successful submission
+    } catch (error) {
+      toast.error('Failed to submit the review. Please try again.');
+    }
   };
 
   if (!isOpen) return null;
@@ -104,13 +115,11 @@ const UserProfileReviewModal = ({ isOpen, onClose, product, onReviewSubmit }) =>
                     <button
                       key={star}
                       type="button"
-                      onClick={() => setRatings(prev => ({ ...prev, [key]: star }))}
+                      onClick={() => setRatings(prev => ({ ...prev, [key]: star }))} 
                       className="focus:outline-none"
                     >
                       <svg
-                        className={`w-6 h-6 ${
-                          star <= ratings[key] ? 'text-[#FF8A00]' : 'text-gray-300'
-                        }`}
+                        className={`w-6 h-6 ${star <= ratings[key] ? 'text-[#FF8A00]' : 'text-gray-300'}`}
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
@@ -125,9 +134,7 @@ const UserProfileReviewModal = ({ isOpen, onClose, product, onReviewSubmit }) =>
 
           {/* Review Text */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Your Review
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Your Review</label>
             <textarea
               value={review}
               onChange={(e) => setReview(e.target.value)}
@@ -138,9 +145,7 @@ const UserProfileReviewModal = ({ isOpen, onClose, product, onReviewSubmit }) =>
 
           {/* Image Upload */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Add Photos (Optional)
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Add Photos (Optional)</label>
             <input
               type="file"
               accept="image/*"
@@ -173,5 +178,6 @@ const UserProfileReviewModal = ({ isOpen, onClose, product, onReviewSubmit }) =>
     </div>
   );
 };
+
 
 export default UserProfileReviewModal;

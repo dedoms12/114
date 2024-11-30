@@ -1,37 +1,29 @@
 const users = [
   {
-    id: 1,
+    id: 0,
     name: 'Admin User',
-    email: 'admin@pillpoint.com',
-    password: 'admin123',
+    email: 'admin@gmail.com',
+    password: 'admin',
     role: 'admin'
+  },
+  {
+    id: 1,
+    name: 'Seller',
+    email: 'seller@gmail.com',
+    password: 'sellerrani',
+    role: 'seller'
   },
   {
     id: 2,
-    name: 'Tester3',
-    email: 'test3@pillpoint.com',
-    password: 'test333',
-    role: 'admin'
-  },
-  {
-    id: 3,
-    name: 'Tester1',
-    email: 'test1@pillpoint.com',
-    password: 'test111',
+    name: 'Buyer',
+    email: 'buyer@gmail.com',
+    password: 'buyerrani',
     role: 'buyer'
   },
-  {
-    id: 4,
-    name: 'Tester2',
-    email: 'test2@pillpoint.com',
-    password: 'test222',
-    role: 'seller'
-  }
-
 ];
 
 // Admin registration key
-const ADMIN_KEY = 'PP2024'; // 6-character unique key
+const ADMIN_KEY = '123456'; // 6-character unique key
 
 export const addUser = (userData) => {
   if (userData.role === 'admin' && userData.adminKey !== ADMIN_KEY) {

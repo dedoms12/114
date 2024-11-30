@@ -14,54 +14,35 @@ const ContactManagement = () => {
   const [inquiries, setInquiries] = useState([
     {
       id: 1,
-      name: 'Juan Dela Cruz',
-      email: 'juan@example.com',
-      subject: 'Medicine Availability Query',
-      message: 'I would like to inquire about the availability of Paracetamol in your pharmacy.',
+      name: 'Sarah',
+      email: 'Sarah@example.com',
+      subject: 'Price Inquiry',
+      message: '',
       status: 'pending',
       date: '2024-03-15',
       priority: 'medium'
     },
     {
       id: 2,
-      name: 'Maria Santos',
-      email: 'maria.santos@example.com',
-      subject: 'Prescription Refill Request',
-      message: 'I need to refill my maintenance medication for hypertension.',
+      name: 'John Doe',
+      email: 'John Doe@example.com',
+      subject: 'Delivery Inquiry',
+      message: '',
       status: 'resolved',
       date: '2024-03-14',
       priority: 'high'
     },
     {
       id: 3,
-      name: 'Pedro Reyes',
-      email: 'p.reyes@example.com',
+      name: 'Rose',
+      email: 'rose@example.com',
       subject: 'Delivery Inquiry',
-      message: 'Do you offer medicine delivery services to Makati area?',
+      message: '',
       status: 'pending',
       date: '2024-03-16',
       priority: 'low'
-    },
-    {
-      id: 4,
-      name: 'Ana Martinez',
-      email: 'ana.m@example.com',
-      subject: 'Price Inquiry',
-      message: 'What is the current price of Insulin in your pharmacy?',
-      status: 'pending',
-      date: '2024-03-16',
-      priority: 'high'
-    },
-    {
-      id: 5,
-      name: 'Carlos Gomez',
-      email: 'carlos.g@example.com',
-      subject: 'Operating Hours',
-      message: 'Are you open during holidays? Specifically this coming Holy Week?',
-      status: 'resolved',
-      date: '2024-03-13',
-      priority: 'medium'
     }
+  
   ]);
   const [selectedInquiry, setSelectedInquiry] = useState(null);
   const [showViewModal, setShowViewModal] = useState(false);

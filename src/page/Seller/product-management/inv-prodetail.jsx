@@ -120,9 +120,9 @@ const InventoryProductDetail = () => {
   };
 
   const getStockStatus = (quantity) => {
-    if (quantity <= 0) return { text: 'Out of Stock', color: 'red' };
-    if (quantity < 10) return { text: 'Low Stock', color: 'yellow' };
-    return { text: 'In Stock', color: 'green' };
+    if (quantity <= 0) return { text: 'Sold', color: 'red' };
+    if (quantity < 10) return { text: 'Available', color: 'yellow' };
+    return { text: 'Available', color: 'green' };
   };
 
   const stockStatus = getStockStatus(product.quantity);
@@ -139,17 +139,18 @@ const InventoryProductDetail = () => {
             <FiArrowLeft className="mr-2" /> Back to Products
           </button>
           <div className="flex space-x-3">
-            <button
+           {/* <button
               onClick={() => setShowUpdateModal(true)}
               className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
             >
               Edit Product
             </button>
+            */}
             <button
               onClick={handleAdvanceSettings}
-              className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50"
+              className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-blue-500 bg-blue-300"
             >
-              Advanced Settings
+              Settings
             </button>
           </div>
         </div>
@@ -199,7 +200,7 @@ const InventoryProductDetail = () => {
                     <FiDollarSign className="text-gray-400 mr-2" />
                     <div>
                       <p className="text-sm text-gray-600">Price</p>
-                      <p className="text-xl font-semibold text-blue-600">₱{product.price}</p>
+                      <p className="text-xl font-semibold text-yellow-900">₱{product.price}</p>
                     </div>
                   </div>
                   <div className="flex items-center">
@@ -248,7 +249,7 @@ const InventoryProductDetail = () => {
                   <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     {product.description.features.map((feature, index) => (
                       <li key={index} className="flex items-center text-gray-700">
-                        <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                        <span className="w-2 h-2 bg-yellow-900 rounded-full mr-2"></span>
                         {feature}
                       </li>
                     ))}
@@ -257,7 +258,7 @@ const InventoryProductDetail = () => {
               )}
             </div>
 
-            {/* Inventory Details Card */}
+            {/* Inventory Details Card 
             <div className="bg-white rounded-xl shadow-sm p-6">
               <h3 className="font-semibold mb-4">Inventory Details</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -278,7 +279,7 @@ const InventoryProductDetail = () => {
                   <p className="font-medium">{product.inventory?.minStock || 5}</p>
                 </div>
               </div>
-            </div>
+            </div>*/}
           </div>
         </div>
 

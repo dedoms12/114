@@ -29,13 +29,13 @@ const SignIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
 
     const user = findUserByEmail(formData.email);
-    
+
     if (!user || user.password !== formData.password) {
       toast.error('Invalid email or password');
       return;
@@ -48,6 +48,7 @@ const SignIn = () => {
       role: user.role
     }));
 
+    toast.success('Login successful!');
     // Navigate based on user role
     switch (user.role) {
       case 'buyer':
@@ -79,37 +80,65 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-screen">
-      {/* Left side - Background image */}
-      <div className="bg-img-signin w-full md:w-1/2 flex items-center justify-center bg-blue-100 p-8 md:p-0" style={{ aspectRatio: '16/9' }}>
-        <div className="text-center md:text-left">
-          <h1 className="text-4xl font-bold mb-2 text-pill-gray text-shadow-lg shadow-pill-purple">Welcome to PillPoint!</h1>
-          <p className="text-xl text-pill-gray text-shadow shadow-pill-purple">Shop for Your Comfort and Convenience</p>
+    <div className="flex flex-col w-full md:w-1/2 xl:w-2/5 2xl:w-2/5 3xl:w-1/3 mx-auto p-8 md:p-10 2xl:p-12 3xl:p-14 bg-[#fffff] rounded-2xl shadow-xl border-2 mt-5 mb-5">
+ 
+      <div class="flex justify-center gap-3 pb-4">
+        <div>
+          <img src="/images/thriftstorelogo.png" alt="Logo" width="300" />
         </div>
       </div>
-      
-      {/* Right side - Sign in form */}
-      <div className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-8">
-        <div className="w-full max-w-md">
+      <div class="flex justify-center text-sm font-light pb-8 "><p class="text-[#D19B5A]">ThriftEase:</p><span>Online Market for
+        Sustainable Thrifted Clothing and Shoes</span></div>
+   
+      <div className="flex flex-col">
+        <div className="pb-2">
           <h1 className="text-2xl font-bold mb-6 text-center text-gray-700">Sign in</h1>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-3">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-              <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="name@example.com"/>
-              {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
+              <label htmlFor="email" className="block mb-1 text-sm font-medium text-[#111827]">Email</label>
+              <div class="relative text-gray-400"><span class="absolute flex items-center p-1 pl-3 pt-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg></span>
+                <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} className="pl-12 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-yellow-300 block w-full p-2.5 rounded-l-lg py-3 px-4" placeholder="Email@gmail.com" />
+                <div className="h-2">
+                {errors.email && <p className=" mt-2 text-red-500 text-xs">{errors.email}</p>}
+                </div>
+              </div>
             </div>
-            <div className="relative">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <div className="relative text-gray-400">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Password
               </label>
               <div className="relative mt-1">
+                <span className="absolute inset-y-0 left-0 flex items-center p-1 pl-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-square-asterisk"
+                  >
+                    <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                    <path d="M12 8v8"></path>
+                    <path d="m8.5 14 7-4"></path>
+                    <path d="m8.5 10 7 4"></path>
+                  </svg>
+                </span>
                 <input
                   type={showPassword ? "text" : "password"}
                   id="password"
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 pr-10 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="••••••••••"
+                  className="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-yellow-300 block w-full py-3 px-4"
+                  autoComplete="new-password"
                 />
                 <button
                   type="button"
@@ -127,13 +156,13 @@ const SignIn = () => {
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <input type="checkbox" id="remember-me" className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"/>
+                <input type="checkbox" id="remember-me" className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
                 <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">Remember me</label>
               </div>
               <a href="#" className="text-sm text-blue-600 hover:underline">Forgot password?</a>
             </div>
             <div>
-              <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-pill-blue hover:bg-pill-teal focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pill-blue">
+              <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#D19B5A] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-200">
                 Sign In
               </button>
             </div>
@@ -147,20 +176,15 @@ const SignIn = () => {
                 <span className="px-2 bg-white text-gray-500">Or continue with</span>
               </div>
             </div>
-            <div className="mt-6 grid grid-cols-3 gap-3">
+            <div className="flex flex-row gap-2 justify-center mt-5">
               <div>
                 <a href="#" className="w-full flex items-center justify-center px-8 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-                  <img className="h-5 w-5" src="/images/Signin/Facebook.svg" alt="Facebook" />
+                  <img className="h-5 w-40" src="/images/Signin/Facebook.svg" alt="Facebook" />
                 </a>
               </div>
               <div>
                 <a href="#" className="w-full flex items-center justify-center px-8 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-                  <img className="h-5 w-5" src="/images/Signin/Google.svg" alt="Google" />
-                </a>
-              </div>
-              <div>
-                <a href="#" className="w-full flex items-center justify-center px-8 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-                  <img className="h-5 w-5" src="/images/Signin/Apple.svg" alt="Apple" />
+                  <img className="h-5 w-40" src="/images/Signin/Google.svg" alt="Google" />
                 </a>
               </div>
             </div>
@@ -169,8 +193,8 @@ const SignIn = () => {
             <p className="text-sm text-gray-600">Don't have an account? <Link to="/signup" className="font-medium text-blue-600 hover:underline">Sign up</Link></p>
           </div>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 };
 

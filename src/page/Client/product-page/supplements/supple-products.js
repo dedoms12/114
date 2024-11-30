@@ -9,692 +9,352 @@ const getRandomStore = () => {
 const originalSupplementProducts = [
   {
     id: 1,
-    name: "Tempra Pediatric Drops Orange 30ml",
-    price: 140,
-    rating: 4.5,
-    soldCount: 801,
-    image: "/images/Client/product-page/supplements/image1stbatch-11.svg",
-    category: "supplements",
+    name: "Toddler Baby Girl Cotton Linen Dress Ruffle Sleeve Halter Sleeveless",
+    price: 150,
+    image: "/images/Client/product-page/Kidswear/kids1.jpg",
+    category: "kidswear",
     description: {
-      main: "Pediatric Fever and Pain Relief Drops",
-      subText: "Orange Flavored Paracetamol for Children",
+      main: "A cute and comfortable cotton-linen dress for toddler girls, perfect for warm weather, featuring ruffled sleeves and a stylish halter design.",
+      subText: "The dress offers a cool and breathable option for your little one, with a charming white color that pairs well with any occasion.",
       features: [
-        "Fast-Acting Formula",
-        "Pleasant Orange Taste",
-        "Easy to Administer",
-        "Suitable for Infants and Young Children"
+        "Soft cotton-linen fabric blend",
+        "Ruffled sleeve design for added cuteness",
+        "Halter style with an open back for comfort",
+        "Lightweight and breathable for summer wear"
       ],
       specifications: [
-        "Contains Paracetamol",
-        "30ml Bottle with Dropper",
-        "For Children 0-2 Years",
-        "Store Below 30°C",
-        "Keep Away from Light",
-        "Shake Well Before Use"
+        "Material: 50% Cotton, 50% Linen",
+        "Color: White",
+        "Size: 4tg (Toddler Girls)",
+        "Perfect for warm weather and casual outings"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱70", days: "3-5 Days" },
+      express: { price: "₱120", days: "1-2 Days" }
     },
-    reviews: [
-      {
-        id: 1,
-        user: "Parent123",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Very effective for my baby's fever. The orange flavor makes it easier to give.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/supplements/image1stbatch-11.svg",
-      "/images/Client/product-page/supplements/image1stbatch-11.svg",
-      "/images/Client/product-page/supplements/image1stbatch-11.svg"
-    ],
-    location: "Butuan City, Agusan Del Norte"
+    location: "Quezon City, Metro Manila"
   },
   {
     id: 2,
-    name: "Fern-C 568 18mg",
-    price: 8,
-    rating: 5,
-    soldCount: 1264,
-    image: "/images/Client/product-page/supplements/image1stbatch-10.svg",
-    category: "supplements",
+    name: "PTPuke Kids' Tees Crewneck Cotton Solid T-Shirts",
+    price: 180,
+    image: "/images/Client/product-page/Kidswear/kids2.jpg",
+    category: "kidswear",
     description: {
-      main: "Vitamin C with Sodium Ascorbate",
-      subText: "Non-Acidic Vitamin C Supplement",
+      main: "A pack of comfortable and soft crewneck cotton tees for boys and girls, perfect for casual wear or as an undershirt. These solid-color t-shirts are ideal for everyday use.",
+      subText: "The classic crewneck design and soft cotton fabric make these tees a staple in any toddler's or child's wardrobe, providing both comfort and durability for all-day wear.",
       features: [
-        "Non-Acidic Formula",
-        "Boosts Immune System",
-        "Promotes Collagen Production",
-        "Antioxidant Protection"
+        "Soft, breathable cotton fabric for comfort",
+        "Classic crewneck style suitable for both boys and girls",
+        "Short sleeve design perfect for warm weather",
+        "Solid colors to easily match with any outfit",
+        "Available in various sizes for toddlers and kids"
       ],
       specifications: [
-        "568.18mg per capsule",
-        "Sodium Ascorbate",
-        "Take 1 capsule daily",
-        "Store in cool, dry place",
-        "Keep away from direct sunlight"
+        "Material: 100% Cotton",
+        "Size: Available for toddlers and kids (2-10 Years)",
+        "Machine washable for easy care",
+        "Color: Available in multiple solid colors"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱50", days: "5-7 Days" },
+      express: { price: "₱90", days: "2-3 Days" }
     },
-    reviews: [
-      {
-        id: 1,
-        user: "HealthBuff",
-        rating: 5,
-        date: "2024-03-12",
-        comment: "Great vitamin C supplement, doesn't upset my stomach!",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/supplements/image1stbatch-10.svg",
-      "/images/Client/product-page/supplements/image1stbatch-10.svg",
-      "/images/Client/product-page/supplements/image1stbatch-10.svg"
-    ],
-    location: "Butuan City, Agusan Del Norte"
+    location: "Quezon City, Metro Manila"
   },
   {
     id: 3,
-    name: "Koi Herbal Capsules 550 Mg",
-    price: 13,
-    rating: 3.8,
-    soldCount: 1500,
-    image: "/images/Client/product-page/supplements/image1stbatch-8.svg",
-    category: "supplements",
+    name: "Rainbow Stars Long Sleeved Unicorn Dress",
+    price: 150,
+    image: "/images/Client/product-page/Kidswear/kids3.jpg",
+    category: "kidswear",
     description: {
-      main: "Natural Herbal Supplement",
-      subText: "Traditional Herbal Formula",
+      main: "A cute and magical long-sleeved dress with a unicorn design, featuring rainbow stars and a soft, comfortable fit. Perfect for special occasions or everyday wear.",
+      subText: "This charming dress is perfect for your little one to show off their unicorn-loving style while keeping cozy with long sleeves. Ideal for playdates, parties, and casual outings.",
       features: [
-        "100% Natural Ingredients",
-        "Supports Overall Wellness",
-        "Easy to Swallow Capsules",
-        "Traditional Asian Formula"
+        "Soft and breathable fabric for comfort",
+        "Long-sleeve design for added warmth",
+        "Rainbow star prints and a unicorn graphic for a fun, magical look",
+        "Elastic waistband for a perfect fit",
+        "Available in multiple sizes"
       ],
       specifications: [
-        "550mg per capsule",
-        "30 capsules per bottle",
-        "Take 1-2 capsules daily",
-        "Store in cool, dry place",
-        "FDA Registered",
-        "Keep away from direct sunlight"
+        "Material: 100% Cotton",
+        "Size: Available in sizes 4 and above",
+        "Machine washable for easy maintenance",
+        "Color: Beige with rainbow star and unicorn prints"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱60", days: "5-7 Days" },
+      express: { price: "₱100", days: "2-3 Days" }
     },
-    reviews: [
-      {
-        id: 1,
-        user: "HerbalUser",
-        rating: 5,
-        date: "2024-03-10",
-        comment: "Great natural supplement, feeling more energetic!",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/supplements/image1stbatch-8.svg",
-      "/images/Client/product-page/supplements/image1stbatch-8.svg",
-      "/images/Client/product-page/supplements/image1stbatch-8.svg"
-    ],
-    location: "Butuan City, Agusan Del Norte"
+    location: "Pasig City, Metro Manila"
   },
   {
     id: 4,
-    name: "Poten-Cee Forte 1g Tablet 20's",
-    price: 13,
-    rating: 5,
-    soldCount: 32,
-    image: "/images/Client/product-page/supplements/image1stbatch-9.svg",
-    category: "supplements",
+    name: "Bayswater Girls Trench Coat - Mustard",
+    price: 120,
+    image: "/images/Client/product-page/Kidswear/kids4.jpg",
+    category: "kidswear",
     description: {
-      main: "High-Potency Vitamin C Supplement",
-      subText: "With Zinc for Enhanced Immune Support",
+      main: "A stylish mustard trench coat for girls, offering a fashionable yet functional layer for cooler days.",
+      subText: "This coat is designed with a classic trench silhouette and includes a belt for a tailored look.",
       features: [
-        "1000mg Vitamin C per tablet",
-        "Added Zinc",
-        "Boosts Immune System",
-        "Antioxidant Protection"
+        "Classic trench coat design",
+        "Belted waist for a custom fit",
+        "Button front with flap pockets",
+        "Soft fabric ideal for layering"
       ],
       specifications: [
-        "1g (1000mg) per tablet",
-        "20 tablets per pack",
-        "Take 1 tablet daily",
-        "With Sodium Ascorbate",
-        "Store below 30°C"
+        "Material: 100% Polyester",
+        "Color: Mustard",
+        "Size: Available in various sizes for girls"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱150", days: "3-5 Days" },
+      express: { price: "₱250", days: "1-2 Days" }
     },
-    reviews: [
-      {
-        id: 1,
-        user: "VitaminLover",
-        rating: 5,
-        date: "2024-03-14",
-        comment: "Perfect dosage and great value for money!",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/supplements/image1stbatch-9.svg",
-      "/images/Client/product-page/supplements/image1stbatch-9.svg",
-      "/images/Client/product-page/supplements/image1stbatch-9.svg"
-    ],
-    location: "Butuan City, Agusan Del Norte"
+    location: "Taguig City, Metro Manila"
   },
   {
     id: 5,
-    name: "Dalacin C 75mg/5ml Granules 60ml",
-    price: 625,
-    rating: 5,
-    soldCount: 3300,
-    image: "/images/Client/product-page/supplements/image1stbatch-7.svg",
-    category: "supplements",
+    name: "NNJXD Girl Sleeveless Embroidery Princess Pageant Dresses Kids Prom Ball Gown",
+    price: 130,
+    image: "/images/Client/product-page/Kidswear/kids5.jpg",
+    category: "kidswear",
     description: {
-      main: "Antibiotic Oral Solution",
-      subText: "For Treatment of Bacterial Infections",
+      main: "An elegant sleeveless princess pageant dress with intricate embroidery, perfect for special events, proms, or formal occasions. The dress features a full ball gown silhouette for a royal look.",
+      subText: "This stunning gown will make your little one feel like royalty. Featuring delicate embroidery and a voluminous skirt, it's perfect for any princess-themed occasion.",
       features: [
-        "Easy to Mix Granules",
-        "Pleasant Taste",
-        "Precise Dosing",
-        "For Children and Adults"
+        "Sleeveless design for comfort and ease of movement",
+        "Intricate embroidery and lace details on the bodice",
+        "Full skirt with layers for a beautiful ball gown look",
+        "Zipper closure at the back for easy dressing",
+        "Ideal for pageants, proms, or formal parties"
       ],
       specifications: [
-        "75mg/5ml concentration",
-        "60ml when reconstituted",
-        "Store below 30°C",
-        "Prescription required",
-        "Keep away from light"
+        "Material: 100% Polyester with lace and embroidery details",
+        "Available in sizes 4, 6, 8, 10, and 12",
+        "Machine washable for convenience",
+        "Color: Available in soft pastel shades"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱100", days: "7-10 Days" },
+      express: { price: "₱150", days: "3-5 Days" }
     },
-    reviews: [
-      {
-        id: 1,
-        user: "MedUser",
-        rating: 5,
-        date: "2024-03-11",
-        comment: "Very effective antibiotic, easy to prepare.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/supplements/image1stbatch-7.svg",
-      "/images/Client/product-page/supplements/image1stbatch-7.svg",
-      "/images/Client/product-page/supplements/image1stbatch-7.svg"
-    ],
-    location: "Butuan City, Agusan Del Norte"
+    location: "Muntinlupa City, Metro Manila"
   },
   {
     id: 6,
-    name: "Canesten 5gm Cream",
-    price: 28,
-    rating: 5,
-    soldCount: 53,
-    image: "/images/Client/product-page/supplements/image1stbatch.svg",
-    category: "supplements",
+    name: "Uuszgmr Baby Shorts For Boys Girls Solid Color Comfortable Spring Summer Cotton Shorts",
+    price: 180,
+    image: "/images/Client/product-page/Kidswear/kids6.jpg",
+    category: "kidswear",
     description: {
-      main: "Antifungal Cream",
-      subText: "For Treatment of Fungal Skin Infections",
+      main: "Soft and comfortable solid color baby shorts, perfect for warm spring and summer days. Designed for both boys and girls, these cotton shorts offer a breathable and relaxed fit for active infants.",
+      subText: "These adorable cotton shorts are ideal for casual outings and playtime. Available in a variety of sizes to fit toddlers and babies, making them a must-have for warmer weather.",
       features: [
-        "Fast-Acting Formula",
-        "Non-Greasy",
-        "Soothes Irritation",
-        "Easy to Apply"
+        "Made from soft, breathable cotton for all-day comfort",
+        "Elastic waistband for a secure, adjustable fit",
+        "Simple solid color design for easy matching",
+        "Available in sizes 3-6 months, 2-3 years",
+        "Perfect for spring and summer activities"
       ],
       specifications: [
-        "5g tube",
-        "1% Clotrimazole",
-        "For external use only",
-        "Store below 30°C",
-        "Use as directed"
+        "Material: 100% Cotton",
+        "Color: Yellow (for 2-3 years), Gray (for 3-6 months)",
+        "Machine washable for easy care",
+        "Soft and lightweight fabric ideal for warmer weather"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱50", days: "5-7 Days" },
+      express: { price: "₱100", days: "2-3 Days" }
     },
-    reviews: [
-      {
-        id: 1,
-        user: "SkinCare",
-        rating: 5,
-        date: "2024-03-13",
-        comment: "Works quickly and effectively!",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/supplements/image1stbatch.svg",
-      "/images/Client/product-page/supplements/image1stbatch.svg",
-      "/images/Client/product-page/supplements/image1stbatch.svg"
-    ],
-    location: "Butuan City, Agusan Del Norte"
+    location: "Quezon City, Metro Manila"
   },
   {
     id: 7,
-    name: "Zithromax 250mg Tablet",
-    price: 109,
-    rating: 5,
-    soldCount: 111,
-    image: "/images/Client/product-page/supplements/image1stbatch-1.svg",
-    category: "supplements",
+    name: "SAYO TOMASYON 2024 Summer Young Children Boys Shorts Cotton Embroidery Dinosaur Girls Sports Shorts",
+    price: 150,
+    image: "/images/Client/product-page/Kidswear/kids7.jpg",
+    category: "kidswear",
     description: {
-      main: "Antibiotic Tablet",
-      subText: "For Bacterial Infections Treatment",
+      main: "Cute and comfortable cotton shorts for young children, featuring a playful embroidered dinosaur design. Ideal for both boys and girls, these sports shorts are perfect for active kids during the summer months.",
+      subText: "These vibrant yellow shorts are not only stylish but also soft and breathable, keeping kids cool and comfortable while playing outdoors. Available for children aged 2-6 years.",
       features: [
-        "Once Daily Dosing",
-        "Fast-Acting",
-        "Broad Spectrum",
-        "Easy to Swallow"
+        "Embroidered dinosaur design adds fun appeal",
+        "Soft cotton material for comfort",
+        "Elastic waistband for an adjustable fit",
+        "Breathable and lightweight, ideal for summer",
+        "Available in sizes 2T-6T"
       ],
       specifications: [
-        "250mg per tablet",
-        "Azithromycin",
-        "Prescription required",
-        "Store below 30°C",
-        "Keep away from moisture"
+        "Material: 100% Cotton",
+        "Color: Yellow with Dinosaur Embroidery",
+        "Machine washable for easy care",
+        "Elastic waist for secure and comfortable fit"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱50", days: "5-7 Days" },
+      express: { price: "₱100", days: "2-3 Days" }
     },
-    reviews: [
-      {
-        id: 1,
-        user: "HealthPro",
-        rating: 5,
-        date: "2024-03-14",
-        comment: "Effective antibiotic, works as prescribed.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/supplements/image1stbatch-1.svg",
-      "/images/Client/product-page/supplements/image1stbatch-1.svg",
-      "/images/Client/product-page/supplements/image1stbatch-1.svg"
-    ],
-    location: "Butuan City, Agusan Del Norte"
+    location: "Cebu City, Cebu"
   },
   {
     id: 8,
-    name: "Rogin-E Softgel Capsule 12X1 Pack",
-    price: 280,
-    rating: 5,
-    soldCount: 4,
-    image: "/images/Client/product-page/supplements/image1stbatch-2.svg",
-    category: "supplements",
+    name: "UWBACK Boys Winter Jacket Kids Hooded Down Coats Warm Parka with Faux Fur Trim For Girls",
+    price: 150,
+    image: "/images/Client/product-page/Kidswear/kids8.jpg", // Replace with actual image path
+    category: "kidswear",
     description: {
-      main: "Multivitamin for Men",
-      subText: "Energy and Vitality Supplement",
+      main: "A warm and stylish winter jacket designed for both boys and girls. The UWBACK hooded down coat features a faux fur trim for added flair and extra warmth, making it perfect for cold weather.",
+      subText: "This cozy jacket provides excellent insulation and comfort, ideal for outdoor winter activities. Its durable design ensures your child stays warm and fashionable throughout the season.",
       features: [
-        "Enhanced Energy Formula",
-        "With Royal Jelly",
-        "Korean Panax Ginseng",
-        "Complete Vitamin B Complex"
+        "Soft down insulation for warmth",
+        "Removable faux fur trim on the hood for a stylish look",
+        "Hooded design for added protection against the cold",
+        "Zipper closure with button flap for extra warmth",
+        "Two front pockets for storage"
       ],
       specifications: [
-        "12 capsules per pack",
-        "Softgel formulation",
-        "Take 1 capsule daily",
-        "Store in cool, dry place",
-        "For adult use only"
+        "Material: 100% Polyester",
+        "Faux fur trim: Polyester blend",
+        "Available in multiple colors: Navy, Black, Red",
+        "Machine washable for easy maintenance",
+        "Suitable for kids aged 4-12 years"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱150", days: "5-7 Days" },
+      express: { price: "₱250", days: "2-3 Days" }
     },
-    reviews: [
-      {
-        id: 1,
-        user: "EnergySeeker",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great energy boost throughout the day!",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/supplements/image1stbatch-2.svg",
-      "/images/Client/product-page/supplements/image1stbatch-2.svg",
-      "/images/Client/product-page/supplements/image1stbatch-2.svg"
-    ],
-    location: "Butuan City, Agusan Del Norte"
+    location: "Davao City, Davao del Sur"
   },
   {
     id: 9,
-    name: "Berocca 10 Tablets Orange Flavor",
-    price: 233,
-    rating: 5,
-    soldCount: 32,
-    image: "/images/Client/product-page/supplements/image1stbatch-3.svg",
-    category: "supplements",
+    name: "CareTec Unisex Kid's Rain Jacket-PU W/O Fleece Waterproof",
+    price: 120,
+    image: "/images/Client/product-page/Kidswear/kids9.jpg", // Replace with actual image path
+    category: "kidswear",
     description: {
-      main: "Effervescent Energy Vitamin",
-      subText: "High Performance Multivitamin",
+      main: "The CareTec Unisex Kid's Rain Jacket is designed to keep your child dry and comfortable during rainy days. Made from waterproof PU material, this jacket ensures protection from the elements without sacrificing style.",
+      subText: "This lightweight rain jacket features a simple yet functional design, making it a great addition to your child's wardrobe for wet weather. Perfect for school, outdoor activities, and playtime.",
       features: [
-        "Orange Flavored",
-        "Energy Boost Formula",
-        "With B-Vitamins",
-        "Sugar-Free"
+        "Waterproof PU material to keep your child dry",
+        "Lightweight and breathable design for comfort",
+        "Elastic cuffs and hood for added protection",
+        "Simple, stylish design suitable for both boys and girls",
+        "Easy to pack and carry for on-the-go use"
       ],
       specifications: [
-        "10 tablets per pack",
-        "Dissolve in water",
-        "Take 1 tablet daily",
-        "Contains Vitamin B Complex",
-        "With Vitamin C and Zinc"
+        "Material: 100% PU (Polyurethane)",
+        "Available in multiple sizes: XS, S, M, L",
+        "Machine washable for easy care",
+        "Available in bright colors: Yellow, Blue, Green",
+        "Perfect for rainy days and outdoor play"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱100", days: "5-7 Days" },
+      express: { price: "₱180", days: "2-3 Days" }
     },
-    reviews: [
-      {
-        id: 1,
-        user: "VitaminLover",
-        rating: 5,
-        date: "2024-03-12",
-        comment: "Tastes great and gives good energy!",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/supplements/image1stbatch-3.svg",
-      "/images/Client/product-page/supplements/image1stbatch-3.svg",
-      "/images/Client/product-page/supplements/image1stbatch-3.svg"
-    ],
-    location: "Butuan City, Agusan Del Norte"
+    location: "Cebu City, Cebu"
   },
   {
     id: 10,
-    name: "Memorx Lq Plus Syrup 240 ML",
-    price: 433,
-    rating: 5,
-    soldCount: 274,
-    image: "/images/Client/product-page/supplements/image1stbatch-4.svg",
-    category: "supplements",
+    name: "Letterman Kid's Jacket FL11K - Black/White / 12K",
+    price: 180,
+    image: "/images/Client/product-page/Kidswear/kids10.jpg", // Replace with actual image path
+    category: "kidswear",
     description: {
-      main: "Memory Enhancement Syrup",
-      subText: "Brain Function Support",
+      main: "The Letterman Kid's Jacket FL11K offers a classic sporty style with a contemporary twist. Designed with comfort and warmth in mind, this black/white jacket is perfect for the active, stylish child.",
+      subText: "With a sporty letterman design, this jacket is a great fit for casual outings or school activities. The lightweight material provides comfort and warmth for cooler days.",
       features: [
-        "Pleasant Taste",
-        "Easy to Take",
-        "With Ginkgo Biloba",
-        "Memory Booster"
+        "Classic letterman design with ribbed cuffs and hem",
+        "Black and white color combination for a versatile look",
+        "Zipper closure for easy wear",
+        "Soft and breathable material suitable for all-day wear",
+        "Perfect for sports activities or casual wear"
       ],
       specifications: [
-        "240ml bottle",
-        "Liquid formulation",
-        "For adults and children",
-        "Store below 30°C",
-        "Shake well before use"
+        "Material: 60% Cotton, 40% Polyester",
+        "Available sizes: 12K",
+        "Machine washable for easy maintenance",
+        "Soft lining for added comfort",
+        "Available in black/white color"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱120", days: "3-5 Days" },
+      express: { price: "₱200", days: "1-2 Days" }
     },
-    reviews: [
-      {
-        id: 1,
-        user: "BrainBooster",
-        rating: 5,
-        date: "2024-03-10",
-        comment: "Helps with focus and memory!",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/supplements/image1stbatch-4.svg",
-      "/images/Client/product-page/supplements/image1stbatch-4.svg",
-      "/images/Client/product-page/supplements/image1stbatch-4.svg"
-    ],
-    location: "Butuan City, Agusan Del Norte"
+    location: "Quezon City, Metro Manila"
   },
   {
     id: 11,
-    name: "Cetirizine 10mg Tablet – Rose Pharmacy Generics – 10'S",
-    price: 95,
-    rating: 5,
-    soldCount: 3,
-    image: "/images/Client/product-page/supplements/image1stbatch-5.svg",
-    category: "supplements",
+    name: "Cartoon Short Sleeve Kids T-Shirt - Dinosaur / 5T",
+    price: 350,
+    image: "/images/Client/product-page/Kidswear/kids11.jpg", // Replace with actual image path
+    category: "kidswear",
     description: {
-      main: "Antihistamine Tablet",
-      subText: "For Allergy Relief",
+      main: "This fun and colorful Cartoon Short Sleeve Kids T-Shirt features a playful dinosaur print. Ideal for active kids, it combines comfort and style, making it perfect for daily wear.",
+      subText: "Made from soft, breathable cotton, this t-shirt is designed to keep your little one comfortable all day long. The vibrant dinosaur design is sure to be a hit with kids who love animals.",
       features: [
-        "24-Hour Relief",
-        "Non-Drowsy Formula",
-        "Fast-Acting",
-        "Generic Medicine"
+        "Adorable dinosaur cartoon print",
+        "Soft and breathable cotton material",
+        "Short sleeves for comfort during warmer weather",
+        "Perfect for casual outings, school, or playtime",
+        "Available in 5T size for young kids"
       ],
       specifications: [
-        "10mg per tablet",
-        "10 tablets per pack",
-        "Take once daily",
-        "Store below 30°C",
-        "Keep away from moisture"
+        "Material: 100% Cotton",
+        "Available sizes: 5T",
+        "Machine washable",
+        "Vibrant, non-fading print",
+        "Suitable for boys and girls"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱70", days: "2-3 Days" },
+      express: { price: "₱120", days: "1 Day" }
     },
-    reviews: [
-      {
-        id: 1,
-        user: "AllergyFree",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Works well for my allergies!",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/supplements/image1stbatch-5.svg",
-      "/images/Client/product-page/supplements/image1stbatch-5.svg",
-      "/images/Client/product-page/supplements/image1stbatch-5.svg"
-    ],
-    location: "Butuan City, Agusan Del Norte"
+    location: "Taguig City, Metro Manila"
   },
   {
     id: 12,
-    name: "Biogesic Caplet 500mg 500 - MRP 10's",
-    price: 43,
-    rating: 5,
-    soldCount: 5500,
-    image: "/images/Client/product-page/supplements/image1stbatch-6.svg",
-    category: "supplements",
+    name: "Summer Children's Clothing Children's Short-Sleeved T-Shirt Boy Half-Sleeved Baby Clothes",
+    price: 350,
+    image: "/images/Client/product-page/Kidswear/kids12.jpg", // Replace with actual image path
+    category: "kidswear",
     description: {
-      main: "Paracetamol Pain Reliever",
-      subText: "For Fever and Mild Pain",
+      main: "This Summer Children's Short-Sleeved T-Shirt is perfect for warm weather. Made from soft and breathable fabric, it’s designed to keep your baby comfortable while looking stylish.",
+      subText: "The half-sleeved t-shirt features a simple and trendy design, ideal for casual wear during the summer season. Easy to pair with any shorts or pants for a laid-back look.",
       features: [
-        "Fast Pain Relief",
-        "Fever Reducer",
-        "Easy to Swallow",
-        "Trusted Brand"
+        "Soft, breathable fabric for comfort",
+        "Classic half-sleeve design for warm weather",
+        "Perfect for casual outings, summer playtime, or family events",
+        "Easy to wash and maintain",
+        "Available in multiple sizes for boys and baby clothes"
       ],
       specifications: [
-        "500mg per caplet",
-        "10 caplets per pack",
-        "For adults and children",
-        "Store below 30°C",
-        "Keep away from moisture"
+        "Material: 100% Cotton",
+        "Available sizes: 2T, 3T, 4T",
+        "Machine washable",
+        "Lightweight and breathable for summer"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱70", days: "2-3 Days" },
+      express: { price: "₱120", days: "1 Day" }
     },
-    reviews: [
-      {
-        id: 1,
-        user: "PainFree",
-        rating: 5,
-        date: "2024-03-14",
-        comment: "Always reliable for fever and headache.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/supplements/image1stbatch-6.svg",
-      "/images/Client/product-page/supplements/image1stbatch-6.svg",
-      "/images/Client/product-page/supplements/image1stbatch-6.svg"
-    ],
-    location: "Butuan City, Agusan Del Norte"
-  },
-  {
-    id: 13,
-    name: "SNOW CAPS CAP 30 FR VITC 30/",
-    price: 1785,
-    rating: 5,
-    soldCount: 1205,
-    image: "/images/Client/product-page/supplements/image2ndbatch-10.svg",
-    category: "supplements",
-    description: {
-      main: "Whitening Supplement with Vitamin C",
-      subText: "Premium Glutathione Complex",
-      features: [
-        "Skin Whitening Formula",
-        "With Vitamin C",
-        "Antioxidant Protection",
-        "Beauty Enhancement"
-      ],
-      specifications: [
-        "30 capsules per bottle",
-        "Take 1-2 capsules daily",
-        "With L-Glutathione",
-        "Store in cool, dry place"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    reviews: [
-      {
-        id: 1,
-        user: "BeautyQueen",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Effective whitening supplement, visible results in weeks!",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/supplements/image2ndbatch-10.svg",
-      "/images/Client/product-page/supplements/image2ndbatch-10.svg",
-      "/images/Client/product-page/supplements/image2ndbatch-10.svg"
-    ],
-    location: "Butuan City, Agusan Del Norte"
-  },
-  {
-    id: 14,
-    name: "Fortima Fe Tablet 8x1",
-    price: 100,
-    rating: 5,
-    soldCount: 2,
-    image: "/images/Client/product-page/supplements/image2ndbatch-5.svg",
-    category: "supplements",
-    description: {
-      main: "Iron Supplement",
-      subText: "For Iron Deficiency Prevention",
-      features: [
-        "Iron Fortification",
-        "Easy to Swallow",
-        "Once Daily Dosing",
-        "With Folic Acid"
-      ],
-      specifications: [
-        "8 tablets per pack",
-        "Contains Iron and Folic Acid",
-        "For adults and adolescents",
-        "Store below 30°C"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    reviews: [
-      {
-        id: 1,
-        user: "IronWoman",
-        rating: 5,
-        date: "2024-03-10",
-        comment: "Great supplement for anemia prevention",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/supplements/image2ndbatch-5.svg",
-      "/images/Client/product-page/supplements/image2ndbatch-5.svg",
-      "/images/Client/product-page/supplements/image2ndbatch-5.svg"
-    ],
-    location: "Butuan City, Agusan Del Norte"
-  },
-  {
-    id: 15,
-    name: "SANGOBION KIDS(100ML)",
-    price: 391,
-    rating: 5,
-    soldCount: 32,
-    image: "/images/Client/product-page/supplements/image2ndbatch-8.svg",
-    category: "supplements",
-    description: {
-      main: "Iron Supplement Syrup for Kids",
-      subText: "With Vitamins and Minerals",
-      features: [
-        "Pleasant Taste",
-        "Easy to Administer",
-        "Complete Blood Builder",
-        "With B-Vitamins"
-      ],
-      specifications: [
-        "100ml bottle",
-        "For children",
-        "With measuring cup",
-        "Store below 30°C"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    reviews: [
-      {
-        id: 1,
-        user: "CaringMom",
-        rating: 5,
-        date: "2024-03-12",
-        comment: "My kids love the taste!",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/supplements/image2ndbatch-8.svg",
-      "/images/Client/product-page/supplements/image2ndbatch-8.svg",
-      "/images/Client/product-page/supplements/image2ndbatch-8.svg"
-    ],
-    location: "Butuan City, Agusan Del Norte"
+    location: "Davao City, Davao del Sur"
   }
 ];
 

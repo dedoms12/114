@@ -12,10 +12,10 @@ const TopProductsSection = () => {
   // Combine and select top products from all categories
   const getAllTopProducts = () => {
     const allProducts = [
-      ...medicalProducts.map(p => ({ ...p, category: 'medical-supplies' })),
-      ...generalHealthProducts.map(p => ({ ...p, category: 'general-health' })),
-      ...personalCareProducts.map(p => ({ ...p, category: 'personal-care' })),
-      ...supplementProducts.map(p => ({ ...p, category: 'supplements' }))
+      ...medicalProducts.map(p => ({ ...p, category: 'womenswear' })),
+      ...generalHealthProducts.map(p => ({ ...p, category: 'menswear' })),
+      ...personalCareProducts.map(p => ({ ...p, category: 'shoes' })),
+      ...supplementProducts.map(p => ({ ...p, category: 'kidswear' }))
     ];
 
     // Sort by rating and sold count to get top products
@@ -70,7 +70,7 @@ const TopProductsSection = () => {
       to={`/${product.category}/product/${product.id}`}
       state={{ from: '/' }}
     >
-      <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-4 hover:shadow-md transition-shadow">
+      <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-4 hover:shadow-[0_4px_6px_rgba(0,0,0,0.3)] transition-shadow">
         <div className="aspect-square mb-4">
           <img
             src={product.image}
@@ -80,17 +80,13 @@ const TopProductsSection = () => {
         </div>
         <h3 className="text-sm font-medium mb-2 line-clamp-2">{product.name}</h3>
         <div className="flex items-center mb-2">
-          <span className="text-lg font-semibold text-[#F1511B]">₱ {product.price}</span>
+          <span className="text-lg font-semibold text-yellow-900">₱ {product.price}</span>
         </div>
         <div className="flex items-center space-x-2 mb-2">
           <div className="flex text-yellow-400">
-            {[...Array(product.rating)].map((_, i) => (
-              <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-              </svg>
-            ))}
+            
           </div>
-          <span className="text-sm text-gray-500">{product.soldCount} Sold</span>
+          <span className="text-sm text-gray-500">{product.soldCount}</span>
         </div>
         <p className="text-xs text-gray-500">{product.location}</p>
       </div>
@@ -98,18 +94,18 @@ const TopProductsSection = () => {
   );
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="border-2 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 rounded-lg ">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-semibold">Top Products</h2>
+        <h2 className="text-xl font-semibold">All Products</h2>
         <div className="flex gap-2">
-          <button
+          {/*<button
             className={`px-4 py-1.5 rounded-md text-sm ${
               sortBy === 'popular' ? 'bg-[#4C9BF5] text-white' : 'bg-white'
             }`}
             onClick={() => handleSort('popular')}
           >
             Popular
-          </button>
+          </button>*/}
           <button
             className={`px-4 py-1.5 rounded-md text-sm ${
               sortBy === 'latest' ? 'bg-[#4C9BF5] text-white' : 'bg-white'
@@ -118,19 +114,19 @@ const TopProductsSection = () => {
           >
             Latest
           </button>
-          <button
+          {/*<button
             className={`px-4 py-1.5 rounded-md text-sm ${
               sortBy === 'top-sales' ? 'bg-[#4C9BF5] text-white' : 'bg-white'
             }`}
             onClick={() => handleSort('top-sales')}
           >
             Top Sales
-          </button>
+          </button>*/}
         </div>
       </div>
       
       <div className="relative">
-        <button 
+        {/*<button 
           onClick={prevSlide}
           className="absolute -left-12 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-50"
         >
@@ -139,17 +135,16 @@ const TopProductsSection = () => {
             alt="Previous"
             className="h-6 w-6 transform rotate-[90deg]"
           />
-        </button>
+        </button>*/}
 
         <div className="grid grid-cols-5 gap-4">
           {topProducts
-            .slice(currentSlide * 5, (currentSlide + 1) * 5)
+            .slice(currentSlide * 10, (currentSlide + 1) * 10)
             .map(product => (
               <ProductCard key={`${product.category}-${product.id}`} product={product} />
             ))}
         </div>
-
-        <button 
+       {/* <button 
           onClick={nextSlide}
           className="absolute -right-12 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-50"
         >
@@ -158,7 +153,7 @@ const TopProductsSection = () => {
             alt="Next"
             className="h-6 w-6 transform rotate-[270deg]"
           />
-        </button>
+        </button>*/}
       </div>
     </div>
   );

@@ -3,7 +3,6 @@ import { products as generalProducts } from '../../Client/product-page/general-h
 
 // Unified branch list
 export const branches = [
-  'All Branches',
   'Ampayon, Agusan Del Norte',
   'Butuan City, Agusan Del Norte',
   'Cabadbaran, Agusan Del Norte',
@@ -48,8 +47,8 @@ export const storeData = {
       joinDate: '2024-01-15',
       lastVisit: '2024-03-15',
       favoriteProducts: [
-        medicalProducts[0],
-        generalProducts[0]
+        medicalProducts[1],
+        generalProducts[1]
       ]
     },
     {
@@ -180,19 +179,13 @@ export const storeData = {
       customerId: 'CUST-001',
       products: [
         { 
-          name: 'Face Mask', 
-          quantity: 50, 
-          price: 250, 
-          category: 'Medical Supplies' 
-        },
-        { 
-          name: 'Alcohol', 
-          quantity: 20, 
-          price: 100, 
-          category: 'Medical Supplies' 
+          name: 'adidas campus 00s', 
+          quantity: 1, 
+          price: 1300, 
+          category: 'shoes' 
         }
       ],
-      totalAmount: 5500,
+      totalAmount: 1300,
       status: 'Pending',
       orderDate: '2024-03-15T10:30:00',
       branch: 'Butuan City, Agusan Del Norte',
@@ -204,10 +197,9 @@ export const storeData = {
       id: 'ORD-002',
       customerId: 'CUST-002',
       products: [
-        { name: 'Vitamin C', quantity: 5, price: 350, category: 'Supplements' },
-        { name: 'Paracetamol', quantity: 3, price: 150, category: 'Medicine' }
+        { name: 'adidas campus 00s', quantity: 1, price: 1300, category: 'shoes' }
       ],
-      totalAmount: 2200,
+      totalAmount: 1300,
       status: 'Delivered',
       orderDate: '2024-03-14T15:45:00',
       branch: 'Ampayon, Agusan Del Norte',
@@ -219,10 +211,9 @@ export const storeData = {
       id: 'ORD-015',
       customerId: 'CUST-012',
       products: [
-        { name: 'Blood Pressure Monitor', quantity: 1, price: 2500, category: 'Medical Devices' },
-        { name: 'Multivitamins', quantity: 2, price: 800, category: 'Supplements' }
+        { name: 'adidas campus 00s', quantity: 1, price: 1300, category: 'shoes' },
       ],
-      totalAmount: 4100,
+      totalAmount: 1300,
       status: 'Processing',
       orderDate: '2024-03-13T09:15:00',
       branch: 'San Francisco, Agusan Del Sur',
@@ -234,10 +225,9 @@ export const storeData = {
       id: 'ORD-003',
       customerId: 'CUST-004',
       products: [
-        { name: 'Digital Thermometer', quantity: 2, price: 850, category: 'Medical Devices' },
-        { name: 'First Aid Kit', quantity: 1, price: 1200, category: 'Medical Supplies' }
+        { name: 'adidas campus 00s', quantity: 1, price: 1300, category: 'shoes' }
       ],
-      totalAmount: 2900,
+      totalAmount: 1300,
       status: 'Shipped',
       orderDate: '2024-03-12T14:20:00',
       branch: 'Cabadbaran, Agusan Del Norte',
@@ -249,10 +239,9 @@ export const storeData = {
       id: 'ORD-004',
       customerId: 'CUST-005',
       products: [
-        { name: 'Vitamin B Complex', quantity: 3, price: 450, category: 'Supplements' },
-        { name: 'Bandages', quantity: 5, price: 75, category: 'Medical Supplies' }
+        { name: 'adidas campus 00s', quantity: 1, price: 1300, category: 'shoes' }
       ],
-      totalAmount: 1725,
+      totalAmount: 1300,
       status: 'Cancelled',
       orderDate: '2024-02-15T11:30:00',
       branch: 'Butuan City, Agusan Del Norte',
@@ -264,10 +253,9 @@ export const storeData = {
       id: 'ORD-005',
       customerId: 'CUST-006',
       products: [
-        { name: 'Blood Glucose Monitor', quantity: 1, price: 3500, category: 'Medical Devices' },
-        { name: 'Test Strips', quantity: 50, price: 45, category: 'Medical Supplies' }
+        { name: 'adidas campus 00s', quantity: 1, price: 1300, category: 'shoes' }
       ],
-      totalAmount: 5750,
+      totalAmount: 1300,
       status: 'Delivered',
       orderDate: '2024-03-14T09:45:00',
       branch: 'Nasipit, Agusan Del Norte',
@@ -279,10 +267,9 @@ export const storeData = {
       id: 'ORD-006',
       customerId: 'CUST-007',
       products: [
-        { name: 'Multivitamins', quantity: 2, price: 800, category: 'Supplements' },
-        { name: 'Face Masks', quantity: 100, price: 5, category: 'Medical Supplies' }
+        { name: 'adidas campus 00s', quantity: 1, price: 1300, category: 'shoes' }
       ],
-      totalAmount: 2100,
+      totalAmount: 1300,
       status: 'Processing',
       orderDate: '2024-03-15T13:15:00',
       branch: 'San Francisco, Agusan Del Sur',
@@ -294,10 +281,9 @@ export const storeData = {
       id: 'ORD-007',
       customerId: 'CUST-008',
       products: [
-        { name: 'Nebulizer', quantity: 1, price: 2800, category: 'Medical Devices' },
-        { name: 'Saline Solution', quantity: 5, price: 120, category: 'Medical Supplies' }
+        { name: 'adidas campus 00s', quantity: 1, price: 1300, category: 'shoes' }
       ],
-      totalAmount: 3400,
+      totalAmount: 1300,
       status: 'Pending',
       orderDate: '2024-03-13T16:30:00',
       branch: 'Ampayon, Agusan Del Norte',

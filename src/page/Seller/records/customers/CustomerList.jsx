@@ -121,7 +121,6 @@ const CustomerList = () => {
           <div className="flex justify-between items-center mb-6">
             <div>
               <h1 className="text-2xl font-semibold text-gray-900">Customer Management</h1>
-              <p className="text-sm text-gray-500">Track and manage your customer relationships</p>
             </div>
             <div className="flex gap-3">
               <button className="flex items-center px-4 py-2 text-sm text-gray-600 bg-white rounded-md border border-gray-200 hover:bg-gray-50">

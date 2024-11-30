@@ -1,52 +1,56 @@
 import React from 'react';
-import { FaHeartbeat, FaFirstAid, FaVials, FaSprayCan } from 'react-icons/fa';
+import { FaShoePrints, FaMale, FaFemale } from 'react-icons/fa';
 
 const ProductSection = ({ handleCategoryClick }) => {
   const categories = [
     {
       id: 1,
-      name: 'General Health',
-      path: 'general-health',
-      icon: FaHeartbeat,
-      description: 'Medicines & wellness products'
+      name: 'Mens Wear',
+      path: 'menswear',
+      icon: 'images/Client/product-page/Menswear/tshirt1.jpg', 
+      description: ''
     },
     {
       id: 2,
-      name: 'Medical Supplies',
-      path: 'medical-supplies',
-      icon: FaFirstAid,
-      description: 'Medical equipment & supplies'
+      name: 'Womens Wear',
+      path: 'womenswear',
+      icon: 'images/Client/product-page/Womenswear/dress2.jpg', 
+      description: ''
     },
     {
       id: 3,
-      name: 'Supplements',
-      path: 'supplements',
-      icon: FaVials,
-      description: 'Vitamins & supplements'
+      name: 'Kids Wear',
+      path: 'kidswear',
+      icon: 'images/Client/product-page/Kidswear/kids11.jpg',  // Image path
+      description: ''
     },
     {
       id: 4,
-      name: 'Personal Care',
-      path: 'personal-care',
-      icon: FaSprayCan,
-      description: 'Personal care products'
+      name: 'Shoes',
+      path: 'shoes',
+      icon: 'images/Client/product-page/Shoes/shoes4.jpg', 
+      description: ''
     }
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <h2 className="text-2xl font-semibold mb-6">Shop by Category</h2>
+    <div className=" border-2 rounded-lg max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <h2 className="text-2xl font-semibold mb-6">Categories</h2>
       <div className="grid grid-cols-4 gap-6">
         {categories.map((category) => {
-          const IconComponent = category.icon;
           return (
             <div
               key={category.id}
-              className="bg-white cursor-pointer hover:shadow-md transition-all duration-300 rounded-lg p-6 flex flex-col items-center text-center"
+              className="bg-white cursor-pointer hover:shadow-[0_4px_6px_rgba(0,0,0,0.3)] transition-all duration-300 rounded-lg p-6 flex flex-col items-center text-center"
               onClick={() => handleCategoryClick(category.path)}
             >
               <div className="w-24 h-24 mb-4 flex items-center justify-center text-[#4C9BF5]">
-                <IconComponent size={64} />
+                {/* Conditionally render image or icon */}
+                {typeof category.icon === 'string' ? (
+                  <img src={category.icon} alt={category.name} className=" w-20 h-30 object-contain rounded-lg" />
+                ) : (
+                  <category.icon size={64} />
+                )}
               </div>
               <h3 className="font-medium text-lg mb-2">{category.name}</h3>
               <p className="text-sm text-gray-500">{category.description}</p>

@@ -50,7 +50,7 @@ const ChatbotPage = () => {
               <div className="w-5" /> {/* Spacer */}
             </div>
             <div className="text-center">
-              <h1 className="text-3xl font-semibold mb-2">Hi, User 1</h1>
+              <h1 className="text-3xl font-semibold mb-2">Hi, User</h1>
               <p className="text-white/80">
                 Ready to assist you with anything you need, from answering
                 questions to providing recommendations.

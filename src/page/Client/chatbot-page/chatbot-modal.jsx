@@ -14,7 +14,7 @@ const ChatbotModal = ({ isOpen, onClose, onSendMessage }) => {
   if (!isOpen) return null;
 
   const quickActions = [
-    {
+    {/*
       icon: "🏥",
       title: "Find nearest pharmacy",
       description: "Locate pharmacies in Ampayon"
@@ -28,12 +28,12 @@ const ChatbotModal = ({ isOpen, onClose, onSendMessage }) => {
       icon: "💊",
       title: "Popular medicines",
       description: "View most purchased medicines"
-    }
+    */}
   ];
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end sm:items-center justify-center z-50">
-      <div className="bg-white w-full sm:w-[500px] sm:rounded-2xl p-6 sm:p-8 max-h-[80vh] overflow-y-auto animate-slide-up">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end sm:items-center justify-center z-50 ">
+      <div className="bg-white w-full sm:w-[500px] sm:rounded-2xl p-6 sm:p-8 max-h-[80vh] overflow-y-auto animate-slide-up ">
         <div className="flex justify-between items-center mb-6">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
@@ -66,7 +66,7 @@ const ChatbotModal = ({ isOpen, onClose, onSendMessage }) => {
         <div className="flex gap-2 mb-6">
           <input
             type="text"
-            placeholder="Ask PillPoint anything..."
+            placeholder="Ask anything about the app"
             className="flex-1 px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <button className="px-6 py-2 bg-[#4C9BF5] text-white rounded-full hover:bg-blue-600 transition-colors">
@@ -74,12 +74,12 @@ const ChatbotModal = ({ isOpen, onClose, onSendMessage }) => {
           </button>
         </div>
 
-        <button
+        {/*<button
           onClick={() => navigate('/chatbot')}
           className="w-full py-3 text-[#4C9BF5] font-medium hover:bg-blue-50 rounded-lg transition-colors"
         >
           Open Full Chat Assistance →
-        </button>
+        </button>*/}
       </div>
     </div>
   );

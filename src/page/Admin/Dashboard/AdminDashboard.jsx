@@ -13,57 +13,57 @@ const AdminDashboard = () => {
   const monitoringStats = [
     {
       icon: FiUserCheck,
-      status: '156',
+      status: '100',
       label: 'Pending Verifications',
       description: 'Seller accounts awaiting approval',
       color: 'yellow',
       action: 'Review Now',
       path: '/admin/reports/store-verification',
-      tooltip: 'View and manage pending pharmacy verifications'
+
     },
     {
       icon: FiPackage,
-      status: '298',
-      label: 'Active Medicines',
+      status: '100',
+      label: 'Products',
       description: 'Currently listed products',
       color: 'blue',
       action: 'View List',
-      path: '/admin/inventory/medicines',
-      tooltip: 'Manage active medicine listings and inventory'
+      path: '/admin/inventory/products',
+
     },
     {
       icon: FiShield,
-      status: '45',
+      status: '100',
       label: 'Quality Checks',
       description: 'Products requiring review',
       color: 'green',
       action: 'Review',
-      path: '/admin/inventory',
-      tooltip: 'Review products flagged for quality inspection'
+      path: '/admin/inventory/products',
+
     },
     {
       icon: FiAlertOctagon,
-      status: '3',
+      status: '10',
       label: 'Reported Items',
       description: 'Products flagged by users',
       color: 'red',
       action: 'Investigate',
       path: '/admin/inventory/blocklist',
-      tooltip: 'Investigate reported products and take action'
+
     }
   ];
 
   const criticalAlerts = [
     {
       type: 'Verification',
-      message: 'New pharmacy registration requires document verification',
+      message: 'New store registration requires document verification',
       time: '10 minutes ago',
       priority: 'high',
       action: 'Verify Now'
     },
     {
       type: 'Product',
-      message: 'Multiple reports on medicine quality concerns',
+      message: 'Multiple reports on quality concerns',
       time: '1 hour ago',
       priority: 'high',
       action: 'Review'
@@ -81,7 +81,7 @@ const AdminDashboard = () => {
     dates: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
     datasets: [
       {
-        label: 'New Pharmacy Registrations',
+        label: 'New Store',
         data: [32, 45, 38, 52, 48, 60],
         color: '#818CF8' // indigo-400
       },
@@ -123,7 +123,6 @@ const AdminDashboard = () => {
             <div className="flex justify-between items-center mb-6">
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">Admin Control Center</h1>
-                <p className="text-sm text-gray-600">Monitor and manage platform safety & compliance</p>
               </div>
               <div className="flex items-center gap-3">
                 <select className="px-4 py-2 bg-white border rounded-lg text-sm">
@@ -175,7 +174,6 @@ const AdminDashboard = () => {
                 <div className="flex justify-between items-center mb-6">
                   <div>
                     <h2 className="text-lg font-semibold">Verification Activity</h2>
-                    <p className="text-sm text-gray-500">Pharmacy registration and verification progress</p>
                   </div>
                   <div className="flex gap-2">
                     <button 
@@ -280,7 +278,7 @@ const AdminDashboard = () => {
                             navigate('/admin/reports/store-verification');
                             break;
                           case 'Product':
-                            navigate('/admin/inventory/medicines');
+                            navigate('/admin/inventory/products');
                             break;
                           case 'Compliance':
                             navigate('/admin/reports/users');

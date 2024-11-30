@@ -23,8 +23,7 @@ export const orderData = [
     customerId: 'CUST-001',
     customerName: 'John Doe',
     products: [
-      { name: 'Face Mask', quantity: 50, price: 250, category: 'Medical Supplies' },
-      { name: 'Alcohol', quantity: 20, price: 100, category: 'Medical Supplies' }
+      { name: 'adidas campus 00s', quantity: 1, price: 250, category: 'shoes' }
     ],
     totalAmount: 5500,
     status: 'Pending',
@@ -39,7 +38,7 @@ export const orderData = [
     customerId: 'CUST-002',
     customerName: 'Jane Smith',
     products: [
-      { name: 'Vitamin C', quantity: 100, price: 150, category: 'Supplements' }
+      { name: 'Wedtrend Womens Vintage Tea Dress, Short Sleeve Cocktail Party Dress Work Church Casual Dress', quantity: 1, price: 150, category: 'womenswear' }
     ],
     totalAmount: 15000,
     status: 'Processing',
@@ -54,8 +53,8 @@ export const orderData = [
     customerId: 'CUST-003',
     customerName: 'Maria Garcia',
     products: [
-      { name: 'Biogesic', quantity: 200, price: 8, category: 'Medicine' },
-      { name: 'Vitamin B Complex', quantity: 50, price: 15, category: 'Supplements' }
+      { name: 'Men Atwood Deluxe Sneaker - Mens - Turtledove Beige', quantity: 1, price: 8, category: 'shoes' },
+      { name: 'Letterman Kid Jacket FL11K - Black/White / 12K', quantity: 1, price: 15, category: 'Supplements' }
     ],
     totalAmount: 2350,
     status: 'Delivered',
@@ -70,7 +69,7 @@ export const orderData = [
     customerId: 'CUST-004',
     customerName: 'Robert Lee',
     products: [
-      { name: 'Blood Pressure Monitor', quantity: 1, price: 2500, category: 'Medical Devices' }
+      { name: 'Cross-border Sneakers Couples Running Shoes Trendy Stylish And Lightweight Breathable Casual Cortez - 908 Gray', quantity: 1, price: 2500, category: 'shoes' }
     ],
     totalAmount: 2500,
     status: 'Shipped',
@@ -85,8 +84,8 @@ export const orderData = [
     customerId: 'CUST-005',
     customerName: 'Elena Santos',
     products: [
-      { name: 'Insulin Syringes', quantity: 100, price: 15, category: 'Medical Supplies' },
-      { name: 'Glucose Meter', quantity: 1, price: 1800, category: 'Medical Devices' }
+      { name: 'Adidas Originals Campus 00s Core Black Ftwwht Owhite Hq8708 Sneaker Men US11', quantity: 1, price: 15, category: 'shoes' },
+      { name: 'Adidas Originals Campus 00s Core Black Ftwwht Owhite Hq8708 Sneaker Men US11', quantity: 1, price: 1800, category: 'shoes' }
     ],
     totalAmount: 3300,
     status: 'Delivered',
@@ -101,7 +100,7 @@ export const orderData = [
     customerId: 'CUST-006',
     customerName: 'Michael Tan',
     products: [
-      { name: 'Multivitamins', quantity: 30, price: 800, category: 'Supplements' }
+      { name: 'Adidas Originals Campus 00s Core Black Ftwwht Owhite Hq8708 Sneaker Men US11', quantity: 1, price: 800, category: 'shoes' }
     ],
     totalAmount: 24000,
     status: 'Cancelled',
@@ -116,8 +115,8 @@ export const orderData = [
     customerId: 'CUST-007',
     customerName: 'Patricia Reyes',
     products: [
-      { name: 'First Aid Kit', quantity: 5, price: 1200, category: 'Medical Supplies' },
-      { name: 'Thermal Scanner', quantity: 2, price: 2500, category: 'Medical Devices' }
+      { name: 'Adidas Originals Campus 00s Core Black Ftwwht Owhite Hq8708 Sneaker Men US11', quantity: 5, price: 1200, category: 'shoes' },
+      { name: 'Adidas Originals Campus 00s Core Black Ftwwht Owhite Hq8708 Sneaker Men US11', quantity: 2, price: 2500, category: 'shoes' }
     ],
     totalAmount: 11000,
     status: 'Processing',
@@ -126,52 +125,5 @@ export const orderData = [
     paymentMethod: 'Bank Transfer',
     shippingAddress: 'San Francisco, Agusan Del Sur',
     contactNumber: '+63 978 901 2345'
-  },
-  {
-    id: 'ORD-008',
-    customerId: 'CUST-008',
-    customerName: 'David Cruz',
-    products: [
-      { name: 'Nebulizer', quantity: 1, price: 3500, category: 'Medical Devices' }
-    ],
-    totalAmount: 3500,
-    status: 'Pending',
-    orderDate: '2024-03-08T10:20:00',
-    branch: 'Ampayon, Agusan Del Norte',
-    paymentMethod: 'Cash',
-    shippingAddress: 'Ampayon, Butuan City',
-    contactNumber: '+63 989 012 3456'
-  },
-  {
-    id: 'ORD-009',
-    customerId: 'CUST-009',
-    customerName: 'Ana Lim',
-    products: [
-      { name: 'Pregnancy Test Kit', quantity: 10, price: 150, category: 'Medical Supplies' },
-      { name: 'Prenatal Vitamins', quantity: 3, price: 850, category: 'Supplements' }
-    ],
-    totalAmount: 4050,
-    status: 'Shipped',
-    orderDate: '2024-03-07T09:30:00',
-    branch: 'Butuan City, Agusan Del Norte',
-    paymentMethod: 'Credit Card',
-    shippingAddress: 'JP Rizal, Butuan City',
-    contactNumber: '+63 990 123 4567'
-  },
-  {
-    id: 'ORD-010',
-    customerId: 'CUST-010',
-    customerName: 'Marco Gomez',
-    products: [
-      { name: 'Blood Sugar Test Strips', quantity: 5, price: 900, category: 'Medical Supplies' },
-      { name: 'Calcium Supplements', quantity: 2, price: 750, category: 'Supplements' }
-    ],
-    totalAmount: 6000,
-    status: 'Processing',
-    orderDate: '2024-03-06T14:15:00',
-    branch: 'Cabadbaran, Agusan Del Norte',
-    paymentMethod: 'GCash',
-    shippingAddress: 'Cabadbaran City',
-    contactNumber: '+63 912 345 6789'
   }
 ]; 

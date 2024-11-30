@@ -71,7 +71,6 @@ const EditProfileModal = ({ isOpen, onClose, currentUser, onSave }) => {
     { id: 'basic', label: 'Basic Info' },
     { id: 'contact', label: 'Contact' },
     { id: 'personal', label: 'Personal' },
-    { id: 'tags', label: 'Tags' }
   ];
 
   const renderTabContent = () => {
@@ -178,130 +177,50 @@ const EditProfileModal = ({ isOpen, onClose, currentUser, onSave }) => {
             />
           </div>
         );
-
-      case 'tags':
-        return (
-          <div className="space-y-6">
-            <div className="space-y-4">
-              <h3 className="text-sm font-medium text-gray-700">Add New Tag</h3>
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  value={newTag.name}
-                  onChange={(e) => setNewTag({ ...newTag, name: e.target.value })}
-                  placeholder="Enter tag name"
-                  className="flex-1 border rounded px-3 py-2"
-                />
-                <select
-                  value={newTag.type}
-                  onChange={(e) => setNewTag({ ...newTag, type: e.target.value })}
-                  className="border rounded px-3 py-2"
-                >
-                  <option value="blue">Blue</option>
-                  <option value="green">Green</option>
-                </select>
-                <button
-                  type="button"
-                  onClick={handleAddTag}
-                  className="px-4 py-2 bg-[#4C9BF5] text-white rounded-md hover:bg-blue-600"
-                >
-                  Add
-                </button>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <h3 className="text-sm font-medium text-gray-700">Current Tags</h3>
-              <div className="flex flex-wrap gap-2">
-                {formData.tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className={`px-3 py-1 rounded-full text-sm flex items-center gap-2 ${
-                      tag.type === 'blue' ? 'bg-blue-100 text-blue-600' : 'bg-teal-100 text-teal-600'
-                    }`}
-                  >
-                    {tag.name}
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveTag(tag.name)}
-                      className="text-xs hover:text-red-500"
-                    >
-                      ×
-                    </button>
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <h3 className="text-sm font-medium text-gray-700">Suggested Tags</h3>
-              <div className="flex flex-wrap gap-2">
-                {tagSuggestions.map((suggestion, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    onClick={() => handleAddSuggestion(suggestion)}
-                    className={`px-3 py-1 rounded-full text-sm ${
-                      formData.tags.find(t => t.name === suggestion.name)
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                        : suggestion.type === 'blue'
-                        ? 'bg-blue-50 text-blue-600 hover:bg-blue-100'
-                        : 'bg-teal-50 text-teal-600 hover:bg-teal-100'
-                    }`}
-                    disabled={formData.tags.find(t => t.name === suggestion.name)}
-                  >
-                    + {suggestion.name}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        );
-
-      default:
         return null;
     }
   };
 
   return (
     <ModalWrapper isOpen={isOpen} onClose={onClose}>
-      <div className="p-6">
-        <h2 className="text-xl font-semibold mb-4">Edit Profile</h2>
-        <div className="flex space-x-2 mb-6">
-          {tabs.map(tab => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`px-4 py-2 text-sm rounded-lg ${
-                activeTab === tab.id
-                  ? 'bg-blue-50 text-blue-600'
-                  : 'text-gray-500 hover:bg-gray-50'
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-        
-        <form onSubmit={handleSubmit}>
-          {renderTabContent()}
-          
-          <div className="flex justify-end space-x-3 pt-6 mt-6 border-t">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-4 py-2 border rounded-md hover:bg-gray-50"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="px-4 py-2 bg-[#4C9BF5] text-white rounded-md hover:bg-blue-600"
-            >
-              Save Changes
-            </button>
+      <div className="fixed inset-0 flex items-center justify-center z-50 p-6 bg-black bg-opacity-50">
+        <div className="p-6 max-w-3xl w-full mx-auto bg-white rounded-lg shadow-lg">
+          <h2 className="text-xl font-semibold mb-4">Edit Profile</h2>
+          <div className="flex space-x-2 mb-6">
+            {tabs.map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`px-4 py-2 text-sm rounded-lg ${activeTab === tab.id
+                    ? 'bg-blue-50 text-blue-600'
+                    : 'text-gray-500 hover:bg-gray-50'
+                  }`}
+              >
+                {tab.label}
+              </button>
+            ))}
           </div>
-        </form>
+
+          <form onSubmit={handleSubmit}>
+            {renderTabContent()}
+
+            <div className="flex justify-end space-x-3 pt-6 mt-6 border-t">
+              <button
+                type="button"
+                onClick={onClose}
+                className="px-4 py-2 border rounded-md hover:bg-gray-50"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-[#4C9BF5] text-white rounded-md hover:bg-blue-600"
+              >
+                Save Changes
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </ModalWrapper>
   );

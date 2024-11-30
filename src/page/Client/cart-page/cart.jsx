@@ -118,7 +118,7 @@ const Cart = () => {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <StepIndicator currentStep={1} />
         
-
+      <div className='border-2 px-4 py-8 rounded-lg mx-20'>
         <h1 className="text-2xl font-semibold mb-6">Shopping Cart</h1>
         
         <div className="grid grid-cols-3 gap-6">
@@ -131,7 +131,6 @@ const Cart = () => {
                   <span className="font-medium">Product</span>
                 </div>
                 <div className="col-span-2 text-center">
-                  <span className="font-medium">Quantity</span>
                 </div>
                 <div className="col-span-2 text-center">
                   <span className="font-medium">Price</span>
@@ -143,7 +142,7 @@ const Cart = () => {
 
               {/* Cart Items */}
               {cartItems.map(item => (
-                <div key={`${item.category}-${item.id}`} className="p-4 border-b last:border-0">
+                <div key={`${item.category}-${item.id}`} className="p-4 border last:border-0">
                   <div className="grid grid-cols-12 gap-4 items-center">
                     {/* Product Info */}
                     <div className="col-span-6">
@@ -176,38 +175,20 @@ const Cart = () => {
                     <div className="col-span-2">
                       <div className="flex items-center justify-center group relative">
                         <div className="flex border rounded-md">
-                          <button 
-                            title="Decrease quantity"
-                            onClick={() => handleQuantityChange(item.id, item.category, -1, item.quantity)}
-                            className="px-3 py-1 hover:bg-gray-100 border-r"
-                          >
-                            -
-                          </button>
-                          <span className="px-4 py-1 border-r">{item.quantity}</span>
-                          <button 
-                            title="Increase quantity"
-                            onClick={() => handleQuantityChange(item.id, item.category, 1, item.quantity)}
-                            className="px-3 py-1 hover:bg-gray-100"
-                          >
-                            +
-                          </button>
-                        </div>
-                        <div className="invisible group-hover:visible absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2">
-                          Adjust quantity
                         </div>
                       </div>
                     </div>
 
                     {/* Price */}
                     <div className="col-span-2 text-center">
-                      <span className="text-[#F1511B] font-medium">₱ {item.price}</span>
+                      <span className="text-black font-medium">₱ {item.price}</span>
                     </div>
 
                     {/* Delete Button */}
                     <div className="col-span-2 text-center">
                       <button
                         onClick={() => handleDelete(item.id, item.category)}
-                        className="text-[#4C9BF5] hover:text-blue-700"
+                        className="text-red-500 hover:text-yellow-700"
                       >
                         Delete
                       </button>
@@ -232,24 +213,16 @@ const Cart = () => {
 
           {/* Order Summary - Remains mostly the same */}
           <div className="col-span-1">
-            <div className="bg-white rounded-lg shadow-sm p-6 sticky top-4">
+            <div className="bg-white rounded-lg shadow-sm p-4 top-4 border-2 ">
               {cartItems.length === 0 ? (
-                <div className="text-center py-8">
-                  <p className="text-gray-500 mb-4">Your cart is empty</p>
-                  <div className="bg-gray-50 p-4 rounded-lg max-w-md mx-auto mb-4">
-                    <h3 className="font-medium text-gray-700 mb-2">Getting Started:</h3>
-                    <ul className="text-sm text-gray-600 text-left list-disc list-inside">
-                      <li>Browse products from our categories</li>
-                      <li>Click on products to view details</li>
-                      <li>Add items to cart using "Add to Cart" button</li>
-                      <li>Or use "Buy Now" for immediate checkout</li>
-                    </ul>
-                  </div>
-                  <Link to="/home">
-                    <button className="bg-[#4C9BF5] text-white px-6 py-2 rounded-md hover:bg-blue-600 transition-colors">
-                      Start Shopping
-                    </button>
-                  </Link>
+                <div className="text-center py-4">
+                <p className="text-gray-600 mb-4">Your cart is empty.</p>
+                <Link
+          to="/menswear"
+          className="text-blue-500 hover:text-blue-600 font-medium"
+        >
+          Buy products
+        </Link>
                 </div>
               ) : (
                 <>
@@ -270,7 +243,7 @@ const Cart = () => {
                     <div className="border-t pt-4">
                       <div className="flex justify-between">
                         <span className="font-semibold">Total</span>
-                        <span className="font-semibold text-[#F1511B]">
+                        <span className="font-semibold text-black">
                           ₱ {calculateTotal()}
                         </span>
                       </div>
@@ -297,6 +270,7 @@ const Cart = () => {
           <h2 className="text-xl font-semibold mb-6">You Might Also Like</h2>
           <CartMightLike />
         </div>
+      </div>
       </div>
     </div>
   );

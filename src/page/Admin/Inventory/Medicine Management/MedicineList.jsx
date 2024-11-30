@@ -1,8 +1,8 @@
 import AdminNavbar from '../../components/AdminNavbar';
 import AdminSidebar from '../../components/AdminSidebar';
-import { 
-  FiSearch, FiFilter, FiDownload, FiEdit2, FiTrash2, 
-  FiSlash, FiEye, FiPlus, FiRefreshCw, FiX, FiCamera, FiDollarSign, FiBox, FiCalendar, FiClock, FiTag, FiUpload 
+import {
+  FiSearch, FiFilter, FiDownload, FiEdit2, FiTrash2,
+  FiSlash, FiEye, FiPlus, FiRefreshCw, FiX, FiCamera, FiDollarSign, FiBox, FiCalendar, FiClock, FiTag, FiUpload
 } from 'react-icons/fi';
 import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -59,94 +59,61 @@ const MedicineList = () => {
       const mockMedicines = [
         {
           id: 1,
-          name: "Warmhouse 800D Electric Centrifuge Machine",
-          seller: "MedTech Solutions",
-          pharmacy: "MedTech Pharmacy",
-          category: "Medical Supplies",
-          price: 2349,
-          stock: 30,
+          name: "Vintage Leather Boots",
+          seller: "EcoSole Collective",
+          category: "Thrifted Shoes",
+          price: 1299,
+          stock: 1,
           status: "active",
           restrictions: [],
-          lastUpdated: "2024-03-15",
-          pharmacyLicense: "PHA-2024-001",
-          image: "medicine-image-url.jpg",
-          description: "High-quality centrifuge machine for medical laboratories"
+          lastUpdated: "2024-11-01",
+          sellerCertification: "Certified Eco-Friendly",
+          image: "vintage-leather-boots.jpg",
+          description: "Classic brown leather boots in excellent condition, perfect for any season."
         },
         {
           id: 2,
-          name: "Digital Blood Pressure Monitor",
-          seller: "HealthCare Plus",
-          pharmacy: "HealthCare Pharmacy",
-          category: "Medical Devices",
-          price: 1299,
-          stock: 50,
+          name: "Retro Denim Jacket",
+          seller: "Urban Thrift Depot",
+          category: "Thrifted Clothes",
+          price: 899,
+          stock: 25,
           status: "active",
           restrictions: [],
-          lastUpdated: "2024-03-14",
-          pharmacyLicense: "PHA-2024-002",
-          image: "bp-monitor-url.jpg",
-          description: "Accurate digital blood pressure monitoring device"
+          lastUpdated: "2024-10-28",
+          sellerCertification: "Certified Sustainable",
+          image: "retro-denim-jacket.jpg",
+          description: "Stylish retro denim jacket with a comfortable fit and durable material."
         },
         {
           id: 3,
-          name: "Premium Stethoscope Professional Grade",
-          seller: "MediEquip Pro",
-          pharmacy: "MediEquip Pharmacy",
-          category: "Medical Devices",
-          price: 899,
-          stock: 75,
+          name: "Chunky Sneakers",
+          seller: "GreenStep Traders",
+          category: "Thrifted Shoes",
+          price: 1499,
+          stock: 20,
           status: "active",
           restrictions: [],
-          lastUpdated: "2024-03-13",
-          pharmacyLicense: "PHA-2024-003",
-          image: "stethoscope-url.jpg",
-          description: "Professional-grade stethoscope for medical practitioners"
+          lastUpdated: "2024-11-05",
+          sellerCertification: "Certified Pre-Loved",
+          image: "chunky-sneakers.jpg",
+          description: "Trendy chunky sneakers for a bold, casual look. Minimal wear and tear."
         },
         {
           id: 4,
-          name: "Surgical Mask N95 (Box of 50)",
-          seller: "SafetyFirst Medical",
-          pharmacy: "SafetyFirst Pharmacy",
-          category: "Medical Supplies",
-          price: 499,
-          stock: 200,
+          name: "Floral Maxi Dress",
+          seller: "ThriftGlam Boutique",
+          category: "Thrifted Clothes",
+          price: 749,
+          stock: 10,
           status: "active",
           restrictions: [],
-          lastUpdated: "2024-03-12",
-          pharmacyLicense: "PHA-2024-004",
-          image: "mask-url.jpg",
-          description: "High-quality N95 surgical masks for medical use"
+          lastUpdated: "2024-11-10",
+          sellerCertification: "Certified Thrift Partner",
+          image: "floral-maxi-dress.jpg",
+          description: "Elegant floral maxi dress with vibrant prints and flowy fabric."
         },
-        {
-          id: 5,
-          name: "Advanced Pulse Oximeter",
-          seller: "HealthTech Solutions",
-          pharmacy: "HealthTech Pharmacy",
-          category: "Medical Devices",
-          price: 799,
-          stock: 45,
-          status: "blocked",
-          restrictions: ["Quality Check Required"],
-          lastUpdated: "2024-03-11",
-          pharmacyLicense: "PHA-2024-005",
-          image: "oximeter-url.jpg",
-          description: "Digital pulse oximeter with advanced features"
-        },
-        {
-          id: 6,
-          name: "Infrared Thermometer Professional",
-          seller: "MedTech Solutions",
-          pharmacy: "MedTech Pharmacy",
-          category: "Medical Devices",
-          price: 599,
-          stock: 60,
-          status: "active",
-          restrictions: [],
-          lastUpdated: "2024-03-10",
-          pharmacyLicense: "PHA-2024-001",
-          image: "thermometer-url.jpg",
-          description: "Professional-grade infrared thermometer for accurate temperature readings"
-        }
+        
       ];
       setMedicines(mockMedicines);
     }
@@ -167,7 +134,7 @@ const MedicineList = () => {
 
   const handleAction = (medicine, action) => {
     setSelectedMedicine(medicine);
-    switch(action) {
+    switch (action) {
       case 'view':
         setDetailModalContent({ ...medicine });
         setShowDetailModal(true);
@@ -208,39 +175,39 @@ const MedicineList = () => {
     try {
       // API call would go here
       // await api.deleteMedicine(medicineId);
-      
+
       // Update local state
-      setMedicines(prevMedicines => 
+      setMedicines(prevMedicines =>
         prevMedicines.filter(med => med.id !== medicineId)
       );
-      toast.success('Medicine deleted successfully');
+      toast.success('Product deleted successfully');
     } catch (error) {
-      console.error('Error deleting medicine:', error);
-      toast.error('Failed to delete medicine');
+      console.error('Error deleting product:', error);
+      toast.error('Failed to delete product');
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-    
+
     try {
       // API call would go here
       // const updatedMedicine = await api.updateMedicine(selectedMedicine.id, detailModalContent);
-      
+
       // Update local state
       setMedicines(prevMedicines =>
         prevMedicines.map(med =>
           med.id === selectedMedicine.id ? { ...med, ...detailModalContent } : med
         )
       );
-      
+
       setShowDetailModal(false);
       setIsEditing(false);
-      toast.success('Medicine updated successfully');
+      toast.success('Product updated successfully');
     } catch (error) {
-      console.error('Error updating medicine:', error);
-      toast.error('Failed to update medicine');
+      console.error('Error updating product:', error);
+      toast.error('Failed to update product');
     }
   };
 
@@ -258,14 +225,14 @@ const MedicineList = () => {
           reviewDate: blockDetails.blockType === 'temporary' ? blockDetails.reviewDate : null,
           status: 'blocked'
         };
-        
+
         const success = await addBlockedMedicine(blockedMedicine);
-        
+
         if (success) {
           // Update local medicines state
-          setMedicines(prevMedicines => 
-            prevMedicines.map(med => 
-              med.id === selectedMedicine.id 
+          setMedicines(prevMedicines =>
+            prevMedicines.map(med =>
+              med.id === selectedMedicine.id
                 ? { ...med, status: 'blocked' }
                 : med
             )
@@ -273,7 +240,7 @@ const MedicineList = () => {
           toast.success(`${selectedMedicine.name} has been blocked`);
         }
       }
-      
+
       setShowActionModal(false);
       setBlockDetails({
         reason: '',
@@ -340,7 +307,7 @@ const MedicineList = () => {
 
   const handleBlockMedicine = async () => {
     if (!selectedMedicine) return;
-    
+
     const success = await addBlockedMedicine({
       id: selectedMedicine.id,
       name: selectedMedicine.name,
@@ -361,9 +328,9 @@ const MedicineList = () => {
   const renderContent = () => {
     const filteredMedicines = medicines.filter(medicine => {
       const searchMatch = medicine.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         medicine.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         medicine.pharmacy.toLowerCase().includes(searchTerm.toLowerCase());
-                       
+        medicine.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        medicine.pharmacy.toLowerCase().includes(searchTerm.toLowerCase());
+
       const statusMatch = selectedStatus === 'all' || medicine.status === selectedStatus;
       const categoryMatch = selectedCategory === 'all' || medicine.category === selectedCategory;
       const pharmacyMatch = selectedPharmacy === 'all' || medicine.pharmacy === selectedPharmacy;
@@ -380,11 +347,10 @@ const MedicineList = () => {
               <h3 className="text-lg font-semibold leading-tight line-clamp-2 flex-1 mr-2">
                 {medicine.name}
               </h3>
-              <span className={`px-2 py-1 rounded-full text-xs font-medium whitespace-nowrap ${
-                medicine.status === 'active' ? 'bg-green-100 text-green-800' : 
-                medicine.status === 'blocked' ? 'bg-red-100 text-red-800' : 
-                'bg-yellow-100 text-yellow-800'
-              }`}>
+              <span className={`px-2 py-1 rounded-full text-xs font-medium whitespace-nowrap ${medicine.status === 'active' ? 'bg-green-100 text-green-800' :
+                  medicine.status === 'blocked' ? 'bg-red-100 text-red-800' :
+                    'bg-yellow-100 text-yellow-800'
+                }`}>
                 {medicine.status.charAt(0).toUpperCase() + medicine.status.slice(1)}
               </span>
             </div>
@@ -411,15 +377,7 @@ const MedicineList = () => {
 
             {/* Action Buttons */}
             <div className="mt-4 pt-4 border-t flex justify-end gap-2">
-              <button
-                data-tooltip-id="view-tooltip"
-                data-tooltip-content="View medicine details"
-                onClick={() => handleAction(medicine, 'view')}
-                className="p-2 text-gray-600 hover:text-blue-600 transition-colors"
-                title="View Details"
-              >
-                <FiEye className="w-4 h-4" />
-              </button>
+
               <button
                 data-tooltip-id="edit-tooltip"
                 data-tooltip-content="Edit medicine information"
@@ -493,11 +451,10 @@ const MedicineList = () => {
                   <div className="text-sm text-gray-900">{medicine.stock}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                    medicine.status === 'active' ? 'bg-green-100 text-green-800' : 
-                    medicine.status === 'blocked' ? 'bg-red-100 text-red-800' : 
-                    'bg-yellow-100 text-yellow-800'
-                  }`}>
+                  <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${medicine.status === 'active' ? 'bg-green-100 text-green-800' :
+                      medicine.status === 'blocked' ? 'bg-red-100 text-red-800' :
+                        'bg-yellow-100 text-yellow-800'
+                    }`}>
                     {medicine.status.charAt(0).toUpperCase() + medicine.status.slice(1)}
                   </span>
                 </td>
@@ -554,7 +511,7 @@ const MedicineList = () => {
           <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           <input
             type="text"
-            placeholder="Search medicines..."
+            placeholder="Search products ..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
@@ -566,7 +523,7 @@ const MedicineList = () => {
           onChange={(e) => setSelectedStatus(e.target.value)}
           className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
         >
-          <option value="all">All Status</option>
+          <option value="all">Status</option>
           <option value="active">Active</option>
           <option value="blocked">Blocked</option>
           <option value="inactive">Inactive</option>
@@ -577,10 +534,11 @@ const MedicineList = () => {
           onChange={(e) => setSelectedCategory(e.target.value)}
           className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
         >
-          <option value="all">All Categories</option>
-          <option value="Medical Supplies">Medical Supplies</option>
-          <option value="Medical Devices">Medical Devices</option>
-          <option value="Prescription Drugs">Prescription Drugs</option>
+          <option value="all">Categories</option>
+          <option value="Medical Supplies">Shoes</option>
+          <option value="Medical Devices">Womenswear</option>
+          <option value="Prescription Drugs">Menswear</option>
+          <option value="Prescription Drugs">Kidswear</option>
         </select>
 
         <select
@@ -588,7 +546,7 @@ const MedicineList = () => {
           onChange={(e) => setSelectedPharmacy(e.target.value)}
           className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
         >
-          <option value="all">All Pharmacies</option>
+          <option value="all">Stores</option>
           {[...new Set(medicines.map(m => m.pharmacy))].map(pharmacy => (
             <option key={pharmacy} value={pharmacy}>{pharmacy}</option>
           ))}
@@ -606,9 +564,8 @@ const MedicineList = () => {
     };
 
     return (
-      <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
-        statusClasses[status] || statusClasses.active
-      }`}>
+      <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${statusClasses[status] || statusClasses.active
+        }`}>
         {status.charAt(0).toUpperCase() + status.slice(1)}
       </span>
     );
@@ -623,8 +580,7 @@ const MedicineList = () => {
           {/* Enhanced Header with Actions */}
           <div className="flex justify-between items-center mb-6">
             <div>
-              <h1 className="text-2xl font-bold">Medicine Inventory</h1>
-              <p className="text-sm text-gray-600">Manage and monitor medicine inventory across pharmacies</p>
+              <h1 className="text-2xl font-bold">Product Inventory</h1>
             </div>
             <div className="flex items-center gap-4">
               <button className="p-2 text-gray-600 hover:text-gray-800">
@@ -639,18 +595,18 @@ const MedicineList = () => {
           {/* Grid/Table View Toggle */}
           <div className="flex justify-between items-center mb-4">
             <div className="flex items-center gap-2">
-              <button 
+            <button
+                onClick={() => setView('table')}
+                className={`p-2 rounded ${view === 'table' ? 'bg-blue-50 text-blue-600' : 'text-gray-600'}`}
+              >
+               Products
+              </button>
+              {/*<button
                 onClick={() => setView('grid')}
                 className={`p-2 rounded ${view === 'grid' ? 'bg-blue-50 text-blue-600' : 'text-gray-600'}`}
               >
                 Grid View
-              </button>
-              <button 
-                onClick={() => setView('table')}
-                className={`p-2 rounded ${view === 'table' ? 'bg-blue-50 text-blue-600' : 'text-gray-600'}`}
-              >
-                Table View
-              </button>
+              </button>*/}
             </div>
             <button className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-800">
               <FiDownload className="w-4 h-4" />
@@ -681,10 +637,10 @@ const MedicineList = () => {
                 <div className="border-b px-6 py-4 flex justify-between items-center bg-gray-50">
                   <div>
                     <h3 className="text-xl font-semibold text-gray-900">
-                      {isEditing ? 'Edit Medicine Details' : 'Medicine Information'}
+                      {isEditing ? 'Edit product details' : ' Product Information'}
                     </h3>
                     <p className="text-sm text-gray-500 mt-1">
-                      {isEditing ? 'Make changes to medicine information below' : 'View complete medicine details'}
+                      {isEditing ? 'Make changes to product information below' : 'View complete product details'}
                     </p>
                   </div>
                   <div className="flex items-center gap-2">
@@ -697,14 +653,14 @@ const MedicineList = () => {
                           <FiEdit2 className="w-4 h-4 mr-2" />
                           Edit
                         </button>
-                        <button 
+                        <button
                           onClick={() => setShowDetailModal(false)}
                           className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
                         >
                           <FiX className="w-4 h-4 mr-2" />
                           Close
                         </button>
-                        </>
+                      </>
                     ) : (
                       <>
                         <button
@@ -714,7 +670,7 @@ const MedicineList = () => {
                           <FiUpload className="w-4 h-4 mr-2" />
                           Save Changes
                         </button>
-                        <button 
+                        <button
                           onClick={() => {
                             setIsEditing(false);
                             // Reset form to original values
@@ -788,7 +744,7 @@ const MedicineList = () => {
                         {/* Medicine Name */}
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Medicine Name
+                            Product Name
                           </label>
                           <input
                             type="text"
@@ -798,11 +754,10 @@ const MedicineList = () => {
                               name: e.target.value
                             }))}
                             disabled={!isEditing}
-                            className={`w-full rounded-lg border ${
-                              isEditing 
-                                ? 'border-gray-300 focus:ring-2 focus:ring-blue-500' 
+                            className={`w-full rounded-lg border ${isEditing
+                                ? 'border-gray-300 focus:ring-2 focus:ring-blue-500'
                                 : 'border-transparent bg-gray-50'
-                            } px-4 py-2.5`}
+                              } px-4 py-2.5`}
                           />
                         </div>
 
@@ -819,16 +774,15 @@ const MedicineList = () => {
                                 category: e.target.value
                               }))}
                               disabled={!isEditing}
-                              className={`w-full rounded-lg border ${
-                                isEditing 
-                                  ? 'border-gray-300 focus:ring-2 focus:ring-blue-500' 
+                              className={`w-full rounded-lg border ${isEditing
+                                  ? 'border-gray-300 focus:ring-2 focus:ring-blue-500'
                                   : 'border-transparent bg-gray-50'
-                              } px-4 py-2.5`}
+                                } px-4 py-2.5`}
                             >
-                              <option value="Medical Supplies">Medical Supplies</option>
-                              <option value="Antibiotics">Antibiotics</option>
-                              <option value="Painkillers">Painkillers</option>
-                              <option value="Supplements">Supplements</option>
+                              <option value="Medical Supplies">Menswear</option>
+                              <option value="Antibiotics">Womenswear</option>
+                              <option value="Painkillers">Kidswear</option>
+                              <option value="Supplements">Shoes</option>
                             </select>
                           </div>
 
@@ -843,11 +797,10 @@ const MedicineList = () => {
                                 status: e.target.value
                               }))}
                               disabled={!isEditing}
-                              className={`w-full rounded-lg border ${
-                                isEditing 
-                                  ? 'border-gray-300 focus:ring-2 focus:ring-blue-500' 
+                              className={`w-full rounded-lg border ${isEditing
+                                  ? 'border-gray-300 focus:ring-2 focus:ring-blue-500'
                                   : 'border-transparent bg-gray-50'
-                              } px-4 py-2.5`}
+                                } px-4 py-2.5`}
                             >
                               {statusOptions.map(option => (
                                 <option key={option.value} value={option.value}>
@@ -879,11 +832,10 @@ const MedicineList = () => {
                               price: parseFloat(e.target.value)
                             }))}
                             disabled={!isEditing}
-                            className={`w-full pl-8 pr-4 py-2.5 rounded-lg border ${
-                              isEditing 
-                                ? 'border-gray-300 focus:ring-2 focus:ring-blue-500' 
+                            className={`w-full pl-8 pr-4 py-2.5 rounded-lg border ${isEditing
+                                ? 'border-gray-300 focus:ring-2 focus:ring-blue-500'
                                 : 'border-transparent bg-gray-50'
-                            }`}
+                              }`}
                           />
                         </div>
                       </div>
@@ -903,11 +855,10 @@ const MedicineList = () => {
                             stock: parseInt(e.target.value)
                           }))}
                           disabled={!isEditing}
-                          className={`w-full px-4 py-2.5 rounded-lg border ${
-                            isEditing 
-                              ? 'border-gray-300 focus:ring-2 focus:ring-blue-500' 
+                          className={`w-full px-4 py-2.5 rounded-lg border ${isEditing
+                              ? 'border-gray-300 focus:ring-2 focus:ring-blue-500'
                               : 'border-transparent bg-gray-50'
-                          }`}
+                            }`}
                         />
                       </div>
 
@@ -937,42 +888,13 @@ const MedicineList = () => {
                         }))}
                         disabled={!isEditing}
                         rows={4}
-                        className={`w-full px-4 py-2.5 rounded-lg border ${
-                          isEditing 
-                            ? 'border-gray-300 focus:ring-2 focus:ring-blue-500' 
+                        className={`w-full px-4 py-2.5 rounded-lg border ${isEditing
+                            ? 'border-gray-300 focus:ring-2 focus:ring-blue-500'
                             : 'border-transparent bg-gray-50'
-                        }`}
+                          }`}
                       />
                     </div>
                   </form>
-                </div>
-
-                {/* Modal Footer */}
-                <div className="border-t px-6 py-4 bg-gray-50 flex justify-between items-center">
-                  <div className="text-sm text-gray-500">
-                    {isEditing ? 'All changes will be saved immediately' : 'View-only mode'}
-                  </div>
-                  <div className="flex gap-3">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setShowDetailModal(false);
-                        setIsEditing(false);
-                      }}
-                      className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
-                    >
-                      {isEditing ? 'Cancel' : 'Close'}
-                    </button>
-                    {isEditing && (
-                      <button
-                        type="submit"
-                        onClick={handleSubmit}
-                        className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700"
-                      >
-                        Save Changes
-                      </button>
-                    )}
-                  </div>
                 </div>
               </div>
             </div>

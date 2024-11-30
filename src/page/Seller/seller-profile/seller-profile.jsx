@@ -13,21 +13,13 @@ const SellerProfile = () => {
     {
       id: 1,
       title: 'Business Name Registration Certificate',
-      description: 'Official registration document from DTI or SEC',
+      description: 'Official registration document from DTI',
       status: 'Verified',
       validUntil: '2025-12-31',
       documents: []
     },
     {
       id: 2,
-      title: 'Pharmacy License',
-      description: 'FDA-issued pharmacy license',
-      status: 'Verified',
-      validUntil: '2025-06-30',
-      documents: []
-    },
-    {
-      id: 3,
       title: 'Tax Identification Number',
       description: 'BIR registration and TIN certificate',
       status: 'Verified',
@@ -39,8 +31,8 @@ const SellerProfile = () => {
   const mockData = {
     store: {
       photo: null,
-      name: 'PillPoint Store 1',
-      type: 'Pharmacy Store',
+      name: 'Second Chance Apparel',
+      type: 'Menswear Store',
       location: 'Ampayon, Agusan Del Norte',
       rating: 4.8,
       reviews: 1000,
@@ -60,14 +52,14 @@ const SellerProfile = () => {
         fulfillmentRate: 95,
         completionScore: 80
       },
-      description: 'Ex consectetur veniam eiusmod in laboris aliquip exercitation eu culpa elit laborum.',
-      certificates: ['Business Registration', 'FDA License', 'Pharmacy License'],
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      certificates: ['Business Registration'],
       responseTime: '< 24 hours'
     },
     seller: {
-      name: 'Ashley Gonzalez',
-      role: 'Team 1 Manager',
-      email: 'ashley.g@pillpoint.com',
+      name: 'Mugiwara',
+      role: 'Owner',
+      email: 'luffy@gmail.com',
       phone: '+63 912 345 6789',
       about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     }
@@ -79,8 +71,8 @@ const SellerProfile = () => {
       customerName: 'John Doe',
       rating: 5,
       date: '2024-03-15',
-      comment: 'Great service and fast delivery! The medicines were properly packaged.',
-      productName: 'Paracetamol 500mg',
+      comment: 'Great service and fast delivery!',
+      productName: 'Wedtrend Womens Vintage Tea Dress, Short Sleeve Cocktail Party Dress Work Church Casual Dress',
       helpful: 12,
       reply: null
     },
@@ -90,7 +82,7 @@ const SellerProfile = () => {
       rating: 4,
       date: '2024-03-14',
       comment: 'Good product quality but delivery took a bit longer than expected.',
-      productName: 'Vitamin C 500mg',
+      productName: 'adidas campus 00s',
       helpful: 8,
       reply: {
         date: '2024-03-14',
@@ -106,7 +98,7 @@ const SellerProfile = () => {
   const [activeModalTab, setActiveModalTab] = useState('basic');
   const [storeData, setStoreData] = useState({
     ...mockData.store,
-    email: 'store@pillpoint.com',
+    email: 'luffy@gmail.com',
     phone: '+63 912 345 6789',
   });
   const [sellerData, setSellerData] = useState(mockData.seller);

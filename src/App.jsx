@@ -72,14 +72,14 @@ function App() {
                     <Route path="/contact" element={<ContactPage />} />
                     
                     {/* Product Category Routes */}
-                    <Route path="/general-health" element={<GeneralHealth />} />
-                    <Route path="/general-health/product/:id" element={<ProductDetail />} />
-                    <Route path="/medical-supplies" element={<MedicalSupplies />} />
-                    <Route path="/medical-supplies/product/:id" element={<ProductDetail />} />
-                    <Route path="/personal-care" element={<PersonalCare />} />
-                    <Route path="/personal-care/product/:id" element={<ProductDetail />} />
-                    <Route path="/supplements" element={<Supplements />} />
-                    <Route path="/supplements/product/:id" element={<ProductDetail />} />
+                    <Route path="/menswear" element={<GeneralHealth />} />
+                    <Route path="/menswear/product/:id" element={<ProductDetail />} />
+                    <Route path="/womenswear" element={<MedicalSupplies />} />
+                    <Route path="/womenswear/product/:id" element={<ProductDetail />} />
+                    <Route path="/shoes" element={<PersonalCare />} />
+                    <Route path="/shoes/product/:id" element={<ProductDetail />} />
+                    <Route path="/kidswear" element={<Supplements />} />
+                    <Route path="/kidswear/product/:id" element={<ProductDetail />} />
                     
                     {/* Shopping Routes */}
                     <Route path="/cart" element={<Cart />} />
@@ -110,7 +110,7 @@ function App() {
                       <BlocklistProvider>
                         <Routes>
                           <Route path="/" element={<AdminInventory />} />
-                          <Route path="/medicines" element={<MedicineList />} />
+                          <Route path="/products" element={<MedicineList />} />
                           <Route path="/stores" element={<MedicineGroups />} />
                           <Route path="/blocklist" element={<BlacklistManagement />} />
                         </Routes>
@@ -126,7 +126,7 @@ function App() {
                 </Router>
               </BlocklistProvider>
             </OrderCustomerProvider>
-            <ToastContainer position="top-right" autoClose={2000} />
+            <ToastContainer position="top-center" autoClose={2000} />
           </CartProvider>
         </OrderProvider>
       </SearchProvider>

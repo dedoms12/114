@@ -1,47 +1,198 @@
-import React, { useState, useEffect, useRef } from 'react';
-import mapboxgl from 'mapbox-gl';
-import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import React, { useState } from 'react';
 import NavBar from '../_components/navbar';
 import './stores.css';
-import 'mapbox-gl/dist/mapbox-gl.css';
-import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
-import { products } from '../product-page/general-health/gen-products';
-import { medicalProducts } from '../product-page/medical-supplies/medsup-products';
-import { supplementProducts } from '../product-page/supplements/supple-products';
-import { personalCareProducts } from '../product-page/personal-care/pc-products';
 import { useNavigate } from 'react-router-dom';
+import { FiSearch } from 'react-icons/fi';
 
-// Replace with your Mapbox access token
-mapboxgl.accessToken = 'pk.eyJ1IjoibmltYWV1cyIsImEiOiJjbTJ6a3U3eGwwZGZwMm9zZzU1OGxnZnk4In0.qlcAZr_gSaw9eqE5XQMVTw';
-
-const generateRandomAvailability = () => {
-  return Math.floor(Math.random() * 100) + 1; // Random number between 1-100
-};
-
-// Combine all products and add availability
-const allProducts = [...products, ...medicalProducts, ...supplementProducts, ...personalCareProducts].map(product => ({
-  ...product,
-  availability: generateRandomAvailability()
-}));
+// Example stores data (you should replace this with actual store data from your backend or API)
+const stores = [
+  {
+    id: 1,
+    name: "RetroRevive Thrift",
+    logo: "/images/Client/product-page/Store Section/logo.jpg",
+    rating: 4.9,
+    ratingCount: "500k",
+    followers: "300K",
+    productCount: 300,
+    chatResponse: "90%",
+    memberSince: 2012,
+    action: "SHOP NOW",
+    banners: [
+      "/images/Client/product-page/banner1.svg",
+      "/images/Client/product-page/banner2.svg",
+      "/images/Client/product-page/banner3.svg"
+    ],
+    status: 'active',
+    blacklistReason: null,
+    blacklistDate: null,
+    reportCount: 0
+  },
+  {
+    id: 2,
+    name: "Vintage Finds",
+    logo: "/images/Client/product-page/Store Section/logo1.jpg",
+    rating: 4.8,
+    ratingCount: "850K",
+    followers: "156.2K",
+    productCount: 212,
+    chatResponse: "95%",
+    memberSince: 2002,
+    action: "SHOP NOW",
+    banners: [
+      "/images/Client/product-page/banner1.svg",
+      "/images/Client/product-page/banner2.svg",
+      "/images/Client/product-page/banner3.svg"
+    ],
+    status: 'active',
+    blacklistReason: null,
+    blacklistDate: null,
+    reportCount: 0
+  },
+  {
+    id: 3,
+    name: "EcoThreads",
+    logo: "/images/Client/product-page/Store Section/logo2.jpg",
+    rating: 4.5,
+    ratingCount: "342K",
+    followers: "141.5K",
+    productCount: 321,
+    chatResponse: "95%",
+    memberSince: 2012,
+    action: "SHOP NOW",
+    banners: [
+      "/images/Client/product-page/banner1.svg",
+      "/images/Client/product-page/banner2.svg",
+      "/images/Client/product-page/banner3.svg"
+    ],
+    status: 'active',
+    blacklistReason: null,
+    blacklistDate: null,
+    reportCount: 0
+  },
+  {
+    id: 4,
+    name: "Second Chance Apparel",
+    logo: "/images/Client/product-page/Store Section/logo3.jpg",
+    rating: 4.5,
+    ratingCount: "321K",
+    followers: "109K",
+    productCount: 232,
+    chatResponse: "85%",
+    memberSince: 2015,
+    action: "SHOP NOW",
+    banners: [
+      "/images/Client/product-page/banner1.svg",
+      "/images/Client/product-page/banner2.svg",
+      "/images/Client/product-page/banner3.svg"
+    ],
+    status: 'active',
+    blacklistReason: null,
+    blacklistDate: null,
+    reportCount: 0
+  },
+  // Latest Stores
+  {
+    id: 5,
+    name: "Thrift Luxe",
+    logo: "/images/Client/product-page/Store Section/logo4.jpg",
+    rating: 4.5,
+    ratingCount: "125K",
+    followers: "45.2K",
+    productCount: 189,
+    chatResponse: "79%",
+    memberSince: 2022,
+    action: "SHOP NOW",
+    banners: [
+      "/images/Client/product-page/banner1.svg",
+      "/images/Client/product-page/banner2.svg",
+      "/images/Client/product-page/banner3.svg"
+    ],
+    status: 'active',
+    blacklistReason: null,
+    blacklistDate: null,
+    reportCount: 0
+  },
+  {
+    id: 6,
+    name: "The Thrift Shop",
+    logo: "/images/Client/product-page/Store Section/logo5.jpg",
+    rating: 4.4,
+    ratingCount: "98K",
+    followers: "32.8K",
+    productCount: 156,
+    chatResponse: "82%",
+    memberSince: 2022,
+    action: "SHOP NOW",
+    banners: [
+      "/images/Client/product-page/banner1.svg",
+      "/images/Client/product-page/banner2.svg",
+      "/images/Client/product-page/banner3.svg"
+    ],
+    status: 'active',
+    blacklistReason: null,
+    blacklistDate: null,
+    reportCount: 0
+  },
+  {
+    id: 7,
+    name: "Pre-Loved Couture",
+    logo: "/images/Client/product-page/Store Section/logo6.jpg",
+    rating: 4.3,
+    ratingCount: "75K",
+    followers: "28.4K",
+    productCount: 134,
+    chatResponse: "76%",
+    memberSince: 2023,
+    action: "SHOP NOW",
+    banners: [
+      "/images/Client/product-page/banner1.svg",
+      "/images/Client/product-page/banner2.svg",
+      "/images/Client/product-page/banner3.svg"
+    ],
+    status: 'active',
+    blacklistReason: null,
+    blacklistDate: null,
+    reportCount: 0
+  },
+  {
+    id: 8,
+    name: "Thriftstore",
+    logo: "/images/Client/product-page/Store Section/logo7.jpg",
+    rating: 4.2,
+    ratingCount: "45K",
+    followers: "21.6K",
+    productCount: 98,
+    chatResponse: "81%",
+    memberSince: 2023,
+    action: "SHOP NOW",
+    banners: [
+      "/images/Client/product-page/banner1.svg",
+      "/images/Client/product-page/banner2.svg",
+      "/images/Client/product-page/banner3.svg"
+    ],
+    status: 'active',
+    blacklistReason: null,
+    blacklistDate: null,
+    reportCount: 0
+  }
+];
 
 const Stores = () => {
-  const [map, setMap] = useState(null);
-  const [searchProduct, setSearchProduct] = useState('');
+  const [searchStore, setSearchStore] = useState(''); // Changed to search for stores
   const [currentPage, setCurrentPage] = useState(1);
-  const geocoderContainerRef = useRef(null);
-  
-  const productsPerPage = 4;
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  
-  // Filter products based on search
-  const filteredProducts = allProducts.filter(product => 
-    product.name.toLowerCase().includes(searchProduct.toLowerCase())
+
+  const storesPerPage = 5;
+  const indexOfLastStore = currentPage * storesPerPage;
+  const indexOfFirstStore = indexOfLastStore - storesPerPage;
+
+  // Filter stores based on search
+  const filteredStores = stores.filter(store =>
+    store.name.toLowerCase().includes(searchStore.toLowerCase())
   );
-  
-  // Get current products for pagination
-  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
+  // Get current stores for pagination
+  const currentStores = filteredStores.slice(indexOfFirstStore, indexOfLastStore);
+  const totalPages = Math.ceil(filteredStores.length / storesPerPage);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -49,91 +200,10 @@ const Stores = () => {
 
   const navigate = useNavigate();
 
-  const handleProductClick = (product) => {
-    navigate(`/${product.category}/product/${product.id}`, {
-      state: { 
-        from: '/stores',
-        scrollPosition: window.pageYOffset 
-      }
-    });
-  };
-
-  useEffect(() => {
-    const initializeMap = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: [125.5353, 8.9478], // Butuan City coordinates
-      zoom: 13
-    });
-
-   
-
-    // Add style switcher
-    const layerList = document.createElement('div');
-    layerList.className = 'absolute bottom-4 left-4 bg-white rounded-lg shadow p-2 z-10';
-
-    const inputs = [];
-    const layers = [
-      { id: 'streets', label: 'Streets', style: 'mapbox://styles/mapbox/streets-v11' },
-      { id: 'satellite', label: 'Satellite', style: 'mapbox://styles/mapbox/satellite-v9' },
-      { id: 'hybrid', label: 'Hybrid', style: 'mapbox://styles/mapbox/satellite-streets-v11' }
-    ];
-
-    layers.forEach((layer) => {
-      const input = document.createElement('button');
-      input.className = 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left';
-      input.textContent = layer.label;
-      input.onclick = () => {
-        initializeMap.setStyle(layer.style);
-      };
-      layerList.appendChild(input);
-    });
-
-    document.getElementById('map').appendChild(layerList);
-
-    // Initialize the geocoder
-    const geocoder = new MapboxGeocoder({
-      accessToken: mapboxgl.accessToken,
-      mapboxgl: mapboxgl,
-      marker: true,
-      placeholder: 'Search for places in Butuan...',
-      bbox: [125.4353, 8.8478, 125.6353, 9.0478], // Bounding box for Butuan City
-      proximity: {
-        longitude: 125.5353,
-        latitude: 8.9478
-      },
-      render: function(item) {
-        return `<div class="text-sm text-gray-700">${item.place_name}</div>`;
-      }
-    });
-
-    if (geocoderContainerRef.current) {
-      geocoderContainerRef.current.appendChild(geocoder.onAdd(initializeMap));
-    }
-
-    initializeMap.addControl(new mapboxgl.NavigationControl());
-    initializeMap.addControl(
-      new mapboxgl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true
-        },
-        trackUserLocation: true,
-        showUserHeading: true
-      })
-    );
-
-    setMap(initializeMap);
-
-    return () => {
-      geocoder.onRemove();
-      initializeMap.remove();
-    };
-  }, []);
-
   const Pagination = () => {
-    const pageRange = 1; // Show 3 pages before and after current page
+    const pageRange = 1; // Show 1 page before and after current page
     const pages = [];
-    
+
     // Previous button
     pages.push(
       <button
@@ -165,11 +235,10 @@ const Stores = () => {
           <button
             key={i}
             onClick={() => handlePageChange(i)}
-            className={`px-3 py-2 rounded-md ${
-              currentPage === i
+            className={`px-3 py-2 rounded-md ${currentPage === i
                 ? 'bg-blue-500 text-white'
                 : 'bg-white text-gray-600 hover:bg-gray-50'
-            }`}
+              }`}
           >
             {i}
           </button>
@@ -198,113 +267,65 @@ const Stores = () => {
       <div className="container mx-auto px-6 py-8">
         {/* Header Section */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">Store Locator</h1>
-          <p className="text-gray-600 mt-2">Find products and stores near you</p>
+          <h1 className="text-3xl font-bold text-gray-800">Stores</h1>
+          <p className="text-gray-600 mt-2">Find the best stores for second-hand clothing and shoes</p>
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Side - Search and Products */}
-          <div className="lg:col-span-1">
+        <div className="grid grid-cols-1 gap-8">
+          {/* Left Side - Search and Stores */}
+          <div className="bg-white rounded-xl shadow-sm p-6">
             {/* Search Section */}
-            <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
-              <div className="space-y-6">
-                {/* Product Search */}
-                <div>
-                  <label className="text-sm font-medium text-gray-700 mb-2 block">
-                    Search Products
-                  </label>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      value={searchProduct}
-                      onChange={(e) => setSearchProduct(e.target.value)}
-                      placeholder="Search for products..."
-                      className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    />
-                    <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                      <svg
-                        className="w-5 h-5 text-gray-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                        />
-                      </svg>
-                    </span>
-                  </div>
-                </div>
-
-                {/* Location Search */}
-                <div>
-                  <label className="text-sm font-medium text-gray-700 mb-2 block">
-                    Search Location
-                  </label>
-                  <div className="relative search-wrapper">
-                    <div ref={geocoderContainerRef} className="geocoder-container" />
-                    <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none z-10">
-                      <svg
-                        className="w-5 h-5 text-gray-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                        />
-                      </svg>
-                    </span>
-                  </div>
-                </div>
+            <div className="space-y-6 mb-6 border-2 rounded-lg">
+              {/* Store Search */}
+              <div className="relative w-full">
+                {/* Search Icon */}
+                <FiSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                {/* Input Field */}
+                <input
+                  type="text"
+                  value={searchStore}
+                  onChange={(e) => setSearchStore(e.target.value)} // Update to searchStore
+                  placeholder="Search for stores..."
+                  className="w-full pl-10 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
               </div>
             </div>
-
-            {/* Products List */}
+            
+            {/* Store List */}
             <div className="bg-white rounded-xl shadow-sm">
               <div className="p-4 border-b flex justify-between items-center">
-                <h2 className="font-semibold text-gray-800">Available Products</h2>
+                <h2 className="font-semibold text-gray-800">Available Stores</h2>
                 <span className="text-sm text-gray-500">
-                  {filteredProducts.length} items found
+                  {stores.length} stores found
                 </span>
               </div>
               <div className="divide-y max-h-[600px] overflow-y-auto">
-                {currentProducts.map((product) => (
-                  <div 
-                    key={product.id} 
+                {currentStores.map((store) => (
+                  <div
+                    key={store.id}
                     className="p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                    onClick={() => handleProductClick(product)}
+                    onClick={() => navigate(`/store/${store.id}`)} // Navigate to the store page
                   >
                     <div className="flex gap-4">
                       <img
-                        src={product.image}
-                        alt={product.name}
+                        src={store.logo}
+                        alt={store.name}
                         className="w-20 h-20 object-contain rounded-lg"
                       />
                       <div className="flex-1">
-                        <h3 className="font-medium text-gray-800">{product.name}</h3>
+                        <h3 className="font-medium text-gray-800">{store.name}</h3>
                         <p className="text-sm text-gray-500 mb-2">
-                          Category: {product.category}
+                          {store.productCount} Products
                         </p>
                         <div className="flex justify-between items-center">
-                          <span className="font-medium text-gray-900">₱{product.price}</span>
-                          <span className={`text-sm ${
-                            product.availability > 50 ? 'text-green-600' : 
-                            product.availability > 20 ? 'text-yellow-600' : 
-                            'text-red-600'
-                          }`}>
-                            {product.availability} in stock
+                          <span className="font-medium text-gray-900">Followers: {store.followers}</span>
+                          <span className="text-sm text-gray-600">
+                            Rating: {store.rating} ({store.ratingCount} Ratings)
                           </span>
                         </div>
                         <p className="text-sm text-gray-600 mt-1">
-                          {product.storeInfo?.location || product.location}
+                          {store.location}
                         </p>
                       </div>
                     </div>
@@ -312,13 +333,6 @@ const Stores = () => {
                 ))}
               </div>
               <Pagination />
-            </div>
-          </div>
-
-          {/* Right Side - Map */}
-          <div className="lg:col-span-2">
-            <div className="bg-white rounded-xl shadow-sm p-4 sticky top-6">
-              <div id="map" className="w-full h-[700px] rounded-lg"></div>
             </div>
           </div>
         </div>

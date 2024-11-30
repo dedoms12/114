@@ -211,7 +211,7 @@ const CreateProductModal = ({ isOpen, onClose, onSave, categories, units, editPr
 
             {/* Section 2: Pricing & Stock */}
             <section className="border-t pt-6">
-              <h3 className="text-lg font-medium text-gray-700 mb-4">Pricing & Stock</h3>
+              <h3 className="text-lg font-medium text-gray-700 mb-4">Pricing</h3>
               <div className="grid grid-cols-2 gap-6">
                 <div>
                   <label className="block text-gray-700 mb-2">Price</label>
@@ -226,20 +226,8 @@ const CreateProductModal = ({ isOpen, onClose, onSave, categories, units, editPr
                   />
                 </div>
 
-                <div>
-                  <label className="block text-gray-700 mb-2">Quantity</label>
-                  <input
-                    type="number"
-                    value={formData.quantity}
-                    onChange={(e) => handleQuantityChange(e.target.value)}
-                    className="w-full p-2 bg-gray-50 rounded-md border"
-                    required
-                    min="0"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-gray-700 mb-2">Unit Type</label>
+              {/*}  <div>
+                  <label className="block text-gray-700 mb-2">Type</label>
                   <select
                     value={formData.unit}
                     onChange={(e) => setFormData({...formData, unit: e.target.value})}
@@ -249,9 +237,9 @@ const CreateProductModal = ({ isOpen, onClose, onSave, categories, units, editPr
                       <option key={index} value={unit}>{unit}</option>
                     ))}
                   </select>
-                </div>
+                </div>*/}
 
-                <div>
+               {/*} <div>
                   <label className="block text-gray-700 mb-2">Expiry Date</label>
                   <input
                     type="date"
@@ -260,7 +248,7 @@ const CreateProductModal = ({ isOpen, onClose, onSave, categories, units, editPr
                     className="w-full p-2 bg-gray-50 rounded-md border"
                     required
                   />
-                </div>
+                </div>*/}
               </div>
             </section>
 

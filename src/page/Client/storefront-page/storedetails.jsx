@@ -10,30 +10,28 @@ import { supplementProducts } from '../product-page/supplements/supple-products'
 import { stores } from '../home-page/store';
 
 const NAVIGATION_TABS = [
-  { id: 'home', label: 'Home' },
-  { id: 'all-products', label: 'All Products' },
-  { id: 'general-health', label: 'General Health' },
-  { id: 'medical-supplies', label: 'Medical Supplies' },
-  { id: 'supplements', label: 'Supplements' },
-  { id: 'personal-care', label: 'Personal Care' }
+  { id: 'menswear', label: 'Menswear' },
+  { id: 'womenswear', label: 'Womenswear' },
+  { id: 'kidswear', label: 'Kidswear' },
+  { id: 'shoes', label: 'Shoes' }
 ];
 
 const CATEGORY_INFO = {
-  'general-health': {
-    name: 'General Health',
-    description: 'Medicines & wellness products'
+  'menswear': {
+    name: 'Menswear',
+    description: ''
   },
-  'medical-supplies': {
-    name: 'Medical Supplies',
-    description: 'Medical equipment & supplies'
+  'womenswear': {
+    name: 'Womenswear',
+    description: ''
   },
-  'supplements': {
-    name: 'Supplements',
-    description: 'Vitamins & supplements'
+  'kidswear': {
+    name: 'kidswear',
+    description: ''
   },
-  'personal-care': {
-    name: 'Personal Care',
-    description: 'Personal care products'
+  'shoes': {
+    name: 'Shoes',
+    description: ''
   }
 };
 
@@ -69,13 +67,12 @@ const StoreProductCard = ({ product }) => {
       </div>
       <div className="flex items-center space-x-2 mb-2">
         <div className="flex text-yellow-400">
-          {[...Array(Math.floor(product.rating))].map((_, i) => (
+          {[...Array(Math.floor(product.rating)|| 0)].map((_, i) => (
             <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
               <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
             </svg>
           ))}
         </div>
-        <span className="text-sm text-gray-500">{product.soldCount} Sold</span>
       </div>
       <p className="text-xs text-gray-500">{product.location}</p>
     </div>
@@ -114,7 +111,7 @@ const TopProductCard = ({ product }) => {
       </div>
       <div className="flex items-center space-x-2 mb-2">
         <div className="flex text-yellow-400">
-          {[...Array(Math.floor(product.rating))].map((_, i) => (
+          {[...Array(Math.floor(product.rating)|| 0)].map((_, i) => (
             <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
               <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
             </svg>
@@ -140,10 +137,10 @@ const StoreDetails = () => {
 
   // Combine all products and add category property
   const allProducts = {
-    'general-health': generalHealthProducts,
-    'medical-supplies': medicalProducts,
-    'personal-care': personalCareProducts,
-    'supplements': supplementProducts,
+    'menswear': generalHealthProducts,
+    'womenswear': medicalProducts,
+    'shoes': personalCareProducts,
+    'kidswear': supplementProducts,
   };
 
   // Get products based on active tab
@@ -192,7 +189,7 @@ const StoreDetails = () => {
     
     return (
       <div className="border-b bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 mt-5">
           <div className="flex items-center gap-4 mb-6">
             <div className="w-20 h-20 rounded-full overflow-hidden border border-gray-200">
               <img 
@@ -262,51 +259,9 @@ const StoreDetails = () => {
     <div className="min-h-screen bg-gray-50">
       <NavBar />
       {renderStoreHeader()}
-      
-      {/* Only show banner and top products on home tab */}
-      {activeTab === 'home' && (
-        <>
-          {/* Banner Slider */}
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div className="relative h-[400px] rounded-2xl overflow-hidden">
-              <img 
-                src={storeBanners[currentSlide].image}
-                alt="Store Banner"
-                className="w-full h-full object-cover transition-opacity duration-500"
-              />
-            </div>
-          </div>
-
-          {/* Top Products Section */}
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="mb-8">
-              <h2 className="text-2xl font-semibold mb-6">Top Products</h2>
-              <div className="grid grid-cols-6 gap-4">
-                {topProducts.map(product => (
-                  <TopProductCard key={product.id} product={product} />
-                ))}
-              </div>
-            </div>
-          </div>
-        </>
-      )}
-
       {/* Products Grid Section - Show for all tabs except home */}
-      {activeTab !== 'home' && (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex gap-8">
-            <Categories 
-              onRatingFilter={handleRatingFilter}
-              selectedRating={selectedRating}
-              onClearAll={() => setSelectedRating(null)}
-              onCategoryClick={(category) => {
-                setActiveTab(category);
-                setCurrentPage(1);
-              }}
-              activeCategory={activeTab}
-              isStorePage={true}
-            />
-            
             <div className="flex-1">
               <div className="flex items-center justify-between mb-6">
                 <div>
@@ -341,7 +296,6 @@ const StoreDetails = () => {
             </div>
           </div>
         </div>
-      )}
     </div>
   );
 };

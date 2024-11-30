@@ -9,868 +9,349 @@ const getRandomStore = () => {
 const originalPersonalCareProducts = [
   {
     id: 1,
-    name: "COLGATE Plax 500ml Fresh Tea",
-    price: 247,
-    rating: 5,
-    soldCount: 721,
-    image: "/images/Client/product-page/pc/image1stbatch-11.svg",
-    category: "pc",
+    name: "Dunk Low 'Black White' - 38.5",
+    price: 1500,
+    image: "/images/Client/product-page/Shoes/shoes1.jpg",
+    category: "shoes",
     description: {
-      main: "Antibacterial Mouthwash",
-      subText: "Kills 99% of Bacteria for Fresh Breath",
+      main: "The Nike Dunk Low 'Black White' offers a classic two-tone colorway, blending sleek black and white leather with signature Dunk style.",
+      subText: "With its iconic low-top design and premium leather construction, this sneaker offers both street-ready looks and timeless comfort.",
       features: [
-        "Fresh Tea Flavor",
-        "12-Hour Protection",
-        "Alcohol-Free Formula",
-        "Fights Bad Breath"
+        "Premium leather upper",
+        "Black and white colorway for versatile styling",
+        "Rubber outsole for durable traction",
+        "Low-top design for a sleek silhouette"
       ],
       specifications: [
-        "Volume: 500ml",
-        "Antibacterial Protection",
-        "Sugar-Free",
-        "Contains Fluoride",
-        "Clinically Proven",
-        "24 Months Shelf Life",
-        "Store in Cool, Dry Place"
+        "Material: Leather Upper, Rubber Outsole",
+        "Available in sizes US 6-12",
+        "Imported"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱150", days: "4-6 Days" },
+      express: { price: "₱250", days: "1-2 Days" }
     },
-    location: "Quezon City, Metro Manila",
-    reviews: [
-      {
-        id: 1,
-        user: "John D.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great mouthwash, keeps breath fresh all day!",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/pc/image1stbatch-11.svg",
-      "/images/Client/product-page/pc/image1stbatch-11.svg",
-      "/images/Client/product-page/pc/image1stbatch-11.svg"
-    ]
+    location: "Quezon City, Metro Manila"
   },
   {
     id: 2,
-    name: "LUXE ORGANIX Luxe Organix Himalayan Salt Gargle Stick 10ml",
-    price: 22,
-    rating: 5,
-    soldCount: 103,
-    image: "/images/Client/product-page/pc/image1stbatch-10.svg",
-    category: "pc",
+    name: "Reebok Court Advance Mens Sneakers | White | Regular 7",
+    price: 2000,
+    image: "/images/Client/product-page/Shoes/shoes2.jpg",
+    category: "shoes",
     description: {
-      main: "Himalayan Salt Gargle Stick",
-      subText: "With ¼ Moisturizing Cream for Soft, Smooth Skin",
+      main: "The Reebok Court Advance Mens Sneakers combine athletic performance with casual street style, featuring a clean white design for versatile wear.",
+      subText: "Perfect for sports or everyday use, these sneakers offer comfort, durability, and style with their cushioned footbed and sleek look.",
       features: [
-        "Mild and Gentle Formula",
-        "Suitable for Face and Body",
-        "Dermatologically Tested",
-        "pH Balanced"
+        "Premium synthetic upper for durability",
+        "Cushioned footbed for all-day comfort",
+        "Rubber outsole for optimal grip and traction",
+        "Classic Reebok branding on the tongue and heel"
       ],
       specifications: [
-        "Net Weight: 10ml",
-        "Suitable for All Skin Types",
-        "Paraben-Free",
-        "Not Tested on Animals",
-        "Made with Pure Natural Ingredients",
-        "Shelf Life: 24 Months",
-        "Store in Cool, Dry Place"
+        "Material: Synthetic Upper, Rubber Outsole",
+        "Available in sizes US 6-12",
+        "Imported"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱150", days: "4-6 Days" },
+      express: { price: "₱250", days: "1-2 Days" }
     },
-    location: "Quezon City, Metro Manila",
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great gargle stick! Leaves skin feeling soft and moisturized.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/pc/image1stbatch-10.svg",
-      "/images/Client/product-page/pc/image1stbatch-10.svg",
-      "/images/Client/product-page/pc/image1stbatch-10.svg"
-    ]
+    location: "Mandaluyong City, Metro Manila"
   },
   {
     id: 3,
-    name: "PH CARE Feminine Wash Floral Clean 50ml",
-    price: 55,
-    rating: 5,
-    soldCount: 2700,
-    image: "/images/Client/product-page/pc/image1stbatch-8.svg",
-    category: "pc",
+    name: "Men Atwood Deluxe Sneaker - Men's - Turtledove Beige",
+    price: 1500,
+    image: "/images/Client/product-page/Shoes/shoes3.jpg",
+    category: "shoes",
     description: {
-      main: "Feminine Wash Floral Clean",
-      subText: "With ¼ Moisturizing Cream for Soft, Smooth Skin",
+      main: "The Men Atwood Deluxe Sneaker in Turtledove Beige offers a premium casual look with a minimalist design and lightweight construction.",
+      subText: "Perfect for daily wear, these sneakers feature a clean beige colorway, ensuring versatility while providing all-day comfort and style.",
       features: [
-        "Mild and Gentle Formula",
-        "Suitable for Face and Body",
-        "Dermatologically Tested",
-        "pH Balanced"
+        "Premium canvas upper for a comfortable fit",
+        "Lightweight and breathable construction",
+        "Rubber sole for enhanced traction",
+        "Subtle logo detailing for a classic look"
       ],
       specifications: [
-        "Net Weight: 50ml",
-        "Suitable for All Skin Types",
-        "Paraben-Free",
-        "Not Tested on Animals",
-        "Made with Pure Natural Ingredients",
-        "Shelf Life: 24 Months",
-        "Store in Cool, Dry Place"
+        "Material: Canvas Upper, Rubber Outsole",
+        "Available in sizes US 7-13",
+        "Imported"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱120", days: "3-5 Days" },
+      express: { price: "₱200", days: "1-2 Days" }
     },
-    location: "Quezon City, Metro Manila",
-    reviews: [
-      {
-        id: 1,
-        user: "Maria S.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great feminine wash! Leaves skin feeling soft and moisturized.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/pc/image1stbatch-8.svg",
-      "/images/Client/product-page/pc/image1stbatch-8.svg",
-      "/images/Client/product-page/pc/image1stbatch-8.svg"
-    ]
+    location: "Taguig City, Metro Manila"
   },
   {
     id: 4,
-    name: "DEOPLUS Tawas Powder W/ Licorice Extract 50G",
-    price: 28,
-    rating: 5,
-    soldCount: 530,
-    image: "/images/Client/product-page/pc/image1stbatch-9.svg",
-    category: "pc",
+    name: "Cross-border Sneakers Couples Running Shoes Trendy Stylish And Lightweight Breathable Casual Cortez - 908 Gray",
+    price: 1300,
+    image: "/images/Client/product-page/Shoes/shoes4.jpg",
+    category: "shoes",
     description: {
-      main: "Natural Deodorizing Powder",
-      subText: "With Licorice Extract for Enhanced Protection",
+      main: "The Cross-border Sneakers Cortez 908 in Gray offer a stylish and lightweight design perfect for couples who want to combine fashion and comfort.",
+      subText: "These breathable casual shoes are ideal for running or casual outings, providing a modern look with a comfortable fit.",
       features: [
-        "Natural Tawas Formula",
-        "With Licorice Extract",
-        "Long-lasting Protection",
-        "No Harmful Chemicals"
+        "Breathable mesh upper for superior ventilation",
+        "Lightweight and flexible construction for ease of movement",
+        "Durable rubber outsole for excellent grip",
+        "Trendy design with a sleek, minimalist aesthetic"
       ],
       specifications: [
-        "Net Weight: 50G",
-        "All-Natural Ingredients",
-        "Aluminum Salt Free",
-        "Paraben-Free",
-        "For External Use Only",
-        "24 Months Shelf Life",
-        "Made in Philippines"
+        "Material: Mesh Upper, Rubber Outsole",
+        "Available in sizes US 5-10",
+        "Imported"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱150", days: "4-6 Days" },
+      express: { price: "₱250", days: "1-2 Days" }
     },
-    location: "Quezon City, Metro Manila",
-    reviews: [
-      {
-        id: 1,
-        user: "Anna L.",
-        rating: 5,
-        date: "2024-03-10",
-        comment: "Effective natural deodorant powder, keeps me fresh all day!",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/pc/image1stbatch-9.svg",
-      "/images/Client/product-page/pc/image1stbatch-9.svg",
-      "/images/Client/product-page/pc/image1stbatch-9.svg"
-    ]
+    location: "Cebu City, Cebu"
   },
   {
     id: 5,
-    name: "LUXE ORGANIX Niacinamide + Retinol Cloud Soap 3 X 80g",
-    price: 119,
-    rating: 5,
-    soldCount: 10000,
-    image: "/images/Client/product-page/pc/image1stbatch-7.svg",
-    category: "pc",
+    name: "Tênis Feminino Via Marte Jogging Casual 22-16004-05 - Bebecê",
+    price: 2200,
+    image: "/images/Client/product-page/Shoes/shoes5.jpg",
+    category: "shoes",
     description: {
-      main: "Advanced Skincare Soap",
-      subText: "With Niacinamide and Retinol for Glowing Skin",
+      main: "The Via Marte Jogging Casual Tênis offers a stylish and comfortable design for women, featuring a modern jogger look perfect for everyday wear.",
+      subText: "This casual sneaker by Bebecê combines comfort and style, making it ideal for walking, running, or any casual outing.",
       features: [
-        "Contains Niacinamide",
-        "With Retinol",
-        "Cloud-like Texture",
-        "Brightening Formula"
+        "Soft synthetic upper for comfort",
+        "Lightweight and breathable design",
+        "Rubber outsole for better traction and stability",
+        "Sleek, sporty style with a modern touch"
       ],
       specifications: [
-        "Weight: 80g x 3 bars",
-        "For All Skin Types",
-        "Dermatologically Tested",
-        "Paraben-Free",
-        "Cruelty-Free",
-        "36 Months Shelf Life",
-        "Store in Cool, Dry Place"
+        "Material: Synthetic Upper, Rubber Outsole",
+        "Available in sizes US 6-10",
+        "Imported"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱180", days: "3-5 Days" },
+      express: { price: "₱280", days: "1-2 Days" }
     },
-    location: "Quezon City, Metro Manila",
-    reviews: [
-      {
-        id: 1,
-        user: "Sofia R.",
-        rating: 5,
-        date: "2024-03-12",
-        comment: "Amazing soap! Noticed brighter skin after just a week of use.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/pc/image1stbatch-7.svg",
-      "/images/Client/product-page/pc/image1stbatch-7.svg",
-      "/images/Client/product-page/pc/image1stbatch-7.svg"
-    ]
+    location: "Quezon City, Metro Manila"
   },
   {
     id: 6,
-    name: "Goat Milk Scented Cream Body Wash 1000ml",
-    price: 334,
-    rating: 5,
-    soldCount: 5500,
-    image: "/images/Client/product-page/pc/image1stbatch.svg",
-    category: "pc",
+    name: "New Balance Damen 57/40 in Schwarz/Weiß, Suede/Mesh",
+    price: 2500,
+    image: "/images/Client/product-page/Shoes/shoes6.jpg",
+    category: "shoes",
     description: {
-      main: "Creamy Goat Milk Body Wash",
-      subText: "Luxurious Body Wash with Real Goat Milk",
+      main: "The New Balance Damen 57/40 in Black/White features a premium suede and mesh upper, combining sleek design with everyday comfort.",
+      subText: "These stylish sneakers offer a perfect blend of classic and modern aesthetics, providing comfort and support for all-day wear.",
       features: [
-        "Real Goat Milk Extract",
-        "Moisturizing Formula",
-        "Gentle Cleansing",
-        "Rich Creamy Lather"
+        "Suede and mesh upper for durability and breathability",
+        "Cushioned midsole for added comfort and support",
+        "Rubber outsole for excellent grip and traction",
+        "Iconic New Balance design with a contemporary twist"
       ],
       specifications: [
-        "Volume: 1000ml",
-        "pH Balanced",
-        "For All Skin Types",
-        "Paraben-Free",
-        "With Natural Moisturizers",
-        "24 Months Shelf Life",
-        "Made with Natural Ingredients"
+        "Material: Suede/Mesh Upper, Rubber Outsole",
+        "Available in sizes EU 36-42",
+        "Imported"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱200", days: "4-6 Days" },
+      express: { price: "₱350", days: "1-2 Days" }
     },
-    location: "Quezon City, Metro Manila",
-    reviews: [
-      {
-        id: 1,
-        user: "Maria C.",
-        rating: 5,
-        date: "2024-03-14",
-        comment: "Love how creamy and moisturizing this body wash is!",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/pc/image1stbatch.svg",
-      "/images/Client/product-page/pc/image1stbatch.svg",
-      "/images/Client/product-page/pc/image1stbatch.svg"
-    ]
+    location: "Makati City, Metro Manila"
   },
   {
     id: 7,
-    name: "NIVEA Anti-Perspirant Extra Brightening Roll-On",
-    price: 164,
-    rating: 5,
-    soldCount: 10000,
-    image: "/images/Client/product-page/pc/image1stbatch-1.svg",
-    category: "pc",
+    name: "New Balance ML615 D Marathon Running Shoes/Sneakers ML615NRT (Size: US 8)",
+    price: 1800,
+    image: "/images/Client/product-page/Shoes/shoes7.jpg",
+    category: "shoes",
     description: {
-      main: "Anti-Perspirant Roll-On",
-      subText: "48-Hour Protection with Brightening Effect",
+      main: "The New Balance ML615 D Marathon Running Shoes combine performance and style, engineered for comfort during long-distance runs and everyday activities.",
+      subText: "With a lightweight, breathable mesh upper and responsive cushioning, these sneakers are designed to keep your feet comfortable and supported throughout the day.",
       features: [
-        "48-Hour Protection",
-        "Brightening Formula",
-        "Non-Sticky",
-        "Quick-Drying"
+        "Breathable mesh upper for ventilation",
+        "Cushioned midsole for responsive comfort",
+        "Rubber outsole with tread for superior grip",
+        "Sleek marathon-inspired design for both performance and style"
       ],
       specifications: [
-        "Buy 1 Take 1 Pack",
-        "Contains Vitamin C",
-        "Alcohol-Free",
-        "Dermatologically Tested",
-        "For All Skin Types",
-        "36 Months Shelf Life",
-        "Made in Germany"
+        "Material: Mesh Upper, Rubber Outsole",
+        "Size: US 8",
+        "Ideal for running, gym workouts, and casual wear",
+        "Imported"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱180", days: "3-5 Days" },
+      express: { price: "₱250", days: "1-2 Days" }
     },
-    location: "Quezon City, Metro Manila",
-    reviews: [
-      {
-        id: 1,
-        user: "Jenny P.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Best anti-perspirant! Love the brightening effect.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/pc/image1stbatch-11.svg",
-      "/images/Client/product-page/pc/image1stbatch-11.svg",
-      "/images/Client/product-page/pc/image1stbatch-11.svg"
-    ]
+    location: "Taguig City, Metro Manila"
   },
   {
     id: 8,
-    name: "BELO Intense White Deo 40ML",
-    price: 165,
-    rating: 5,
-    soldCount: 10000,
-    image: "/images/Client/product-page/pc/image1stbatch-2.svg",
-    category: "pc",
+    name: "adidas campus 00s",
+    price: 1300,
+    image: "/images/Client/product-page/Shoes/shoes8.jpg",
+    category: "shoes",
     description: {
-      main: "Whitening Deodorant",
-      subText: "Advanced Whitening Formula with 24-Hour Protection",
+      main: "The adidas Campus 00s is a classic sneaker with a rich heritage that provides comfort and style with every step.",
+      subText: "The leather upper and sturdy rubber outsole offer a durable and stylish sneaker for everyday wear.",
       features: [
-        "Intense Whitening",
-        "24-Hour Protection",
-        "Non-Sticky Formula",
-        "With Kojic Acid"
+        "Leather upper with suede overlays",
+        "Signature rubber outsole for traction",
+        "Classic Campus branding",
+        "Padded collar for extra comfort"
       ],
       specifications: [
-        "Volume: 40ML",
-        "With Alpha Arbutin",
-        "Alcohol-Free",
-        "Dermatologically Tested",
-        "For All Skin Types",
-        "36 Months Shelf Life",
-        "Made in Philippines"
+        "Material: Leather Upper, Rubber Outsole",
+        "Available in sizes US 6-13",
+        "Imported"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱150", days: "4-6 Days" },
+      express: { price: "₱250", days: "1-2 Days" }
     },
-    location: "Quezon City, Metro Manila",
-    reviews: [
-      {
-        id: 1,
-        user: "Patricia M.",
-        rating: 5,
-        date: "2024-03-11",
-        comment: "Effective whitening deo! No dark underarms anymore.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/pc/image1stbatch-2.svg",
-      "/images/Client/product-page/pc/image1stbatch-2.svg",
-      "/images/Client/product-page/pc/image1stbatch-2.svg"
-    ]
+    location: "Caloocan City, Metro Manila"
   },
   {
     id: 9,
-    name: "KOJIE SAN Skin Lightening Classic Soap 65Gx3 (Value Pack)",
-    price: 87,
-    rating: 5,
-    soldCount: 10000,
-    image: "/images/Client/product-page/pc/image1stbatch-3.svg",
-    category: "pc",
+    name: "Original Adidas Clover Campus 00s Men and Women's Shoes Low Top Sports Casual Board Shoes Sneakers - 9 / 44",
+    price: 1200,
+    image: "/images/Client/product-page/Shoes/shoes9.jpg",
+    category: "shoes",
     description: {
-      main: "Kojic Acid Whitening Soap",
-      subText: "Maximum Whitening with Classic Kojic Acid Formula",
+      main: "The Adidas Clover Campus 00s combines retro style with modern comfort, featuring a low-top design for versatile wear and sleek, sporty aesthetics.",
+      subText: "Ideal for both casual outings and athletic activities, these sneakers provide long-lasting comfort, durability, and style with every step.",
       features: [
-        "With Pure Kojic Acid",
-        "Anti-Dark Spots",
-        "Even Skin Tone",
-        "Deep Cleansing"
+        "Low-top design for a versatile and casual look",
+        "Premium suede upper for durability and comfort",
+        "Classic Adidas 3-stripes branding",
+        "Cushioned insole for extra comfort",
+        "Rubber outsole for excellent grip and board control"
       ],
       specifications: [
-        "Weight: 65g x 3 bars",
-        "Maximum Strength Formula",
-        "For Face and Body",
-        "Dermatologically Tested",
-        "All Skin Types",
-        "24 Months Shelf Life",
-        "Made in Philippines"
+        "Material: Suede Upper, Rubber Outsole",
+        "Size: 9 (US) / 44 (EU)",
+        "Available in various sizes",
+        "Imported"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱220", days: "3-5 Days" },
+      express: { price: "₱320", days: "1-2 Days" }
     },
-    location: "Quezon City, Metro Manila",
-    reviews: [
-      {
-        id: 1,
-        user: "Michelle L.",
-        rating: 5,
-        date: "2024-03-13",
-        comment: "Best whitening soap! Visible results in weeks.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/pc/image1stbatch-3.svg",
-      "/images/Client/product-page/pc/image1stbatch-3.svg",
-      "/images/Client/product-page/pc/image1stbatch-3.svg"
-    ]
+    location: "Mandaluyong City, Metro Manila"
   },
   {
     id: 10,
-    name: "CLEENE Cotton Rounds Multi Purpose 80s X 2 Packs",
-    price: 149,
-    rating: 5,
-    soldCount: 4600,
-    image: "/images/Client/product-page/pc/image1stbatch-4.svg",
-    category: "pc",
+    name: "Adidas Originals Campus 00s Core Black Ftwwht Owhite Hq8708 Sneaker Men US11",
+    price: 1300,
+    image: "/images/Client/product-page/Shoes/shoes10.jpg",
+    category: "shoes",
     description: {
-      main: "Multi-Purpose Cotton Rounds",
-      subText: "Soft and Absorbent Cotton Pads for Beauty and Skincare",
+      main: "The Adidas Originals Campus 00s Core Black sneakers deliver a timeless style with a modern twist, featuring a sleek black suede upper and contrasting white details for a standout look.",
+      subText: "Designed for both casual and active lifestyles, these sneakers are built for comfort, durability, and versatile style. Perfect for streetwear or everyday wear.",
       features: [
-        "100% Pure Cotton",
-        "Dual-Sided Texture",
-        "Lint-Free",
-        "Multi-Purpose Use"
+        "Premium suede upper for a soft, durable feel",
+        "Classic white accents with Adidas signature 3-stripes",
+        "Cushioned insole for all-day comfort",
+        "Rubber outsole for superior grip and support",
+        "Iconic Campus 00s design with a retro vibe"
       ],
       specifications: [
-        "80 Pieces x 2 Packs",
-        "Hypoallergenic",
-        "Unscented",
-        "For Cosmetic Use",
-        "Biodegradable",
-        "36 Months Shelf Life",
-        "Made in Philippines"
+        "Material: Suede Upper, Rubber Outsole",
+        "Size: US 11",
+        "Color: Core Black / Ftwwht / Owhite",
+        "Imported"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱250", days: "3-5 Days" },
+      express: { price: "₱350", days: "1-2 Days" }
     },
-    location: "Quezon City, Metro Manila",
-    reviews: [
-      {
-        id: 1,
-        user: "Angela R.",
-        rating: 5,
-        date: "2024-03-14",
-        comment: "Super soft and doesn't leave any lint behind!",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/pc/image1stbatch-4.svg",
-      "/images/Client/product-page/pc/image1stbatch-4.svg",
-      "/images/Client/product-page/pc/image1stbatch-4.svg"
-    ]
+    location: "Quezon City, Metro Manila"
   },
   {
     id: 11,
-    name: "Flat Thread Mint Dental Flossers Loose Box",
-    price: 330,
-    rating: 5,
-    soldCount: 2800,
-    image: "/images/Client/product-page/pc/image1stbatch-5.svg",
-    category: "pc",
+    name: "SAYO TOMASYON 2024 Spring Unisex Men's Shoes Plus Size 47 Casual Sneakers White Canvas Shoes Boys Sport Sneakers Comfortable Women Loafers Black-CN 41",
+    price: 1800,
+    image: "/images/Client/product-page/Shoes/shoes11.jpg",
+    category: "shoes",
     description: {
-      main: "Mint Flavored Dental Flossers",
-      subText: "Easy-to-Use Dental Floss Picks with Mint Flavor",
+      main: "SAYO TOMASYON 2024 Spring Sneakers are designed for both comfort and style, perfect for all-day wear with a modern look for both men and women.",
+      subText: "These white canvas shoes are lightweight, breathable, and versatile, making them ideal for casual, sporty, and everyday use.",
       features: [
-        "Flat Thread Design",
-        "Mint Flavored",
-        "Easy Grip Handle",
-        "Break-Resistant"
+        "Soft, breathable canvas upper for all-day comfort",
+        "Sporty yet casual design for versatile styling",
+        "Durable rubber outsole for great grip and traction",
+        "Easy slip-on style with padded insole for added comfort",
+        "Available in both men's and women's sizes, up to CN 47"
       ],
       specifications: [
-        "Loose Box Pack",
-        "High-Tension Thread",
-        "Food Grade Material",
-        "Travel-Friendly",
-        "FDA Approved",
-        "48 Months Shelf Life",
-        "Made in Philippines"
+        "Material: Canvas Upper, Rubber Outsole",
+        "Size: 41 (CN) / US 8.5",
+        "Comfortable and breathable design",
+        "Imported"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱150", days: "3-5 Days" },
+      express: { price: "₱250", days: "1-2 Days" }
     },
-    location: "Quezon City, Metro Manila",
-    reviews: [
-      {
-        id: 1,
-        user: "David C.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Great quality flossers, love the mint flavor!",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/pc/image1stbatch-5.svg",
-      "/images/Client/product-page/pc/image1stbatch-5.svg",
-      "/images/Client/product-page/pc/image1stbatch-5.svg"
-    ]
+    location: "Muntinlupa City, Metro Manila"
   },
   {
     id: 12,
-    name: "SISTERS Over Night Dry With Wings Cottony Comfort 4 Pads",
-    price: 29,
-    rating: 5,
-    soldCount: 46,
-    image: "/images/Client/product-page/pc/image1stbatch-6.svg",
-    category: "pc",
+    name: "Leather Men Shoes Sneakers Trend Casual Shoes Italian Breathable Leisure Male Sneakers Non-slip shoes Men Vulcanized Shoes Blue-39",
+    price: 1200,
+    image: "/images/Client/product-page/Shoes/shoes12.jpg",
+    category: "shoes",
     description: {
-      main: "Overnight Sanitary Pads",
-      subText: "Extra Long Protection with Wings for Overnight Use",
+      main: "These Leather Men Sneakers offer a blend of Italian design, breathability, and comfort, perfect for casual outings, leisure activities, and everyday wear.",
+      subText: "Crafted with a stylish leather upper, these shoes are designed to keep your feet comfortable with their breathable material and non-slip sole, ensuring durability and flexibility.",
       features: [
-        "With Wings",
-        "Cottony Soft Cover",
-        "Extra Length",
-        "Overnight Protection"
+        "Premium leather upper with a stylish, sleek design",
+        "Breathable material for enhanced comfort and ventilation",
+        "Non-slip, vulcanized rubber outsole for excellent grip and stability",
+        "Lightweight construction perfect for all-day wear",
+        "Versatile design suitable for casual and semi-casual outfits"
       ],
       specifications: [
-        "4 Pads per Pack",
-        "With Wings Design",
-        "Extra Absorbent Core",
-        "Hypoallergenic",
-        "Individually Wrapped",
-        "36 Months Shelf Life",
-        "Made in Philippines"
+        "Material: Leather Upper, Rubber Outsole",
+        "Size: 39 (EU) / US 6.5",
+        "Breathable and flexible design",
+        "Imported from Italy"
       ]
     },
     shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
+      standard: { price: "₱180", days: "3-5 Days" },
+      express: { price: "₱300", days: "1-2 Days" }
     },
-    location: "Quezon City, Metro Manila",
-    reviews: [
-      {
-        id: 1,
-        user: "Sarah M.",
-        rating: 5,
-        date: "2024-03-12",
-        comment: "Very comfortable and great overnight protection!",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/pc/image1stbatch-6.svg",
-      "/images/Client/product-page/pc/image1stbatch-6.svg",
-      "/images/Client/product-page/pc/image1stbatch-6.svg"
-    ]
-  },
-  {
-    id: 13,
-    name: "EUROO Eye2209e 2-in-1 Epilator",
-    price: 1999,
-    rating: 5,
-    soldCount: 476,
-    image: "/images/Client/product-page/pc/image2ndbatch-6.svg",
-    category: "pc",
-    description: {
-      main: "2-in-1 Electric Epilator",
-      subText: "Professional Hair Removal Device with Dual Function",
-      features: [
-        "2-in-1 Functionality",
-        "Cordless Operation",
-        "Waterproof Design",
-        "LED Light Guide"
-      ],
-      specifications: [
-        "Rechargeable Battery",
-        "2 Speed Settings",
-        "Washable Head",
-        "40 Minutes Runtime",
-        "Includes Cleaning Brush",
-        "1 Year Warranty",
-        "CE Certified"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    location: "Quezon City, Metro Manila",
-    reviews: [
-      {
-        id: 1,
-        user: "Lisa T.",
-        rating: 5,
-        date: "2024-03-10",
-        comment: "Great epilator! Easy to use and effective results.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/pc/image2ndbatch-6.svg",
-      "/images/Client/product-page/pc/image2ndbatch-6.svg",
-      "/images/Client/product-page/pc/image2ndbatch-6.svg"
-    ]
-  },
-  {
-    id: 14,
-    name: "Shiba Impregnating Wet Wipes Sakura Scented 100 X 3Pk",
-    price: 119,
-    rating: 5,
-    soldCount: 736,
-    image: "/images/Client/product-page/pc/imagebatch3-6.svg",
-    category: "pc",
-    description: {
-      main: "Sakura Scented Wet Wipes",
-      subText: "Premium Quality Wet Wipes with Japanese Sakura Fragrance",
-      features: [
-        "Sakura Scented",
-        "Extra Thick Material",
-        "Alcohol-Free",
-        "Resealable Pack"
-      ],
-      specifications: [
-        "100 Sheets x 3 Packs",
-        "pH Balanced",
-        "Dermatologically Tested",
-        "With Natural Extracts",
-        "Travel-Friendly Size",
-        "24 Months Shelf Life",
-        "Made in Japan"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    location: "Quezon City, Metro Manila",
-    reviews: [
-      {
-        id: 1,
-        user: "Yuki M.",
-        rating: 5,
-        date: "2024-03-15",
-        comment: "Love the sakura scent! Very refreshing and gentle on skin.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/pc/imagebatch3-6.svg",
-      "/images/Client/product-page/pc/imagebatch3-6.svg",
-      "/images/Client/product-page/pc/imagebatch3-6.svg"
-    ]
-  },
-  {
-    id: 15,
-    name: "Luxe Organix Dermaglow Salicylic Acid 2% Acne Rescue Serum",
-    price: 299,
-    rating: 5,
-    soldCount: 534,
-    image: "/images/Client/product-page/pc/imagebatch3.svg",
-    category: "pc",
-    description: {
-      main: "Acne Treatment Serum",
-      subText: "2% Salicylic Acid Treatment for Acne-Prone Skin",
-      features: [
-        "With 2% Salicylic Acid",
-        "Oil-Free Formula",
-        "Pore-Minimizing",
-        "Anti-Inflammatory"
-      ],
-      specifications: [
-        "30ml Bottle",
-        "For Acne-Prone Skin",
-        "Alcohol-Free",
-        "Fragrance-Free",
-        "Dermatologically Tested",
-        "24 Months Shelf Life",
-        "Made in Korea"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    location: "Quezon City, Metro Manila",
-    reviews: [
-      {
-        id: 1,
-        user: "Claire P.",
-        rating: 5,
-        date: "2024-03-14",
-        comment: "Amazing for acne control! Saw results in just a week.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/pc/imagebatch3.svg",
-      "/images/Client/product-page/pc/imagebatch3.svg",
-      "/images/Client/product-page/pc/imagebatch3.svg"
-    ]
-  },
-  {
-    id: 16,
-    name: "Cream Body Wash Strawberry Refill 900ml",
-    price: 159,
-    rating: 5,
-    soldCount: 105,
-    image: "/images/Client/product-page/pc/imagebatch3-2.svg",
-    category: "pc",
-    description: {
-      main: "Strawberry Scented Body Wash",
-      subText: "Creamy Body Wash with Natural Strawberry Extract",
-      features: [
-        "Rich Creamy Lather",
-        "Natural Strawberry Scent",
-        "Moisturizing Formula",
-        "Eco-Friendly Refill Pack"
-      ],
-      specifications: [
-        "Volume: 900ml",
-        "pH Balanced",
-        "With Natural Extracts",
-        "Paraben-Free",
-        "Recyclable Packaging",
-        "24 Months Shelf Life",
-        "Made in Philippines"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    location: "Quezon City, Metro Manila",
-    reviews: [
-      {
-        id: 1,
-        user: "Mary A.",
-        rating: 5,
-        date: "2024-03-13",
-        comment: "Smells amazing and leaves skin soft! Love the refill option.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/pc/imagebatch3-2.svg",
-      "/images/Client/product-page/pc/imagebatch3-2.svg",
-      "/images/Client/product-page/pc/imagebatch3-2.svg"
-    ]
-  },
-  {
-    id: 17,
-    name: "GEISHA WHITE Geisha White Intense Bar 65g X 3",
-    price: 82,
-    rating: 5,
-    soldCount: 456,
-    image: "/images/Client/product-page/pc/imagebatch3-3.svg",
-    category: "pc",
-    description: {
-      main: "Whitening Beauty Soap",
-      subText: "Triple Action Whitening with Japanese Technology",
-      features: [
-        "Intense Whitening Formula",
-        "With Natural Extracts",
-        "Moisturizing Effect",
-        "Gentle on Skin"
-      ],
-      specifications: [
-        "65g x 3 Bars",
-        "With Japanese Technology",
-        "For All Skin Types",
-        "Dermatologically Tested",
-        "With Natural Ingredients",
-        "36 Months Shelf Life",
-        "Made in Japan"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    location: "Quezon City, Metro Manila",
-    reviews: [
-      {
-        id: 1,
-        user: "Sophia L.",
-        rating: 5,
-        date: "2024-03-12",
-        comment: "Best whitening soap! Visible results in 2 weeks.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/pc/imagebatch3-3.svg",
-      "/images/Client/product-page/pc/imagebatch3-3.svg",
-      "/images/Client/product-page/pc/imagebatch3-3.svg"
-    ]
-  },
-  {
-    id: 18,
-    name: "HYGIENIX Hygienix Germkill Mega Menthol Soap 125G Triple",
-    price: 114,
-    rating: 5,
-    soldCount: 236,
-    image: "/images/Client/product-page/pc/imagebatch3-4.svg",
-    category: "pc",
-    description: {
-      main: "Antibacterial Menthol Soap",
-      subText: "Triple Action Germ Protection with Cooling Menthol",
-      features: [
-        "Kills 99.9% Germs",
-        "Cooling Menthol Effect",
-        "Long-lasting Protection",
-        "Fresh Scent"
-      ],
-      specifications: [
-        "125G x 3 Bars",
-        "With Active Antibacterial",
-        "Dermatologically Tested",
-        "For All Skin Types",
-        "With Natural Menthol",
-        "36 Months Shelf Life",
-        "Made in Philippines"
-      ]
-    },
-    shipping: {
-      standard: { price: "₱30", days: "10 Hours" },
-      express: { price: "₱50", days: "5 Hours" }
-    },
-    location: "Quezon City, Metro Manila",
-    reviews: [
-      {
-        id: 1,
-        user: "Mark R.",
-        rating: 5,
-        date: "2024-03-11",
-        comment: "Great antibacterial soap! Love the cooling sensation.",
-        images: []
-      }
-    ],
-    images: [
-      "/images/Client/product-page/pc/imagebatch3-4.svg",
-      "/images/Client/product-page/pc/imagebatch3-4.svg",
-      "/images/Client/product-page/pc/imagebatch3-4.svg"
-    ]
+    location: "Pasig City, Metro Manila"
   }
+
+
+
+
+
+
+
+
+
+
+
+
 ];
 
 // Export products with random store info

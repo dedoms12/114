@@ -130,29 +130,12 @@ const SearchResults = () => {
               <div className="flex gap-2">
                 <button
                   className={`px-4 py-1.5 rounded-md text-sm ${
-                    sortBy === 'popular' ? 'bg-[#4C9BF5] text-white' : 'bg-white'
-                  }`}
-                  onClick={() => handleSort('popular')}
-                >
-                  Popular
-                </button>
-                <button
-                  className={`px-4 py-1.5 rounded-md text-sm ${
                     sortBy === 'latest' ? 'bg-[#4C9BF5] text-white' : 'bg-white'
                   }`}
                   onClick={() => handleSort('latest')}
                 >
                   Latest
                 </button>
-                <button
-                  className={`px-4 py-1.5 rounded-md text-sm ${
-                    sortBy === 'top-sales' ? 'bg-[#4C9BF5] text-white' : 'bg-white'
-                  }`}
-                  onClick={() => handleSort('top-sales')}
-                >
-                  Top Sales
-                </button>
-                
                 <div className="relative">
                   <button
                     className={`px-4 py-1.5 rounded-md text-sm ${

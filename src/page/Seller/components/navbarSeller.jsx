@@ -14,33 +14,32 @@ const NavbarSeller = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [showSearchResults, setShowSearchResults] = useState(false);
 
-  const firstName = currentUser?.name?.split(' ')[0] || 'Seller';
+  const firstName = currentUser?.name?.split(' ')[1] || 'Seller';
 
   const handleLogout = () => {
-    // Add any logout cleanup logic here
-    navigate('/signin');
+    const confirmed = window.confirm("Are you sure you want to log out?");
+    if (confirmed) {
+      setCurrentUser(null);
+      localStorage.removeItem('token');
+      navigate('/signin');
+    }
   };
 
   const navItems = [
-    { name: 'Home', path: '/seller/dashboard', icon: '/images/Client/product-page/home-logo.svg' },
-    { name: 'Products Management', path: '/seller/product-management', icon: '/images/Client/product-page/client-package.svg' },
-    { name: 'Sales', path: '/seller/sales', icon: '/images/Client/product-page/client-shopping-cart.svg' },
-    { name: 'Records', icon: '/images/Seller/Records/collectionicon.svg', dropdown: [
-      { name: 'Customer List', path: '/seller/records/customers' },
-      { name: 'Order List', path: '/seller/records/orders' }
-    ] }
+    { name: 'Dashboard', path: '/seller/dashboard', icon: '/images/Seller/dashboard.png' },
+    { name: 'Sales', path: '/seller/sales', icon: '/images/Seller/sales.png' },
+    { name: 'Products', path: '/seller/product-management', icon: '/images/Seller/products.png' },
+    { name: 'Orders', path: '/seller/records/orders', icon: '/images/Seller/order-delivery.png' },
+    { name: 'Customers', path: '/seller/records/customers', icon: '/images/Seller/customer.png' },
   ];
 
   const [activeDropdown, setActiveDropdown] = useState(null);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleDropdownClick = (itemName) => {
     if (activeDropdown === itemName) {
       setActiveDropdown(null);
-      setIsDropdownOpen(false);
     } else {
       setActiveDropdown(itemName);
-      setIsDropdownOpen(true);
     }
   };
 
@@ -72,8 +71,8 @@ const NavbarSeller = () => {
         type="text"
         value={searchQuery}
         onChange={handleSearch}
-        placeholder="Search pages..."
-        className="w-64 pl-4 pr-10 py-2 rounded-full border border-gray-200 focus:outline-none focus:border-pill-blue"
+        placeholder="Search for Dashboard, Sales, Products... "
+        className="w-64 pl-4 pr-10 py-2 rounded-full border border-gray-200 focus:outline-none focus:border-yellow-500 text-black"
       />
       <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
         <FiSearch className="w-5 h-5" />
@@ -98,13 +97,12 @@ const NavbarSeller = () => {
   );
 
   return (
-    <nav className="bg-[#FCFFFE] shadow-sm py-4">
-      <div className="container mx-auto px-6">
+    <nav className="bg-[#FCFFFE] shadow-sm py-4 bg-gray-900 text-white">
+      <div className="container mx-auto px-20">
         <div className="flex items-center justify-between">
           {/* Logo and Nav Items */}
           <Link to="/seller/dashboard" className="flex items-center space-x-2">
-            <img src="/images/Client/product-page/PillLogo.svg" alt="PillPoint" className="h-12 w-12" />
-            <span className="text-2xl font-semibold text-gray-800">PillPoint</span>
+            <img src="/images/thriftstorelogo.png" alt="logo" className="h-20 w-50" />
           </Link>
 
           {/* Hamburger Icon for Mobile */}
@@ -134,54 +132,14 @@ const NavbarSeller = () => {
           {/* Desktop Nav Items */}
           <div className="hidden md:flex items-center space-x-16">
             {navItems.map((item) => (
-              <div
-                key={item.name}
-                className="relative"
-              >
-                {item.dropdown ? (
-                  <>
-                    <div
-                      onClick={() => handleDropdownClick(item.name)}
-                      className="flex items-center space-x-2 text-gray-600 hover:text-pill-blue cursor-pointer"
-                    >
-                      <img src={item.icon} alt={item.name} className="w-5 h-5" />
-                      <span className="text-sm">{item.name}</span>
-                      <svg 
-                        className={`w-4 h-4 transition-transform ${activeDropdown === item.name ? 'rotate-180' : ''}`} 
-                        fill="none" 
-                        stroke="currentColor" 
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </div>
-                    {activeDropdown === item.name && (
-                      <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-                        {item.dropdown.map((dropItem) => (
-                          <Link
-                            key={dropItem.name}
-                            to={dropItem.path}
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                            onClick={() => {
-                              setActiveDropdown(null);
-                              setIsDropdownOpen(false);
-                            }}
-                          >
-                            {dropItem.name}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <Link
-                    to={item.path}
-                    className="flex items-center space-x-2 text-gray-600 hover:text-pill-blue"
-                  >
-                    <img src={item.icon} alt={item.name} className="w-5 h-5" />
-                    <span className="text-sm">{item.name}</span>
-                  </Link>
-                )}
+              <div key={item.name} className="relative">
+                <Link
+                  to={item.path}
+                  className="flex items-center space-x-2 text-white hover:text-yellow-500"
+                >
+                  <img src={item.icon} alt={item.name} className="w-5 h-5 invert" />
+                  <span className="text-sm">{item.name}</span>
+                </Link>
               </div>
             ))}
           </div>
@@ -191,14 +149,11 @@ const NavbarSeller = () => {
             {searchBarJSX}
 
             {/* User Profile Dropdown */}
-            <div className="relative">
+            <div className="relative px-5">
               <button
                 onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                 className="flex items-center space-x-2 hover:opacity-80"
               >
-                <div className="w-8 h-8 bg-gray-900 rounded-full flex items-center justify-center text-sm text-white">
-                  {firstName.charAt(0)}
-                </div>
                 <span className="text-sm hidden md:block">
                   {firstName}
                 </span>

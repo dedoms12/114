@@ -27,7 +27,7 @@ export const BlocklistProvider = ({ children }) => {
       );
       return true;
     } catch (error) {
-      console.error('Error adding blocked medicine:', error);
+      console.error('Error adding blocked:', error);
       return false;
     }
   };
@@ -40,10 +40,10 @@ export const BlocklistProvider = ({ children }) => {
           med.id === medicineId ? { ...med, ...updates } : med
         )
       }));
-      toast.success('Medicine block details updated');
+      toast.success('Block details updated');
       return true;
     } catch (error) {
-      toast.error('Failed to update medicine');
+      toast.error('Failed to update');
       return false;
     }
   };
@@ -54,10 +54,10 @@ export const BlocklistProvider = ({ children }) => {
         ...prev,
         medicines: prev.medicines.filter(med => med.id !== medicineId)
       }));
-      toast.success('Medicine removed from blocklist');
+      toast.success('Removed from blocklist');
       return true;
     } catch (error) {
-      toast.error('Failed to delete medicine');
+      toast.error('Failed to delete');
       return false;
     }
   };
@@ -81,8 +81,8 @@ export const BlocklistProvider = ({ children }) => {
       toast.success(`${medicineName} has been unblocked`);
       return true;
     } catch (error) {
-      console.error('Error unblocking medicine:', error);
-      toast.error('Failed to unblock medicine');
+      console.error('Error unblocking:', error);
+      toast.error('Failed to unblock');
       return false;
     }
   };

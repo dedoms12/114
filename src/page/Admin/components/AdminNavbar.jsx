@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FiSearch, FiChevronDown, FiSun } from 'react-icons/fi';
+import { FiSearch, FiChevronDown, FiSun, FiHelpCircle } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 
 const AdminNavbar = () => {
@@ -14,12 +14,17 @@ const AdminNavbar = () => {
   const firstName = currentUser?.name?.split(' ')[0] || 'Admin';
 
   const handleLogout = () => {
-    navigate('/signin');
+    const confirmed = window.confirm("Are you sure you want to log out?");
+    if (confirmed) {
+      setCurrentUser(null);
+      localStorage.removeItem('token');
+      navigate('/signin');
+    }
   };
 
   return (
     <nav className="bg-white border-b">
-      <div className="px-6 py-2">
+      <div className="px-6 py-2  bg-gray-900 ">
         <div className="flex items-center justify-between">
           {/* Search Bar */}
           <div className="relative flex-1 max-w-2x1">
@@ -35,42 +40,20 @@ const AdminNavbar = () => {
 
           {/* Right Side */}
           <div className="flex items-center space-x-6">
-            {/* Language Selector */}
-            <div className="flex items-center space-x-2">
-              <img src="/images/Admin/globe.svg" alt="Language" className="w-5 h-5" />
-              <span className="text-sm text-gray-600">{language}</span>
-              <FiChevronDown className="w-4 h-4 text-gray-400" />
-            </div>
-
             {/* Time and Date */}
-            <div className="text-right">
-              <div className="text-sm font-medium flex items-center justify-end gap-2">
-                <FiSun className="w-5 h-5 text-yellow-400" />
-                Good Morning
-              </div>
-              <div className="text-xs text-gray-500">
-                {new Date().toLocaleDateString('en-US', {
-                  day: 'numeric',
-                  month: 'long',
-                  year: 'numeric'
-                })} - {' '}
-                {new Date().toLocaleTimeString('en-US', {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                  second: '2-digit'
-                })}
+            <div className="text-right text-white">
+              <div className="text-sm font-medium flex items-center justify-end gap-2 px-4">
+              <FiHelpCircle className="w-5 h-5" />
               </div>
             </div>
 
             {/* User Profile Dropdown */}
-            <div className="relative">
+            <div className="relative text-white">
               <button
                 onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                 className="flex items-center space-x-2 hover:opacity-80"
               >
-                <div className="w-8 h-8 bg-gray-900 rounded-full flex items-center justify-center text-sm text-white">
-                  {firstName.charAt(0)}
-                </div>
+              
                 <span className="text-sm hidden md:block">
                   {firstName}
                 </span>

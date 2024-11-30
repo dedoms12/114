@@ -320,7 +320,6 @@ const OrderList = () => {
           <div className="flex justify-between items-center mb-6">
             <div>
               <h1 className="text-2xl font-semibold text-gray-900">Order Management</h1>
-              <p className="text-sm text-gray-500">Track and manage all orders across branches</p>
             </div>
             <div className="flex gap-3">
               <button className="flex items-center px-4 py-2 text-sm text-gray-600 bg-white rounded-md border border-gray-200 hover:bg-gray-50">
@@ -388,22 +387,6 @@ const OrderList = () => {
                   ))}
                 </select>
               </div>
-
-              {/* Branch Filter */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Branch</label>
-                <select
-                  value={selectedBranch}
-                  onChange={(e) => setSelectedBranch(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-200 rounded-md"
-                >
-                  <option value="All Branches">All Branches</option>
-                  {branches.map(branch => (
-                    <option key={branch} value={branch}>{branch}</option>
-                  ))}
-                </select>
-              </div>
-
               {/* Amount Range Filter */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -550,7 +533,7 @@ const OrderList = () => {
                     Status
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Branch
+                    Location
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Order Date

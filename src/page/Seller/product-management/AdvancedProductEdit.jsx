@@ -33,7 +33,7 @@ const AdvancedProductEdit = () => {
     expiryDate: '2025-12-31',
     reorderPoint: 100,
     unit: 'Box',
-    manufacturer: 'PharmaCorp Inc.'
+    manufacturer: 'Store'
   };
 
   const [formData, setFormData] = useState({
@@ -556,7 +556,7 @@ const AdvancedProductEdit = () => {
                 />
               </div>
 
-              <div>
+             {/*} <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Unit Type</label>
                 <select
                   value={formData.unit}
@@ -567,7 +567,7 @@ const AdvancedProductEdit = () => {
                     <option key={index} value={unit}>{unit}</option>
                   ))}
                 </select>
-              </div>
+              </div>*/}
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Stock Alert Level</label>
@@ -685,7 +685,7 @@ const AdvancedProductEdit = () => {
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Branch Location
+                  Location
                 </label>
                 <select
                   value={formData.location}
@@ -798,10 +798,10 @@ const AdvancedProductEdit = () => {
               className="flex items-center text-blue-600 hover:text-blue-700"
             >
               <FiArrowLeft className="mr-2" />
-              Back to Product Management
+              Back
             </button>
             <span className="mx-2">/</span>
-            <span>Advanced Edit</span>
+            <span>Edit</span>
           </div>
           <h1 className="mt-2 text-2xl font-bold text-gray-900">Edit Product Details</h1>
         </div>
@@ -840,7 +840,7 @@ const AdvancedProductEdit = () => {
                 Save as Draft
               </button>
               <div className="space-x-4">
-                <button 
+                {/*<button 
                   className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
                   onClick={() => {
                     // Implement preview functionality if needed
@@ -848,10 +848,10 @@ const AdvancedProductEdit = () => {
                   }}
                 >
                   Preview
-                </button>
+                </button>*/}
                 <button 
                   className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-                  onClick={handlePublish}
+                  onClick={handleDraftSave}
                 >
                   Publish
                 </button>

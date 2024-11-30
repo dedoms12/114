@@ -2,13 +2,13 @@ import { FiX, FiCheck } from 'react-icons/fi';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 
-const BlockMedicineModal = ({ 
-  isOpen, 
-  onClose, 
-  onConfirm, 
-  blockDetails, 
+const BlockMedicineModal = ({
+  isOpen,
+  onClose,
+  onConfirm,
+  blockDetails,
   setBlockDetails,
-  onViewBlocklist 
+  onViewBlocklist
 }) => {
   const [showConfirmation, setShowConfirmation] = useState(false);
 
@@ -43,13 +43,12 @@ const BlockMedicineModal = ({
   };
 
   const blockReasons = [
-    { value: 'quality', label: 'Failed Quality Check' },
-    { value: 'compliance', label: 'Non-compliance with Regulations' },
-    { value: 'safety', label: 'Safety Concerns' },
-    { value: 'documentation', label: 'Incomplete Documentation' },
-    { value: 'expiry', label: 'Expiration Date Issues' },
-    { value: 'recall', label: 'Product Recall' },
-    { value: 'other', label: 'Other' }
+    { value: 'quality', label: 'Failed Quality Check (Condition, Wear, Stains)' },
+    { value: 'compliance', label: 'Non-compliance with Thrift Store Standards' },
+    { value: 'safety', label: 'Safety Concerns (Allergens, Hazardous Materials, Improper Labeling)' },
+    { value: 'documentation', label: 'Missing or Incomplete Product Documentation (Care Labels, Size Information)' },
+    { value: 'recall', label: 'Product Recall (Banned or Unsafe Items)' },
+    { value: 'other', label: 'Other (Specify Reason)' }
   ];
 
   if (!isOpen) return null;
@@ -60,8 +59,8 @@ const BlockMedicineModal = ({
         <div className="bg-white rounded-lg p-6 max-w-md w-full">
           <div className="text-center">
             <FiCheck className="mx-auto h-12 w-12 text-green-500 mb-4" />
-            <h3 className="text-lg font-medium mb-2">Medicine Blocked Successfully</h3>
-            <p className="text-gray-600 mb-6">The medicine has been added to the blocklist.</p>
+            <h3 className="text-lg font-medium mb-2">Blocked Successfully</h3>
+            <p className="text-gray-600 mb-6">It has been added to the blocklist.</p>
             <div className="flex justify-center gap-4">
               <button
                 onClick={handleClose}
@@ -86,7 +85,7 @@ const BlockMedicineModal = ({
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg p-6 max-w-md w-full">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-medium">Block Medicine</h3>
+          <h3 className="text-lg font-medium">Block</h3>
           <button onClick={onClose}>
             <FiX className="w-5 h-5" />
           </button>
@@ -97,7 +96,7 @@ const BlockMedicineModal = ({
             <label className="block text-sm font-medium mb-2">Block Type</label>
             <select
               value={blockDetails.blockType}
-              onChange={(e) => setBlockDetails(prev => ({...prev, blockType: e.target.value}))}
+              onChange={(e) => setBlockDetails(prev => ({ ...prev, blockType: e.target.value }))}
               className="w-full p-2 border rounded-md"
             >
               <option value="temporary">Temporary Block</option>
@@ -111,7 +110,7 @@ const BlockMedicineModal = ({
               <input
                 type="date"
                 value={blockDetails.reviewDate}
-                onChange={(e) => setBlockDetails(prev => ({...prev, reviewDate: e.target.value}))}
+                onChange={(e) => setBlockDetails(prev => ({ ...prev, reviewDate: e.target.value }))}
                 className="w-full p-2 border rounded-md"
                 min={new Date().toISOString().split('T')[0]}
               />
@@ -122,7 +121,7 @@ const BlockMedicineModal = ({
             <label className="block text-sm font-medium mb-2">Reason for Blocking</label>
             <select
               value={blockDetails.reason}
-              onChange={(e) => setBlockDetails(prev => ({...prev, reason: e.target.value}))}
+              onChange={(e) => setBlockDetails(prev => ({ ...prev, reason: e.target.value }))}
               className="w-full p-2 border rounded-md"
             >
               <option value="">Select a reason...</option>
@@ -139,7 +138,7 @@ const BlockMedicineModal = ({
               <label className="block text-sm font-medium mb-2">Specify Reason</label>
               <textarea
                 value={blockDetails.customReason}
-                onChange={(e) => setBlockDetails(prev => ({...prev, customReason: e.target.value}))}
+                onChange={(e) => setBlockDetails(prev => ({ ...prev, customReason: e.target.value }))}
                 className="w-full p-2 border rounded-md"
                 rows="3"
                 placeholder="Please specify the reason for blocking..."
@@ -159,7 +158,7 @@ const BlockMedicineModal = ({
             onClick={handleBlock}
             className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
           >
-            Block Medicine
+            Block
           </button>
         </div>
       </div>

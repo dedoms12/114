@@ -6,34 +6,34 @@ const Categories = ({ onRatingFilter, selectedRating, onClearAll }) => {
   
   const categories = [
     { 
-      name: 'General Health', 
-      path: '/general-health', 
-      isActive: location.pathname === '/general-health'
+      name: 'Mens Wear', 
+      path: '/menswear', 
+      isActive: location.pathname === '/menswear'
     },
     { 
-      name: 'Medical Supplies', 
-      path: '/medical-supplies', 
-      isActive: location.pathname === '/medical-supplies'
+      name: 'Womens Wear', 
+      path: '/womenswear', 
+      isActive: location.pathname === '/womenswear'
     },
     { 
-      name: 'Supplements', 
-      path: '/supplements', 
-      isActive: location.pathname === '/supplements'
+      name: 'Kids Wear', 
+      path: '/kidswear', 
+      isActive: location.pathname === '/kidswear'
     },
     { 
-      name: 'Personal Care', 
-      path: '/personal-care', 
-      isActive: location.pathname === '/personal-care'
+      name: 'Shoes', 
+      path: '/shoes', 
+      isActive: location.pathname === '/shoes'
     },
   ];
 
-  const ratings = [
+ /* const ratings = [
     { stars: 5, label: "5 Stars" },
     { stars: 4, label: "4 Stars & Up" },
     { stars: 3, label: "3 Stars & Up" },
     { stars: 2, label: "2 Stars & Up" },
     { stars: 1, label: "1 Star & Up" }
-  ];
+  ];*/
 
   return (
     <div className="w-64 space-y-4">
@@ -60,7 +60,7 @@ const Categories = ({ onRatingFilter, selectedRating, onClearAll }) => {
         </div>
       </div>
 
-      {/* Rating Card */}
+      {/*{/* Rating Card }
       {onRatingFilter && (
         <div className="bg-white rounded-lg p-4 shadow-sm">
           <div className="flex items-center gap-2 mb-4">
@@ -104,7 +104,7 @@ const Categories = ({ onRatingFilter, selectedRating, onClearAll }) => {
         </div>
       )}
 
-      {/* Clear All Button - Only show if filters are active */}
+      {/* Clear All Button - Only show if filters are active }
       {(selectedRating || onClearAll) && (
         <button 
           onClick={onClearAll}
@@ -112,7 +112,7 @@ const Categories = ({ onRatingFilter, selectedRating, onClearAll }) => {
         >
           Clear All
         </button>
-      )}
+      )}*/}
     </div>
   );
 };

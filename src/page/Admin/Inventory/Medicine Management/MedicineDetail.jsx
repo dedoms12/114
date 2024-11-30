@@ -65,7 +65,7 @@ const MedicineDetail = () => {
       // API call logic here
       navigate('/admin/inventory/medicines');
     } catch (error) {
-      setErrors({ submit: 'Failed to save medicine details' });
+      setErrors({ submit: 'Failed to save details' });
     }
   };
 
@@ -102,7 +102,7 @@ const MedicineDetail = () => {
                 <h2 className="text-lg font-semibold mb-4">Basic Information</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium mb-2">Medicine Name*</label>
+                    <label className="block text-sm font-medium mb-2">Name*</label>
                     <input
                       type="text"
                       value={medicine.name}

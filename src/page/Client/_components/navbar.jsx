@@ -21,10 +21,13 @@ const NavBar = () => {
   const searchRef = useRef(null);
 
   const navItems = [
-    { name: 'Home', path: '/home', icon: '/images/Client/product-page/home-logo.svg' },
-    { name: 'Products', path: '/general-health', icon: '/images/Client/product-page/client-package.svg' },
-    { name: 'Stores', path: '/stores', icon: '/images/Client/product-page/client-shopping-cart.svg' },
-    { name: 'Contact Us', path: '/contact', icon: '/images/Client/product-page/client-vector.svg' },
+    {
+      name: 'Home',
+      path: '/home',
+      icon: '/images/Client/product-page/image.png'
+    },
+    { name: 'Products', path: '/menswear', icon: '/images/Client/product-page/box.png' },
+    { name: 'Stores', path: '/stores', icon: '/images/Client/product-page/store.png' },
   ];
 
   const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
@@ -80,33 +83,37 @@ const NavBar = () => {
   }, []);
 
   const handleLogout = () => {
-    setCurrentUser(null);
-    localStorage.removeItem('token');
-    navigate('/signin');
+    const confirmed = window.confirm("Are you sure you want to log out?");
+    if (confirmed) {
+      setCurrentUser(null);
+      localStorage.removeItem('token');
+      navigate('/signin');
+    }
   };
 
   // Get first name from full name
-  const firstName = currentUser?.name?.split(' ')[0] || 'User';
+  const firstName = currentUser?.name?.split(' ')[2] || 'User';
 
   return (
     <>
-      <nav className="bg-[#FCFFFE] shadow-sm py-4">
+      <nav className="bg-[#FCFFFE] shadow-sm py-4 bg-gray-900 text-white">
         <div className="container mx-auto px-6">
           <div className="flex items-center justify-between">
             {/* Logo and Nav Items */}
-            <div className="flex items-center space-x-12">
-              <Link to="/" className="flex items-center space-x-2">
-                <img src="/images/Client/product-page/PillLogo.svg" alt="PillPoint" className="h-12 w-12" />
-                <span className="text-2xl font-semibold text-gray-800">PillPoint</span>
+            <div className="flex items-center space-x-20">
+              <Link to="/" className="flex items-center space-x-4">
+                <img src="/images/thriftstorelogo.png" alt="Logo" className="h-20 w-50" />
               </Link>
-              <div className="flex items-center space-x-8">
+              <div className="flex items-center space-x-10">
                 {navItems.map((item) => (
                   <Link
                     key={item.name}
                     to={item.path}
-                    className="flex items-center space-x-1 text-gray-600 hover:text-pill-blue"
+                    className="flex items-center space-x-2 text-white hover:text-yellow-500"
                   >
-                    <img src={item.icon} alt={item.name} className="w-5 h-5" />
+                    {item.icon && (
+                      <img src={item.icon} alt={item.name} className="w-6 h-6 inline-block filter invert" />
+                    )}
                     <span className="text-sm">{item.name}</span>
                   </Link>
                 ))}
@@ -114,68 +121,32 @@ const NavBar = () => {
             </div>
 
             {/* Right Side - Search, Language, Cart, User */}
-            <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-8">
               {/* Search Bar */}
-              <div className="relative" ref={searchRef}>
+              <div className="relative flex-grow max-w-lg" ref={searchRef}>
                 <form onSubmit={handleSearchSubmit}>
                   <input
                     type="text"
                     value={searchInput}
                     onChange={handleSearchInput}
-                    placeholder="Search products, stores, or pages..."
-                    className="w-64 pl-4 pr-10 py-2 rounded-full border border-gray-200 focus:outline-none focus:border-pill-blue"
+                    placeholder="Search product"
+                    className="w-full pl-5 pr-80 py-2 rounded-full border border-gray-800 text-gray-800 focus:outline-none focus:border-yellow-500"
                   />
-                  <button 
+                  <button
                     type="submit"
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-800 hover:text-gray-600"
                   >
                     <FiSearch className="w-5 h-5" />
                   </button>
                 </form>
-
-                {/* Search Results Dropdown */}
-                {showSearchResults && searchResults && (
-                  <div className="absolute top-full left-0 w-full bg-white rounded-b-lg shadow-lg mt-1 max-h-96 overflow-y-auto">
-                    {/* Pages Section - Show at top */}
-                    {searchResults.pages && searchResults.pages.length > 0 && (
-                      <div className="p-3 border-b">
-                        <h3 className="text-xs font-semibold text-gray-500 mb-2">PAGES</h3>
-                        {searchResults.pages.map((page, index) => (
-                          <button
-                            key={`page-${index}`}
-                            onClick={() => handlePageClick(page.path)}
-                            className="block w-full text-left px-3 py-2 hover:bg-gray-50 rounded-md"
-                          >
-                            {page.name}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Products Section */}
-                    {Object.entries(searchResults).map(([category, results]) => {
-                      if (category !== 'pages' && results.length > 0) {
-                        return (
-                          <div key={category} className="p-3 border-b">
-                            <h3 className="text-xs font-semibold text-gray-500 mb-2">
-                              {category.toUpperCase()}
-                            </h3>
-                            {/* Product results rendering */}
-                          </div>
-                        );
-                      }
-                      return null;
-                    })}
-                  </div>
-                )}
               </div>
 
               {/* Cart with Counter */}
               <Link to="/cart" className="relative">
-                <img 
-                  src="/images/Client/product-page/client-shopping-cart.svg" 
-                  alt="Cart" 
-                  className="w-6 h-6"
+                <img
+                  src="/images/Client/product-page/client-shopping-cart.svg"
+                  alt="Cart"
+                  className="w-6 h-6 hover:border-yellow-300"
                 />
                 {cartItemCount > 0 && (
                   <span className="absolute -top-2 -right-2 bg-[#F1511B] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
@@ -190,12 +161,7 @@ const NavBar = () => {
                   onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                   className="flex items-center space-x-2 hover:opacity-80"
                 >
-                  <div className="w-8 h-8 bg-gray-900 rounded-full flex items-center justify-center text-sm text-white">
-                    {firstName.charAt(0)}
-                  </div>
-                  <span className="text-sm hidden md:block">
-                    {firstName}
-                  </span>
+                  <span className="text-sm hidden md:block hover:text-yellow-500">Buyer</span>
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                   </svg>
@@ -224,10 +190,11 @@ const NavBar = () => {
           </div>
         </div>
       </nav>
+
       <ChatbotButton onClick={() => setIsChatbotOpen(true)} />
-      <ChatbotModal 
-        isOpen={isChatbotOpen} 
-        onClose={() => setIsChatbotOpen(false)} 
+      <ChatbotModal
+        isOpen={isChatbotOpen}
+        onClose={() => setIsChatbotOpen(false)}
       />
     </>
   );

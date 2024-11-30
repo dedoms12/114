@@ -296,7 +296,6 @@ const BlacklistManagement = () => {
         <div className="flex-1 bg-gray-100 p-6">
           <div className="mb-6">
             <h1 className="text-2xl font-bold">Blacklist Management</h1>
-            <p className="text-sm text-gray-600">Monitor and manage blocked medicines and stores</p>
           </div>
 
           {/* Tab Navigation */}
@@ -312,7 +311,7 @@ const BlacklistManagement = () => {
                   }`}
                 >
                   <FiPackage className="w-4 h-4 mr-2" />
-                  Blocked Medicines
+                  Blocked Products
                 </button>
                 <button
                   onClick={() => setActiveTab('stores')}

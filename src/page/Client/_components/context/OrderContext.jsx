@@ -5,9 +5,9 @@ const OrderContext = createContext();
 export const OrderProvider = ({ children }) => {
   const [orders, setOrders] = useState([]);
   const [currentUser, setCurrentUser] = useState({
-    name: 'Ashley',
+    name: 'Luffy',
     location: 'Ampayon, Agusan Del Norte',
-    avatar: 'A'
+    avatar: 'L'
   });
 
   const addOrder = (orderDetails) => {

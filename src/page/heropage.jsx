@@ -20,7 +20,7 @@ const HeroPage = () => {
         <div className="w-32 h-32 bg-blue-100 rounded-full flex items-center justify-center shadow-lg absolute">
           {/* Logo image */}
           <img
-            src="/images/Client/product-page/client-pill-point-3.png"
+            src="/images/Client/product-page/thriftstore.jpg"
             alt="Logo"
             className="w-16 h-16"
           />

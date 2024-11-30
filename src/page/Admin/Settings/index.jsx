@@ -25,7 +25,7 @@ const AdminSettings = () => {
       id: 'general',
       icon: FiUser,
       title: 'General Settings',
-      description: 'Basic pharmacy information and business hours'
+      description: 'Basic store information and business hours'
     },
     {
       id: 'security',
@@ -50,23 +50,23 @@ const AdminSettings = () => {
   const renderGeneralSettings = () => (
     <div className="space-y-8">
       <section className="border-b pb-6">
-        <h3 className="text-lg font-medium mb-4">Pharmacy Information</h3>
+        <h3 className="text-lg font-medium mb-4">Store Information</h3>
         <div className="grid grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Pharmacy Name</label>
-            <input type="text" className="w-full border rounded-lg px-3 py-2" defaultValue="MedCare Pharmacy" />
+            <label className="block text-sm font-medium text-gray-700 mb-2">Store Name</label>
+            <input type="text" className="w-full border rounded-lg px-3 py-2" defaultValue="" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">License Number</label>
-            <input type="text" className="w-full border rounded-lg px-3 py-2" defaultValue="PH-12345-2024" />
+            <input type="text" className="w-full border rounded-lg px-3 py-2" defaultValue="" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Contact Email</label>
-            <input type="email" className="w-full border rounded-lg px-3 py-2" defaultValue="contact@medcare.com" />
+            <input type="email" className="w-full border rounded-lg px-3 py-2" defaultValue="" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-            <input type="tel" className="w-full border rounded-lg px-3 py-2" defaultValue="+1 234 567 8900" />
+            <input type="tel" className="w-full border rounded-lg px-3 py-2" defaultValue="" />
           </div>
         </div>
       </section>
@@ -273,7 +273,7 @@ const AdminSettings = () => {
         <div className="flex-1 bg-gray-100 p-6">
           <div className="mb-6">
             <h1 className="text-2xl font-bold">Settings</h1>
-            <p className="text-sm text-gray-600">Manage your pharmacy system settings</p>
+            <p className="text-sm text-gray-600">Manage your store system settings</p>
           </div>
 
           <div className="grid grid-cols-4 gap-6 mb-6">

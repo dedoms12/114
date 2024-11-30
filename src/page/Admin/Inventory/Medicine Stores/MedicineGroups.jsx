@@ -67,14 +67,14 @@ const MedicineGroups = () => {
       const mockPharmacies = [
         {
           id: 1,
-          name: "MedTech Solutions Pharmacy",
+          name: "Store",
           address: "123 Main Street, Quezon City",
           phone: "+63 912 345 6789",
-          email: "medtech@example.com",
+          email: "store@example.com",
           licenseNumber: "PHA-2024-001",
           status: "active",
           branchCount: 5,
-          medicineGroups: ["Medical Supplies", "Personal Care", "Prescription Drugs"],
+          medicineGroups: [],
           branches: [
             { location: "Quezon City", address: "123 Main Street" },
             { location: "Makati", address: "456 Business Ave" }
@@ -85,74 +85,39 @@ const MedicineGroups = () => {
         },
         {
           id: 2,
-          name: "HealthCare Plus Pharmacy",
-          address: "456 Business Ave, Makati City",
-          phone: "+63 917 123 4567",
-          email: "healthcare@example.com",
-          licenseNumber: "PHA-2024-002",
-          status: "blocked",
-          branchCount: 3,
-          medicineGroups: ["Prescription Drugs", "Medical Supplies", "Wellness Products"],
+          name: "Store",
+          address: "123 Main Street, Quezon City",
+          phone: "+63 912 345 6789",
+          email: "store@example.com",
+          licenseNumber: "PHA-2024-001",
+          status: "active",
+          branchCount: 5,
+          medicineGroups: [],
           branches: [
-            { location: "Makati", address: "456 Business Ave" },
-            { location: "BGC", address: "789 Corporate Drive" }
+            { location: "Quezon City", address: "123 Main Street" },
+            { location: "Makati", address: "456 Business Ave" }
           ],
-          operatingHours: "9:00 AM - 9:00 PM",
+          operatingHours: "8:00 AM - 10:00 PM",
           certifications: ["FDA", "ISO 9001"],
-          lastInspection: "2024-03-01"
+          lastInspection: "2024-02-15"
         },
         {
           id: 3,
-          name: "Wellness First Pharmacy",
-          address: "789 Health Street, Pasig City",
-          phone: "+63 918 765 4321",
-          email: "wellness@example.com",
-          licenseNumber: "PHA-2024-003",
-          status: "inactive",
-          branchCount: 2,
-          medicineGroups: ["Wellness Products", "Natural Medicine", "Personal Care"],
-          branches: [
-            { location: "Pasig", address: "789 Health Street" }
-          ],
-          operatingHours: "8:00 AM - 8:00 PM",
-          certifications: ["FDA"],
-          lastInspection: "2024-01-20"
-        },
-        {
-          id: 4,
-          name: "PharmaCare Express",
-          address: "321 Quick Road, Mandaluyong",
-          phone: "+63 919 876 5432",
-          email: "express@example.com",
-          licenseNumber: "PHA-2024-004",
+          name: "Store",
+          address: "123 Main Street, Quezon City",
+          phone: "+63 912 345 6789",
+          email: "store@example.com",
+          licenseNumber: "PHA-2024-001",
           status: "active",
-          branchCount: 7,
-          medicineGroups: ["Prescription Drugs", "Emergency Supplies", "First Aid"],
+          branchCount: 5,
+          medicineGroups: [],
           branches: [
-            { location: "Mandaluyong", address: "321 Quick Road" },
-            { location: "San Juan", address: "123 Fast Street" }
+            { location: "Quezon City", address: "123 Main Street" },
+            { location: "Makati", address: "456 Business Ave" }
           ],
-          operatingHours: "24/7",
-          certifications: ["FDA", "ISO 9001", "ISO 14001"],
-          lastInspection: "2024-02-28"
-        },
-        {
-          id: 5,
-          name: "Family Care Pharmacy",
-          address: "567 Community Ave, Pasay City",
-          phone: "+63 915 432 1098",
-          email: "family@example.com",
-          licenseNumber: "PHA-2024-005",
-          status: "active",
-          branchCount: 4,
-          medicineGroups: ["Family Medicine", "Pediatric Care", "Elderly Care"],
-          branches: [
-            { location: "Pasay", address: "567 Community Ave" },
-            { location: "Parañaque", address: "890 Family Street" }
-          ],
-          operatingHours: "7:00 AM - 11:00 PM",
+          operatingHours: "8:00 AM - 10:00 PM",
           certifications: ["FDA", "ISO 9001"],
-          lastInspection: "2024-03-10"
+          lastInspection: "2024-02-15"
         }
       ];
       setPharmacies(mockPharmacies);
@@ -204,7 +169,7 @@ const MedicineGroups = () => {
   const handleDelete = async (storeId) => {
     try {
       // Show confirmation dialog
-      const confirmed = window.confirm('Are you sure you want to delete this pharmacy? This action cannot be undone.');
+      const confirmed = window.confirm('Are you sure you want to delete? This action cannot be undone.');
       if (!confirmed) return;
 
       // Here you would typically make an API call to delete the store
@@ -215,10 +180,10 @@ const MedicineGroups = () => {
       setPharmacies(updatedPharmacies);
       
       // Show success message
-      toast.success('Pharmacy deleted successfully');
+      toast.success('Deleted successfully');
     } catch (error) {
-      console.error('Error deleting pharmacy:', error);
-      toast.error('Failed to delete pharmacy');
+      console.error('Error deleting', error);
+      toast.error('Failed to delete');
     }
   };
 
@@ -244,10 +209,10 @@ const MedicineGroups = () => {
       // Close modal and reset editing state
       setShowDetailModal(false);
       setIsEditing(false);
-      toast.success('Pharmacy updated successfully');
+      toast.success('Updated successfully');
     } catch (error) {
-      console.error('Error updating pharmacy:', error);
-      toast.error('Failed to update pharmacy');
+      console.error('Error updating', error);
+      toast.error('Failed to update');
     }
   };
 
@@ -351,7 +316,7 @@ const MedicineGroups = () => {
           <thead className="bg-gray-50">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Pharmacy Name
+                Name
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Address
@@ -361,9 +326,6 @@ const MedicineGroups = () => {
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Status
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Medicine Groups
               </th>
               <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Actions
@@ -522,8 +484,7 @@ const MedicineGroups = () => {
           {/* Header Section */}
           <div className="flex justify-between items-center mb-6">
             <div>
-              <h1 className="text-2xl font-bold">Pharmacy Management</h1>
-              <p className="text-sm text-gray-600">Monitor and manage registered pharmacies</p>
+              <h1 className="text-2xl font-bold">Store Management</h1>
             </div>
             {/* Action buttons */}
           </div>
@@ -536,7 +497,7 @@ const MedicineGroups = () => {
                 <div className="relative">
                   <input
                     type="text"
-                    placeholder="Search pharmacies..."
+                    placeholder="Search stores ..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
